@@ -1,0 +1,573 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Intent Workbench</title>
+  <style>
+    :root {
+      --bg: #f4efe6;
+      --card: rgba(255,255,255,.82);
+      --ink: #1f1d1a;
+      --muted: #676055;
+      --line: rgba(31,29,26,.12);
+      --accent: #a33b20;
+      --accent-soft: #f2d6cc;
+      --ok: #1f7a52;
+      --warn: #b66b00;
+      --shadow: 0 20px 50px rgba(55, 35, 18, .12);
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(163,59,32,.18), transparent 30%),
+        radial-gradient(circle at right 20%, rgba(31,122,82,.12), transparent 26%),
+        linear-gradient(180deg, #f8f4ed 0%, var(--bg) 100%);
+    }
+
+    main {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 40px 20px 64px;
+    }
+
+    .hero {
+      display: grid;
+      gap: 16px;
+      padding: 28px;
+      border: 1px solid var(--line);
+      background: var(--card);
+      backdrop-filter: blur(8px);
+      box-shadow: var(--shadow);
+    }
+
+    h1, h2, h3, p { margin: 0; }
+    h1 { font-size: clamp(34px, 6vw, 64px); line-height: .95; }
+    h2 { font-size: 22px; }
+    p, li, label, input, select, button, textarea { font-size: 15px; line-height: 1.5; }
+    .muted { color: var(--muted); }
+
+    .grid {
+      display: grid;
+      gap: 18px;
+      margin-top: 18px;
+    }
+
+    .grid-2 {
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+
+    .card {
+      border: 1px solid var(--line);
+      background: var(--card);
+      box-shadow: var(--shadow);
+      padding: 20px;
+    }
+
+    .stat-grid {
+      display: grid;
+      gap: 12px;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      margin-top: 12px;
+    }
+
+    .stat {
+      padding: 14px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.65);
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 26px;
+      margin-bottom: 4px;
+    }
+
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      margin-top: 16px;
+    }
+
+    .toolbar a,
+    button {
+      appearance: none;
+      border: 1px solid var(--ink);
+      background: var(--ink);
+      color: #fff;
+      padding: 10px 14px;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    button.secondary,
+    .toolbar a.secondary {
+      background: transparent;
+      color: var(--ink);
+    }
+
+    select, input {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.85);
+      color: var(--ink);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+      font-size: 14px;
+    }
+
+    th, td {
+      text-align: left;
+      padding: 10px 8px;
+      border-bottom: 1px solid var(--line);
+      vertical-align: top;
+    }
+
+    .pill {
+      display: inline-block;
+      padding: 3px 8px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.7);
+      font-size: 12px;
+      margin-right: 6px;
+      margin-bottom: 6px;
+    }
+
+    .p0, .p1 { color: var(--ok); font-weight: 700; }
+    .p2 { color: var(--warn); font-weight: 700; }
+    .signal-list {
+      display: grid;
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .signal {
+      padding: 14px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.62);
+    }
+
+    .signal ul {
+      margin: 10px 0 0;
+      padding-left: 18px;
+    }
+
+    code {
+      background: rgba(31,29,26,.06);
+      padding: 2px 6px;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="hero">
+      <p class="muted">PSEO Intent Intelligence Workbench</p>
+      <h1>不是泛泛挖词，而是先做意图分层、商业排序、实时信号验证。</h1>
+      <p class="muted">
+        这页是公开展示入口。内部执行核心来自本仓库的 <code>tools/intent-workbench</code>，
+        上游参考是 Perplexica / Vane 的搜索与研究编排思路。
+      </p>
+      <div class="toolbar">
+        <a href="#dashboard">看工作台</a>
+        <a class="secondary" href="https://github.com/BunsDev/Perplexica-Search-Engine-AI" target="_blank" rel="noreferrer">上游参考</a>
+      </div>
+    </section>
+
+    <section class="grid grid-2" style="margin-top:18px;">
+      <article class="card">
+        <h2>当前已完成</h2>
+        <div class="signal-list">
+          <div class="signal">
+            <strong>CLI 核心</strong>
+            <p class="muted">已可读取品牌上下文、策略文档、关键词池，输出 Markdown / JSON / CSV。</p>
+          </div>
+          <div class="signal">
+            <strong>Skill 包装</strong>
+            <p class="muted">已接入 <code>Packs/intent-intelligence-pack</code>，可给 agent 直接调用。</p>
+          </div>
+          <div class="signal">
+            <strong>静态工作台</strong>
+            <p class="muted">本页可直接加载最近一次产出的 dashboard 数据，展示优先词和实时信号。</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <h2>当前状态</h2>
+        <div class="signal-list">
+          <div class="signal">
+            <strong>搜索后端</strong>
+            <p class="muted">v3: 三层 fallback (SearxNG → Reddit API → cn.bing.com scraper)。代理开启时 Reddit API 直连拿完整帖子数据。</p>
+          </div>
+          <div class="signal">
+            <strong>意图分析</strong>
+            <p class="muted">v2 taxonomy: 18 种意图 + 次意图 + 转化距离 + 品牌适配度 + funnel 阶段。</p>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <section id="dashboard" class="grid grid-2" style="margin-top:18px;">
+      <article class="card">
+        <h2>数据源</h2>
+        <p class="muted" style="margin-top:8px;">默认读取仓库里最近同步的 dashboard 文件。</p>
+        <div class="grid" style="margin-top:12px;">
+          <label>
+            品牌
+            <select id="brandSelect">
+              <option value="arousen">arousen</option>
+              <option value="302ai">302ai</option>
+              <option value="pinkpunch">pinkpunch</option>
+              <option value="hakkoai">hakkoai</option>
+              <option value="leewow">leewow</option>
+            </select>
+          </label>
+        </div>
+        <div class="toolbar">
+          <button id="loadBtn">加载 dashboard</button>
+          <button id="runBtn" class="secondary">调用本地 API 运行</button>
+          <a class="secondary" id="jsonLink" href="#" target="_blank" rel="noreferrer">打开 JSON</a>
+        </div>
+        <p id="status" class="muted" style="margin-top:12px;">等待加载。</p>
+      </article>
+
+      <article class="card">
+        <h2>浏览器配置</h2>
+        <p class="muted" style="margin-top:8px;">这些值只保存在当前浏览器，用于后续接你自己的本地服务或远程后端。</p>
+        <div class="grid" style="margin-top:12px;">
+          <label>
+            Intent API Base
+            <input id="apiBaseInput" placeholder="http://127.0.0.1:4318">
+          </label>
+          <label>
+            HTTPS Proxy
+            <input id="proxyInput" placeholder="http://127.0.0.1:7892">
+          </label>
+          <label>
+            Topic
+            <input id="topicInput" placeholder="best vibrator alternatives">
+          </label>
+          <label>
+            Keyword Limit
+            <input id="limitInput" type="number" min="1" value="30">
+          </label>
+        </div>
+        <div class="toolbar">
+          <button id="saveConfigBtn">保存配置</button>
+          <button id="resetConfigBtn" class="secondary">重置配置</button>
+        </div>
+      </article>
+    </section>
+
+    <section class="card" style="margin-top:18px;">
+      <h2>概览</h2>
+      <div class="stat-grid" id="summaryStats"></div>
+      <div style="margin-top:16px;">
+        <div id="intentPills"></div>
+      </div>
+    </section>
+
+    <section class="card" style="margin-top:18px;">
+      <h2>优先机会词</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Keyword</th>
+            <th>Priority</th>
+            <th>Intent</th>
+            <th>Commercial</th>
+            <th>Live</th>
+            <th>Fitness</th>
+            <th>Distance</th>
+            <th>Format</th>
+          </tr>
+        </thead>
+        <tbody id="opportunityRows">
+          <tr><td colspan="8" class="muted">等待加载。</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="card" style="margin-top:18px;">
+      <h2>实时信号</h2>
+      <div id="signals" class="signal-list">
+        <div class="signal"><p class="muted">等待加载。</p></div>
+      </div>
+    </section>
+
+    <section class="card" style="margin-top:18px;">
+      <h2>LLM Research</h2>
+      <p class="muted" style="margin-top:8px;" id="llmStatus">等待加载。</p>
+      <div id="llmClassification" style="margin-top:10px;"></div>
+      <div id="llmFacts" class="signal-list" style="margin-top:10px;"></div>
+    </section>
+  </main>
+
+  <script>
+    const els = {
+      brandSelect: document.getElementById('brandSelect'),
+      loadBtn: document.getElementById('loadBtn'),
+      runBtn: document.getElementById('runBtn'),
+      saveConfigBtn: document.getElementById('saveConfigBtn'),
+      resetConfigBtn: document.getElementById('resetConfigBtn'),
+      apiBaseInput: document.getElementById('apiBaseInput'),
+      proxyInput: document.getElementById('proxyInput'),
+      topicInput: document.getElementById('topicInput'),
+      limitInput: document.getElementById('limitInput'),
+      status: document.getElementById('status'),
+      jsonLink: document.getElementById('jsonLink'),
+      summaryStats: document.getElementById('summaryStats'),
+      intentPills: document.getElementById('intentPills'),
+      opportunityRows: document.getElementById('opportunityRows'),
+      signals: document.getElementById('signals'),
+      llmStatus: document.getElementById('llmStatus'),
+      llmClassification: document.getElementById('llmClassification'),
+      llmFacts: document.getElementById('llmFacts'),
+    };
+
+    const configKey = 'intent-workbench-config-v1';
+
+    function getDataPath(brand) {
+      return `data/intent-workbench/${brand}/intent-workbench-dashboard.json`;
+    }
+
+    function loadConfig() {
+      const raw = localStorage.getItem(configKey);
+      const config = raw ? JSON.parse(raw) : {
+        apiBase: 'http://127.0.0.1:4318',
+        proxy: 'http://127.0.0.1:7892',
+        topic: '',
+        limit: 30,
+      };
+      els.apiBaseInput.value = config.apiBase || '';
+      els.proxyInput.value = config.proxy || '';
+      els.topicInput.value = config.topic || '';
+      els.limitInput.value = String(config.limit || 30);
+      return config;
+    }
+
+    function saveConfig() {
+      const config = {
+        apiBase: els.apiBaseInput.value.trim(),
+        proxy: els.proxyInput.value.trim(),
+        topic: els.topicInput.value.trim(),
+        limit: Number(els.limitInput.value || 30),
+      };
+      localStorage.setItem(configKey, JSON.stringify(config));
+      return config;
+    }
+
+    function resetConfig() {
+      localStorage.removeItem(configKey);
+      loadConfig();
+      els.status.textContent = '浏览器配置已重置。';
+    }
+
+    function renderStats(payload) {
+      const stats = [
+        ['Brand', payload.brand || '-'],
+        ['Website', payload.website || '-'],
+        ['Keywords', payload.summary?.keywordCount ?? 0],
+        ['Live Queries', payload.summary?.liveQueryCount ?? 0],
+        ['High Priority', payload.summary?.highPriorityCount ?? 0],
+      ];
+      els.summaryStats.innerHTML = stats.map(([label, value]) => `
+        <div class="stat">
+          <strong>${value}</strong>
+          <span class="muted">${label}</span>
+        </div>
+      `).join('');
+    }
+
+    function renderIntents(payload) {
+      els.intentPills.innerHTML = (payload.intentDistribution || []).map((item) =>
+        `<span class="pill">${item.intentLabel}: ${item.count}</span>`
+      ).join('') || '<span class="muted">暂无 intent 分布</span>';
+    }
+
+    function renderOpportunities(payload) {
+      const rows = (payload.topOpportunities || []).slice(0, 20);
+      if (!rows.length) {
+        els.opportunityRows.innerHTML = '<tr><td colspan="8" class="muted">暂无数据。</td></tr>';
+        return;
+      }
+      els.opportunityRows.innerHTML = rows.map((item) => `
+        <tr>
+          <td>${item.keyword || ''}</td>
+          <td class="${String(item.priority || '').toLowerCase()}">${item.priority || ''}</td>
+          <td>${item.intent || ''}</td>
+          <td>${item.commercialScore ?? 0}</td>
+          <td>${item.liveSignalScore ?? 0}</td>
+          <td>${item.brandFitness || ''}</td>
+          <td>${item.conversionDistance || ''}</td>
+          <td>${item.contentFormat || ''}</td>
+        </tr>
+      `).join('');
+    }
+
+    function renderSignals(payload) {
+      const signals = payload.liveSignals || [];
+      if (!signals.length) {
+        els.signals.innerHTML = '<div class="signal"><p class="muted">暂无实时信号。</p></div>';
+        return;
+      }
+      els.signals.innerHTML = signals.map((signal) => {
+        const reddit = signal.reddit || {};
+        const stats = reddit.stats || {};
+        const posts = reddit.topDiscussions || [];
+        const postItems = posts.slice(0, 5).map((item) => {
+          const buying = (item.buyingSignals || []).map(s => `<span style="color:var(--ok);font-size:12px;">${s}</span>`).join(' ');
+          const pain = (item.painPoints || []).map(p => `<span style="color:var(--accent);font-size:12px;">${p}</span>`).join(' ');
+          const comp = (item.competitors || []).map(c => `<span style="color:var(--muted);font-size:12px;">${c}</span>`).join(' ');
+          return `<li>
+            <strong>${item.score || 0}↑ ${item.numComments || 0}💬</strong>
+            ${item.title || 'untitled'}
+            ${item.subreddit ? `<span class="muted">r/${item.subreddit}</span>` : ''}
+            ${buying ? `<br><span style="font-size:12px;">购买信号: ${buying}</span>` : ''}
+            ${pain ? `<br><span style="font-size:12px;">痛点: ${pain}</span>` : ''}
+            ${comp ? `<br><span style="font-size:12px;">竞品: ${comp}</span>` : ''}
+          </li>`;
+        }).join('');
+
+        return `
+          <div class="signal">
+            <strong>${signal.query}</strong>
+            <p class="muted">live score: ${signal.liveSignalScore ?? 0} | 数据源: Reddit Only</p>
+            ${reddit.ok ? `
+              <p>Reddit: ${reddit.count} 条帖子 (模式: ${reddit.mode || '-'})</p>
+              <p style="font-size:13px;">
+                热度 avg=${stats.avgScore || 0}, max=${stats.maxScore || 0} |
+                评论 avg=${stats.avgComments || 0} |
+                购买信号=${stats.totalBuyingSignals || 0} |
+                痛点=${stats.totalPainPoints || 0}
+                ${(stats.competitors || []).length ? `<br>竞品提及: ${(stats.competitors || []).join(', ')}` : ''}
+              </p>
+              ${(stats.subreddits || []).length ? `<p style="font-size:12px;">子版块: ${(stats.subreddits || []).map(s => `<span class="pill">r/${s}</span>`).join(' ')}</p>` : ''}
+            ` : `<p>Reddit: ${reddit.error || '不可用'}</p>`}
+            ${postItems ? `<ul>${postItems}</ul>` : ''}
+          </div>
+        `;
+      }).join('');
+    }
+
+    function renderLLMResearch(payload) {
+      const research = payload.llmResearch;
+      if (!research) {
+        els.llmStatus.textContent = payload.llmEnabled ? 'LLM 已启用但无研究结果。' : 'LLM 未启用（需配置 LLM_API_KEY）。';
+        els.llmClassification.innerHTML = '';
+        els.llmFacts.innerHTML = '';
+        return;
+      }
+      if (!research.available) {
+        els.llmStatus.textContent = 'LLM 不可用。设置 LLM_API_KEY 环境变量后重启服务。';
+        els.llmClassification.innerHTML = '';
+        els.llmFacts.innerHTML = '';
+        return;
+      }
+      els.llmStatus.textContent = `LLM 已启用 | 研究迭代: ${research.iterations || 0} 轮`;
+      if (research.classification) {
+        const c = research.classification;
+        els.llmClassification.innerHTML = `
+          <div class="pill">Intent: ${c.primaryIntent || '-'}</div>
+          ${(c.searchQueries || []).map(q => `<span class="pill">${q}</span>`).join('')}
+        `;
+      } else {
+        els.llmClassification.innerHTML = '<span class="muted">无分类数据</span>';
+      }
+      const facts = research.extractedFacts || [];
+      if (facts.length === 0) {
+        els.llmFacts.innerHTML = '<div class="signal"><p class="muted">未提取到事实。</p></div>';
+        return;
+      }
+      const typeColors = {
+        buying_signal: 'var(--ok)', pain_point: 'var(--accent)', price: 'var(--warn)',
+        trend: '#5a3db5', preference: '#2a7a9b', comparison: '#555',
+      };
+      els.llmFacts.innerHTML = facts.map(f => `
+        <div class="signal">
+          <span class="pill" style="color:${typeColors[f.type] || 'var(--muted)'}">${f.type}</span>
+          <p style="margin:6px 0 0;">${f.fact || f.snippet || ''}</p>
+          ${f.source ? `<p class="muted" style="font-size:12px;margin-top:4px;">${f.source}</p>` : ''}
+        </div>
+      `).join('');
+    }
+
+    async function loadDashboard() {
+      const brand = els.brandSelect.value;
+      const path = getDataPath(brand);
+      els.status.textContent = `正在加载 ${path}`;
+      els.jsonLink.href = path;
+      try {
+        const res = await fetch(path, { cache: 'no-store' });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const payload = await res.json();
+        renderStats(payload);
+        renderIntents(payload);
+        renderOpportunities(payload);
+        renderSignals(payload);
+        renderLLMResearch(payload);
+        els.status.textContent = `已加载 ${brand}，生成时间 ${payload.generatedAt || 'unknown'}${payload.llmEnabled ? ' (LLM)' : ''}`;
+      } catch (error) {
+        els.status.textContent = `加载失败：${error.message}`;
+        els.summaryStats.innerHTML = '';
+        els.intentPills.innerHTML = '<span class="muted">没有可展示的数据。</span>';
+        els.opportunityRows.innerHTML = '<tr><td colspan="8" class="muted">没有可展示的数据。</td></tr>';
+        els.signals.innerHTML = '<div class="signal"><p class="muted">没有可展示的数据。</p></div>';
+        els.llmStatus.textContent = '加载失败。';
+        els.llmClassification.innerHTML = '';
+        els.llmFacts.innerHTML = '';
+      }
+    }
+
+    async function runViaApi() {
+      const brand = els.brandSelect.value;
+      const config = saveConfig();
+      if (!config.apiBase) {
+        els.status.textContent = '请先填写 Intent API Base。';
+        return;
+      }
+      els.status.textContent = `正在调用 ${config.apiBase}/api/run`;
+      try {
+        const res = await fetch(`${config.apiBase.replace(/\/+$/, '')}/api/run`, {
+          method: 'POST',
+          headers: { 'content-type': 'application/json' },
+          body: JSON.stringify({
+            brand,
+            topic: config.topic || undefined,
+            limit: config.limit || 30,
+          }),
+        });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const payload = await res.json();
+        els.status.textContent = `本地 API 已运行 ${brand}。建议接着执行站点同步。`;
+        if (payload.output && payload.output.brand) {
+          await loadDashboard();
+        }
+      } catch (error) {
+        els.status.textContent = `运行失败：${error.message}`;
+      }
+    }
+
+    els.loadBtn.addEventListener('click', loadDashboard);
+    els.runBtn.addEventListener('click', runViaApi);
+    els.saveConfigBtn.addEventListener('click', () => {
+      saveConfig();
+      els.status.textContent = '浏览器配置已保存。';
+    });
+    els.resetConfigBtn.addEventListener('click', resetConfig);
+    loadConfig();
+    loadDashboard();
+  </script>
+</body>
+</html>

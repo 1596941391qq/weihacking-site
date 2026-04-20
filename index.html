@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light" data-lang="zh">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>weihacking — Strategy. Build. Ship.</title>
+  <meta name="description" content="SEO/GEO strategist. hacking newsletter author. Soulcraft Limited. Partnering with Concrete Future AI for results-driven global marketing.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⌘</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Source+Code+Pro:wght@400;600&family=Noto+Serif+SC:wght@400;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #FDFBF7;
+      --bg-alt: #F0ECE3;
+      --ink: #1A1714;
+      --ink-s: #3D3831;
+      --muted: #8A8279;
+      --accent: #C0392B;
+      --mono: 'Source Code Pro', Consolas, monospace;
+      --serif: 'Playfair Display', 'Noto Serif SC', Georgia, serif;
+      --body: 'Noto Serif SC', Georgia, serif;
+      --rule: rgba(26,23,20,.12);
+      --rule-s: rgba(26,23,20,.25);
+      --card: #fff;
+      --shadow: 0 2px 24px rgba(26,23,20,.07);
+    }
+    [data-theme="dark"] {
+      --bg: #0D0C0B; --bg-alt: #161514;
+      --ink: #E8E4DB; --ink-s: #C4BFB4; --muted: #706B62;
+      --accent: #4ADE80;
+      --rule: rgba(232,228,219,.08); --rule-s: rgba(232,228,219,.18);
+      --card: #1A1918; --shadow: 0 2px 24px rgba(0,0,0,.3);
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:var(--body);color:var(--ink);background:var(--bg);line-height:1.7;-webkit-font-smoothing:antialiased;transition:background .5s,color .5s}
+    a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
+    ::selection{background:var(--accent);color:#fff}
+    img{max-width:100%;display:block}
+
+    /* NAV */
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:14px 32px;font-family:var(--mono);font-size:12px;mix-blend-mode:difference;color:#fff}
+    nav a{color:#fff;opacity:.7;transition:opacity .2s}nav a:hover{opacity:1;text-decoration:none}
+    .nav-links{display:flex;gap:16px}
+    .nav-r{display:flex;gap:6px;align-items:center}
+    .nb{background:none;border:1px solid rgba(255,255,255,.3);color:#fff;padding:4px 10px;font-size:11px;cursor:pointer;font-family:var(--mono);border-radius:2px}
+    .nb:hover{background:rgba(255,255,255,.15)}
+
+    /* HERO */
+    .hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:60px 24px;position:relative;overflow:hidden;
+      background:radial-gradient(ellipse at 50% 50%, rgba(192,57,43,.06) 0%, transparent 60%),var(--bg)}
+    [data-theme="dark"] .hero{background:radial-gradient(ellipse at 50% 50%, rgba(74,222,128,.05) 0%, transparent 60%),var(--bg)}
+    .hero-photo{width:120px;height:120px;border-radius:50%;background:var(--bg-alt);border:2px solid var(--rule-s);margin:0 auto 32px;overflow:hidden;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:11px;color:var(--muted)}
+    .hero-photo img{width:100%;height:100%;object-fit:cover}
+    .hero-tag{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:16px}
+    .hero h1{font-family:var(--serif);font-size:clamp(52px,11vw,130px);font-weight:900;line-height:.88;letter-spacing:-.04em;margin-bottom:20px}
+    .hero h1 em{font-style:italic;color:var(--accent)}
+    .hero-sub{font-size:clamp(16px,2.4vw,21px);color:var(--ink-s);max-width:500px;margin:0 auto 36px;line-height:1.6}
+    .hero-links{display:flex;gap:16px;flex-wrap:wrap;justify-content:center}
+    .cta{font-family:var(--mono);font-size:12px;letter-spacing:.04em;padding:12px 24px;border:1px solid var(--ink);background:var(--ink);color:var(--bg);transition:all .2s;text-decoration:none}
+    .cta:hover{background:var(--accent);border-color:var(--accent);text-decoration:none}
+    .cta.ghost{background:none;color:var(--ink);border-color:var(--rule-s)}
+    .cta.ghost:hover{border-color:var(--accent);color:var(--accent)}
+
+    /* SECTIONS */
+    .wrap{max-width:900px;margin:0 auto;padding:0 28px}
+    section{padding:80px 0;opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
+    section.visible{opacity:1;transform:translateY(0)}
+    .sec-label{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);border-top:2px solid var(--ink);padding-top:8px;display:inline-block;margin-bottom:32px}
+    .sec-title{font-family:var(--serif);font-size:clamp(32px,5vw,44px);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:20px}
+
+    /* ABOUT — single column */
+    .about-text p{font-size:19px;line-height:1.8;color:var(--ink-s);margin-bottom:18px}
+    .about-text p:first-child{font-size:24px;font-weight:700;color:var(--ink);font-family:var(--serif)}
+    .about-text em{font-style:normal;color:var(--accent);font-weight:700}
+    .pull{font-family:var(--serif);font-size:28px;font-weight:700;line-height:1.35;color:var(--ink);border-left:3px solid var(--accent);padding-left:20px;margin:40px 0;font-style:italic}
+    .about-img-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:28px}
+    .about-img-row .img-slot{border:1px solid var(--rule);border-radius:4px;overflow:hidden;aspect-ratio:16/10;background:var(--bg-alt)}
+    .about-img-row .img-slot img{width:100%;height:100%;object-fit:cover}
+
+/* THINKING */
+    .think-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+    .think-piece{border-left:1px solid var(--rule-s);padding-left:18px}
+    .think-piece p{font-size:16px;line-height:1.85;color:var(--ink-s)}
+    .think-piece strong{color:var(--ink);font-weight:700}
+    .think-date{font-family:var(--mono);font-size:11px;color:var(--muted);margin-top:10px;letter-spacing:.06em}
+
+    /* NEWSLETTER / KB */
+    .kb-section{background:var(--bg-alt)}
+    .kb-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+    .kb-card{background:var(--card);border:1px solid var(--rule);padding:28px;transition:all .3s;position:relative}
+    .kb-card:hover{border-color:var(--accent);box-shadow:var(--shadow);transform:translateY(-2px)}
+    .kb-card .kb-num{font-family:var(--mono);font-size:11px;color:var(--accent);letter-spacing:.1em;margin-bottom:10px}
+    .kb-card h3{font-family:var(--serif);font-size:20px;font-weight:700;line-height:1.3;margin-bottom:10px}
+    .kb-card .kb-meta{font-family:var(--mono);font-size:11px;color:var(--muted);margin-bottom:12px}
+    .kb-card .kb-excerpt{font-size:14px;color:var(--ink-s);line-height:1.6}
+    .kb-tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:14px}
+    .kb-tag{font-family:var(--mono);font-size:10px;padding:2px 7px;border:1px solid var(--rule);color:var(--muted)}
+    .kb-card:hover .kb-tag{border-color:var(--accent);color:var(--accent)}
+
+    /* HackingSEO OS1 banner */
+    .gos-banner{margin-top:32px;background:var(--card);border:1px solid var(--rule-s);padding:32px;display:grid;grid-template-columns:1.2fr 1fr;gap:24px;align-items:center}
+    .gos-text h3{font-family:var(--serif);font-size:22px;font-weight:700;margin-bottom:8px}
+    .gos-text p{font-size:14px;color:var(--ink-s);line-height:1.6;margin-bottom:12px}
+    .gos-img{border:1px solid var(--rule);border-radius:4px;aspect-ratio:4/3;background:var(--bg-alt);overflow:hidden}
+    .gos-img img{width:100%;height:100%;object-fit:cover}
+
+    /* PRODUCTS */
+    .prod-section{background:var(--bg-alt)}
+    .prod-note{font-size:14px;color:var(--muted);margin-bottom:28px;max-width:600px}
+    .prod-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule);border:1px solid var(--rule)}
+    .prod-cell{background:var(--card);padding:32px 24px;transition:all .3s;display:flex;flex-direction:column}
+    .prod-cell:hover{background:var(--bg)}
+    .prod-cell h3{font-family:var(--serif);font-size:20px;font-weight:700;margin-bottom:10px;line-height:1.3}
+    .prod-cell p{font-size:14px;color:var(--muted);line-height:1.65}
+    .prod-cta{font-family:var(--mono);font-size:11px;color:var(--accent);margin-top:auto;padding-top:16px;display:inline-block}
+    .prod-img{margin-top:16px;border:1px solid var(--rule);border-radius:4px;aspect-ratio:16/9;overflow:hidden}
+    .prod-img img{width:100%;height:100%;object-fit:cover}
+
+    /* TOOLS */
+    .tools-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+    .tool-card{border:1px solid var(--rule);padding:20px;transition:all .2s}
+    .tool-card:hover{border-color:var(--accent)}
+    .tool-card h3{font-family:var(--mono);font-size:13px;margin-bottom:6px}
+    .tool-card p{font-size:13px;color:var(--muted);line-height:1.5}
+    .tool-card a{font-family:var(--mono);font-size:11px;color:var(--accent)}
+
+    /* KNOWLEDGE */
+    .k-item{padding:32px 0;border-bottom:1px solid var(--rule)}
+    .k-item:last-child{border-bottom:none}
+    .k-src{font-family:var(--mono);font-size:11px;color:var(--accent);letter-spacing:.08em;margin-bottom:6px}
+    .k-item h3{font-family:var(--serif);font-size:22px;font-weight:700;line-height:1.35;margin-bottom:10px;max-width:680px}
+    .k-item p{font-size:15px;color:var(--ink-s);max-width:580px}
+
+    /* CTA BAND */
+    .cta-band{padding:80px 0;text-align:center;border-top:1px solid var(--rule)}
+    .cta-band .cta{margin-top:8px}
+
+    /* PARTNER */
+    .partner-band{text-align:center;padding:40px 0;border-bottom:1px solid var(--rule)}
+    .partner-band p{font-family:var(--mono);font-size:12px;color:var(--muted);letter-spacing:.04em}
+    .partner-band strong{color:var(--ink)}
+
+    /* FOOTER */
+    footer{padding:48px 28px;font-family:var(--mono);font-size:12px;color:var(--muted);border-top:1px solid var(--rule);display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+    footer a{color:var(--muted)}footer a:hover{color:var(--accent);text-decoration:none}
+    .f-links{display:flex;gap:18px}
+
+    /* RESPONSIVE */
+    @media(max-width:768px){
+      .nav-links{display:none}
+      .gos-banner{grid-template-columns:1fr;gap:16px}
+      .kb-grid,.think-grid,.prod-grid,.tools-grid{grid-template-columns:1fr}
+      .about-img-row{grid-template-columns:1fr}.hero-sub{font-size:16px}
+      nav{padding:12px 16px}.wrap{padding:0 16px}
+    }
+    body.sw *{transition:background .5s,color .5s,border-color .5s!important}
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="#">weihacking_</a>
+    <div class="nav-links">
+      <a href="#about" data-zh="关于" data-en="About">关于</a>
+      <a href="#knowledge-base" data-zh="知识" data-en="Knowledge">知识</a>
+      <a href="#products" data-zh="服务" data-en="Services">服务</a>
+    </div>
+    <div class="nav-r">
+      <button class="nb" id="langToggle" onclick="toggleLang()">EN</button>
+      <button class="nb" id="themeToggle" onclick="toggleTheme()">☽</button>
+    </div>
+  </nav>
+
+  <!-- ==================== HERO ==================== -->
+  <div class="hero">
+    <div class="hero-photo" id="heroAvatar"><img src="images/avatar.jpg" alt="weihacking"></div>
+    <div class="hero-tag" data-zh="SEO / GEO 策略师 · hacking 周刊作者 · Soulcraft Limited" data-en="SEO / GEO Strategist · hacking Newsletter · Soulcraft Limited">SEO / GEO 策略师 · hacking 周刊作者 · Soulcraft Limited</div>
+    <h1 data-zh="wei<em>hacking</em>" data-en="wei<em>hacking</em>">wei<em>hacking</em></h1>
+    <div class="hero-sub" data-zh="六年实战，200+ 客户。在搜索引擎和 AI 的交叉地带找缝隙。不卖概念，只交付数字。" data-en="Six years in the trenches. 200+ clients. Finding the gaps between search and AI. No buzzwords — just numbers.">六年实战，200+ 客户。在搜索引擎和 AI 的交叉地带找缝隙。不卖概念，只交付数字。</div>
+    <div class="hero-links">
+      <a href="#products" class="cta" data-zh="结果向交付 →" data-en="Services →">结果向交付 →</a>
+      <a href="#knowledge-base" class="cta ghost" data-zh="HackingSEO OS1" data-en="HackingSEO OS1">HackingSEO OS1</a>
+    </div>
+  </div>
+
+  <!-- ==================== ABOUT ==================== -->
+  <section id="about">
+    <div class="wrap">
+      <div class="sec-label" data-zh="关于" data-en="About">关于</div>
+      <div class="about-text">
+        <p data-zh="我做的是在 AI 和搜索的交叉地带<em>凿路</em>。" data-en="What I do is <em>carve paths</em> at the intersection of AI and search.">我做的是在 AI 和搜索的交叉地带<em>凿路</em>。</p>
+        <p data-zh="六年海外 SEO，200+ 品牌从零到稳定收入。运营 <em>hacking 周刊</em>，拆解 SEO 暗面手法、AI 搜索策略和出海增长。公司是 <em>Soulcraft Limited</em>，和炬象未来（Concrete Future AI）深度合作。" data-en="Six years of international SEO. 200+ brands from zero to revenue. I run the <em>hacking newsletter</em> — dissecting dark-side SEO, AI search strategy, and global growth. My company is <em>Soulcraft Limited</em>, partnering deep with Concrete Future AI.">六年海外 SEO，200+ 品牌从零到稳定收入。运营 <em>hacking 周刊</em>，拆解 SEO 暗面手法、AI 搜索策略和出海增长。公司是 <em>Soulcraft Limited</em>，和炬象未来（Concrete Future AI）深度合作。</p>
+        <div class="pull" data-zh="平台在淘汰的不是技巧，是整套假的生存环境。" data-en="Platforms aren't eliminating tactics — they're eliminating entire fake environments.">平台在淘汰的不是技巧，是整套假的生存环境。</div>
+        <div class="about-img-row">
+          <div class="img-slot" id="aboutImg1"><img src="images/7c6dc15500d5ed153dbd540d6a738c97.jpg" alt="Google Search Console Growth"></div>
+          <div class="img-slot" id="aboutImg2"><img src="images/feishu-ai-ui.png" alt="Feishu AI Q&A Interface"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== THINKING ==================== -->
+  <section id="thinking">
+    <div class="wrap">
+      <div class="sec-label" data-zh="推文哲思" data-en="Thinking">推文哲思</div>
+      <div class="sec-title" data-zh="最近在想什么" data-en="Recent Thinking">最近在想什么</div>
+      <div class="think-grid">
+        <div class="think-piece">
+          <p data-zh="你优化了一篇文章让 AI 引用你。AI 引用了你。<strong>然后呢？</strong><br>读到 AI 回答的人不会点进你的网站。他们拿到了答案，关掉了标签页。<br>你赢了引用，输了流量。<br>如果你卖的是信息，你完了。<br>如果你卖的是<strong>信任</strong>，你才刚开始。" data-en="You optimize for AI citation. AI cites you. <strong>Then what?</strong><br>Nobody clicks through. They got the answer and closed the tab.<br>You won the citation. You lost the traffic.<br>If you sell information, you're done.<br>If you sell <strong>trust</strong>, you're just getting started.">你优化了一篇文章让 AI 引用你。AI 引用了你。<strong>然后呢？</strong><br>读到 AI 回答的人不会点进你的网站。他们拿到了答案，关掉了标签页。<br>你赢了引用，输了流量。<br>如果你卖的是信息，你完了。<br>如果你卖的是<strong>信任</strong>，你才刚开始。</p>
+          <div class="think-date">2026-04-20</div>
+        </div>
+        <div class="think-piece">
+          <p data-zh="凌晨两点的想法，写下来。第二天早上再看。<br>如果还觉得好，那就是真的好。<br>如果觉得荒谬——<br>说明昨晚那个<strong>「特别清楚」</strong>的感觉，不是来自洞察。<br>是来自疲惫。" data-en="Ideas at 2am: write them down. Morning verdict.<br>Still good? Then good.<br>Absurd? Then that clarity wasn't <strong>insight</strong>.<br>It was exhaustion.">凌晨两点的想法，写下来。第二天早上再看。<br>如果还觉得好，那就是真的好。<br>如果觉得荒谬——<br>说明昨晚那个<strong>「特别清楚」</strong>的感觉，不是来自洞察。<br>是来自疲惫。</p>
+          <div class="think-date">2026-04-20</div>
+        </div>
+      </div>
+      <div style="margin-top:28px;text-align:center">
+        <a href="https://x.com/weihacking" target="_blank" rel="noreferrer" style="font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.06em;border:1px solid var(--rule);padding:6px 16px;display:inline-block;border-radius:2px" data-zh="更多推文 → @weihacking" data-en="More thoughts → @weihacking">更多推文 → @weihacking</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== KNOWLEDGE BASE / NEWSLETTER ==================== -->
+  <section class="kb-section" id="knowledge-base">
+    <div class="wrap">
+      <div class="sec-label" data-zh="知识产品" data-en="Knowledge Products">知识产品</div>
+      <div class="sec-title" data-zh="hacking 周刊<br>& HackingSEO OS1" data-en="hacking Newsletter<br>& HackingSEO OS1">hacking 周刊<br>& HackingSEO OS1</div>
+      <p style="font-size:15px;color:var(--ink-s);margin-bottom:32px;max-width:560px" data-zh="免费版是 hacking 周刊。付费版是 HackingSEO_OS1——出海企业的高级 SEO 认知，33 篇成品文档、60 万字结构化知识、7 层知识架构，接入飞书 AI 即时问答。不是教程，是把前沿/边缘/深水区 SEO 知识和 AI Agent 自动化打包在一起的操作系统。" data-en="Free tier: hacking newsletter. Paid tier: HackingSEO_OS1 — frontier SEO/GEO knowledge with agent-powered automation. 33 docs, 600K+ words, 7-layer knowledge stack with Feishu AI Q&A. Not a course — an operating system.">免费版是 hacking 周刊。付费版是 HackingSEO_OS1——出海企业的高级 SEO 认知，33 篇成品文档、60 万字结构化知识、7 层知识架构，接入飞书 AI 即时问答。不是教程，是把前沿/边缘/深水区 SEO 知识和 AI Agent 自动化打包在一起的操作系统。</p>
+
+      <div class="kb-grid">
+        <div class="kb-card">
+          <div class="kb-num">#02</div>
+          <h3 data-zh="过期域名的残余价值评估框架" data-en="Expired Domain Residual Value Assessment">过期域名的残余价值评估框架</h3>
+          <div class="kb-meta">2026-04-05 ~ 04-12</div>
+          <div class="kb-excerpt" data-zh="2026 三月 spam 更新后，过期域名的信任残留正在被系统性压缩。ROI 从正转负的临界信号。" data-en="Post March 2026 spam update: expired domain trust is being systematically compressed. The inflection where ROI flips negative.">2026 三月 spam 更新后，过期域名的信任残留正在被系统性压缩。ROI 从正转负的临界信号。</div>
+          <div class="kb-tags"><span class="kb-tag">过期域名</span><span class="kb-tag">AI检测对抗</span><span class="kb-tag">社媒工业化</span></div>
+        </div>
+        <div class="kb-card">
+          <div class="kb-num">#01</div>
+          <h3 data-zh="平台正在一起淘汰假环境" data-en="Platforms Are Eliminating Fake Environments">平台正在一起淘汰假环境</h3>
+          <div class="kb-meta">2026-03-29 ~ 04-01</div>
+          <div class="kb-excerpt" data-zh="Google 压缩模板化页面，Reddit 压缩模板化互动，外链市场放大同源污染。所有信号指向同一结论。" data-en="Google compresses templates. Reddit compresses scripted engagement. Link markets amplify same-source pollution.">Google 压缩模板化页面，Reddit 压缩模板化互动，外链市场放大同源污染。所有信号指向同一结论。</div>
+          <div class="kb-tags"><span class="kb-tag">Google更新</span><span class="kb-tag">Reddit投票</span><span class="kb-tag">外链翻车</span></div>
+        </div>
+      </div>
+
+      <!-- HackingSEO_OS1 banner -->
+      <div class="gos-banner">
+        <div class="gos-text">
+          <h3 data-zh="HackingSEO_OS1 — 出海 SEO 认知操作系统" data-en="HackingSEO_OS1 — Frontier SEO/GEO Knowledge OS">HackingSEO_OS1 — 出海 SEO 认知操作系统</h3>
+          <p data-zh="7 层知识架构：内容生产方法论 → AI 可见度/GEO 体系 → 外链建设 → 策略集/工具链 → 垂直行业指南 → 深水区方法论 → 行业情报。33 篇文档、60 万字、飞书 AI 24/7 问答。你不需要懂 SEO，带着业务问题来就行。" data-en="7-layer knowledge stack: Content → AI Visibility/GEO → Link Building → Strategy/Tools → Vertical Playbooks → Deep-Water Methods → Intelligence Feed. 33 docs, 600K+ words, 24/7 Feishu AI Q&A. No SEO background needed.">7 层知识架构：内容生产方法论 → AI 可见度/GEO 体系 → 外链建设 → 策略集/工具链 → 垂直行业指南 → 深水区方法论 → 行业情报。33 篇文档、60 万字、飞书 AI 24/7 问答。你不需要懂 SEO，带着业务问题来就行。</p>
+          <a href="https://vcnierml3885.feishu.cn/share/base/form/shrcn7Z09L3UJHDrX3NPgHNRyib" target="_blank" rel="noreferrer" class="cta ghost" style="display:inline-block" data-zh="申请免费 30 分钟咨询 →" data-en="Apply for free 30-min advisory →">申请免费 30 分钟咨询 →</a>
+        </div>
+        <div class="gos-img" id="gosImg"><img src="images/bb4938b58ff7501f1a635ec613cc671a.jpg" alt="HackingSEO_OS1 7-Layer Knowledge Base"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== PRODUCTS ==================== -->
+  <section class="prod-section" id="products">
+    <div class="wrap">
+      <div class="sec-label" data-zh="结果向交付" data-en="Results-Driven Delivery">结果向交付</div>
+      <div class="sec-title" data-zh="不卖概念，只交数字" data-en="No Buzzwords. Just Numbers.">不卖概念，只交数字</div>
+      <div class="prod-note" data-zh="和炬象未来（Concrete Future AI）深度合作，提供结果向交付服务。每一项服务的交付物都是具体的数字——粉丝数、排名位次、送达率——可在后台核实。" data-en="Deep partnership with Concrete Future AI. Every deliverable is a number: followers, rankings, delivery rates — verifiable in platform dashboards.">和炬象未来（Concrete Future AI）深度合作，提供结果向交付服务。每一项服务的交付物都是具体的数字——粉丝数、排名位次、送达率——可在后台核实。</div>
+
+      <div class="prod-grid">
+        <div class="prod-cell">
+          <h3 data-zh="高权重站文章发布" data-en="High-Authority Article Publishing">高权重站文章发布</h3>
+          <p data-zh="在 DA 50+ 的高权重站点发布品牌文章，提升搜索可见性和 AI 引用率。每篇文章的排名、索引、流量均可追踪。" data-en="Publish branded articles on DA 50+ sites. Boost search visibility and AI citation rates. Every article's ranking, indexing, and traffic is trackable.">在 DA 50+ 的高权重站点发布品牌文章，提升搜索可见性和 AI 引用率。每篇文章的排名、索引、流量均可追踪。</p>
+          <div class="prod-img" id="prodImg1"><img src="images/newsletter-header-seo-analytics.jpg" alt="High-Authority Article Publishing"></div>
+          <a href="https://vcnierml3885.feishu.cn/share/base/form/shrcn7Z09L3UJHDrX3NPgHNRyib" target="_blank" rel="noreferrer" class="prod-cta" data-zh="咨询详情 →" data-en="Learn more →">咨询详情 →</a>
+        </div>
+        <div class="prod-cell">
+          <h3 data-zh="社媒评论截流" data-en="Social Comment Interception">社媒评论截流</h3>
+          <p data-zh="AI 筛选高价值目标帖，自动生成有价值的评论，从竞争对手帖子下截取精准流量。触达效率提升 3-5 倍。" data-en="AI filters high-value target posts, generates valuable comments, intercepts precision traffic from competitor threads. 3-5x outreach efficiency.">AI 筛选高价值目标帖，自动生成有价值的评论，从竞争对手帖子下截取精准流量。触达效率提升 3-5 倍。</p>
+          <div class="prod-img" id="prodImg2"><img src="images/tweet-img3.jpg" alt="Social Comment Interception"></div>
+          <a href="https://vcnierml3885.feishu.cn/share/base/form/shrcn7Z09L3UJHDrX3NPgHNRyib" target="_blank" rel="noreferrer" class="prod-cta" data-zh="咨询详情 →" data-en="Learn more →">咨询详情 →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== TOOLS ==================== -->
+  <section id="tools">
+    <div class="wrap">
+      <div class="sec-label" data-zh="开源工具" data-en="Open Source Tools">开源工具</div>
+      <div class="sec-title" data-zh="工具 &amp; 作品" data-en="Tools &amp; Works">工具 &amp; 作品</div>
+      <div class="tools-grid">
+        <div class="tool-card">
+          <h3>GitHub</h3>
+          <p data-zh="所有开源工具、pack、bundle 和自动化链路" data-en="All open-source tools, packs, bundles, and automation chains">所有开源工具、pack、bundle 和自动化链路</p>
+          <a href="https://github.com/1596941391qq" target="_blank" rel="noreferrer">github.com/1596941391qq →</a>
+        </div>
+        <div class="tool-card">
+          <h3 data-zh="关键词意图深搜" data-en="Keyword Intent Deep Search">关键词意图深搜</h3>
+          <p data-zh="品牌上下文 + SEO 策略 → 可执行的意图分析" data-en="Brand context + SEO strategy → actionable intent analysis">品牌上下文 + SEO 策略 → 可执行的意图分析</p>
+          <a href="./intent-workbench.html" data-zh="在线工作台 →" data-en="Live Workbench →">在线工作台 →</a>
+        </div>
+        <div class="tool-card">
+          <h3 data-zh="外链导航" data-en="Backlink Navigator">外链导航</h3>
+          <p data-zh="高质量外链资源发现与评估" data-en="High-quality backlink resource discovery and evaluation">高质量外链资源发现与评估</p>
+          <a href="Packs/link-building-pack/templates/backlink-sources-full.html" data-zh="查看资源 →" data-en="View Resources →">查看资源 →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== KNOWLEDGE HIGHLIGHTS ==================== -->
+  <section id="knowledge">
+    <div class="wrap">
+      <div class="sec-label" data-zh="知识精选" data-en="Knowledge Highlights">知识精选</div>
+      <div class="k-item">
+        <div class="k-src">Ahrefs · 75K brands</div>
+        <h3 data-zh="YouTube 提及是 AI 可见性的最强信号，远超域名权重" data-en="YouTube mentions are the #1 AI visibility signal, beating domain rating by 3x">YouTube 提及是 AI 可见性的最强信号，远超域名权重</h3>
+        <p data-zh="相关性 0.737 vs 0.266。不是播放量，是被提及的广度。" data-en="Correlation: 0.737 vs 0.266. Not views — breadth of mentions.">相关性 0.737 vs 0.266。不是播放量，是被提及的广度。</p>
+      </div>
+      <div class="k-item">
+        <div class="k-src">Ahrefs · 730K responses</div>
+        <h3 data-zh="AI Mode 和 AI Overviews 说同一件事，引用完全不同的来源" data-en="AI Mode and AI Overviews say the same thing citing completely different sources">AI Mode 和 AI Overviews 说同一件事，引用完全不同的来源</h3>
+        <p data-zh="86% 语义一致，13.7% 引用重叠。被一个引用不保证被另一个引用。" data-en="86% semantic overlap. 13.7% citation overlap.">86% 语义一致，13.7% 引用重叠。被一个引用不保证被另一个引用。</p>
+      </div>
+      <div class="k-item">
+        <div class="k-src">Semrush · 89K URLs</div>
+        <h3 data-zh="LinkedIn 是 AI 搜索引用量第二大的域名，超过 Wikipedia" data-en="LinkedIn is the #2 most-cited domain in AI search, ahead of Wikipedia">LinkedIn 是 AI 搜索引用量第二大的域名，超过 Wikipedia</h3>
+        <p data-zh="被引用最多的帖子平均只有 15-25 个赞。AI 不追热点，它追的是持续的存在。" data-en="Most-cited posts average 15-25 likes. AI chases consistent presence, not virality.">被引用最多的帖子平均只有 15-25 个赞。AI 不追热点，它追的是持续的存在。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== CLOSING CTA ==================== -->
+  <div class="cta-band">
+    <div class="wrap">
+      <p style="font-family:var(--serif);font-size:24px;font-weight:700;margin-bottom:20px;color:var(--ink)" data-zh="聊聊你的业务，看我们能不能帮到你。" data-en="Let's talk about your business.">聊聊你的业务，看我们能不能帮到你。</p>
+      <a href="https://vcnierml3885.feishu.cn/share/base/form/shrcn7Z09L3UJHDrX3NPgHNRyib" target="_blank" rel="noreferrer" class="cta" data-zh="申请免费 30 分钟咨询 →" data-en="Apply for free 30-min advisory →">申请免费 30 分钟咨询 →</a>
+    </div>
+  </div>
+
+  <!-- PARTNER -->
+  <div class="partner-band">
+    <p data-zh="深度合作伙伴：<strong>炬象未来 / Concrete Future AI</strong> — 出海营销 · AI 社媒自动化 · 电商全链路" data-en="Deep partner: <strong>Concrete Future AI</strong> — Global marketing · AI social automation · E-commerce full funnel">深度合作伙伴：<strong>炬象未来 / Concrete Future AI</strong> — 出海营销 · AI 社媒自动化 · 电商全链路</p>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div>© 2026 weihacking · Soulcraft Limited</div>
+    <div class="f-links">
+      <a href="https://x.com/weihacking" target="_blank" rel="noreferrer">X ↗</a>
+      <a href="https://github.com/1596941391qq" target="_blank" rel="noreferrer">GitHub ↗</a>
+      <a href="mailto:echokay777@163.com">Email</a>
+    </div>
+  </footer>
+
+  <script>
+    function toggleTheme(){document.body.classList.add('sw');const h=document.documentElement,n=h.getAttribute('data-theme')==='dark'?'light':'dark';h.setAttribute('data-theme',n);document.getElementById('themeToggle').textContent=n==='dark'?'☀':'☽';localStorage.setItem('theme',n);setTimeout(()=>document.body.classList.remove('sw'),600)}
+    function toggleLang(){const h=document.documentElement,n=h.getAttribute('data-lang')==='zh'?'en':'zh';h.setAttribute('data-lang',n);document.getElementById('langToggle').textContent=n==='zh'?'EN':'中文';localStorage.setItem('lang',n);applyLang(n)}
+    function applyLang(l){document.querySelectorAll('[data-zh][data-en]').forEach(e=>{const v=e.getAttribute('data-'+l);if(v!==null)e.innerHTML=v})}
+    (function(){const t=localStorage.getItem('theme');if(t){document.documentElement.setAttribute('data-theme',t);document.getElementById('themeToggle').textContent=t==='dark'?'☀':'☽'}const l=localStorage.getItem('lang');if(l){document.documentElement.setAttribute('data-lang',l);document.getElementById('langToggle').textContent=l==='zh'?'EN':'中文';applyLang(l)}})();
+    // Scroll fade-up
+    const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}})},{threshold:.08});
+    document.querySelectorAll('section').forEach(s=>obs.observe(s));
+  </script>
+</body>
+</html>
