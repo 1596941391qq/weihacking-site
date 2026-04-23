@@ -9,164 +9,12 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Source+Code+Pro:wght@400;600&family=Noto+Serif+SC:wght@400;700;900&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --bg: #FDFBF7;
-      --bg-alt: #F0ECE3;
-      --ink: #1A1714;
-      --ink-s: #3D3831;
-      --muted: #8A8279;
-      --accent: #C0392B;
-      --mono: 'Source Code Pro', Consolas, monospace;
-      --serif: 'Playfair Display', 'Noto Serif SC', Georgia, serif;
-      --body: 'Noto Serif SC', Georgia, serif;
-      --rule: rgba(26,23,20,.12);
-      --rule-s: rgba(26,23,20,.25);
-      --card: #fff;
-      --shadow: 0 2px 24px rgba(26,23,20,.07);
-    }
-    [data-theme="dark"] {
-      --bg: #0D0C0B; --bg-alt: #161514;
-      --ink: #E8E4DB; --ink-s: #C4BFB4; --muted: #706B62;
-      --accent: #4ADE80;
-      --rule: rgba(232,228,219,.08); --rule-s: rgba(232,228,219,.18);
-      --card: #1A1918; --shadow: 0 2px 24px rgba(0,0,0,.3);
-    }
-    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    html{scroll-behavior:smooth}
-    body{font-family:var(--body);color:var(--ink);background:var(--bg);line-height:1.7;-webkit-font-smoothing:antialiased;transition:background .5s,color .5s}
-    a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
-    ::selection{background:var(--accent);color:#fff}
-    img{max-width:100%;display:block}
-
-    /* NAV */
-    nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:14px 32px;font-family:var(--mono);font-size:12px;mix-blend-mode:difference;color:#fff}
-    nav a{color:#fff;opacity:.7;transition:opacity .2s}nav a:hover{opacity:1;text-decoration:none}
-    .nav-links{display:flex;gap:16px}
-    .nav-r{display:flex;gap:6px;align-items:center}
-    .nb{background:none;border:1px solid rgba(255,255,255,.3);color:#fff;padding:4px 10px;font-size:11px;cursor:pointer;font-family:var(--mono);border-radius:2px}
-    .nb:hover{background:rgba(255,255,255,.15)}
-
-    /* HERO */
-    .hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:60px 24px;position:relative;overflow:hidden;
-      background:radial-gradient(ellipse at 50% 50%, rgba(192,57,43,.06) 0%, transparent 60%),var(--bg)}
-    [data-theme="dark"] .hero{background:radial-gradient(ellipse at 50% 50%, rgba(74,222,128,.05) 0%, transparent 60%),var(--bg)}
-    .hero-photo{width:120px;height:120px;border-radius:50%;background:var(--bg-alt);border:2px solid var(--rule-s);margin:0 auto 32px;overflow:hidden;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:11px;color:var(--muted)}
-    .hero-photo img{width:100%;height:100%;object-fit:cover}
-    .hero-tag{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:16px}
-    .hero h1{font-family:var(--serif);font-size:clamp(52px,11vw,130px);font-weight:900;line-height:.88;letter-spacing:-.04em;margin-bottom:20px}
-    .hero h1 em{font-style:italic;color:var(--accent)}
-    .hero-sub{font-size:clamp(16px,2.4vw,21px);color:var(--ink-s);max-width:500px;margin:0 auto 36px;line-height:1.6}
-    .hero-links{display:flex;gap:16px;flex-wrap:wrap;justify-content:center}
-    .cta{font-family:var(--mono);font-size:12px;letter-spacing:.04em;padding:12px 24px;border:1px solid var(--ink);background:var(--ink);color:var(--bg);transition:all .2s;text-decoration:none}
-    .cta:hover{background:var(--accent);border-color:var(--accent);text-decoration:none}
-    .cta.ghost{background:none;color:var(--ink);border-color:var(--rule-s)}
-    .cta.ghost:hover{border-color:var(--accent);color:var(--accent)}
-
-    /* SECTIONS */
-    .wrap{max-width:900px;margin:0 auto;padding:0 28px}
-    section{padding:80px 0;opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
-    section.visible{opacity:1;transform:translateY(0)}
-    .sec-label{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);border-top:2px solid var(--ink);padding-top:8px;display:inline-block;margin-bottom:32px}
-    .sec-title{font-family:var(--serif);font-size:clamp(32px,5vw,44px);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:20px}
-
-    /* ABOUT — single column */
-    .about-text p{font-size:19px;line-height:1.8;color:var(--ink-s);margin-bottom:18px}
-    .about-text p:first-child{font-size:24px;font-weight:700;color:var(--ink);font-family:var(--serif)}
-    .about-text em{font-style:normal;color:var(--accent);font-weight:700}
-    .pull{font-family:var(--serif);font-size:28px;font-weight:700;line-height:1.35;color:var(--ink);border-left:3px solid var(--accent);padding-left:20px;margin:40px 0;font-style:italic}
-    .about-img-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:28px}
-    .about-img-row .img-slot{border:1px solid var(--rule);border-radius:4px;overflow:hidden;aspect-ratio:16/10;background:var(--bg-alt)}
-    .about-img-row .img-slot img{width:100%;height:100%;object-fit:cover}
-
-/* THINKING */
-    .think-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px}
-    .think-piece{border-left:1px solid var(--rule-s);padding-left:18px}
-    .think-piece p{font-size:16px;line-height:1.85;color:var(--ink-s)}
-    .think-piece strong{color:var(--ink);font-weight:700}
-    .think-date{font-family:var(--mono);font-size:11px;color:var(--muted);margin-top:10px;letter-spacing:.06em}
-
-    /* NEWSLETTER / KB */
-    .kb-section{background:var(--bg-alt)}
-    .kb-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
-    .kb-card{background:var(--card);border:1px solid var(--rule);padding:28px;transition:all .3s;position:relative}
-    .kb-card:hover{border-color:var(--accent);box-shadow:var(--shadow);transform:translateY(-2px)}
-    .kb-card .kb-num{font-family:var(--mono);font-size:11px;color:var(--accent);letter-spacing:.1em;margin-bottom:10px}
-    .kb-card h3{font-family:var(--serif);font-size:20px;font-weight:700;line-height:1.3;margin-bottom:10px}
-    .kb-card .kb-meta{font-family:var(--mono);font-size:11px;color:var(--muted);margin-bottom:12px}
-    .kb-card .kb-excerpt{font-size:14px;color:var(--ink-s);line-height:1.6}
-    .kb-tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:14px}
-    .kb-tag{font-family:var(--mono);font-size:10px;padding:2px 7px;border:1px solid var(--rule);color:var(--muted)}
-    .kb-card:hover .kb-tag{border-color:var(--accent);color:var(--accent)}
-
-    /* HackingSEO OS1 banner */
-    .gos-banner{margin-top:32px;background:var(--card);border:1px solid var(--rule-s);padding:32px;display:grid;grid-template-columns:1.2fr 1fr;gap:24px;align-items:center}
-    .gos-text h3{font-family:var(--serif);font-size:22px;font-weight:700;margin-bottom:8px}
-    .gos-text p{font-size:14px;color:var(--ink-s);line-height:1.6;margin-bottom:12px}
-    .gos-img{border:1px solid var(--rule);border-radius:4px;aspect-ratio:4/3;background:var(--bg-alt);overflow:hidden}
-    .gos-img img{width:100%;height:100%;object-fit:cover}
-
-    /* PRODUCTS */
-    .prod-section{background:var(--bg-alt)}
-    .prod-note{font-size:14px;color:var(--muted);margin-bottom:28px;max-width:600px}
-    .prod-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule);border:1px solid var(--rule)}
-    .prod-cell{background:var(--card);padding:32px 24px;transition:all .3s;display:flex;flex-direction:column}
-    .prod-cell:hover{background:var(--bg)}
-    .prod-cell h3{font-family:var(--serif);font-size:20px;font-weight:700;margin-bottom:10px;line-height:1.3}
-    .prod-cell p{font-size:14px;color:var(--muted);line-height:1.65}
-    .prod-cta{font-family:var(--mono);font-size:11px;color:var(--accent);margin-top:auto;padding-top:16px;display:inline-block}
-    .prod-img{margin-top:16px;border:1px solid var(--rule);border-radius:4px;aspect-ratio:16/9;overflow:hidden}
-    .prod-img img{width:100%;height:100%;object-fit:cover}
-
-    /* TOOLS */
-    .tools-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
-    .tool-card{border:1px solid var(--rule);padding:20px;transition:all .2s}
-    .tool-card:hover{border-color:var(--accent)}
-    .tool-card h3{font-family:var(--mono);font-size:13px;margin-bottom:6px}
-    .tool-card p{font-size:13px;color:var(--muted);line-height:1.5}
-    .tool-card a{font-family:var(--mono);font-size:11px;color:var(--accent)}
-
-    /* KNOWLEDGE */
-    .k-item{padding:32px 0;border-bottom:1px solid var(--rule)}
-    .k-item:last-child{border-bottom:none}
-    .k-src{font-family:var(--mono);font-size:11px;color:var(--accent);letter-spacing:.08em;margin-bottom:6px}
-    .k-item h3{font-family:var(--serif);font-size:22px;font-weight:700;line-height:1.35;margin-bottom:10px;max-width:680px}
-    .k-item p{font-size:15px;color:var(--ink-s);max-width:580px}
-
-    /* CTA BAND */
-    .cta-band{padding:80px 0;text-align:center;border-top:1px solid var(--rule)}
-    .cta-band .cta{margin-top:8px}
-
-    /* PARTNER */
-    .partner-band{text-align:center;padding:40px 0;border-bottom:1px solid var(--rule)}
-    .partner-band p{font-family:var(--mono);font-size:12px;color:var(--muted);letter-spacing:.04em}
-    .partner-band strong{color:var(--ink)}
-
-    /* FOOTER */
-    footer{padding:48px 28px;font-family:var(--mono);font-size:12px;color:var(--muted);border-top:1px solid var(--rule);display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
-    footer a{color:var(--muted)}footer a:hover{color:var(--accent);text-decoration:none}
-    .f-links{display:flex;gap:18px}
-
-    /* RESPONSIVE */
-    @media(max-width:768px){
-      .nav-links{display:none}
-      .gos-banner{grid-template-columns:1fr;gap:16px}
-      .kb-grid,.think-grid,.prod-grid,.tools-grid{grid-template-columns:1fr}
-      .about-img-row{grid-template-columns:1fr}.hero-sub{font-size:16px}
-      nav{padding:12px 16px}.wrap{padding:0 16px}
-    }
-    body.sw *{transition:background .5s,color .5s,border-color .5s!important}
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
   <nav>
     <a href="#">weihacking_</a>
-    <div class="nav-links">
-      <a href="#about" data-zh="关于" data-en="About">关于</a>
-      <a href="#knowledge-base" data-zh="知识" data-en="Knowledge">知识</a>
-      <a href="#products" data-zh="服务" data-en="Services">服务</a>
-    </div>
     <div class="nav-r">
       <button class="nb" id="langToggle" onclick="toggleLang()">EN</button>
       <button class="nb" id="themeToggle" onclick="toggleTheme()">☽</button>
@@ -182,6 +30,64 @@
     <div class="hero-links">
       <a href="#products" class="cta" data-zh="结果向交付 →" data-en="Services →">结果向交付 →</a>
       <a href="#knowledge-base" class="cta ghost" data-zh="HackingSEO OS1" data-en="HackingSEO OS1">HackingSEO OS1</a>
+      <a href="https://x.com/weihacking" target="_blank" rel="noreferrer" class="cta ghost">X / Twitter</a>
+      <a href="https://github.com/1596941391qq" target="_blank" rel="noreferrer" class="cta ghost">GitHub</a>
+    </div>
+  </div>
+
+  <!-- ==================== UPDATES ==================== -->
+  <div class="updates-band">
+    <div class="updates-inner">
+      <span class="updates-label" data-zh="最新" data-en="Updates">最新</span>
+      <div class="updates-feed">
+        <span class="update-item"><span class="ud">04-22</span><span data-zh="个人品牌站上线，8 页杂志式架构" data-en="Personal brand site launched — 8-page magazine architecture">个人品牌站上线，8 页杂志式架构</span></span>
+        <span class="update-item"><span class="ud">04-20</span><span data-zh="hacking 周刊第三期发布" data-en="hacking newsletter Issue #03 published">hacking 周刊第三期发布</span></span>
+        <span class="update-item"><span class="ud">04-12</span><span data-zh="HackingSEO OS1 知识库突破 60 万字" data-en="HackingSEO OS1 knowledge base exceeds 600K words">HackingSEO OS1 知识库突破 60 万字</span></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== TABLE OF CONTENTS ==================== -->
+  <div class="toc-band">
+    <div class="wrap">
+      <div style="font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:24px" data-zh="本期目录" data-en="In This Issue">本期目录</div>
+      <div class="toc-grid">
+        <a href="about.html" class="toc-item">
+          <div class="toc-num">01</div>
+          <h3 data-zh="个人故事" data-en="Personal Story">个人故事</h3>
+          <p data-zh="开发者 → SEO → AI Agent" data-en="Developer → SEO → AI Agent">开发者 → SEO → AI Agent</p>
+        </a>
+        <a href="thinking.html" class="toc-item">
+          <div class="toc-num">02</div>
+          <h3 data-zh="推文哲思" data-en="Thinking">推文哲思</h3>
+          <p data-zh="凌晨两点的洞察" data-en="2am insights">凌晨两点的洞察</p>
+        </a>
+        <a href="knowledge.html" class="toc-item">
+          <div class="toc-num">03</div>
+          <h3 data-zh="知识产品" data-en="Knowledge">知识产品</h3>
+          <p data-zh="周刊 + OS1 知识库" data-en="Newsletter + OS1 Knowledge Base">周刊 + OS1 知识库</p>
+        </a>
+        <a href="tools.html" class="toc-item">
+          <div class="toc-num">04</div>
+          <h3 data-zh="免费工具" data-en="Free Tools">免费工具</h3>
+          <p data-zh="开源、可用、解决真问题" data-en="Open source, live, solves real problems">开源、可用、解决真问题</p>
+        </a>
+        <a href="services.html" class="toc-item">
+          <div class="toc-num">05</div>
+          <h3 data-zh="交付服务" data-en="Services">交付服务</h3>
+          <p data-zh="不卖概念，只交数字" data-en="No buzzwords, just numbers">不卖概念，只交数字</p>
+        </a>
+        <a href="insights.html" class="toc-item">
+          <div class="toc-num">06</div>
+          <h3 data-zh="数据洞察" data-en="Insights">数据洞察</h3>
+          <p data-zh="Ahrefs / Semrush 前沿研究" data-en="Ahrefs / Semrush frontier research">Ahrefs / Semrush 前沿研究</p>
+        </a>
+        <a href="community.html" class="toc-item">
+          <div class="toc-num">07</div>
+          <h3 data-zh="社群 &amp; 联系" data-en="Community">社群 &amp; 联系</h3>
+          <p data-zh="微信 · 咨询 · 社交平台" data-en="WeChat · Advisory · Social">微信 · 咨询 · 社交平台</p>
+        </a>
+      </div>
     </div>
   </div>
 
@@ -301,7 +207,7 @@
         <div class="tool-card">
           <h3 data-zh="外链导航" data-en="Backlink Navigator">外链导航</h3>
           <p data-zh="高质量外链资源发现与评估" data-en="High-quality backlink resource discovery and evaluation">高质量外链资源发现与评估</p>
-          <a href="Packs/link-building-pack/templates/backlink-sources-full.html" data-zh="查看资源 →" data-en="View Resources →">查看资源 →</a>
+          <a href="./backlink-sources-full.html" data-zh="查看资源 →" data-en="View Resources →">查看资源 →</a>
         </div>
       </div>
     </div>
@@ -352,14 +258,6 @@
     </div>
   </footer>
 
-  <script>
-    function toggleTheme(){document.body.classList.add('sw');const h=document.documentElement,n=h.getAttribute('data-theme')==='dark'?'light':'dark';h.setAttribute('data-theme',n);document.getElementById('themeToggle').textContent=n==='dark'?'☀':'☽';localStorage.setItem('theme',n);setTimeout(()=>document.body.classList.remove('sw'),600)}
-    function toggleLang(){const h=document.documentElement,n=h.getAttribute('data-lang')==='zh'?'en':'zh';h.setAttribute('data-lang',n);document.getElementById('langToggle').textContent=n==='zh'?'EN':'中文';localStorage.setItem('lang',n);applyLang(n)}
-    function applyLang(l){document.querySelectorAll('[data-zh][data-en]').forEach(e=>{const v=e.getAttribute('data-'+l);if(v!==null)e.innerHTML=v})}
-    (function(){const t=localStorage.getItem('theme');if(t){document.documentElement.setAttribute('data-theme',t);document.getElementById('themeToggle').textContent=t==='dark'?'☀':'☽'}const l=localStorage.getItem('lang');if(l){document.documentElement.setAttribute('data-lang',l);document.getElementById('langToggle').textContent=l==='zh'?'EN':'中文';applyLang(l)}})();
-    // Scroll fade-up
-    const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}})},{threshold:.08});
-    document.querySelectorAll('section').forEach(s=>obs.observe(s));
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>

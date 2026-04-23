@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light" data-lang="zh">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Community — weihacking</title>
+  <meta name="description" content="Connect with weihacking — consultation, WeChat, X/Twitter, and email contact.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⌘</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Source+Code+Pro:wght@400;600&family=Noto+Serif+SC:wght@400;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <nav>
+    <a href="#">weihacking_</a>
+    <div class="nav-r">
+      <a href="index.html" class="nb" style="margin-right:8px">←</a>
+      <button class="nb" id="langToggle" onclick="toggleLang()">EN</button>
+      <button class="nb" id="themeToggle" onclick="toggleTheme()">☽</button>
+    </div>
+  </nav>
+
+  <!-- ==================== PAGE HEADER ==================== -->
+  <div class="sub-hero">
+    <div class="hero-tag" data-zh="社群 / Community" data-en="Community">社群 / Community</div>
+    <h1 data-zh="联系 &amp; 交流" data-en="Connect &amp; Chat">联系 &amp; 交流</h1>
+  </div>
+
+  <!-- ==================== COMMUNITY CONTENT ==================== -->
+  <section class="visible">
+    <div class="wrap">
+
+      <!-- Consultation CTA -->
+      <div style="text-align:center;margin-bottom:48px">
+        <p style="font-family:var(--serif);font-size:24px;font-weight:700;margin-bottom:20px;color:var(--ink)" data-zh="聊聊你的业务，看我们能不能帮到你。" data-en="Let's talk about your business.">聊聊你的业务，看我们能不能帮到你。</p>
+        <a href="https://vcnierml3885.feishu.cn/share/base/form/shrcn7Z09L3UJHDrX3NPgHNRyib" target="_blank" rel="noreferrer" class="cta" data-zh="申请免费 30 分钟咨询 →" data-en="Apply for free 30-min advisory →">申请免费 30 分钟咨询 →</a>
+      </div>
+
+      <!-- WeChat -->
+      <div style="text-align:center;margin-bottom:40px">
+        <div class="sec-label" data-zh="微信" data-en="WeChat">微信</div>
+        <div style="max-width:280px;margin:0 auto;border:1px solid var(--rule);border-radius:4px;overflow:hidden">
+          <img src="images/微信名.png" alt="WeChat QR Code" style="width:100%;height:auto">
+        </div>
+      </div>
+
+      <!-- Social Links -->
+      <div style="text-align:center;margin-bottom:32px">
+        <div class="sec-label" data-zh="社交平台" data-en="Social">社交平台</div>
+        <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:16px">
+          <a href="https://x.com/weihacking" target="_blank" rel="noreferrer" class="cta ghost">X / Twitter</a>
+          <a href="https://github.com/1596941391qq" target="_blank" rel="noreferrer" class="cta ghost">GitHub</a>
+          <a href="mailto:echokay777@163.com" class="cta ghost" data-zh="邮箱" data-en="Email">邮箱</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- READ NEXT -->
+  <div class="read-next">
+    <div class="wrap">
+      <div class="rn-label" data-zh="继续阅读" data-en="Read Next">继续阅读</div>
+      <div class="rn-grid">
+        <a href="services.html" class="rn-item">
+          <div class="rn-sec">05</div>
+          <h4 data-zh="交付服务" data-en="Services">交付服务</h4>
+          <p data-zh="结果向交付，数字说话" data-en="Results-driven delivery">结果向交付，数字说话</p>
+        </a>
+        <a href="about.html" class="rn-item">
+          <div class="rn-sec">01</div>
+          <h4 data-zh="个人故事" data-en="Personal Story">个人故事</h4>
+          <p data-zh="开发者到 SEO 到 AI Agent" data-en="From developer to SEO to AI Agent">开发者到 SEO 到 AI Agent</p>
+        </a>
+        <a href="knowledge.html" class="rn-item">
+          <div class="rn-sec">03</div>
+          <h4 data-zh="知识产品" data-en="Knowledge">知识产品</h4>
+          <p data-zh="周刊 + OS1 知识库" data-en="Newsletter + OS1 Knowledge Base">周刊 + OS1 知识库</p>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div>© 2026 weihacking · Soulcraft Limited</div>
+    <div class="f-links">
+      <a href="https://x.com/weihacking" target="_blank" rel="noreferrer">X ↗</a>
+      <a href="https://github.com/1596941391qq" target="_blank" rel="noreferrer">GitHub ↗</a>
+      <a href="mailto:echokay777@163.com">Email</a>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
