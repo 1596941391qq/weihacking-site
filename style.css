@@ -255,11 +255,38 @@
     .method-note{margin-top:48px;padding:24px;background:var(--bg-alt);border:1px solid var(--rule)}
     .method-note p{font-family:var(--mono);font-size:11px;color:var(--muted);line-height:1.7}
 
+    /* TIER SPLIT (knowledge page) */
+    .tier-split{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule);border:1px solid var(--rule)}
+    .tier-col{background:var(--card);padding:36px 28px;display:flex;flex-direction:column}
+    .tier-label{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:12px;padding:2px 8px;border:1px solid var(--rule);display:inline-block;width:fit-content}
+    .tier-col h3{font-family:var(--serif);font-size:22px;font-weight:700;margin-bottom:8px;line-height:1.3}
+    .tier-col p{font-size:14px;color:var(--ink-s);line-height:1.65;margin-bottom:16px;flex:1}
+    .tier-col .cta{align-self:flex-start;margin-top:auto}
+
+    /* ISSUE GALLERY (knowledge page) */
+    .issue-gallery{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
+    .issue-card{border:1px solid var(--rule);overflow:hidden;transition:all .3s}
+    .issue-card:hover{border-color:var(--accent);transform:translateY(-2px);box-shadow:var(--shadow)}
+    .issue-img{height:140px;overflow:hidden;background:var(--bg-alt)}
+    .issue-img img{width:100%;height:100%;object-fit:cover}
+    .issue-body{padding:20px}
+    .issue-body h4{font-family:var(--serif);font-size:16px;font-weight:700;line-height:1.3;margin-bottom:8px}
+    .issue-body p{font-size:13px;color:var(--ink-s);line-height:1.6;margin-bottom:10px}
+
+    /* LAYER STACK (knowledge page) */
+    .layer-stack{margin-top:48px;padding-top:32px;border-top:1px solid var(--rule)}
+    .layer-item{display:flex;align-items:center;padding:12px 0;border-bottom:1px solid var(--rule);transition:all .2s}
+    .layer-item:last-child{border-bottom:none}
+    .layer-item:hover{padding-left:8px}
+    .layer-num{font-family:var(--mono);font-size:11px;color:var(--accent);letter-spacing:.1em;width:36px;flex-shrink:0}
+    .layer-name{font-family:var(--serif);font-size:16px;font-weight:700;color:var(--ink);flex:1}
+    .layer-desc{font-size:13px;color:var(--muted);max-width:280px;text-align:right}
+
     /* RESPONSIVE */
     @media(max-width:768px){
       .hero-links{gap:10px}
       .gos-banner{grid-template-columns:1fr;gap:16px}
-      .kb-grid,.think-grid,.prod-grid,.tools-grid,.toc-grid,.rn-grid,.skills-grid,.aph-grid,.contra-grid,.mf-items,.findings-grid,.stats-grid,.case-spot{grid-template-columns:1fr}
+      .kb-grid,.think-grid,.prod-grid,.tools-grid,.toc-grid,.rn-grid,.skills-grid,.aph-grid,.contra-grid,.mf-items,.findings-grid,.stats-grid,.case-spot,.tier-split,.issue-gallery{grid-template-columns:1fr}
       .about-img-row{grid-template-columns:1fr}.hero-sub{font-size:16px}
       nav{padding:12px 16px}.wrap{padding:0 16px}
       .updates-inner{padding:0 16px;flex-direction:column;gap:8px;text-align:center}
