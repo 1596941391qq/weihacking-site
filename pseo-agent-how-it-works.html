@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light" data-lang="zh">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Programmatic SEO Agent — How PSEO Automation Works — weihacking</title>
+  <meta name="description" content="Complete guide to Programmatic SEO (PSEO): how NicheDigger mining, intent classification, and PSEO Agent work together to automate keyword matrix construction.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⌘</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Source+Code+Pro:wght@400;600&family=Noto+Serif+SC:wght@400;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="canonical" href="https://1596941391qq.github.io/pseo-agent-how-it-works.html">
+  <meta property="og:title" content="Programmatic SEO Agent — How PSEO Automation Works">
+  <meta property="og:description" content="Complete guide to Programmatic SEO: NicheDigger mining, intent classification, and PSEO Agent automation.">
+  <meta property="og:url" content="https://1596941391qq.github.io/pseo-agent-how-it-works.html">
+  <meta property="og:site_name" content="weihacking">
+  <meta property="og:type" content="article">
+  <meta property="og:locale" content="zh_CN">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@weihacking">
+  <meta name="twitter:title" content="Programmatic SEO Agent — How PSEO Automation Works">
+  <meta name="twitter:description" content="Complete guide to Programmatic SEO: NicheDigger mining, intent classification, and PSEO Agent automation.">
+  <meta property="og:image" content="https://1596941391qq.github.io/images/feishu-ai-ui.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://1596941391qq.github.io/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "PSEO Agent",
+      "item": "https://1596941391qq.github.io/pseo-agent-how-it-works.html"
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html">weihacking_</a>
+    <div class="nav-r">
+      <a href="index.html" class="nb" style="margin-right:8px">←</a>
+      <button class="nb" id="langToggle" onclick="toggleLang()">EN</button>
+      <button class="nb" id="themeToggle" onclick="toggleTheme()">☽</button>
+    </div>
+  </nav>
+
+  <!-- ==================== PAGE HEADER ==================== -->
+  <div class="sub-hero">
+    <h2 class="hero-tag" data-zh="策略指南 / Strategy Guide" data-en="Strategy Guide">策略指南 / Strategy Guide</h2>
+    <h1 data-zh="PSEO Agent<br>工作原理" data-en="PSEO Agent<br>How It Works">PSEO Agent<br>工作原理</h1>
+  </div>
+
+  <!-- ==================== WHAT IS PSEO ==================== -->
+  <section class="visible">
+    <div class="wrap">
+      <h2 class="sec-label" data-zh="什么是程序化 SEO" data-en="What Is Programmatic SEO">什么是程序化 SEO</h2>
+      <div class="about-text">
+        <p data-zh="<em>Programmatic SEO</em>（PSEO）是用自动化工具批量生成、优化和发布 SEO 内容的策略。不是低质量的 AI 洗稿，而是每个关键词获得独立的、有针对性的、结构化可抓取的内容。" data-en="<em>Programmatic SEO</em> (PSEO) is the strategy of using automation tools to batch-generate, optimize, and publish SEO content. Not low-quality AI rewriting — each keyword gets independent, targeted, structured, crawlable content."><em>Programmatic SEO</em>（PSEO）是用自动化工具批量生成、优化和发布 SEO 内容的策略。不是低质量的 AI 洗稿，而是每个关键词获得独立的、有针对性的、结构化可抓取的内容。</p>
+        <p data-zh="核心逻辑：当关键词量大到人工无法覆盖时，只有自动化能填补空白。一个品牌 100 个关键词，每篇 1500 词，人工写要 <em>3 个月</em>。PSEO Agent 完成同样的工作量需要 <em>3 天</em>。" data-en="Core logic: when keyword volume exceeds human capacity, only automation fills the gap. 100 keywords per brand, 1,500 words each — humans need <em>3 months</em>. PSEO Agent does it in <em>3 days</em>.">核心逻辑：当关键词量大到人工无法覆盖时，只有自动化能填补空白。一个品牌 100 个关键词，每篇 1500 词，人工写要 <em>3 个月</em>。PSEO Agent 完成同样的工作量需要 <em>3 天</em>。</p>
+        <div class="pull" data-zh="PSEO 的核心优势不是单篇质量，而是覆盖密度。20 篇覆盖一个主题，比 1 篇完美文章的排名概率高 8 倍。" data-en="PSEO's core advantage isn't single-piece quality, it's coverage density. 20 articles on one topic rank 8x more likely than 1 perfect article.">PSEO 的核心优势不是单篇质量，而是覆盖密度。20 篇覆盖一个主题，比 1 篇完美文章的排名概率高 8 倍。</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== THE PIPELINE ==================== -->
+  <section>
+    <div class="wrap">
+      <h2 class="sec-label" data-zh="完整流水线" data-en="The Complete Pipeline">完整流水线</h2>
+
+      <div class="process-flow" style="margin:0 0 48px">
+        <div class="process-step">
+          <div class="process-num">01</div>
+          <h4 data-zh="品牌上下文" data-en="Brand Context">品牌上下文</h4>
+          <p data-zh="读取品牌营销资料、竞品分析、行业特征" data-en="Read brand marketing materials, competitor analysis, industry traits">读取品牌营销资料、竞品分析、行业特征</p>
+        </div>
+        <div class="process-step">
+          <div class="process-num">02</div>
+          <h4 data-zh="NicheDigger 挖词" data-en="NicheDigger Mining">NicheDigger 挖词</h4>
+          <p data-zh="100+ 候选关键词，自动意图分类和冲动质量评分" data-en="100+ candidate keywords, auto intent classification and impulse quality scoring">100+ 候选关键词，自动意图分类和冲动质量评分</p>
+        </div>
+        <div class="process-step">
+          <div class="process-num">03</div>
+          <h4 data-zh="人工审核" data-en="Human Review">人工审核</h4>
+          <p data-zh="确认关键词列表，调整 prompt 策略，排除品牌词冲突" data-en="Confirm keyword list, adjust prompt strategy, exclude brand term conflicts">确认关键词列表，调整 prompt 策略，排除品牌词冲突</p>
+        </div>
+        <div class="process-step">
+          <div class="process-num">04</div>
+          <h4 data-zh="PSEO Agent 生成" data-en="PSEO Agent Generation">PSEO Agent 生成</h4>
+          <p data-zh="每词独立 prompt，结构化输出，原创度检测" data-en="Per-keyword prompts, structured output, originality detection">每词独立 prompt，结构化输出，原创度检测</p>
+        </div>
+      </div>
+
+      <div class="process-flow" style="margin:0 0 48px;border-top:none">
+        <div class="process-step">
+          <div class="process-num">05</div>
+          <h4 data-zh="质量检查" data-en="Quality Check">质量检查</h4>
+          <p data-zh="AI 检测对抗、关键词密度、结构化评分" data-en="AI detection resistance, keyword density, structure scoring">AI 检测对抗、关键词密度、结构化评分</p>
+        </div>
+        <div class="process-step">
+          <div class="process-num">06</div>
+          <h4 data-zh="自动发布" data-en="Auto-Publish">自动发布</h4>
+          <p data-zh="Google Sites / GitHub Pages，自动索引提交" data-en="Google Sites / GitHub Pages, auto index submission">Google Sites / GitHub Pages，自动索引提交</p>
+        </div>
+        <div class="process-step">
+          <div class="process-num">07</div>
+          <h4 data-zh="排名追踪" data-en="Rank Tracking">排名追踪</h4>
+          <p data-zh="Google Search Console + 第三方工具监控排名变化" data-en="Google Search Console + third-party tools for rank change monitoring">Google Search Console + 第三方工具监控排名变化</p>
+        </div>
+        <div class="process-step">
+          <div class="process-num">08</div>
+          <h4 data-zh="迭代优化" data-en="Iterative Optimization">迭代优化</h4>
+          <p data-zh="基于排名数据调整关键词和内容策略" data-en="Adjust keyword and content strategy based on ranking data">基于排名数据调整关键词和内容策略</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== NICHEDIGGER ==================== -->
+  <section>
+    <div class="wrap">
+      <h2 class="sec-label" data-zh="NicheDigger 挖词引擎" data-en="NicheDigger Mining Engine">NicheDigger 挖词引擎</h2>
+      <div class="svc-grid">
+        <div class="svc-card">
+          <div class="svc-metric">100+</div>
+          <div class="svc-metric-label" data-zh="默认词量/品牌" data-en="Default keywords/brand">默认词量/品牌</div>
+          <h3 data-zh="品牌上下文驱动挖词" data-en="Brand Context-Driven Mining">品牌上下文驱动挖词</h3>
+          <p data-zh="NicheDigger 不是通用关键词工具。它先读取品牌的营销上下文、行业特征和竞品数据，再生成针对性的候选关键词。同一个词在不同品牌的评分不同。" data-en="NicheDigger isn't a generic keyword tool. It reads brand marketing context, industry traits, and competitor data first, then generates targeted candidates. The same keyword scores differently for different brands.">NicheDigger 不是通用关键词工具。它先读取品牌的营销上下文、行业特征和竞品数据，再生成针对性的候选关键词。同一个词在不同品牌的评分不同。</p>
+        </div>
+        <div class="svc-card">
+          <div class="svc-metric">7 种</div>
+          <div class="svc-metric-label" data-zh="意图分类" data-en="Intent Types">意图分类</div>
+          <h3 data-zh="自动意图分类" data-en="Auto Intent Classification">自动意图分类</h3>
+          <p data-zh="每个关键词自动标记意图类型：信息型、商业型、导航型、比较型、教程型、评测型、本地型。信息型关键词的索引率和排名速度远超其他类型。" data-en="Each keyword auto-tagged with intent type: informational, commercial, navigational, comparison, tutorial, review, local. Informational keywords index and rank far faster than other types.">每个关键词自动标记意图类型：信息型、商业型、导航型、比较型、教程型、评测型、本地型。信息型关键词的索引率和排名速度远超其他类型。</p>
+        </div>
+        <div class="svc-card">
+          <div class="svc-metric">40%</div>
+          <div class="svc-metric-label" data-zh="无效词过滤率" data-en="Dead-end filter rate">无效词过滤率</div>
+          <h3 data-zh="冲动质量评分" data-en="Impulse Quality Scoring">冲动质量评分</h3>
+          <p data-zh="自动评估关键词的商业冲动价值。过滤掉品牌词冲突、搜索量为零、竞争度过高的无效词。平均过滤掉 40% 的候选词。" data-en="Auto-evaluate commercial impulse value. Filter brand conflicts, zero-volume, and over-competitive dead ends. Averages 40% candidate filtering.">自动评估关键词的商业冲动价值。过滤掉品牌词冲突、搜索量为零、竞争度过高的无效词。平均过滤掉 40% 的候选词。</p>
+        </div>
+        <div class="svc-card">
+          <div class="svc-metric">CLI</div>
+          <div class="svc-metric-label" data-zh="命令行工具" data-en="Command-Line Tool">命令行工具</div>
+          <h3 data-zh="开源可复现" data-en="Open Source & Reproducible">开源可复现</h3>
+          <p data-zh="NicheDigger 是命令行工具，所有参数可调。默认 100 词 / 300 帖参考数据。支持代理配置。全中文定性分析报告输出。" data-en="NicheDigger is a CLI tool with adjustable parameters. Default 100 keywords / 300 reference posts. Proxy support. Full Chinese qualitative analysis report output.">NicheDigger 是命令行工具，所有参数可调。默认 100 词 / 300 帖参考数据。支持代理配置。全中文定性分析报告输出。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== PSEO AGENT ==================== -->
+  <section>
+    <div class="wrap">
+      <h2 class="sec-label" data-zh="PSEO Agent 内容引擎" data-en="PSEO Agent Content Engine">PSEO Agent 内容引擎</h2>
+      <div class="case-spot">
+        <div class="case-spot-img">
+          <img src="images/feishu-ai-ui.png" alt="PSEO Agent workflow automation" loading="lazy">
+        </div>
+        <div class="case-spot-text">
+          <h3 data-zh="从关键词到 SERP 的全自动化" data-en="Full Automation from Keyword to SERP">从关键词到 SERP 的全自动化</h3>
+          <p data-zh="PSEO Agent 接收 NicheDigger 的关键词列表，为每个关键词生成独立的 prompt。每个 prompt 包含品牌上下文、关键词意图、竞品分析和结构化输出要求。" data-en="PSEO Agent receives NicheDigger's keyword list and generates independent prompts for each keyword. Each prompt includes brand context, keyword intent, competitor analysis, and structured output requirements.">PSEO Agent 接收 NicheDigger 的关键词列表，为每个关键词生成独立的 prompt。每个 prompt 包含品牌上下文、关键词意图、竞品分析和结构化输出要求。</p>
+          <p data-zh="生成的内容经过 AI 检测对抗处理、关键词密度校验、结构化评分后自动发布。全程零人工干预。" data-en="Generated content goes through AI detection resistance, keyword density verification, and structure scoring before auto-publishing. Zero manual intervention throughout.">生成的内容经过 AI 检测对抗处理、关键词密度校验、结构化评分后自动发布。全程零人工干预。</p>
+          <div class="cs-stat" data-zh="每词独立 prompt · 原创度检测 · 自动索引提交 · 零人工干预" data-en="Per-keyword prompts · Originality detection · Auto index submission · Zero manual intervention">每词独立 prompt · 原创度检测 · 自动索引提交 · 零人工干预</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== RESULTS ==================== -->
+  <section>
+    <div class="wrap">
+      <h2 class="sec-label" data-zh="实战验证" data-en="Battle-Tested Results">实战验证</h2>
+      <div class="aph-grid">
+        <div class="aph-card">
+          <div class="aph-num">Leewow</div>
+          <div class="aph-title" data-zh="6 个 SERP #1，20/20 发布成功" data-en="6 SERP #1, 20/20 publish success">6 个 SERP #1，20/20 发布成功</div>
+          <p data-zh="POD 品牌，竞争词「custom blankets」#2（22,200 vol）。「custom hoodies」#3（18,100 vol）。最高单词月搜索量 60,500。" data-en="POD brand. 'Custom blankets' at #2 (22,200 vol). 'Custom hoodies' at #3 (18,100 vol). Top single-keyword volume: 60,500.">POD 品牌，竞争词「custom blankets」#2（22,200 vol）。「custom hoodies」#3（18,100 vol）。最高单词月搜索量 60,500。</p>
+          <a href="case-study-leewow.html" style="font-family:var(--mono);font-size:11px;color:var(--accent)" data-zh="查看完整案例 →" data-en="View full case study →">查看完整案例 →</a>
+        </div>
+        <div class="aph-card">
+          <div class="aph-num">HakkoAI</div>
+          <div class="aph-title" data-zh="8 个游戏关键词排名前五" data-en="8 gaming keywords top 5">8 个游戏关键词排名前五</div>
+          <p data-zh="游戏 AI 伴侣。Valorant AI Coach #1。Roblox AI Coach #2。LoL / CS2 / Warzone / Apex 均 #3。10M+ 用户，Product Hunt #1。" data-en="Gaming AI companion. Valorant AI Coach #1. Roblox AI Coach #2. LoL / CS2 / Warzone / Apex all at #3. 10M+ users, Product Hunt #1.">游戏 AI 伴侣。Valorant AI Coach #1。Roblox AI Coach #2。LoL / CS2 / Warzone / Apex 均 #3。10M+ 用户，Product Hunt #1。</p>
+          <a href="case-study-hakkoai.html" style="font-family:var(--mono);font-size:11px;color:var(--accent)" data-zh="查看完整案例 →" data-en="View full case study →">查看完整案例 →</a>
+        </div>
+        <div class="aph-card">
+          <div class="aph-num">9 品牌</div>
+          <div class="aph-title" data-zh="从策略到交付的完整验证" data-en="Full end-to-end validation">从策略到交付的完整验证</div>
+          <p data-zh="302AI（125 kw）、Arousen（99 kw）、PinkPunch（36 kw）、SpinexPickleball（11 kw，100% 成功）、NanoBanana-2（10 kw，100% 成功）。覆盖 AI 工具、电商、游戏、健康、体育、视频多个行业。" data-en="302AI (125 kw), Arousen (99 kw), PinkPunch (36 kw), SpinexPickleball (11 kw, 100%), NanoBanana-2 (10 kw, 100%). Covers AI tools, e-commerce, gaming, wellness, sports, video.">302AI（125 kw）、Arousen（99 kw）、PinkPunch（36 kw）、SpinexPickleball（11 kw，100% 成功）、NanoBanana-2（10 kw，100% 成功）。覆盖 AI 工具、电商、游戏、健康、体育、视频多个行业。</p>
+        </div>
+        <div class="aph-card">
+          <div class="aph-num">769K</div>
+          <div class="aph-title" data-zh="月搜索曝光验证" data-en="Monthly impressions verified">月搜索曝光验证</div>
+          <p data-zh="Google Search Console 实测数据。769K 月搜索曝光不是预估，是后台截图可查的真实数据。" data-en="Google Search Console verified. 769K monthly impressions — not an estimate, but real data verifiable via dashboard screenshots.">Google Search Console 实测数据。769K 月搜索曝光不是预估，是后台截图可查的真实数据。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== CTA ==================== -->
+  <div class="cta-band">
+    <div class="wrap">
+      <p style="font-family:var(--serif);font-size:24px;font-weight:700;margin-bottom:20px;color:var(--ink)" data-zh="想用 PSEO Agent 覆盖你的关键词矩阵？" data-en="Want to cover your keyword matrix with PSEO Agent?">想用 PSEO Agent 覆盖你的关键词矩阵？</p>
+      <a href="https://vcnierml3885.feishu.cn/share/base/form/shrcn7Z09L3UJHDrX3NPgHNRyib" target="_blank" rel="noreferrer" class="cta" data-zh="申请免费 30 分钟咨询 →" data-en="Apply for free 30-min advisory →">申请免费 30 分钟咨询 →</a>
+    </div>
+  </div>
+
+  <!-- READ NEXT -->
+  <div class="read-next">
+    <div class="wrap">
+      <div class="rn-label" data-zh="继续阅读" data-en="Read Next">继续阅读</div>
+      <div class="rn-grid">
+        <a href="geo-aeo-optimization-guide.html" class="rn-item">
+          <div class="rn-sec">10</div>
+          <h4 data-zh="GEO/AEO 优化指南" data-en="GEO/AEO Optimization Guide">GEO/AEO 优化指南</h4>
+          <p data-zh="2026 年 AI 搜索优化策略" data-en="2026 AI search optimization strategy">2026 年 AI 搜索优化策略</p>
+        </a>
+        <a href="case-study-leewow.html" class="rn-item">
+          <div class="rn-sec">08</div>
+          <h4 data-zh="Leewow 案例研究" data-en="Leewow Case Study">Leewow 案例研究</h4>
+          <p data-zh="POD 品牌，6 个 SERP #1" data-en="POD brand, 6 SERP #1 rankings">POD 品牌，6 个 SERP #1</p>
+        </a>
+        <a href="tools.html" class="rn-item">
+          <div class="rn-sec">04</div>
+          <h4 data-zh="免费工具" data-en="Free Tools">免费工具</h4>
+          <p data-zh="开源可用，解决真问题" data-en="Open source, solves real problems">开源可用，解决真问题</p>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div>&copy; 2026 weihacking &middot; Soulcraft Limited</div>
+    <div class="f-links">
+      <a href="https://x.com/weihacking" target="_blank" rel="noreferrer">X &nearr;</a>
+      <a href="https://github.com/1596941391qq" target="_blank" rel="noreferrer">GitHub &nearr;</a>
+      <a href="mailto:echokay777@163.com">Email</a>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

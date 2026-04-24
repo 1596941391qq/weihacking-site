@@ -342,6 +342,35 @@
     .wechat-img{max-width:220px;margin:16px auto 0;border:1px solid var(--rule);border-radius:4px;overflow:hidden}
     .wechat-img img{width:100%;height:auto}
 
+    /* SERP GALLERY (case study pages) */
+    .serp-gallery {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .serp-item {
+      border: 1px solid var(--rule);
+      border-radius: 4px;
+      overflow: hidden;
+      background: var(--bg-alt);
+      transition: border-color 0.2s;
+    }
+    .serp-item:hover {
+      border-color: var(--accent);
+    }
+    .serp-item img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .serp-caption {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--muted);
+      padding: 8px 12px;
+      letter-spacing: 0.04em;
+    }
+
     /* PORTFOLIO GRID */
     .portfolio-grid {
       display: grid;
@@ -404,7 +433,7 @@
     @media(max-width:768px){
       .hero-links{gap:10px}
       .gos-banner{grid-template-columns:1fr;gap:16px}
-      .kb-grid,.think-grid,.prod-grid,.tools-grid,.toc-grid,.rn-grid,.skills-grid,.aph-grid,.contra-grid,.mf-items,.findings-grid,.stats-grid,.case-spot,.tier-split,.issue-gallery,.feat-tools,.project-grid,.svc-grid,.results-grid,.contact-grid,.portfolio-grid{grid-template-columns:1fr}
+      .kb-grid,.think-grid,.prod-grid,.tools-grid,.toc-grid,.rn-grid,.skills-grid,.aph-grid,.contra-grid,.mf-items,.findings-grid,.stats-grid,.case-spot,.tier-split,.issue-gallery,.feat-tools,.project-grid,.svc-grid,.results-grid,.contact-grid,.portfolio-grid,.serp-gallery{grid-template-columns:1fr}
       .about-img-row{grid-template-columns:1fr}.hero-sub{font-size:16px}
       nav{padding:12px 16px}.wrap{padding:0 16px}
       .updates-inner{padding:0 16px;flex-direction:column;gap:8px;text-align:center}
