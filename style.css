@@ -429,6 +429,9 @@
       color: var(--muted);
     }
 
+    /* PASSAGE (AI extraction layer) */
+    .passage{font-size:14px;line-height:1.6;color:var(--ink-s);margin-bottom:24px;max-width:640px}
+
     /* RESPONSIVE */
     @media(max-width:768px){
       .hero-links{gap:10px}
