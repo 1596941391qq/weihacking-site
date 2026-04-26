@@ -8,7 +8,7 @@
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⌘</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Source+Code+Pro:wght@400;600&family=Noto+Serif+SC:wght@400;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Source+Code+Pro:wght@400;600&family=Noto+Serif+SC:wght@400;700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
   <link rel="canonical" href="https://1596941391qq.github.io/index.html">
@@ -64,28 +64,21 @@
 
   <!-- ==================== HERO ==================== -->
   <div class="hero">
-    <!-- Geometric background -->
-    <div class="hero-geo" aria-hidden="true">
-      <svg viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice">
-        <g class="geo-float" opacity=".12"><polygon points="120,80 140,40 160,80" fill="var(--accent)"/></g>
-        <g class="geo-float" opacity=".08"><circle cx="900" cy="200" r="6" fill="var(--ink)"/></g>
-        <g class="geo-float" opacity=".10"><rect x="600" y="500" width="12" height="12" fill="var(--accent)" transform="rotate(15 606 506)"/></g>
-        <g class="geo-float" opacity=".06"><circle cx="300" cy="600" r="4" fill="var(--ink)"/></g>
-        <g class="geo-float" opacity=".09"><polygon points="1000,650 1010,620 1020,650" fill="var(--accent)"/></g>
-      </svg>
+    <div class="hero-text">
+      <div class="hero-greeting" data-zh="你好。" data-en="Hey there.">你好。</div>
+      <div class="hero-tag" data-zh="SEO / GEO 策略师 · hacking 周刊作者 · Soulcraft Limited" data-en="SEO / GEO Strategist · hacking Newsletter · Soulcraft Limited">SEO / GEO 策略师 · hacking 周刊作者 · Soulcraft Limited</div>
+      <h1 data-zh="wei<em>hacking</em>" data-en="wei<em>hacking</em>">wei<em>hacking</em></h1>
+      <div class="hero-sub" data-zh="六年实战，200+ 客户。在搜索引擎和 AI 的交叉地带找缝隙。不卖概念，只交付数字。" data-en="Six years in the trenches. 200+ clients. Finding the gaps between search and AI. No buzzwords — just numbers.">六年实战，200+ 客户。在搜索引擎和 AI 的交叉地带找缝隙。不卖概念，只交付数字。</div>
+      <div class="hero-links">
+        <a href="#products" class="cta" data-zh="结果向交付 →" data-en="Services →">结果向交付 →</a>
+        <a href="#knowledge-base" class="cta ghost" data-zh="HackingSEO OS1" data-en="HackingSEO OS1">HackingSEO OS1</a>
+        <a href="https://x.com/weihacking" target="_blank" rel="noreferrer" class="cta ghost">X / Twitter</a>
+        <a href="https://github.com/1596941391qq" target="_blank" rel="noreferrer" class="cta ghost">GitHub</a>
+      </div>
     </div>
-    <div class="hero-photo-wrap" style="z-index:1">
+    <div class="hero-photo-area">
+      <svg class="hero-blob" viewBox="0 0 200 200" aria-hidden="true"><path d="M44.7,-76.4C58.8,-69.2,71.8,-59.1,79.6,-45.8C87.4,-32.5,90,-16.3,88.2,-0.9C86.5,14.5,80.5,29,72.1,42.1C63.6,55.2,52.8,66.9,39.8,74.8C26.8,82.7,11.5,86.8,-3.1,92.2C-17.7,97.6,-35.2,104.3,-49.1,98.4C-63,92.5,-73.3,74,-80.3,56.3C-87.3,38.5,-91,21.5,-90.5,4.8C-90,-11.9,-85.3,-28.3,-76.7,-42.1C-68.1,-55.9,-55.6,-67.1,-41.9,-74.5C-28.2,-81.9,-13.3,-85.5,1.2,-87.8C15.7,-90.1,30.6,-83.6,44.7,-76.4Z" transform="translate(100 100)"/></svg>
       <div class="hero-photo" id="heroAvatar"><img src="images/avatar.jpg" alt="weihacking" loading="lazy"></div>
-      <svg class="hero-orbit" viewBox="0 0 160 160"><circle cx="80" cy="80" r="78"/></svg>
-    </div>
-    <div class="hero-tag" data-zh="SEO / GEO 策略师 · hacking 周刊作者 · Soulcraft Limited" data-en="SEO / GEO Strategist · hacking Newsletter · Soulcraft Limited" style="z-index:1">SEO / GEO 策略师 · hacking 周刊作者 · Soulcraft Limited</div>
-    <h1 data-zh="wei<em>hacking</em>" data-en="wei<em>hacking</em>" style="z-index:1">wei<em>hacking</em></h1>
-    <div class="hero-sub" data-zh="六年实战，200+ 客户。在搜索引擎和 AI 的交叉地带找缝隙。不卖概念，只交付数字。" data-en="Six years in the trenches. 200+ clients. Finding the gaps between search and AI. No buzzwords — just numbers." style="z-index:1">六年实战，200+ 客户。在搜索引擎和 AI 的交叉地带找缝隙。不卖概念，只交付数字。</div>
-    <div class="hero-links" style="z-index:1">
-      <a href="#products" class="cta" data-zh="结果向交付 →" data-en="Services →">结果向交付 →</a>
-      <a href="#knowledge-base" class="cta ghost" data-zh="HackingSEO OS1" data-en="HackingSEO OS1">HackingSEO OS1</a>
-      <a href="https://x.com/weihacking" target="_blank" rel="noreferrer" class="cta ghost">X / Twitter</a>
-      <a href="https://github.com/1596941391qq" target="_blank" rel="noreferrer" class="cta ghost">GitHub</a>
     </div>
   </div>
 
@@ -339,6 +332,7 @@
 
   <!-- FOOTER -->
   <footer>
+    <div style="margin-bottom:8px;font-family:var(--hand);font-size:18px;color:var(--accent)">weihacking</div>
     <div>© 2026 weihacking · Soulcraft Limited</div>
     <div class="f-links">
       <a href="https://x.com/weihacking" target="_blank" rel="noreferrer">X ↗</a>

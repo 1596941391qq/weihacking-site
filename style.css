@@ -7,6 +7,7 @@
       --accent: #C0392B;
       --mono: 'Source Code Pro', Consolas, monospace;
       --serif: 'Playfair Display', 'Noto Serif SC', Georgia, serif;
+      --hand: 'Caveat', cursive;
       --body: 'Noto Serif SC', Georgia, serif;
       --rule: rgba(26,23,20,.12);
       --rule-s: rgba(26,23,20,.25);
@@ -34,17 +35,23 @@
     .nb{background:none;border:1px solid rgba(255,255,255,.3);color:#fff;padding:4px 10px;font-size:11px;cursor:pointer;font-family:var(--mono);border-radius:2px}
     .nb:hover{background:rgba(255,255,255,.15)}
 
-    /* HERO */
-    .hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:60px 24px;position:relative;overflow:hidden;
-      background:radial-gradient(ellipse at 50% 50%, rgba(192,57,43,.06) 0%, transparent 60%),var(--bg)}
-    [data-theme="dark"] .hero{background:radial-gradient(ellipse at 50% 50%, rgba(74,222,128,.05) 0%, transparent 60%),var(--bg)}
-    .hero-photo{width:120px;height:120px;border-radius:50%;background:var(--bg-alt);border:2px solid var(--rule-s);margin:0 auto 32px;overflow:hidden;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:11px;color:var(--muted)}
+    /* HERO — Magazine Cover Layout */
+    .hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:48px;padding:120px 48px 80px;position:relative;overflow:hidden;
+      background:radial-gradient(ellipse at 30% 50%, rgba(192,57,43,.06) 0%, transparent 50%),var(--bg)}
+    [data-theme="dark"] .hero{background:radial-gradient(ellipse at 30% 50%, rgba(74,222,128,.05) 0%, transparent 50%),var(--bg)}
+    .hero-text{position:relative;z-index:2}
+    .hero-greeting{font-family:var(--hand);font-size:clamp(20px,3vw,32px);color:var(--accent);margin-bottom:8px}
+    .hero-photo-area{position:relative;display:flex;align-items:center;justify-content:center;z-index:1}
+    .hero-photo{width:280px;height:340px;border-radius:8px;background:var(--bg-alt);border:3px solid var(--ink);overflow:hidden;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:11px;color:var(--muted);transform:rotate(-2deg);box-shadow:12px 12px 0 var(--bg-alt),12px 12px 0 3px var(--rule-s);position:relative;z-index:2}
     .hero-photo img{width:100%;height:100%;object-fit:cover}
+    .hero-blob{position:absolute;width:400px;height:400px;z-index:1;opacity:.12;animation:blobFloat 10s ease-in-out infinite}
+    .hero-blob path{fill:var(--accent)}
+    @keyframes blobFloat{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(10px,-15px) scale(1.03)}}
     .hero-tag{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:16px}
-    .hero h1{font-family:var(--serif);font-size:clamp(52px,11vw,130px);font-weight:900;line-height:.88;letter-spacing:-.04em;margin-bottom:20px}
+    .hero h1{font-family:var(--serif);font-size:clamp(48px,7vw,100px);font-weight:900;line-height:.9;letter-spacing:-.03em;margin-bottom:20px}
     .hero h1 em{font-style:italic;color:var(--accent)}
-    .hero-sub{font-size:clamp(16px,2.4vw,21px);color:var(--ink-s);max-width:500px;margin:0 auto 36px;line-height:1.6}
-    .hero-links{display:flex;gap:16px;flex-wrap:wrap;justify-content:center}
+    .hero-sub{font-size:clamp(15px,1.8vw,19px);color:var(--ink-s);max-width:440px;line-height:1.7;margin-bottom:32px}
+    .hero-links{display:flex;gap:12px;flex-wrap:wrap}
     .cta{font-family:var(--mono);font-size:12px;letter-spacing:.04em;padding:12px 24px;border:1px solid var(--ink);background:var(--ink);color:var(--bg);transition:all .2s;text-decoration:none}
     .cta:hover{background:var(--accent);border-color:var(--accent);text-decoration:none}
     .cta.ghost{background:none;color:var(--ink);border-color:var(--rule-s)}
@@ -505,27 +512,7 @@
 
     /* ===== CREATIVE ANIMATION LAYER ===== */
 
-    /* Hero geometric background */
-    .hero-geo{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0}
-    .hero-geo svg{position:absolute;width:100%;height:100%}
-
-    /* Avatar orbital ring */
-    .hero-photo-wrap{position:relative;display:flex;align-items:center;justify-content:center;margin:0 auto 32px}
-    .hero-orbit{position:absolute;width:160px;height:160px;animation:orbitSpin 20s linear infinite}
-    .hero-orbit circle{fill:none;stroke:var(--accent);stroke-width:.5;stroke-dasharray:4 6;opacity:.4}
-    @keyframes orbitSpin{to{transform:rotate(360deg)}}
-
-    /* Floating geometric shapes */
-    .geo-float{animation:geoFloat 8s ease-in-out infinite}
-    .geo-float:nth-child(2){animation-delay:-2s;animation-duration:10s}
-    .geo-float:nth-child(3){animation-delay:-4s;animation-duration:12s}
-    .geo-float:nth-child(4){animation-delay:-6s;animation-duration:9s}
-    .geo-float:nth-child(5){animation-delay:-3s;animation-duration:11s}
-    @keyframes geoFloat{
-      0%,100%{transform:translateY(0) rotate(0deg)}
-      33%{transform:translateY(-18px) rotate(6deg)}
-      66%{transform:translateY(8px) rotate(-4deg)}
-    }
+    /* Hero blob float */
 
     /* Section line-draw dividers */
     .sec-divider{display:block;width:100%;height:24px;margin:0 auto;opacity:.15;transition:opacity .4s}
@@ -539,18 +526,23 @@
     @keyframes tickerScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
     .updates-feed:hover{animation-play-state:paused}
 
-    /* Hero entrance cascade */
-    .hero .hero-tag,.hero .hero-photo-wrap,.hero h1,.hero .hero-sub,.hero .hero-links{opacity:0;transform:translateY(24px);animation:heroIn .7s ease forwards}
-    .hero .hero-photo-wrap{animation-delay:.15s}
-    .hero .hero-tag{animation-delay:.35s}
-    .hero h1{animation-delay:.5s}
-    .hero .hero-sub{animation-delay:.7s}
-    .hero .hero-links{animation-delay:.9s}
+    /* Hero entrance cascade — magazine layout */
+    .hero .hero-greeting,.hero .hero-tag,.hero h1,.hero .hero-sub,.hero .hero-links,.hero .hero-photo-area{opacity:0;transform:translateY(20px);animation:heroIn .7s ease forwards}
+    .hero .hero-greeting{animation-delay:.1s}
+    .hero .hero-tag{animation-delay:.2s}
+    .hero h1{animation-delay:.35s}
+    .hero .hero-sub{animation-delay:.5s}
+    .hero .hero-links{animation-delay:.65s}
+    .hero .hero-photo-area{animation-delay:.3s;transform:translateY(20px) rotate(0deg)}
     @keyframes heroIn{to{opacity:1;transform:translateY(0)}}
 
     /* RESPONSIVE */
     @media(max-width:768px){
-      .hero-links{gap:10px}
+      .hero{grid-template-columns:1fr;justify-items:center;text-align:center;padding:100px 24px 60px;gap:32px}
+      .hero-text{order:2}.hero-photo-area{order:1}
+      .hero-photo{width:180px;height:220px;transform:rotate(-1deg)}
+      .hero-blob{width:260px;height:260px}
+      .hero-links{gap:10px;justify-content:center}
       .gos-banner{grid-template-columns:1fr;gap:16px}
       .kb-grid,.think-grid,.prod-grid,.tools-grid,.toc-grid,.rn-grid,.skills-grid,.aph-grid,.contra-grid,.mf-items,.findings-grid,.stats-grid,.case-spot,.tier-split,.issue-gallery,.feat-tools,.project-grid,.svc-grid,.results-grid,.contact-grid,.portfolio-grid,.serp-gallery{grid-template-columns:1fr}
       .about-img-row{grid-template-columns:1fr}.hero-sub{font-size:16px}
