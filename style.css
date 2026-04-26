@@ -7,7 +7,7 @@
       --accent: #C0392B;
       --mono: 'Source Code Pro', Consolas, monospace;
       --serif: 'Playfair Display', 'Noto Serif SC', Georgia, serif;
-      --hand: 'Caveat', cursive;
+      --hand: 'Long Cang', cursive;
       --body: 'Noto Serif SC', Georgia, serif;
       --rule: rgba(26,23,20,.12);
       --rule-s: rgba(26,23,20,.25);
@@ -52,6 +52,9 @@
     .hero h1 em{font-style:italic;color:var(--accent)}
     .hero-sub{font-size:clamp(15px,1.8vw,19px);color:var(--ink-s);max-width:440px;line-height:1.7;margin-bottom:32px}
     .hero-links{display:flex;gap:12px;flex-wrap:wrap}
+    .hero-social{display:flex;gap:10px;margin-top:16px}
+    .hero-social a{width:36px;height:36px;border:1px solid var(--rule-s);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--muted);transition:all .2s}
+    .hero-social a:hover{color:var(--accent);border-color:var(--accent);transform:translateY(-2px);text-decoration:none}
     .cta{font-family:var(--mono);font-size:12px;letter-spacing:.04em;padding:12px 24px;border:1px solid var(--ink);background:var(--ink);color:var(--bg);transition:all .2s;text-decoration:none}
     .cta:hover{background:var(--accent);border-color:var(--accent);text-decoration:none}
     .cta.ghost{background:none;color:var(--ink);border-color:var(--rule-s)}
