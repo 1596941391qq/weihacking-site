@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light" data-lang="zh">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Robots.txt Generator — Free SEO Tool — weihacking</title>
+  <meta name="description" content="Free robots.txt generator. Create a properly formatted robots.txt file for your website with sitemap URL, crawl directives, and disallow rules.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⌘</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Source+Code+Pro:wght@400;600&family=Noto+Serif+SC:wght@400;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
+  <link rel="canonical" href="https://1596941391qq.github.io/robots-txt-generator.html">
+  <meta property="og:title" content="Robots.txt Generator — Free SEO Tool">
+  <meta property="og:description" content="Free robots.txt generator. Create properly formatted robots.txt with sitemap, crawl directives, and disallow rules.">
+  <meta property="og:url" content="https://1596941391qq.github.io/robots-txt-generator.html">
+  <meta property="og:site_name" content="weihacking">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="zh_CN">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@weihacking">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://1596941391qq.github.io/"},
+    {"@type": "ListItem", "position": 2, "name": "Tools", "item": "https://1596941391qq.github.io/tools.html"},
+    {"@type": "ListItem", "position": 3, "name": "Robots.txt Generator", "item": "https://1596941391qq.github.io/robots-txt-generator.html"}
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Robots.txt Generator",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Web",
+  "description": "Free robots.txt generator. Create properly formatted robots.txt with sitemap and crawl directives.",
+  "url": "https://1596941391qq.github.io/robots-txt-generator.html",
+  "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}
+}
+</script>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html">weihacking_</a>
+    <div class="nav-r">
+      <a href="tools.html" class="nb" style="margin-right:8px">←</a>
+      <button class="nb" id="langToggle" onclick="toggleLang()">EN</button>
+      <button class="nb" id="themeToggle" onclick="toggleTheme()">☽</button>
+    </div>
+  </nav>
+
+  <div class="sub-hero">
+    <div class="wrap">
+      <p class="sec-label" data-zh="免费工具" data-en="Free Tool">免费工具</p>
+      <h1 data-zh="Robots.txt 生成器" data-en="Robots.txt Generator">Robots.txt 生成器</h1>
+      <p class="hero-sub" data-zh="一键生成符合规范的 robots.txt。支持 sitemap、爬虫指令和禁止路径。" data-en="Generate a standards-compliant robots.txt in one click. Supports sitemap, crawl directives, and disallow rules.">一键生成符合规范的 robots.txt。支持 sitemap、爬虫指令和禁止路径。</p>
+    </div>
+  </div>
+
+  <section class="wrap" style="padding:48px 28px">
+    <div class="tool-ui">
+      <div class="tool-input-group">
+        <label data-zh="Sitemap URL" data-en="Sitemap URL">Sitemap URL</label>
+        <input type="url" class="tool-input" id="sitemapUrl" placeholder="https://example.com/sitemap.xml" oninput="generate()">
+      </div>
+      <div class="tool-input-group">
+        <label data-zh="禁止路径（每行一条）" data-en="Disallow Paths (one per line)">禁止路径（每行一条）</label>
+        <textarea class="tool-input" id="disallowPaths" rows="4" placeholder="/admin/&#10;/private/&#10;/tmp/" oninput="generate()"></textarea>
+      </div>
+      <div class="tool-input-group">
+        <label data-zh="允许路径（每行一条）" data-en="Allow Paths (one per line)">允许路径（每行一条）</label>
+        <textarea class="tool-input" id="allowPaths" rows="2" placeholder="/admin/public/" oninput="generate()"></textarea>
+      </div>
+      <div class="tool-input-group">
+        <label><input type="checkbox" id="blockAi" onchange="generate()" style="margin-right:6px"> <span data-zh="屏蔽 AI 爬虫（GPTBot, CCBot, Google-Extended）" data-en="Block AI crawlers (GPTBot, CCBot, Google-Extended)">屏蔽 AI 爬虫（GPTBot, CCBot, Google-Extended）</span></label>
+      </div>
+      <div class="tool-input-group">
+        <label><input type="checkbox" id="crawlDelay" onchange="generate()" style="margin-right:6px"> <span data-zh="添加 Crawl-delay: 10" data-en="Add Crawl-delay: 10">添加 Crawl-delay: 10</span></label>
+      </div>
+      <button class="tool-btn" onclick="copyOutput()" data-zh="复制到剪贴板" data-en="Copy to Clipboard">复制到剪贴板</button>
+
+      <div class="tool-output" id="output">
+        <h4 data-zh="生成的 robots.txt" data-en="Generated robots.txt">生成的 robots.txt</h4>
+        <pre id="outputCode"></pre>
+      </div>
+
+      <div class="tool-tips">
+        <h4 data-zh="Robots.txt 要点" data-en="Robots.txt Tips">Robots.txt 要点</h4>
+        <ul>
+          <li data-zh="<strong>位置</strong>：必须放在域名根目录 (example.com/robots.txt)。" data-en="<strong>Location</strong>: Must be at the domain root (example.com/robots.txt)."><strong>位置</strong>：必须放在域名根目录 (example.com/robots.txt)。</li>
+          <li data-zh="<strong>大小限制</strong>：文件不能超过 500KB，否则 Google 只解析前 500KB。" data-en="<strong>Size limit</strong>: File must be under 500KB or Google only parses the first 500KB."><strong>大小限制</strong>：文件不能超过 500KB，否则 Google 只解析前 500KB。</li>
+          <li data-zh="<strong>不是安全机制</strong>：robots.txt 只是建议，恶意爬虫可以无视。" data-en="<strong>Not a security mechanism</strong>: robots.txt is advisory. Malicious crawlers can ignore it."><strong>不是安全机制</strong>：robots.txt 只是建议，恶意爬虫可以无视。</li>
+          <li data-zh="<strong>验证</strong>：用 Google Search Console 的 robots.txt 测试器验证。" data-en="<strong>Validate</strong>: Use Google Search Console's robots.txt tester."><strong>验证</strong>：用 Google Search Console 的 robots.txt 测试器验证。</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="read-next wrap">
+    <div class="rn-label" data-zh="更多工具" data-en="More Tools">更多工具</div>
+    <div class="rn-grid">
+      <a href="sitemap-generator.html" class="rn-item">
+        <div class="rn-sec">Tool</div>
+        <h4 data-zh="Sitemap 生成器" data-en="Sitemap Generator">Sitemap 生成器</h4>
+        <p data-zh="生成 XML sitemap" data-en="Generate XML sitemap">生成 XML sitemap</p>
+      </a>
+      <a href="schema-markup-generator.html" class="rn-item">
+        <div class="rn-sec">Tool</div>
+        <h4 data-zh="Schema 标记生成器" data-en="Schema Markup Generator">Schema 标记生成器</h4>
+        <p data-zh="生成 JSON-LD 结构化数据" data-en="Generate JSON-LD structured data">生成 JSON-LD 结构化数据</p>
+      </a>
+      <a href="tools.html" class="rn-item">
+        <div class="rn-sec">Tools</div>
+        <h4 data-zh="全部工具" data-en="All Tools">全部工具</h4>
+        <p data-zh="查看所有免费 SEO 工具" data-en="Browse all free SEO tools">查看所有免费 SEO 工具</p>
+      </a>
+    </div>
+  </section>
+
+  <footer>
+    <div>© 2026 weihacking · Soulcraft Limited</div>
+    <div class="f-links">
+      <a href="https://x.com/weihacking" target="_blank" rel="noreferrer">X ↗</a>
+      <a href="https://github.com/1596941391qq" target="_blank" rel="noreferrer">GitHub ↗</a>
+      <a href="mailto:echokay777@163.com">Email</a>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+  function generate(){
+    var lines=[];
+    lines.push('User-agent: *');
+    var disallow=document.getElementById('disallowPaths').value.trim().split('\n').filter(function(x){return x.trim()});
+    var allow=document.getElementById('allowPaths').value.trim().split('\n').filter(function(x){return x.trim()});
+    disallow.forEach(function(p){lines.push('Disallow: '+p.trim())});
+    allow.forEach(function(p){lines.push('Allow: '+p.trim())});
+    if(disallow.length===0&&allow.length===0){lines.push('Disallow:')}
+    if(document.getElementById('crawlDelay').checked){lines.push('Crawl-delay: 10')}
+    lines.push('');
+    var sitemap=document.getElementById('sitemapUrl').value.trim();
+    if(sitemap){lines.push('Sitemap: '+sitemap)}
+    if(document.getElementById('blockAi').checked){
+      lines.push('');
+      lines.push('# AI Crawlers');
+      ['GPTBot','CCBot','Google-Extended','anthropic-ai','Bytespider'].forEach(function(bot){
+        lines.push('');
+        lines.push('User-agent: '+bot);
+        lines.push('Disallow: /');
+      });
+    }
+    document.getElementById('outputCode').textContent=lines.join('\n');
+    document.getElementById('output').className='tool-output show';
+  }
+  function copyOutput(){
+    var text=document.getElementById('outputCode').textContent;
+    navigator.clipboard.writeText(text).then(function(){
+      var btn=document.querySelector('.tool-btn');
+      var orig=btn.textContent;
+      btn.textContent='Copied!';
+      setTimeout(function(){btn.textContent=orig},1500);
+    });
+  }
+  generate();
+  </script>
+</body>
+</html>

@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light" data-lang="zh">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hreflang Tag Generator — Free SEO Tool — weihacking</title>
+  <meta name="description" content="Free hreflang tag generator. Create hreflang annotations for multilingual websites. Supports x-default, regional targeting, and bidirectional validation.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⌘</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Source+Code+Pro:wght@400;600&family=Noto+Serif+SC:wght@400;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
+  <link rel="canonical" href="https://1596941391qq.github.io/hreflang-tag-generator.html">
+  <meta property="og:title" content="Hreflang Tag Generator — Free SEO Tool">
+  <meta property="og:description" content="Free hreflang tag generator for multilingual websites. Create and validate hreflang annotations.">
+  <meta property="og:url" content="https://1596941391qq.github.io/hreflang-tag-generator.html">
+  <meta property="og:site_name" content="weihacking">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="zh_CN">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@weihacking">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://1596941391qq.github.io/"},{"@type":"ListItem","position":2,"name":"Tools","item":"https://1596941391qq.github.io/tools.html"},{"@type":"ListItem","position":3,"name":"Hreflang Tag Generator","item":"https://1596941391qq.github.io/hreflang-tag-generator.html"}]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Hreflang Tag Generator","applicationCategory":"DeveloperApplication","operatingSystem":"Web","description":"Free hreflang tag generator for multilingual websites.","url":"https://1596941391qq.github.io/hreflang-tag-generator.html","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+</script>
+</head>
+<body>
+  <nav>
+    <a href="index.html">weihacking_</a>
+    <div class="nav-r">
+      <a href="tools.html" class="nb" style="margin-right:8px">←</a>
+      <button class="nb" id="langToggle" onclick="toggleLang()">EN</button>
+      <button class="nb" id="themeToggle" onclick="toggleTheme()">☽</button>
+    </div>
+  </nav>
+  <div class="sub-hero">
+    <div class="wrap">
+      <p class="sec-label" data-zh="免费工具" data-en="Free Tool">免费工具</p>
+      <h1 data-zh="Hreflang 标签生成器" data-en="Hreflang Tag Generator">Hreflang 标签生成器</h1>
+      <p class="hero-sub" data-zh="为多语言网站生成 hreflang 标签。支持 x-default 和区域定向。" data-en="Generate hreflang annotations for multilingual sites. Supports x-default and regional targeting.">为多语言网站生成 hreflang 标签。支持 x-default 和区域定向。</p>
+    </div>
+  </div>
+  <section class="wrap" style="padding:48px 28px">
+    <div class="tool-ui">
+      <div class="tool-input-group">
+        <label data-zh="各语言版本 URL（格式：语言代码 | URL，每行一条）" data-en="Language URLs (format: lang-code | URL, one per line)">各语言版本 URL（格式：语言代码 | URL，每行一条）</label>
+        <textarea class="tool-input" id="langUrls" rows="6" placeholder="zh-CN | https://example.com/zh/page&#10;en | https://example.com/en/page&#10;ja | https://example.com/ja/page&#10;x-default | https://example.com/en/page" oninput="generate()"></textarea>
+      </div>
+      <div class="tool-input-group">
+        <label><input type="checkbox" id="addXDefault" checked onchange="generate()" style="margin-right:6px"> <span data-zh="自动添加 x-default（如果未在列表中）" data-en="Auto-add x-default (if not in list)">自动添加 x-default（如果未在列表中）</span></label>
+      </div>
+      <button class="tool-btn" onclick="copyOutput()" data-zh="复制标签" data-en="Copy Tags">复制标签</button>
+
+      <div class="tool-output" id="headOutput">
+        <h4 data-zh="HTML &lt;head&gt; 标签" data-en="HTML &lt;head&gt; Tags">HTML &lt;head&gt; 标签</h4>
+        <pre id="headCode"></pre>
+      </div>
+
+      <div class="tool-output" id="httpOutput">
+        <h4 data-zh="HTTP Header 格式" data-en="HTTP Header Format">HTTP Header 格式</h4>
+        <pre id="httpCode"></pre>
+      </div>
+
+      <div class="tool-output" id="sitemapOutput">
+        <h4 data-zh="XML Sitemap 格式" data-en="XML Sitemap Format">XML Sitemap 格式</h4>
+        <pre id="sitemapCode"></pre>
+      </div>
+
+      <div class="tool-tips">
+        <h4 data-zh="Hreflang 要点" data-en="Hreflang Tips">Hreflang 要点</h4>
+        <ul>
+          <li data-zh="<strong>双向</strong>：每个语言页面必须包含所有其他语言版本的链接，包括自己。" data-en="<strong>Bidirectional</strong>: Each language page must link to all others, including itself."><strong>双向</strong>：每个语言页面必须包含所有其他语言版本的链接，包括自己。</li>
+          <li data-zh="<strong>x-default</strong>：必须指定一个默认页面处理未匹配的语言。" data-en="<strong>x-default</strong>: Must specify a fallback page for unmatched languages."><strong>x-default</strong>：必须指定一个默认页面处理未匹配的语言。</li>
+          <li data-zh="<strong>自引用</strong>：每个页面必须包含指向自己的 hreflang 标签。" data-en="<strong>Self-referencing</strong>: Each page must include an hreflang tag pointing to itself."><strong>自引用</strong>：每个页面必须包含指向自己的 hreflang 标签。</li>
+          <li data-zh="<strong> canonical</strong>：hreflang 和 canonical 必须指向同一 URL。" data-en="<strong>Canonical</strong>: hreflang and canonical must point to the same URL."><strong>canonical</strong>：hreflang 和 canonical 必须指向同一 URL。</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+  <section class="read-next wrap">
+    <div class="rn-label" data-zh="更多工具" data-en="More Tools">更多工具</div>
+    <div class="rn-grid">
+      <a href="sitemap-generator.html" class="rn-item">
+        <div class="rn-sec">Tool</div>
+        <h4 data-zh="Sitemap 生成器" data-en="Sitemap Generator">Sitemap 生成器</h4>
+        <p data-zh="生成 XML sitemap" data-en="Generate XML sitemap">生成 XML sitemap</p>
+      </a>
+      <a href="robots-txt-generator.html" class="rn-item">
+        <div class="rn-sec">Tool</div>
+        <h4 data-zh="Robots.txt 生成器" data-en="Robots.txt Generator">Robots.txt 生成器</h4>
+        <p data-zh="生成 robots.txt" data-en="Generate robots.txt">生成 robots.txt</p>
+      </a>
+      <a href="tools.html" class="rn-item">
+        <div class="rn-sec">Tools</div>
+        <h4 data-zh="全部工具" data-en="All Tools">全部工具</h4>
+        <p data-zh="查看所有免费 SEO 工具" data-en="Browse all free SEO tools">查看所有免费 SEO 工具</p>
+      </a>
+    </div>
+  </section>
+  <footer>
+    <div>© 2026 weihacking · Soulcraft Limited</div>
+    <div class="f-links">
+      <a href="https://x.com/weihacking" target="_blank" rel="noreferrer">X ↗</a>
+      <a href="https://github.com/1596941391qq" target="_blank" rel="noreferrer">GitHub ↗</a>
+      <a href="mailto:echokay777@163.com">Email</a>
+    </div>
+  </footer>
+  <script src="script.js"></script>
+  <script>
+  function generate(){
+    var lines=document.getElementById('langUrls').value.trim().split('\n').filter(function(x){return x.trim()});
+    var entries=lines.map(function(line){
+      var parts=line.split('|');
+      return{lang:parts[0].trim(),url:(parts[1]||'').trim()};
+    }).filter(function(e){return e.lang&&e.url});
+    if(entries.length===0){document.getElementById('headCode').textContent='';return}
+    var hasXDefault=entries.some(function(e){return e.lang==='x-default'});
+    if(document.getElementById('addXDefault').checked&&!hasXDefault&&entries.length>0){
+      entries.push({lang:'x-default',url:entries[0].url});
+    }
+    var headTags='';
+    var httpHeaders='';
+    var xmlTags='';
+    entries.forEach(function(e){
+      headTags+='<link rel="alternate" hreflang="'+esc(e.lang)+'" href="'+esc(e.url)+'">\n';
+      httpHeaders+='Link: <'+e.url+'>; rel="alternate"; hreflang="'+e.lang+'"\n';
+      xmlTags+='    <xhtml:link rel="alternate" hreflang="'+esc(e.lang)+'" href="'+esc(e.url)+'" />\n';
+    });
+    document.getElementById('headCode').textContent=headTags.trim();
+    document.getElementById('headOutput').className='tool-output show';
+    document.getElementById('httpCode').textContent=httpHeaders.trim();
+    document.getElementById('httpOutput').className='tool-output show';
+    var xml='<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"\n  xmlns:xhtml="http://www.w3.org/1999/xhtml">\n  <url>\n    <loc>'+esc(entries[0].url)+'</loc>\n'+xmlTags+'  </url>\n</urlset>';
+    document.getElementById('sitemapCode').textContent=xml;
+    document.getElementById('sitemapOutput').className='tool-output show';
+  }
+  function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
+  function copyOutput(){
+    var text=document.getElementById('headCode').textContent;
+    navigator.clipboard.writeText(text).then(function(){
+      var btn=document.querySelector('.tool-btn');
+      var orig=btn.textContent;
+      btn.textContent='Copied!';
+      setTimeout(function(){btn.textContent=orig},1500);
+    });
+  }
+  generate();
+  </script>
+</body>
+</html>

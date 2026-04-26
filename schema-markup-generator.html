@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light" data-lang="zh">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Schema Markup Generator — Free SEO Tool — weihacking</title>
+  <meta name="description" content="Free JSON-LD schema markup generator. Create structured data for Article, FAQ, Product, LocalBusiness, and more. Copy-paste ready for any CMS.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⌘</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Source+Code+Pro:wght@400;600&family=Noto+Serif+SC:wght@400;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
+  <link rel="canonical" href="https://1596941391qq.github.io/schema-markup-generator.html">
+  <meta property="og:title" content="Schema Markup Generator — Free SEO Tool">
+  <meta property="og:description" content="Free JSON-LD schema markup generator. Create structured data for Article, FAQ, Product, and more.">
+  <meta property="og:url" content="https://1596941391qq.github.io/schema-markup-generator.html">
+  <meta property="og:site_name" content="weihacking">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="zh_CN">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@weihacking">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://1596941391qq.github.io/"},
+    {"@type": "ListItem", "position": 2, "name": "Tools", "item": "https://1596941391qq.github.io/tools.html"},
+    {"@type": "ListItem", "position": 3, "name": "Schema Markup Generator", "item": "https://1596941391qq.github.io/schema-markup-generator.html"}
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Schema Markup Generator",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Web",
+  "description": "Free JSON-LD schema markup generator for Article, FAQ, Product, LocalBusiness, and more.",
+  "url": "https://1596941391qq.github.io/schema-markup-generator.html",
+  "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}
+}
+</script>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html">weihacking_</a>
+    <div class="nav-r">
+      <a href="tools.html" class="nb" style="margin-right:8px">←</a>
+      <button class="nb" id="langToggle" onclick="toggleLang()">EN</button>
+      <button class="nb" id="themeToggle" onclick="toggleTheme()">☽</button>
+    </div>
+  </nav>
+
+  <div class="sub-hero">
+    <div class="wrap">
+      <p class="sec-label" data-zh="免费工具" data-en="Free Tool">免费工具</p>
+      <h1 data-zh="Schema 标记生成器" data-en="Schema Markup Generator">Schema 标记生成器</h1>
+      <p class="hero-sub" data-zh="生成 JSON-LD 结构化数据。支持 Article、FAQ、Product、LocalBusiness 等类型。" data-en="Generate JSON-LD structured data. Supports Article, FAQ, Product, LocalBusiness and more.">生成 JSON-LD 结构化数据。支持 Article、FAQ、Product、LocalBusiness 等类型。</p>
+    </div>
+  </div>
+
+  <section class="wrap" style="padding:48px 28px">
+    <div class="tool-ui">
+      <div class="tool-input-group">
+        <label data-zh="Schema 类型" data-en="Schema Type">Schema 类型</label>
+        <select class="tool-input" id="schemaType" onchange="updateFields()">
+          <option value="Article">Article</option>
+          <option value="FAQ">FAQ Page</option>
+          <option value="Product">Product</option>
+          <option value="LocalBusiness">LocalBusiness</option>
+          <option value="Person">Person</option>
+          <option value="BreadcrumbList">BreadcrumbList</option>
+        </select>
+      </div>
+
+      <div id="fieldsArticle">
+        <div class="tool-row">
+          <div class="tool-input-group">
+            <label>Headline</label>
+            <input type="text" class="tool-input" id="aHeadline" placeholder="Article headline" oninput="generate()">
+          </div>
+          <div class="tool-input-group">
+            <label>Author</label>
+            <input type="text" class="tool-input" id="aAuthor" placeholder="Author name" oninput="generate()">
+          </div>
+        </div>
+        <div class="tool-row">
+          <div class="tool-input-group">
+            <label>Date Published</label>
+            <input type="date" class="tool-input" id="aPubDate" oninput="generate()">
+          </div>
+          <div class="tool-input-group">
+            <label>Date Modified</label>
+            <input type="date" class="tool-input" id="aModDate" oninput="generate()">
+          </div>
+        </div>
+        <div class="tool-input-group">
+          <label>URL</label>
+          <input type="url" class="tool-input" id="aUrl" placeholder="https://example.com/article" oninput="generate()">
+        </div>
+        <div class="tool-input-group">
+          <label>Image URL</label>
+          <input type="url" class="tool-input" id="aImage" placeholder="https://example.com/image.jpg" oninput="generate()">
+        </div>
+      </div>
+
+      <div id="fieldsFAQ" style="display:none">
+        <div class="tool-input-group">
+          <label>FAQ 问答对（每行一问一答，用 | 分隔）</label>
+          <textarea class="tool-input" id="faqItems" rows="5" placeholder="What is SEO? | SEO is the practice of optimizing...&#10;How long does SEO take? | Typically 3-6 months..." oninput="generate()"></textarea>
+        </div>
+      </div>
+
+      <div id="fieldsProduct" style="display:none">
+        <div class="tool-row">
+          <div class="tool-input-group">
+            <label>Product Name</label>
+            <input type="text" class="tool-input" id="pName" placeholder="Product name" oninput="generate()">
+          </div>
+          <div class="tool-input-group">
+            <label>Price</label>
+            <input type="text" class="tool-input" id="pPrice" placeholder="29.99" oninput="generate()">
+          </div>
+        </div>
+        <div class="tool-row">
+          <div class="tool-input-group">
+            <label>Currency</label>
+            <input type="text" class="tool-input" id="pCurrency" placeholder="USD" value="USD" oninput="generate()">
+          </div>
+          <div class="tool-input-group">
+            <label>Availability</label>
+            <select class="tool-input" id="pAvail" onchange="generate()">
+              <option value="InStock">In Stock</option>
+              <option value="OutOfStock">Out of Stock</option>
+              <option value="PreOrder">Pre-Order</option>
+            </select>
+          </div>
+        </div>
+        <div class="tool-input-group">
+          <label>Description</label>
+          <textarea class="tool-input" id="pDesc" rows="2" placeholder="Product description..." oninput="generate()"></textarea>
+        </div>
+      </div>
+
+      <div id="fieldsLocal" style="display:none">
+        <div class="tool-row">
+          <div class="tool-input-group">
+            <label>Business Name</label>
+            <input type="text" class="tool-input" id="lbName" placeholder="Business name" oninput="generate()">
+          </div>
+          <div class="tool-input-group">
+            <label>Phone</label>
+            <input type="text" class="tool-input" id="lbPhone" placeholder="+1-234-567-8900" oninput="generate()">
+          </div>
+        </div>
+        <div class="tool-input-group">
+          <label>Address</label>
+          <input type="text" class="tool-input" id="lbAddr" placeholder="123 Main St, City, State" oninput="generate()">
+        </div>
+        <div class="tool-input-group">
+          <label>Website URL</label>
+          <input type="url" class="tool-input" id="lbUrl" placeholder="https://example.com" oninput="generate()">
+        </div>
+      </div>
+
+      <div id="fieldsPerson" style="display:none">
+        <div class="tool-row">
+          <div class="tool-input-group">
+            <label>Name</label>
+            <input type="text" class="tool-input" id="perName" placeholder="Full name" oninput="generate()">
+          </div>
+          <div class="tool-input-group">
+            <label>Job Title</label>
+            <input type="text" class="tool-input" id="perJob" placeholder="SEO Consultant" oninput="generate()">
+          </div>
+        </div>
+        <div class="tool-input-group">
+          <label>Website URL</label>
+          <input type="url" class="tool-input" id="perUrl" placeholder="https://example.com" oninput="generate()">
+        </div>
+      </div>
+
+      <div id="fieldsBreadcrumb" style="display:none">
+        <div class="tool-input-group">
+          <label>Breadcrumb 路径（每行一条，从根到当前页）</label>
+          <textarea class="tool-input" id="bcItems" rows="4" placeholder="Home | https://example.com&#10;Blog | https://example.com/blog&#10;Article Title | https://example.com/blog/article" oninput="generate()"></textarea>
+        </div>
+      </div>
+
+      <button class="tool-btn" onclick="copyOutput()" data-zh="复制 JSON-LD" data-en="Copy JSON-LD">复制 JSON-LD</button>
+
+      <div class="tool-output" id="output">
+        <h4 data-zh="生成的 JSON-LD" data-en="Generated JSON-LD">生成的 JSON-LD</h4>
+        <pre id="outputCode"></pre>
+      </div>
+
+      <div class="tool-tips">
+        <h4 data-zh="Schema 使用要点" data-en="Schema Tips">Schema 使用要点</h4>
+        <ul>
+          <li data-zh="<strong>放置位置</strong>：将 JSON-LD 放在 &lt;head&gt; 或 &lt;body&gt; 底部的 &lt;script&gt; 标签中。" data-en="<strong>Placement</strong>: Put JSON-LD in a &lt;script&gt; tag in &lt;head&gt; or at the bottom of &lt;body&gt;."><strong>放置位置</strong>：将 JSON-LD 放在 &lt;head&gt; 或 &lt;body&gt; 底部的 &lt;script&gt; 标签中。</li>
+          <li data-zh="<strong>验证</strong>：用 Google Rich Results Test 或 Schema.org Validator 验证。" data-en="<strong>Validate</strong>: Use Google Rich Results Test or Schema.org Validator."><strong>验证</strong>：用 Google Rich Results Test 或 Schema.org Validator 验证。</li>
+          <li data-zh="<strong>不要重复</strong>：同一类型同一页面只放一份 JSON-LD。" data-en="<strong>No duplicates</strong>: Only one JSON-LD per type per page."><strong>不要重复</strong>：同一类型同一页面只放一份 JSON-LD。</li>
+          <li data-zh="<strong>FAQ</strong>：FAQ schema 可直接获得 Google 富摘要展示。" data-en="<strong>FAQ</strong>: FAQ schema can earn rich results directly in Google."><strong>FAQ</strong>：FAQ schema 可直接获得 Google 富摘要展示。</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="read-next wrap">
+    <div class="rn-label" data-zh="更多工具" data-en="More Tools">更多工具</div>
+    <div class="rn-grid">
+      <a href="robots-txt-generator.html" class="rn-item">
+        <div class="rn-sec">Tool</div>
+        <h4 data-zh="Robots.txt 生成器" data-en="Robots.txt Generator">Robots.txt 生成器</h4>
+        <p data-zh="生成 robots.txt 文件" data-en="Generate robots.txt file">生成 robots.txt 文件</p>
+      </a>
+      <a href="serp-preview-tool.html" class="rn-item">
+        <div class="rn-sec">Tool</div>
+        <h4 data-zh="SERP 预览工具" data-en="SERP Preview Tool">SERP 预览工具</h4>
+        <p data-zh="模拟搜索结果展示" data-en="Simulate search result display">模拟搜索结果展示</p>
+      </a>
+      <a href="tools.html" class="rn-item">
+        <div class="rn-sec">Tools</div>
+        <h4 data-zh="全部工具" data-en="All Tools">全部工具</h4>
+        <p data-zh="查看所有免费 SEO 工具" data-en="Browse all free SEO tools">查看所有免费 SEO 工具</p>
+      </a>
+    </div>
+  </section>
+
+  <footer>
+    <div>© 2026 weihacking · Soulcraft Limited</div>
+    <div class="f-links">
+      <a href="https://x.com/weihacking" target="_blank" rel="noreferrer">X ↗</a>
+      <a href="https://github.com/1596941391qq" target="_blank" rel="noreferrer">GitHub ↗</a>
+      <a href="mailto:echokay777@163.com">Email</a>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+  function updateFields(){
+    var type=document.getElementById('schemaType').value;
+    ['Article','FAQ','Product','LocalBusiness','Person','BreadcrumbList'].forEach(function(t){
+      var el=document.getElementById('fields'+t);
+      if(el)el.style.display=t===type?'block':'none';
+    });
+    generate();
+  }
+  function generate(){
+    var type=document.getElementById('schemaType').value;
+    var schema={};
+    if(type==='Article'){
+      schema={"@context":"https://schema.org","@type":"Article",headline:v('aHeadline'),author:{"@type":"Person",name:v('aAuthor')},datePublished:v('aPubDate'),dateModified:v('aModDate')||v('aPubDate'),url:v('aUrl'),mainEntityOfPage:v('aUrl')};
+      if(v('aImage'))schema.image=v('aImage');
+    }else if(type==='FAQ'){
+      var items=v('faqItems').split('\n').filter(function(x){return x.trim()}).map(function(line){
+        var parts=line.split('|');
+        return{"@type":"Question",name:parts[0].trim(),acceptedAnswer:{"@type":"Answer",text:(parts[1]||'').trim()}};
+      });
+      schema={"@context":"https://schema.org","@type":"FAQPage",mainEntity:items};
+    }else if(type==='Product'){
+      schema={"@context":"https://schema.org","@type":"Product",name:v('pName'),description:v('pDesc'),offers:{"@type":"Offer",price:v('pPrice'),priceCurrency:v('pCurrency')||'USD',availability:"https://schema.org/"+v('pAvail')}};
+    }else if(type==='LocalBusiness'){
+      schema={"@context":"https://schema.org","@type":"LocalBusiness",name:v('lbName'),telephone:v('lbPhone'),address:{"@type":"PostalAddress",streetAddress:v('lbAddr')},url:v('lbUrl')};
+    }else if(type==='Person'){
+      schema={"@context":"https://schema.org","@type":"Person",name:v('perName'),jobTitle:v('perJob'),url:v('perUrl')};
+    }else if(type==='BreadcrumbList'){
+      var bc=v('bcItems').split('\n').filter(function(x){return x.trim()}).map(function(line,i){
+        var parts=line.split('|');
+        return{"@type":"ListItem",position:i+1,name:parts[0].trim(),item:(parts[1]||'').trim()};
+      });
+      schema={"@context":"https://schema.org","@type":"BreadcrumbList",itemListElement:bc};
+    }
+    document.getElementById('outputCode').textContent=JSON.stringify(schema,null,2);
+    document.getElementById('output').className='tool-output show';
+  }
+  function v(id){return(document.getElementById(id)||{}).value||''}
+  function copyOutput(){
+    var text=document.getElementById('outputCode').textContent;
+    navigator.clipboard.writeText(text).then(function(){
+      var btn=document.querySelector('.tool-btn');
+      var orig=btn.textContent;
+      btn.textContent='Copied!';
+      setTimeout(function(){btn.textContent=orig},1500);
+    });
+  }
+  generate();
+  </script>
+</body>
+</html>

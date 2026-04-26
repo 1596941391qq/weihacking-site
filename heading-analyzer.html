@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light" data-lang="zh">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Heading Structure Analyzer — Free SEO Tool — weihacking</title>
+  <meta name="description" content="Free heading structure analyzer. Check your HTML heading hierarchy (H1-H6) for SEO best practices. Detect missing H1s, skipped levels, and structure issues.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⌘</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Source+Code+Pro:wght@400;600&family=Noto+Serif+SC:wght@400;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
+  <link rel="canonical" href="https://1596941391qq.github.io/heading-analyzer.html">
+  <meta property="og:title" content="Heading Structure Analyzer — Free SEO Tool">
+  <meta property="og:description" content="Free heading structure analyzer. Check HTML heading hierarchy for SEO best practices.">
+  <meta property="og:url" content="https://1596941391qq.github.io/heading-analyzer.html">
+  <meta property="og:site_name" content="weihacking">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="zh_CN">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@weihacking">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://1596941391qq.github.io/"},{"@type":"ListItem","position":2,"name":"Tools","item":"https://1596941391qq.github.io/tools.html"},{"@type":"ListItem","position":3,"name":"Heading Analyzer","item":"https://1596941391qq.github.io/heading-analyzer.html"}]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Heading Structure Analyzer","applicationCategory":"DeveloperApplication","operatingSystem":"Web","description":"Free heading hierarchy analyzer for SEO. Detect missing H1s, skipped levels, and structure issues.","url":"https://1596941391qq.github.io/heading-analyzer.html","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+</script>
+</head>
+<body>
+  <nav>
+    <a href="index.html">weihacking_</a>
+    <div class="nav-r">
+      <a href="tools.html" class="nb" style="margin-right:8px">←</a>
+      <button class="nb" id="langToggle" onclick="toggleLang()">EN</button>
+      <button class="nb" id="themeToggle" onclick="toggleTheme()">☽</button>
+    </div>
+  </nav>
+  <div class="sub-hero">
+    <div class="wrap">
+      <p class="sec-label" data-zh="免费工具" data-en="Free Tool">免费工具</p>
+      <h1 data-zh="标题结构分析器" data-en="Heading Structure Analyzer">标题结构分析器</h1>
+      <p class="hero-sub" data-zh="检查 HTML 标题层级 (H1-H6)。检测缺失 H1、跳级、结构问题。" data-en="Check HTML heading hierarchy (H1-H6). Detect missing H1s, skipped levels, and structure issues.">检查 HTML 标题层级 (H1-H6)。检测缺失 H1、跳级、结构问题。</p>
+    </div>
+  </div>
+  <section class="wrap" style="padding:48px 28px">
+    <div class="tool-ui">
+      <div class="tool-input-group">
+        <label data-zh="粘贴 HTML 代码" data-en="Paste HTML Code">粘贴 HTML 代码</label>
+        <textarea class="tool-input" id="htmlInput" rows="8" placeholder="Paste your HTML here...&#10;&#10;Example:&#10;<h1>Main Title</h1>&#10;<h2>Section 1</h2>&#10;<h3>Subsection 1.1</h3>&#10;<h2>Section 2</h2>"></textarea>
+      </div>
+      <button class="tool-btn" onclick="analyzeHeadings()" data-zh="分析标题结构" data-en="Analyze Headings">分析标题结构</button>
+
+      <div class="tool-output" id="treeOutput">
+        <h4 data-zh="标题层级树" data-en="Heading Tree">标题层级树</h4>
+        <div class="heading-tree" id="headingTree"></div>
+      </div>
+
+      <div class="tool-output" id="issueOutput">
+        <h4 data-zh="发现问题" data-en="Issues Found">发现问题</h4>
+        <div id="issues"></div>
+      </div>
+
+      <div class="tool-output" id="statsOutput">
+        <h4 data-zh="统计" data-en="Statistics">统计</h4>
+        <div id="stats"></div>
+      </div>
+
+      <div class="tool-tips">
+        <h4 data-zh="标题层级 SEO 要点" data-en="Heading SEO Tips">标题层级 SEO 要点</h4>
+        <ul>
+          <li data-zh="<strong>一个 H1</strong>：每页只有一个 H1，通常是页面标题。" data-en="<strong>One H1</strong>: Each page should have exactly one H1, usually the page title."><strong>一个 H1</strong>：每页只有一个 H1，通常是页面标题。</li>
+          <li data-zh="<strong>不跳级</strong>：H1→H2→H3，不要 H1→H3 跳过 H2。" data-en="<strong>No skipping</strong>: H1→H2→H3. Don't skip H2 between H1 and H3."><strong>不跳级</strong>：H1→H2→H3，不要 H1→H3 跳过 H2。</li>
+          <li data-zh="<strong>关键词</strong>：H1 放主关键词，H2/H3 放次级关键词。" data-en="<strong>Keywords</strong>: Put main keyword in H1, secondary keywords in H2/H3."><strong>关键词</strong>：H1 放主关键词，H2/H3 放次级关键词。</li>
+          <li data-zh="<strong>长度</strong>：H1 保持 20-70 字符，H2 保持描述性但简洁。" data-en="<strong>Length</strong>: Keep H1 20-70 characters, H2 descriptive but concise."><strong>长度</strong>：H1 保持 20-70 字符，H2 保持描述性但简洁。</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+  <section class="read-next wrap">
+    <div class="rn-label" data-zh="更多工具" data-en="More Tools">更多工具</div>
+    <div class="rn-grid">
+      <a href="keyword-density-checker.html" class="rn-item">
+        <div class="rn-sec">Tool</div>
+        <h4 data-zh="关键词密度检查器" data-en="Keyword Density Checker">关键词密度检查器</h4>
+        <p data-zh="分析页面关键词频率" data-en="Analyze keyword frequency">分析页面关键词频率</p>
+      </a>
+      <a href="meta-description-generator.html" class="rn-item">
+        <div class="rn-sec">Tool</div>
+        <h4 data-zh="Meta Description 生成器" data-en="Meta Description Generator">Meta Description 生成器</h4>
+        <p data-zh="SEO 描述优化工具" data-en="SEO description optimizer">SEO 描述优化工具</p>
+      </a>
+      <a href="tools.html" class="rn-item">
+        <div class="rn-sec">Tools</div>
+        <h4 data-zh="全部工具" data-en="All Tools">全部工具</h4>
+        <p data-zh="查看所有免费 SEO 工具" data-en="Browse all free SEO tools">查看所有免费 SEO 工具</p>
+      </a>
+    </div>
+  </section>
+  <footer>
+    <div>© 2026 weihacking · Soulcraft Limited</div>
+    <div class="f-links">
+      <a href="https://x.com/weihacking" target="_blank" rel="noreferrer">X ↗</a>
+      <a href="https://github.com/1596941391qq" target="_blank" rel="noreferrer">GitHub ↗</a>
+      <a href="mailto:echokay777@163.com">Email</a>
+    </div>
+  </footer>
+  <script src="script.js"></script>
+  <script>
+  function analyzeHeadings(){
+    var html=document.getElementById('htmlInput').value;
+    if(!html.trim())return;
+    var parser=new DOMParser();
+    var doc=parser.parseFromString(html,'text/html');
+    var headings=doc.querySelectorAll('h1,h2,h3,h4,h5,h6');
+    var tree=document.getElementById('headingTree');
+    var issues=[];
+    var counts={h1:0,h2:0,h3:0,h4:0,h5:0,h6:0};
+    var prevLevel=0;
+    var html='';
+    if(headings.length===0){
+      html='<p style="color:var(--accent)">No headings found in the HTML.</p>';
+      issues.push('No heading tags found. Add H1-H6 tags for proper SEO structure.');
+    }else{
+      headings.forEach(function(h){
+        var tag=h.tagName.toLowerCase();
+        var level=parseInt(tag.charAt(1));
+        var text=h.textContent.trim();
+        counts[tag]++;
+        var cls='h'+(level)+'-item';
+        if(prevLevel>0&&level>prevLevel+1){
+          cls+=' h-warn';
+          issues.push('Skipped level: '+tag.toUpperCase()+' "'+text+'" follows H'+prevLevel+' (should follow H'+(level-1)+')');
+        }
+        html+='<div class="'+cls+'">'+tag.toUpperCase()+': '+esc(text)+'</div>';
+        prevLevel=level;
+      });
+      if(counts.h1===0)issues.push('Missing H1! Every page needs exactly one H1 tag.');
+      if(counts.h1>1)issues.push('Multiple H1 tags found ('+counts.h1+'). Use only one H1 per page.');
+      if(counts.h1===1)issues.push('OK: Exactly one H1 tag found.');
+    }
+    tree.innerHTML=html;
+    document.getElementById('treeOutput').className='tool-output show';
+    var issueHtml=issues.map(function(i){
+      var isOk=i.indexOf('OK:')===0;
+      return'<p style="font-size:13px;color:'+(isOk?'var(--ink-s)':'var(--accent)')+';line-height:1.6;margin:4px 0">'+(isOk?'✓':'✗')+' '+i.replace(/^(OK|Skipped|Missing|Multiple): /,'')+'</p>';
+    }).join('');
+    document.getElementById('issues').innerHTML=issueHtml;
+    document.getElementById('issueOutput').className='tool-output show';
+    var total=headings.length;
+    var statsHtml='<div style="display:flex;gap:24px;flex-wrap:wrap">';
+    ['h1','h2','h3','h4','h5','h6'].forEach(function(t){
+      if(counts[t]>0)statsHtml+='<div style="text-align:center"><div style="font-family:var(--serif);font-size:28px;font-weight:900;color:var(--accent)">'+counts[t]+'</div><div style="font-family:var(--mono);font-size:10px;color:var(--muted);text-transform:uppercase">'+t.toUpperCase()+'</div></div>';
+    });
+    statsHtml+='<div style="text-align:center"><div style="font-family:var(--serif);font-size:28px;font-weight:900;color:var(--ink)">'+total+'</div><div style="font-family:var(--mono);font-size:10px;color:var(--muted);text-transform:uppercase">TOTAL</div></div></div>';
+    document.getElementById('stats').innerHTML=statsHtml;
+    document.getElementById('statsOutput').className='tool-output show';
+  }
+  function esc(s){return s.replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+  </script>
+</body>
+</html>

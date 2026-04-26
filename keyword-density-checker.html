@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light" data-lang="zh">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Keyword Density Checker — Free SEO Tool — weihacking</title>
+  <meta name="description" content="Free keyword density checker. Analyze keyword frequency, distribution, and prominence in your content. Find over-optimization before it hurts your rankings.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⌘</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Source+Code+Pro:wght@400;600&family=Noto+Serif+SC:wght@400;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
+  <link rel="canonical" href="https://1596941391qq.github.io/keyword-density-checker.html">
+  <meta property="og:title" content="Keyword Density Checker — Free SEO Tool">
+  <meta property="og:description" content="Free keyword density checker. Analyze keyword frequency and find over-optimization.">
+  <meta property="og:url" content="https://1596941391qq.github.io/keyword-density-checker.html">
+  <meta property="og:site_name" content="weihacking">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="zh_CN">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@weihacking">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://1596941391qq.github.io/"},{"@type":"ListItem","position":2,"name":"Tools","item":"https://1596941391qq.github.io/tools.html"},{"@type":"ListItem","position":3,"name":"Keyword Density Checker","item":"https://1596941391qq.github.io/keyword-density-checker.html"}]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Keyword Density Checker","applicationCategory":"DeveloperApplication","operatingSystem":"Web","description":"Free keyword density checker. Analyze keyword frequency and detect over-optimization.","url":"https://1596941391qq.github.io/keyword-density-checker.html","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+</script>
+</head>
+<body>
+  <nav>
+    <a href="index.html">weihacking_</a>
+    <div class="nav-r">
+      <a href="tools.html" class="nb" style="margin-right:8px">←</a>
+      <button class="nb" id="langToggle" onclick="toggleLang()">EN</button>
+      <button class="nb" id="themeToggle" onclick="toggleTheme()">☽</button>
+    </div>
+  </nav>
+  <div class="sub-hero">
+    <div class="wrap">
+      <p class="sec-label" data-zh="免费工具" data-en="Free Tool">免费工具</p>
+      <h1 data-zh="关键词密度检查器" data-en="Keyword Density Checker">关键词密度检查器</h1>
+      <p class="hero-sub" data-zh="分析内容中的关键词频率、分布和密度。避免过度优化。" data-en="Analyze keyword frequency, distribution, and density. Avoid over-optimization.">分析内容中的关键词频率、分布和密度。避免过度优化。</p>
+    </div>
+  </div>
+  <section class="wrap" style="padding:48px 28px">
+    <div class="tool-ui">
+      <div class="tool-input-group">
+        <label data-zh="页面内容" data-en="Page Content">页面内容</label>
+        <textarea class="tool-input" id="content" rows="8" placeholder="Paste your page content here..."></textarea>
+      </div>
+      <div class="tool-input-group">
+        <label data-zh="目标关键词（用逗号分隔多个）" data-en="Target Keywords (comma-separated)">目标关键词（用逗号分隔多个）</label>
+        <input type="text" class="tool-input" id="keywords" placeholder="SEO, search engine optimization, 搜索引擎优化">
+      </div>
+      <button class="tool-btn" onclick="analyzeDensity()" data-zh="分析密度" data-en="Analyze Density">分析密度</button>
+
+      <div class="tool-output" id="densityOutput">
+        <h4 data-zh="关键词密度分析" data-en="Keyword Density Analysis">关键词密度分析</h4>
+        <div id="densityResults"></div>
+      </div>
+
+      <div class="tool-output" id="wordOutput">
+        <h4 data-zh="词频 Top 20" data-en="Top 20 Word Frequency">词频 Top 20</h4>
+        <div id="wordFreq"></div>
+      </div>
+
+      <div class="tool-tips">
+        <h4 data-zh="关键词密度要点" data-en="Keyword Density Tips">关键词密度要点</h4>
+        <ul>
+          <li data-zh="<strong>理想密度</strong>：1-2%。超过 3% 可能被判定为关键词堆砌。" data-en="<strong>Ideal density</strong>: 1-2%. Above 3% risks keyword stuffing penalty."><strong>理想密度</strong>：1-2%。超过 3% 可能被判定为关键词堆砌。</li>
+          <li data-zh="<strong>自然融入</strong>：关键词应自然出现在内容中，不强行插入。" data-en="<strong>Natural placement</strong>: Keywords should flow naturally in content."><strong>自然融入</strong>：关键词应自然出现在内容中，不强行插入。</li>
+          <li data-zh="<strong>LSI 关键词</strong>：用同义词和相关的概念词丰富内容。" data-en="<strong>LSI keywords</strong>: Use synonyms and related concept words to enrich content."><strong>LSI 关键词</strong>：用同义词和相关的概念词丰富内容。</li>
+          <li data-zh="<strong>位置</strong>：前 100 词出现关键词权重最高。" data-en="<strong>Position</strong>: Keywords in the first 100 words carry the most weight."><strong>位置</strong>：前 100 词出现关键词权重最高。</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+  <section class="read-next wrap">
+    <div class="rn-label" data-zh="更多工具" data-en="More Tools">更多工具</div>
+    <div class="rn-grid">
+      <a href="heading-analyzer.html" class="rn-item">
+        <div class="rn-sec">Tool</div>
+        <h4 data-zh="标题结构分析器" data-en="Heading Analyzer">标题结构分析器</h4>
+        <p data-zh="检查 HTML 标题层级" data-en="Check HTML heading hierarchy">检查 HTML 标题层级</p>
+      </a>
+      <a href="meta-description-generator.html" class="rn-item">
+        <div class="rn-sec">Tool</div>
+        <h4 data-zh="Meta Description 生成器" data-en="Meta Description Generator">Meta Description 生成器</h4>
+        <p data-zh="SEO 描述优化" data-en="SEO description optimizer">SEO 描述优化</p>
+      </a>
+      <a href="tools.html" class="rn-item">
+        <div class="rn-sec">Tools</div>
+        <h4 data-zh="全部工具" data-en="All Tools">全部工具</h4>
+        <p data-zh="查看所有免费 SEO 工具" data-en="Browse all free SEO tools">查看所有免费 SEO 工具</p>
+      </a>
+    </div>
+  </section>
+  <footer>
+    <div>© 2026 weihacking · Soulcraft Limited</div>
+    <div class="f-links">
+      <a href="https://x.com/weihacking" target="_blank" rel="noreferrer">X ↗</a>
+      <a href="https://github.com/1596941391qq" target="_blank" rel="noreferrer">GitHub ↗</a>
+      <a href="mailto:echokay777@163.com">Email</a>
+    </div>
+  </footer>
+  <script src="script.js"></script>
+  <script>
+  function analyzeDensity(){
+    var text=document.getElementById('content').value;
+    var kwInput=document.getElementById('keywords').value;
+    if(!text.trim())return;
+    var words=text.toLowerCase().replace(/[^\w一-鿿\s]/g,' ').split(/\s+/).filter(function(x){return x});
+    var totalWords=words.length;
+    var kws=kwInput.split(',').map(function(k){return k.trim().toLowerCase()}).filter(function(k){return k});
+    var resultsHtml='<p style="font-size:13px;color:var(--muted);margin-bottom:16px">Total words: '+totalWords+'</p>';
+    if(kws.length>0){
+      kws.forEach(function(kw){
+        var regex=new RegExp(kw.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'),'gi');
+        var matches=text.match(regex);
+        var count=matches?matches.length:0;
+        var density=((count*kw.split(/\s+/).length)/totalWords*100).toFixed(2);
+        var status=density>3?'Over-optimized':density>=1?'Good':'Low';
+        var statusColor=density>3?'var(--accent)':density>=1?'#4ade80':'var(--muted)';
+        resultsHtml+='<div style="margin-bottom:16px;padding:12px;border:1px solid var(--rule);background:var(--bg)">';
+        resultsHtml+='<div style="font-family:var(--serif);font-size:18px;font-weight:700;color:var(--ink)">'+kw+'</div>';
+        resultsHtml+='<div style="display:flex;gap:24px;margin-top:8px">';
+        resultsHtml+='<div><span style="font-family:var(--mono);font-size:24px;font-weight:900;color:var(--accent)">'+count+'</span><span style="font-family:var(--mono);font-size:10px;color:var(--muted);margin-left:4px">occurrences</span></div>';
+        resultsHtml+='<div><span style="font-family:var(--mono);font-size:24px;font-weight:900;color:var(--accent)">'+density+'%</span><span style="font-family:var(--mono);font-size:10px;color:var(--muted);margin-left:4px">density</span></div>';
+        resultsHtml+='<div style="font-family:var(--mono);font-size:11px;padding:2px 8px;border:1px solid;display:inline-block;color:'+statusColor+';border-color:'+statusColor+'">'+status+'</div>';
+        resultsHtml+='</div></div>';
+      });
+    }
+    document.getElementById('densityResults').innerHTML=resultsHtml;
+    document.getElementById('densityOutput').className='tool-output show';
+    var freq={};
+    var stopWords=['the','a','an','is','are','was','were','be','been','being','have','has','had','do','does','did','will','would','shall','should','may','might','must','can','could','of','in','to','for','with','on','at','from','by','about','as','into','through','during','before','after','above','below','between','and','but','or','nor','not','so','yet','both','either','neither','each','every','all','any','few','more','most','other','some','such','no','only','own','same','than','too','very','just','because','if','when','where','how','what','which','who','this','that','these','those','i','me','my','we','our','you','your','he','him','his','she','her','it','its','they','them','their'];
+    words.forEach(function(w){
+      if(w.length>1&&stopWords.indexOf(w)===-1){freq[w]=(freq[w]||0)+1}
+    });
+    var sorted=Object.keys(freq).sort(function(a,b){return freq[b]-freq[a]}).slice(0,20);
+    var freqHtml='<div style="display:flex;flex-wrap:wrap;gap:8px">';
+    sorted.forEach(function(w){
+      var pct=(freq[w]/totalWords*100).toFixed(1);
+      var bg=pct>2?'var(--accent)':pct>1?'var(--ink)':'var(--muted)';
+      freqHtml+='<span style="font-family:var(--mono);font-size:11px;padding:3px 10px;border:1px solid var(--rule);color:var(--ink-s)">'+w+' <span style="color:'+bg+';font-weight:600">'+freq[w]+'</span></span>';
+    });
+    freqHtml+='</div>';
+    document.getElementById('wordFreq').innerHTML=freqHtml;
+    document.getElementById('wordOutput').className='tool-output show';
+  }
+  </script>
+</body>
+</html>

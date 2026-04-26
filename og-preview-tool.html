@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light" data-lang="zh">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>OG Preview Tool — Free SEO Tool — weihacking</title>
+  <meta name="description" content="Free Open Graph preview tool. See how your page appears when shared on Facebook, Twitter/X, LinkedIn, and other social media platforms.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⌘</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Source+Code+Pro:wght@400;600&family=Noto+Serif+SC:wght@400;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
+  <link rel="canonical" href="https://1596941391qq.github.io/og-preview-tool.html">
+  <meta property="og:title" content="OG Preview Tool — Free SEO Tool">
+  <meta property="og:description" content="Free Open Graph preview tool. See how your page appears on Facebook, Twitter, and LinkedIn.">
+  <meta property="og:url" content="https://1596941391qq.github.io/og-preview-tool.html">
+  <meta property="og:site_name" content="weihacking">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="zh_CN">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@weihacking">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://1596941391qq.github.io/"},{"@type":"ListItem","position":2,"name":"Tools","item":"https://1596941391qq.github.io/tools.html"},{"@type":"ListItem","position":3,"name":"OG Preview Tool","item":"https://1596941391qq.github.io/og-preview-tool.html"}]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"OG Preview Tool","applicationCategory":"DeveloperApplication","operatingSystem":"Web","description":"Free Open Graph preview tool for Facebook, Twitter, and LinkedIn.","url":"https://1596941391qq.github.io/og-preview-tool.html","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+</script>
+</head>
+<body>
+  <nav>
+    <a href="index.html">weihacking_</a>
+    <div class="nav-r">
+      <a href="tools.html" class="nb" style="margin-right:8px">←</a>
+      <button class="nb" id="langToggle" onclick="toggleLang()">EN</button>
+      <button class="nb" id="themeToggle" onclick="toggleTheme()">☽</button>
+    </div>
+  </nav>
+  <div class="sub-hero">
+    <div class="wrap">
+      <p class="sec-label" data-zh="免费工具" data-en="Free Tool">免费工具</p>
+      <h1 data-zh="OG 社交预览工具" data-en="OG Social Preview Tool">OG 社交预览工具</h1>
+      <p class="hero-sub" data-zh="查看页面在 Facebook、Twitter/X、LinkedIn 分享时的展示效果。" data-en="See how your page appears when shared on Facebook, Twitter/X, and LinkedIn.">查看页面在 Facebook、Twitter/X、LinkedIn 分享时的展示效果。</p>
+    </div>
+  </div>
+  <section class="wrap" style="padding:48px 28px">
+    <div class="tool-ui">
+      <div class="tool-row">
+        <div class="tool-input-group">
+          <label>og:title</label>
+          <input type="text" class="tool-input" id="ogTitle" placeholder="Page title for social sharing" oninput="updateOG()">
+        </div>
+        <div class="tool-input-group">
+          <label>og:site_name</label>
+          <input type="text" class="tool-input" id="ogSite" placeholder="Site name" oninput="updateOG()">
+        </div>
+      </div>
+      <div class="tool-input-group">
+        <label>og:description</label>
+        <textarea class="tool-input" id="ogDesc" rows="2" placeholder="Description for social sharing..." oninput="updateOG()"></textarea>
+      </div>
+      <div class="tool-input-group">
+        <label>og:image URL</label>
+        <input type="url" class="tool-input" id="ogImage" placeholder="https://example.com/image.jpg (1200x630 recommended)" oninput="updateOG()">
+      </div>
+      <div class="tool-input-group">
+        <label>og:url</label>
+        <input type="url" class="tool-input" id="ogUrl" placeholder="https://example.com/page" oninput="updateOG()">
+      </div>
+
+      <div class="tool-preview" id="fbPreview">
+        <h4>Facebook / LinkedIn Preview</h4>
+        <div class="og-preview" style="max-width:520px">
+          <div class="og-img" id="fbImg">1200 × 630</div>
+          <div class="og-body">
+            <div class="og-site" id="fbSite">example.com</div>
+            <div class="og-title" id="fbTitle">Your Page Title</div>
+            <div class="og-desc" id="fbDesc">Your description appears here...</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tool-preview" id="twPreview" style="margin-top:24px">
+        <h4>Twitter / X Card Preview</h4>
+        <div style="display:flex;gap:16px;flex-wrap:wrap">
+          <div>
+            <div style="font-family:var(--mono);font-size:10px;color:var(--muted);margin-bottom:6px;letter-spacing:.06em">SUMMARY_LARGE_IMAGE</div>
+            <div class="og-preview" style="max-width:400px">
+              <div class="og-img" style="height:200px" id="twImg">Image Preview</div>
+              <div class="og-body">
+                <div class="og-title" id="twTitle">Your Page Title</div>
+                <div class="og-desc" id="twDesc">Your description...</div>
+                <div class="og-site" id="twSite">example.com</div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div style="font-family:var(--mono);font-size:10px;color:var(--muted);margin-bottom:6px;letter-spacing:.06em">SUMMARY</div>
+            <div style="border:1px solid var(--rule);border-radius:8px;overflow:hidden;max-width:300px;display:flex;background:var(--card)">
+              <div style="width:120px;height:120px;background:var(--bg-alt);display:flex;align-items:center;justify-content:center;color:var(--muted);font-family:var(--mono);font-size:10px;flex-shrink:0" id="twSmImg">Img</div>
+              <div style="padding:10px 12px;display:flex;flex-direction:column;justify-content:center">
+                <div style="font-size:14px;font-weight:700;color:var(--ink);line-height:1.3;margin-bottom:2px" id="twSmTitle">Title</div>
+                <div style="font-size:12px;color:var(--muted);line-height:1.4;margin-bottom:2px" id="twSmDesc">Description</div>
+                <div style="font-family:var(--mono);font-size:10px;color:var(--muted)" id="twSmSite">example.com</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tool-output" id="tagOutput">
+        <h4 data-zh="OG 标签代码" data-en="OG Tag Code">OG 标签代码</h4>
+        <pre id="tagCode"></pre>
+      </div>
+
+      <div class="tool-tips">
+        <h4 data-zh="OG 优化要点" data-en="OG Tips">OG 优化要点</h4>
+        <ul>
+          <li data-zh="<strong>图片尺寸</strong>：Facebook 推荐 1200×630，Twitter 大卡片同。" data-en="<strong>Image size</strong>: Facebook recommends 1200x630, same for Twitter large cards."><strong>图片尺寸</strong>：Facebook 推荐 1200×630，Twitter 大卡片同。</li>
+          <li data-zh="<strong>标题</strong>：60 字符以内，超出 Facebook 会截断。" data-en="<strong>Title</strong>: Under 60 characters or Facebook truncates."><strong>标题</strong>：60 字符以内，超出 Facebook 会截断。</li>
+          <li data-zh="<strong>描述</strong>：200 字符以内。Twitter 不显示描述。" data-en="<strong>Description</strong>: Under 200 characters. Twitter doesn't show description."><strong>描述</strong>：200 字符以内。Twitter 不显示描述。</li>
+          <li data-zh="<strong>调试</strong>：用 Facebook Sharing Debugger 和 Twitter Card Validator 验证。" data-en="<strong>Debug</strong>: Use Facebook Sharing Debugger and Twitter Card Validator."><strong>调试</strong>：用 Facebook Sharing Debugger 和 Twitter Card Validator 验证。</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+  <section class="read-next wrap">
+    <div class="rn-label" data-zh="更多工具" data-en="More Tools">更多工具</div>
+    <div class="rn-grid">
+      <a href="meta-description-generator.html" class="rn-item">
+        <div class="rn-sec">Tool</div>
+        <h4 data-zh="Meta Description 生成器" data-en="Meta Description Generator">Meta Description 生成器</h4>
+        <p data-zh="SEO 描述优化工具" data-en="SEO description optimizer">SEO 描述优化工具</p>
+      </a>
+      <a href="serp-preview-tool.html" class="rn-item">
+        <div class="rn-sec">Tool</div>
+        <h4 data-zh="SERP 预览工具" data-en="SERP Preview Tool">SERP 预览工具</h4>
+        <p data-zh="Google 搜索结果模拟" data-en="Google search result simulator">Google 搜索结果模拟</p>
+      </a>
+      <a href="tools.html" class="rn-item">
+        <div class="rn-sec">Tools</div>
+        <h4 data-zh="全部工具" data-en="All Tools">全部工具</h4>
+        <p data-zh="查看所有免费 SEO 工具" data-en="Browse all free SEO tools">查看所有免费 SEO 工具</p>
+      </a>
+    </div>
+  </section>
+  <footer>
+    <div>© 2026 weihacking · Soulcraft Limited</div>
+    <div class="f-links">
+      <a href="https://x.com/weihacking" target="_blank" rel="noreferrer">X ↗</a>
+      <a href="https://github.com/1596941391qq" target="_blank" rel="noreferrer">GitHub ↗</a>
+      <a href="mailto:echokay777@163.com">Email</a>
+    </div>
+  </footer>
+  <script src="script.js"></script>
+  <script>
+  function updateOG(){
+    var title=v('ogTitle')||'Your Page Title';
+    var site=v('ogSite')||'example.com';
+    var desc=v('ogDesc')||'Your description appears here...';
+    var img=v('ogImage');
+    var url=v('ogUrl')||'https://example.com/page';
+    document.getElementById('fbTitle').textContent=title;
+    document.getElementById('fbSite').textContent=site;
+    document.getElementById('fbDesc').textContent=desc;
+    document.getElementById('twTitle').textContent=title;
+    document.getElementById('twDesc').textContent=desc;
+    document.getElementById('twSite').textContent=site;
+    document.getElementById('twSmTitle').textContent=title;
+    document.getElementById('twSmDesc').textContent=desc;
+    document.getElementById('twSmSite').textContent=site;
+    if(img){
+      ['fbImg','twImg'].forEach(function(id){var el=document.getElementById(id);el.style.backgroundImage='url('+img+')';el.style.backgroundSize='cover';el.style.backgroundPosition='center';el.textContent=''});
+      var smEl=document.getElementById('twSmImg');smEl.style.backgroundImage='url('+img+')';smEl.style.backgroundSize='cover';smEl.style.backgroundPosition='center';smEl.textContent='';
+    }
+    document.getElementById('fbPreview').className='tool-preview show';
+    document.getElementById('twPreview').className='tool-preview show';
+    var tags='<meta property="og:title" content="'+esc(title)+'">\n';
+    tags+='<meta property="og:description" content="'+esc(desc)+'">\n';
+    tags+='<meta property="og:url" content="'+esc(url)+'">\n';
+    tags+='<meta property="og:site_name" content="'+esc(site)+'">\n';
+    tags+='<meta property="og:type" content="website">\n';
+    if(img)tags+='<meta property="og:image" content="'+esc(img)+'">\n';
+    tags+='\n<meta name="twitter:card" content="summary_large_image">\n';
+    tags+='<meta name="twitter:title" content="'+esc(title)+'">\n';
+    tags+='<meta name="twitter:description" content="'+esc(desc)+'">\n';
+    if(img)tags+='<meta name="twitter:image" content="'+esc(img)+'">\n';
+    document.getElementById('tagCode').textContent=tags;
+    document.getElementById('tagOutput').className='tool-output show';
+  }
+  function v(id){return(document.getElementById(id)||{}).value||''}
+  function esc(s){return s.replace(/"/g,'&quot;')}
+  </script>
+</body>
+</html>

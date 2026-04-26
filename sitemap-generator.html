@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light" data-lang="zh">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sitemap Generator — Free SEO Tool — weihacking</title>
+  <meta name="description" content="Free XML sitemap generator. Create a standards-compliant sitemap.xml for your website. Add URLs, set priorities and change frequencies, then download.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⌘</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Source+Code+Pro:wght@400;600&family=Noto+Serif+SC:wght@400;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
+  <link rel="canonical" href="https://1596941391qq.github.io/sitemap-generator.html">
+  <meta property="og:title" content="Sitemap Generator — Free SEO Tool">
+  <meta property="og:description" content="Free XML sitemap generator. Create standards-compliant sitemap.xml for your website.">
+  <meta property="og:url" content="https://1596941391qq.github.io/sitemap-generator.html">
+  <meta property="og:site_name" content="weihacking">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="zh_CN">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@weihacking">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://1596941391qq.github.io/"},{"@type":"ListItem","position":2,"name":"Tools","item":"https://1596941391qq.github.io/tools.html"},{"@type":"ListItem","position":3,"name":"Sitemap Generator","item":"https://1596941391qq.github.io/sitemap-generator.html"}]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Sitemap Generator","applicationCategory":"DeveloperApplication","operatingSystem":"Web","description":"Free XML sitemap generator. Create standards-compliant sitemap.xml.","url":"https://1596941391qq.github.io/sitemap-generator.html","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+</script>
+</head>
+<body>
+  <nav>
+    <a href="index.html">weihacking_</a>
+    <div class="nav-r">
+      <a href="tools.html" class="nb" style="margin-right:8px">←</a>
+      <button class="nb" id="langToggle" onclick="toggleLang()">EN</button>
+      <button class="nb" id="themeToggle" onclick="toggleTheme()">☽</button>
+    </div>
+  </nav>
+  <div class="sub-hero">
+    <div class="wrap">
+      <p class="sec-label" data-zh="免费工具" data-en="Free Tool">免费工具</p>
+      <h1 data-zh="Sitemap 生成器" data-en="Sitemap Generator">Sitemap 生成器</h1>
+      <p class="hero-sub" data-zh="生成符合规范的 XML sitemap。添加 URL、设置优先级和更新频率。" data-en="Generate a standards-compliant XML sitemap. Add URLs, set priorities and change frequencies.">生成符合规范的 XML sitemap。添加 URL、设置优先级和更新频率。</p>
+    </div>
+  </div>
+  <section class="wrap" style="padding:48px 28px">
+    <div class="tool-ui">
+      <div class="tool-input-group">
+        <label data-zh="URL 列表（每行一个 URL）" data-en="URL List (one per line)">URL 列表（每行一个 URL）</label>
+        <textarea class="tool-input" id="urlList" rows="8" placeholder="https://example.com/&#10;https://example.com/about&#10;https://example.com/products&#10;https://example.com/blog" oninput="generate()"></textarea>
+      </div>
+      <div class="tool-row">
+        <div class="tool-input-group">
+          <label data-zh="默认优先级" data-en="Default Priority">默认优先级</label>
+          <select class="tool-input" id="priority" onchange="generate()">
+            <option value="0.8">0.8 (High)</option>
+            <option value="0.5" selected>0.5 (Medium)</option>
+            <option value="0.3">0.3 (Low)</option>
+          </select>
+        </div>
+        <div class="tool-input-group">
+          <label data-zh="更新频率" data-en="Change Frequency">更新频率</label>
+          <select class="tool-input" id="freq" onchange="generate()">
+            <option value="weekly" selected>Weekly</option>
+            <option value="daily">Daily</option>
+            <option value="monthly">Monthly</option>
+            <option value="always">Always</option>
+            <option value="yearly">Yearly</option>
+            <option value="never">Never</option>
+          </select>
+        </div>
+      </div>
+      <div style="display:flex;gap:12px;flex-wrap:wrap">
+        <button class="tool-btn" onclick="copyOutput()" data-zh="复制 XML" data-en="Copy XML">复制 XML</button>
+        <button class="tool-btn" onclick="downloadXml()" style="background:var(--card);color:var(--ink);border:1px solid var(--rule)" data-zh="下载 sitemap.xml" data-en="Download sitemap.xml">下载 sitemap.xml</button>
+      </div>
+
+      <div class="tool-output" id="output">
+        <h4 data-zh="生成的 sitemap.xml" data-en="Generated sitemap.xml">生成的 sitemap.xml</h4>
+        <pre id="outputCode"></pre>
+      </div>
+
+      <div class="tool-tips">
+        <h4 data-zh="Sitemap 要点" data-en="Sitemap Tips">Sitemap 要点</h4>
+        <ul>
+          <li data-zh="<strong>大小</strong>：单个 sitemap 不超过 50MB 或 50,000 URL。" data-en="<strong>Size</strong>: Single sitemap max 50MB or 50,000 URLs."><strong>大小</strong>：单个 sitemap 不超过 50MB 或 50,000 URL。</li>
+          <li data-zh="<strong>位置</strong>：放在根目录，通过 robots.txt 引用。" data-en="<strong>Location</strong>: Place at root, reference from robots.txt."><strong>位置</strong>：放在根目录，通过 robots.txt 引用。</li>
+          <li data-zh="<strong>提交</strong>：在 Google Search Console 和 Bing Webmaster Tools 提交。" data-en="<strong>Submit</strong>: Submit via Google Search Console and Bing Webmaster Tools."><strong>提交</strong>：在 Google Search Console 和 Bing Webmaster Tools 提交。</li>
+          <li data-zh="<strong>lastmod</strong>：使用真实的最后修改日期，不要每次都更新为今天。" data-en="<strong>lastmod</strong>: Use real last-modified dates, not today's date for everything."><strong>lastmod</strong>：使用真实的最后修改日期，不要每次都更新为今天。</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+  <section class="read-next wrap">
+    <div class="rn-label" data-zh="更多工具" data-en="More Tools">更多工具</div>
+    <div class="rn-grid">
+      <a href="robots-txt-generator.html" class="rn-item">
+        <div class="rn-sec">Tool</div>
+        <h4 data-zh="Robots.txt 生成器" data-en="Robots.txt Generator">Robots.txt 生成器</h4>
+        <p data-zh="配合 sitemap 使用" data-en="Pair with your sitemap">配合 sitemap 使用</p>
+      </a>
+      <a href="schema-markup-generator.html" class="rn-item">
+        <div class="rn-sec">Tool</div>
+        <h4 data-zh="Schema 标记生成器" data-en="Schema Markup Generator">Schema 标记生成器</h4>
+        <p data-zh="生成 JSON-LD 结构化数据" data-en="Generate JSON-LD structured data">生成 JSON-LD 结构化数据</p>
+      </a>
+      <a href="tools.html" class="rn-item">
+        <div class="rn-sec">Tools</div>
+        <h4 data-zh="全部工具" data-en="All Tools">全部工具</h4>
+        <p data-zh="查看所有免费 SEO 工具" data-en="Browse all free SEO tools">查看所有免费 SEO 工具</p>
+      </a>
+    </div>
+  </section>
+  <footer>
+    <div>© 2026 weihacking · Soulcraft Limited</div>
+    <div class="f-links">
+      <a href="https://x.com/weihacking" target="_blank" rel="noreferrer">X ↗</a>
+      <a href="https://github.com/1596941391qq" target="_blank" rel="noreferrer">GitHub ↗</a>
+      <a href="mailto:echokay777@163.com">Email</a>
+    </div>
+  </footer>
+  <script src="script.js"></script>
+  <script>
+  function generate(){
+    var urls=document.getElementById('urlList').value.trim().split('\n').filter(function(x){return x.trim()});
+    var priority=document.getElementById('priority').value;
+    var freq=document.getElementById('freq').value;
+    var today=new Date().toISOString().split('T')[0];
+    var xml='<?xml version="1.0" encoding="UTF-8"?>\n';
+    xml+='<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n';
+    urls.forEach(function(url){
+      url=url.trim();
+      if(!url)return;
+      xml+='  <url>\n';
+      xml+='    <loc>'+esc(url)+'</loc>\n';
+      xml+='    <lastmod>'+today+'</lastmod>\n';
+      xml+='    <changefreq>'+freq+'</changefreq>\n';
+      xml+='    <priority>'+priority+'</priority>\n';
+      xml+='  </url>\n';
+    });
+    xml+='</urlset>';
+    document.getElementById('outputCode').textContent=xml;
+    document.getElementById('output').className='tool-output show';
+  }
+  function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+  function copyOutput(){
+    var text=document.getElementById('outputCode').textContent;
+    navigator.clipboard.writeText(text).then(function(){
+      var btn=document.querySelector('.tool-btn');
+      var orig=btn.textContent;
+      btn.textContent='Copied!';
+      setTimeout(function(){btn.textContent=orig},1500);
+    });
+  }
+  function downloadXml(){
+    var text=document.getElementById('outputCode').textContent;
+    var blob=new Blob([text],{type:'application/xml'});
+    var a=document.createElement('a');
+    a.href=URL.createObjectURL(blob);
+    a.download='sitemap.xml';
+    a.click();
+    URL.revokeObjectURL(a.href);
+  }
+  generate();
+  </script>
+</body>
+</html>

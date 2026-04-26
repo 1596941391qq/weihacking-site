@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light" data-lang="zh">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Meta Description Generator — Free SEO Tool — weihacking</title>
+  <meta name="description" content="Free meta description generator. Write SEO-optimized meta descriptions with real-time character counting, quality scoring, and SERP preview.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⌘</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Source+Code+Pro:wght@400;600&family=Noto+Serif+SC:wght@400;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
+  <link rel="canonical" href="https://1596941391qq.github.io/meta-description-generator.html">
+  <meta property="og:title" content="Meta Description Generator — Free SEO Tool">
+  <meta property="og:description" content="Free meta description generator. Write SEO-optimized meta descriptions with real-time character counting and quality scoring.">
+  <meta property="og:url" content="https://1596941391qq.github.io/meta-description-generator.html">
+  <meta property="og:site_name" content="weihacking">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="zh_CN">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@weihacking">
+  <meta name="twitter:title" content="Meta Description Generator — Free SEO Tool">
+  <meta name="twitter:description" content="Free meta description generator with real-time quality scoring.">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://1596941391qq.github.io/"},
+    {"@type": "ListItem", "position": 2, "name": "Tools", "item": "https://1596941391qq.github.io/tools.html"},
+    {"@type": "ListItem", "position": 3, "name": "Meta Description Generator", "item": "https://1596941391qq.github.io/meta-description-generator.html"}
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Meta Description Generator",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Web",
+  "description": "Free meta description generator with real-time character counting, quality scoring, and SERP preview.",
+  "url": "https://1596941391qq.github.io/meta-description-generator.html",
+  "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}
+}
+</script>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html">weihacking_</a>
+    <div class="nav-r">
+      <a href="tools.html" class="nb" style="margin-right:8px">←</a>
+      <button class="nb" id="langToggle" onclick="toggleLang()">EN</button>
+      <button class="nb" id="themeToggle" onclick="toggleTheme()">☽</button>
+    </div>
+  </nav>
+
+  <div class="sub-hero">
+    <div class="wrap">
+      <p class="sec-label" data-zh="免费工具" data-en="Free Tool">免费工具</p>
+      <h1 data-zh="Meta Description 生成器" data-en="Meta Description Generator">Meta Description 生成器</h1>
+      <p class="hero-sub" data-zh="实时字数统计、质量评分、SERP 预览。输入页面标题和描述，即刻优化。" data-en="Real-time character counting, quality scoring, and SERP preview. Enter your title and description to optimize instantly.">实时字数统计、质量评分、SERP 预览。输入页面标题和描述，即刻优化。</p>
+    </div>
+  </div>
+
+  <section class="wrap" style="padding:48px 28px">
+    <div class="tool-ui">
+      <div class="tool-input-group">
+        <label data-zh="页面标题" data-en="Page Title">页面标题</label>
+        <input type="text" class="tool-input" id="pageTitle" placeholder="Enter your page title..." maxlength="70" oninput="updatePreview()">
+        <div class="tool-counter" id="titleCounter">0 / 60</div>
+      </div>
+
+      <div class="tool-input-group">
+        <label data-zh="页面描述" data-en="Page Description">页面描述</label>
+        <textarea class="tool-input" id="pageDesc" rows="3" placeholder="Write your meta description here..." maxlength="200" oninput="updatePreview()"></textarea>
+        <div class="tool-counter" id="descCounter">0 / 155</div>
+      </div>
+
+      <div class="tool-input-group">
+        <label data-zh="目标关键词" data-en="Target Keyword">目标关键词</label>
+        <input type="text" class="tool-input" id="keyword" placeholder="Enter target keyword..." oninput="updatePreview()">
+      </div>
+
+      <div class="tool-preview" id="serpPreview">
+        <h4 data-zh="SERP 预览" data-en="SERP Preview">SERP 预览</h4>
+        <div class="serp-preview">
+          <div class="sp-url" id="spUrl">https://example.com/page</div>
+          <div class="sp-title" id="spTitle">Your Page Title</div>
+          <div class="sp-desc" id="spDesc">Your meta description will appear here...</div>
+        </div>
+      </div>
+
+      <div class="tool-output" id="scoreOutput">
+        <h4 data-zh="质量评分" data-en="Quality Score">质量评分</h4>
+        <div class="tool-score" id="score">0</div>
+        <div class="tool-score-label" id="scoreLabel" data-zh="/100" data-en="/100">/100</div>
+        <div id="scoreDetails" style="margin-top:16px"></div>
+      </div>
+
+      <div class="tool-tips">
+        <h4 data-zh="优化建议" data-en="Tips">优化建议</h4>
+        <ul>
+          <li data-zh="<strong>理想长度</strong>：150-155 字符。超过 155 会被 Google 截断。" data-en="<strong>Ideal length</strong>: 150-155 characters. Google truncates beyond 155."><strong>理想长度</strong>：150-155 字符。超过 155 会被 Google 截断。</li>
+          <li data-zh="<strong>关键词前置</strong>：目标关键词出现在前 60 字符效果最佳。" data-en="<strong>Front-load keywords</strong>: Target keyword in the first 60 characters works best."><strong>关键词前置</strong>：目标关键词出现在前 60 字符效果最佳。</li>
+          <li data-zh="<strong>行动号召</strong>：加入「了解」「探索」「获取」等动词提升点击率。" data-en="<strong>Call to action</strong>: Add verbs like 'Learn', 'Discover', 'Get' to boost CTR."><strong>行动号召</strong>：加入「了解」「探索」「获取」等动词提升点击率。</li>
+          <li data-zh="<strong>避免重复</strong>：每个页面的 meta description 必须唯一。" data-en="<strong>Be unique</strong>: Every page's meta description must be unique."><strong>避免重复</strong>：每个页面的 meta description 必须唯一。</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="read-next wrap">
+    <div class="rn-label" data-zh="更多工具" data-en="More Tools">更多工具</div>
+    <div class="rn-grid">
+      <a href="serp-preview-tool.html" class="rn-item">
+        <div class="rn-sec">Tool</div>
+        <h4 data-zh="SERP 预览工具" data-en="SERP Preview Tool">SERP 预览工具</h4>
+        <p data-zh="模拟 Google 搜索结果展示" data-en="Simulate Google search result display">模拟 Google 搜索结果展示</p>
+      </a>
+      <a href="robots-txt-generator.html" class="rn-item">
+        <div class="rn-sec">Tool</div>
+        <h4 data-zh="Robots.txt 生成器" data-en="Robots.txt Generator">Robots.txt 生成器</h4>
+        <p data-zh="一键生成 robots.txt" data-en="Generate robots.txt in one click">一键生成 robots.txt</p>
+      </a>
+      <a href="tools.html" class="rn-item">
+        <div class="rn-sec">Tools</div>
+        <h4 data-zh="全部工具" data-en="All Tools">全部工具</h4>
+        <p data-zh="查看所有免费 SEO 工具" data-en="Browse all free SEO tools">查看所有免费 SEO 工具</p>
+      </a>
+    </div>
+  </section>
+
+  <footer>
+    <div>© 2026 weihacking · Soulcraft Limited</div>
+    <div class="f-links">
+      <a href="https://x.com/weihacking" target="_blank" rel="noreferrer">X ↗</a>
+      <a href="https://github.com/1596941391qq" target="_blank" rel="noreferrer">GitHub ↗</a>
+      <a href="mailto:echokay777@163.com">Email</a>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+  function updatePreview(){
+    var t=document.getElementById('pageTitle').value;
+    var d=document.getElementById('pageDesc').value;
+    var k=document.getElementById('keyword').value;
+    var tc=document.getElementById('titleCounter');
+    var dc=document.getElementById('descCounter');
+    tc.textContent=t.length+' / 60';
+    tc.className='tool-counter'+(t.length>60?' over':'');
+    dc.textContent=d.length+' / 155';
+    dc.className='tool-counter'+(d.length>155?' over':'');
+    document.getElementById('spTitle').textContent=t||'Your Page Title';
+    document.getElementById('spDesc').textContent=d||'Your meta description will appear here...';
+    var prev=document.getElementById('serpPreview');
+    prev.className='tool-preview'+(t||d?' show':'');
+    if(t||d||k){calcScore(t,d,k)}
+  }
+  function calcScore(t,d,k){
+    var s=0;
+    var details=[];
+    if(d.length>=120&&d.length<=155){s+=25;details.push('✓ Length optimal (120-155 chars)')}
+    else if(d.length>=80){s+=15;details.push('△ Length acceptable but not optimal')}
+    else if(d.length>0){s+=5;details.push('✗ Too short')}
+    if(k&&d.toLowerCase().indexOf(k.toLowerCase())!==-1){s+=25;details.push('✓ Keyword present')}
+    else if(k){s+=0;details.push('✗ Keyword missing from description')}
+    if(k&&d.toLowerCase().indexOf(k.toLowerCase())<60&&d.toLowerCase().indexOf(k.toLowerCase())!==-1){s+=10;details.push('✓ Keyword in first 60 chars')}
+    var ctas=['learn','discover','get','find','explore','try','see','了解','探索','获取','发现','尝试','查看'];
+    var hasCta=ctas.some(function(c){return d.toLowerCase().indexOf(c)!==-1});
+    if(hasCta){s+=15;details.push('✓ Contains call-to-action')}
+    if(d.length>0){s+=10;details.push('✓ Description provided')}
+    if(t.length>0&&t.length<=60){s+=15;details.push('✓ Title length optimal')}
+    else if(t.length>60){s+=5;details.push('△ Title too long')}
+    s=Math.min(s,100);
+    document.getElementById('score').textContent=s;
+    document.getElementById('scoreDetails').innerHTML=details.map(function(x){return'<p style="font-size:13px;color:var(--ink-s);line-height:1.6;margin:4px 0">'+x+'</p>'}).join('');
+    document.getElementById('scoreOutput').className='tool-output show';
+  }
+  </script>
+</body>
+</html>
