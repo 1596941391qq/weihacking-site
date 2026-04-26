@@ -45,3 +45,9 @@
       });
     },{threshold:.05});
     document.querySelectorAll('[data-stagger]').forEach(g=>staggerObs.observe(g));
+
+// Section divider line-draw
+const divObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');divObs.unobserve(e.target)}})
+},{threshold:.1});
+document.querySelectorAll('.sec-divider').forEach(d=>divObs.observe(d));

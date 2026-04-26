@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HackingSEO_OS1 — Pre-Sales Brief</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  /* ═══ Stripe-inspired Design System ═══ */
+  :root {
+    --bg: #ffffff;
+    --fg: #061b31;          /* Deep Navy — Stripe signature heading color */
+    --fg2: #425466;         /* Slate body text */
+    --fg3: #64748d;         /* Cool caption / label */
+    --border: #e5edf5;      /* Cool blue-tinted border */
+    --accent: #533afd;      /* Stripe Purple */
+    --accent-hover: #4434d4;
+    --accent-light: #f0eeff;
+    --card-bg: #f6f9fc;     /* Cool ice-white surface */
+    --shadow: rgba(50,50,93,0.25) 0 6px 24px -6px, rgba(0,0,0,0.08) 0 3px 12px -3px;
+    --shadow-lg: rgba(50,50,93,0.25) 0 30px 45px -30px, rgba(0,0,0,0.1) 0 18px 36px -18px;
+    --max-w: 840px;
+    --r: 6px;
+    --r-lg: 8px;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: var(--bg);
+    color: var(--fg2);
+    line-height: 1.7;
+    font-size: 16px;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page { max-width: var(--max-w); margin: 0 auto; padding: 0 40px; }
+  section { padding: 80px 0; border-bottom: 1px solid var(--border); }
+  section:last-child { border-bottom: none; }
+
+  /* ═══ Typography — Stripe: light weight, tight tracking ═══ */
+  h1 { font-size: 48px; font-weight: 300; letter-spacing: -0.03em; line-height: 1.08; color: var(--fg); }
+  h2 { font-size: 32px; font-weight: 300; letter-spacing: -0.02em; line-height: 1.15; margin-bottom: 20px; color: var(--fg); }
+  h3 { font-size: 22px; font-weight: 400; line-height: 1.3; margin-bottom: 12px; color: var(--fg); }
+  h4 { font-size: 17px; font-weight: 500; line-height: 1.4; margin-bottom: 8px; color: var(--fg); }
+
+  .en { font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif; letter-spacing: -0.01em; }
+  .section-label { font-size: 13px; font-weight: 500; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 14px; }
+  .lead { font-size: 20px; color: var(--fg2); line-height: 1.6; margin-top: 16px; font-weight: 300; }
+  .sub { font-size: 17px; color: var(--fg3); line-height: 1.6; margin-top: 12px; }
+  p { margin-top: 14px; color: var(--fg2); }
+  ul, ol { margin-top: 14px; padding-left: 24px; color: var(--fg2); }
+  li { margin-bottom: 8px; }
+  strong { color: var(--fg); font-weight: 600; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  /* ═══ Hero ═══ */
+  .hero { text-align: center; padding: 96px 0 64px; border-bottom: 1px solid var(--border); }
+  .hero-tag { display: inline-block; background: var(--accent-light); color: var(--accent); font-size: 13px; font-weight: 500; padding: 6px 18px; border-radius: var(--r); margin-bottom: 28px; letter-spacing: 0.04em; }
+  .hero h1 { margin-bottom: 24px; }
+  .hero .lead { max-width: 600px; margin: 0 auto; }
+  .hero-cta { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; margin-top: 32px; }
+  .hero-cta a { display: inline-flex; align-items: center; gap: 6px; padding: 12px 28px; border-radius: var(--r); font-size: 15px; font-weight: 500; transition: all 0.2s; }
+
+  .hero-stats { display: flex; justify-content: center; gap: 48px; flex-wrap: wrap; margin-top: 52px; }
+  .hero-stat { text-align: center; }
+  .hero-stat .num { font-size: 44px; font-weight: 300; color: var(--fg); letter-spacing: -0.02em; }
+  .hero-stat .label { font-size: 13px; color: var(--fg3); margin-top: 4px; font-weight: 400; }
+
+  .contact-bar { display: flex; justify-content: center; gap: 32px; flex-wrap: wrap; padding: 16px 0; margin-top: 16px; font-size: 14px; color: var(--fg3); }
+  .img-row { display: flex; gap: 24px; margin-top: 32px; align-items: flex-start; justify-content: center; }
+  .img-row img { border-radius: var(--r-lg); box-shadow: var(--shadow); }
+  .img-center { text-align: center; margin-top: 36px; }
+  .img-center img { max-width: 100%; border-radius: var(--r-lg); box-shadow: var(--shadow); }
+
+  /* ═══ Cards — elevated white on cool surface ═══ */
+  .card-grid { display: grid; gap: 20px; margin-top: 32px; }
+  .card-grid.c2 { grid-template-columns: repeat(2, 1fr); }
+  .card-grid.c3 { grid-template-columns: repeat(3, 1fr); }
+  .card { background: #fff; border-radius: var(--r-lg); padding: 32px 28px; border: 1px solid var(--border); box-shadow: var(--shadow); }
+  .card-tag { font-size: 12px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 14px; }
+  .card h4 { margin-bottom: 10px; }
+  .card p { font-size: 15px; margin-top: 8px; }
+
+  /* ═══ Table ═══ */
+  .cmp-table { width: 100%; border-collapse: collapse; margin-top: 28px; font-size: 15px; }
+  .cmp-table th, .cmp-table td { padding: 16px 18px; text-align: left; border-bottom: 1px solid var(--border); }
+  .cmp-table th { font-weight: 500; color: var(--fg3); font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; }
+  .cmp-table td:first-child { font-weight: 500; color: var(--fg); width: 18%; }
+
+  /* ═══ Layer Stack ═══ */
+  .layer-stack { margin-top: 32px; }
+  .layer-item { display: flex; align-items: center; gap: 20px; padding: 22px 0; border-bottom: 1px solid var(--border); }
+  .layer-item:last-child { border-bottom: none; }
+  .layer-num { width: 44px; height: 44px; border-radius: var(--r); background: var(--accent); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 16px; flex-shrink: 0; }
+  .layer-body { flex: 1; }
+  .layer-body h4 { margin-bottom: 2px; }
+  .layer-body p { font-size: 14px; margin-top: 2px; color: var(--fg3); }
+
+  /* ═══ Problem ═══ */
+  .problem { margin-top: 44px; }
+  .problem-header { display: flex; align-items: baseline; gap: 12px; margin-bottom: 12px; }
+  .problem-num { font-size: 32px; font-weight: 300; color: var(--accent); line-height: 1; font-family: "SF Pro Display", -apple-system, sans-serif; }
+  .problem h3 { margin-bottom: 0; }
+  .problem .status { background: var(--card-bg); border-radius: var(--r-lg); padding: 22px 26px; margin-top: 16px; border: 1px solid var(--border); }
+  .problem .status h4 { color: var(--fg3); font-size: 12px; font-weight: 500; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.06em; }
+  .problem .solve { margin-top: 16px; }
+  .problem .solve h4 { color: var(--accent); font-size: 12px; font-weight: 500; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.06em; }
+
+  /* ═══ Role ═══ */
+  .role { padding: 28px; background: #fff; border-radius: var(--r-lg); margin-top: 20px; border: 1px solid var(--border); box-shadow: var(--shadow); }
+  .role h4 { font-size: 18px; }
+  .role .example { font-size: 14px; color: var(--fg3); margin-top: 10px; font-style: italic; }
+
+  /* ═══ Principle ═══ */
+  .principle { display: flex; gap: 24px; margin-top: 36px; }
+  .principle-letter { width: 48px; height: 48px; border-radius: 50%; background: var(--accent); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 300; font-size: 22px; flex-shrink: 0; margin-top: 2px; font-family: "SF Pro Display", sans-serif; }
+  .principle-body h4 { font-size: 18px; }
+  .principle-body p { font-size: 15px; }
+
+  /* ═══ Timeline ═══ */
+  .timeline { margin-top: 40px; position: relative; padding-left: 40px; }
+  .timeline::before { content: ''; position: absolute; left: 11px; top: 8px; bottom: 8px; width: 2px; background: var(--border); }
+  .tl-item { position: relative; margin-bottom: 36px; }
+  .tl-item:last-child { margin-bottom: 0; }
+  .tl-dot { position: absolute; left: -40px; top: 4px; width: 22px; height: 22px; border-radius: 50%; border: 3px solid #fff; box-shadow: 0 0 0 2px var(--border); }
+  .tl-badge { display: inline-block; font-size: 12px; font-weight: 500; padding: 4px 14px; border-radius: var(--r); margin-bottom: 10px; background: var(--card-bg); color: var(--fg3); border: 1px solid var(--border); }
+  .tl-badge.now { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .tl-item h4 { font-size: 17px; }
+  .tl-item p { font-size: 15px; color: var(--fg3); margin-top: 6px; line-height: 1.6; }
+
+  /* ═══ Pricing ═══ */
+  .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 40px; }
+  .price-card { background: #fff; border-radius: var(--r-lg); padding: 40px 28px; display: flex; flex-direction: column; text-align: center; border: 1px solid var(--border); box-shadow: var(--shadow); }
+  .price-card h4 { font-size: 20px; margin-bottom: 16px; font-weight: 400; }
+  .price-card p { font-size: 14px; }
+  .price-card ul { font-size: 14px; flex: 1; text-align: left; }
+  .price-card li { margin-bottom: 8px; }
+  .price-tag-label { font-size: 12px; font-weight: 500; color: var(--fg3); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px; }
+  .price-tag { font-size: 40px; font-weight: 300; color: var(--fg); margin-bottom: 4px; letter-spacing: -0.02em; }
+  .price-original { font-size: 15px; color: var(--fg3); text-decoration: line-through; margin-bottom: 16px; }
+
+  /* ═══ Doc Table ═══ */
+  .doc-table { width: 100%; border-collapse: collapse; margin-top: 20px; font-size: 14px; }
+  .doc-table th { text-align: left; padding: 14px 16px; font-size: 12px; color: var(--fg3); text-transform: uppercase; letter-spacing: 0.04em; border-bottom: 2px solid var(--border); font-weight: 500; }
+  .doc-table td { padding: 14px 16px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  .doc-table td:first-child { font-weight: 500; color: var(--fg); white-space: nowrap; width: 30%; }
+  .doc-restricted { color: var(--fg3); font-style: italic; }
+
+  /* ═══ Stats ═══ */
+  .stats-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 32px; }
+  .stat-card { background: #fff; border-radius: var(--r-lg); padding: 32px; text-align: center; border: 1px solid var(--border); box-shadow: var(--shadow); }
+  .stat-card .num { font-size: 36px; font-weight: 300; color: var(--fg); letter-spacing: -0.02em; }
+  .stat-card .label { font-size: 13px; color: var(--fg3); margin-top: 6px; }
+
+  /* ═══ FAQ ═══ */
+  .faq-item { padding: 28px 0; border-bottom: 1px solid var(--border); }
+  .faq-item:last-child { border-bottom: none; }
+  .faq-q { font-weight: 500; font-size: 17px; color: var(--fg); margin-bottom: 10px; }
+  .faq-a { font-size: 15px; color: var(--fg2); line-height: 1.7; }
+
+  /* ═══ Footer ═══ */
+  .footer { text-align: center; padding: 64px 0; font-size: 13px; color: var(--fg3); }
+
+  /* ═══════ Mobile ═══════ */
+  @media (max-width: 768px) {
+    :root { --max-w: 100%; }
+    .page { padding: 0 24px; }
+
+    section { padding: 60px 0; }
+
+    h1 { font-size: 32px; letter-spacing: -0.02em; }
+    h2 { font-size: 26px; margin-bottom: 18px; }
+    h3 { font-size: 19px; margin-bottom: 12px; }
+    h4 { font-size: 16px; }
+    .lead { font-size: 18px; line-height: 1.65; }
+    .sub { font-size: 16px; line-height: 1.65; }
+    body { font-size: 15px; line-height: 1.75; }
+    p { margin-top: 14px; }
+    li { margin-bottom: 10px; }
+
+    .hero { padding: 60px 0 44px; }
+    .hero h1 { margin-bottom: 20px; }
+    .hero-stats { gap: 28px; margin-top: 40px; }
+    .hero-stat .num { font-size: 34px; }
+    .contact-bar { gap: 20px; font-size: 14px; margin-top: 20px; }
+
+    .card-grid.c2, .card-grid.c3, .pricing-grid, .stats-row { grid-template-columns: 1fr; gap: 16px; }
+    .card { padding: 24px 20px; }
+
+    .img-row { gap: 12px; }
+    .img-row img { max-width: 48% !important; flex: 1; min-width: 0; }
+    .img-center img { max-width: 100% !important; }
+
+    .cmp-table { font-size: 14px; }
+    .cmp-table th, .cmp-table td { padding: 12px 10px; }
+    .cmp-table td:first-child { width: auto; white-space: normal; }
+
+    .doc-table { font-size: 14px; }
+    .doc-table td:first-child { white-space: normal; width: auto; }
+    .doc-table th, .doc-table td { padding: 10px 10px; }
+
+    .layer-item { gap: 14px; padding: 18px 0; }
+    .layer-num { width: 36px; height: 36px; font-size: 14px; }
+    .layer-body h4 span { display: block; margin-top: 4px; }
+
+    .problem { margin-top: 40px; }
+    .problem-num { font-size: 26px; }
+    .problem .status { padding: 18px 20px; }
+
+    .role { padding: 22px; margin-top: 16px; }
+    .role h4 span { display: block; margin-top: 4px; }
+
+    .principle { gap: 16px; margin-top: 28px; }
+    .principle-letter { width: 40px; height: 40px; font-size: 18px; }
+
+    .timeline { padding-left: 36px; }
+    .tl-dot { left: -36px; }
+    .tl-item { margin-bottom: 28px; }
+    .tl-item p { font-size: 15px; margin-top: 8px; }
+
+    .price-card { padding: 28px 20px; }
+    .price-card h4 { font-size: 19px; }
+    .price-tag { font-size: 34px; }
+
+    .stat-card { padding: 24px; }
+    .stat-card .num { font-size: 30px; }
+
+    .faq-item { padding: 24px 0; }
+    .faq-q { font-size: 16px; }
+
+    .footer { padding: 44px 0; }
+  }
+
+  /* ═══════ Print / PDF ═══════ */
+  @media print {
+    body { font-size: 13px; line-height: 1.55; }
+    .page { max-width: 100%; padding: 0; }
+    section { padding: 22px 0; border-bottom: 1px solid #eee; }
+    .hero { padding: 24px 0 16px; }
+
+    .card, .role, .stat-card, .price-card { box-shadow: none; border: 1px solid #ddd; }
+
+    .problem, .role, .principle, .card, .price-card, .stat-card,
+    .faq-item, .tl-item, .layer-item { break-inside: avoid; page-break-inside: avoid; }
+    .doc-table tr { break-inside: avoid; page-break-inside: avoid; }
+    h2, h3, h4, .section-label { break-after: avoid; page-break-after: avoid; }
+
+    .pricing-grid { grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .pricing-grid, .stats-row { break-inside: avoid; page-break-inside: avoid; }
+
+    section:nth-of-type(1)  { page-break-before: always; }
+    section:nth-of-type(3)  { page-break-before: always; }
+    section:nth-of-type(5)  { page-break-before: always; }
+    section:nth-of-type(8)  { page-break-before: always; }
+    section:nth-of-type(9)  { page-break-before: always; }
+    section:nth-of-type(13) { page-break-before: always; }
+    section:nth-of-type(15) { page-break-before: always; }
+
+    .img-row img, .img-center img { max-height: 200px; object-fit: contain; }
+    .hero-stats { margin-top: 20px; }
+    .card-grid.c3 { grid-template-columns: repeat(3, 1fr); }
+  }
+</style>
+<style>
+  .hero-tag,
+  .section-label {
+    display: none !important;
+  }
+
+  @media (max-width: 768px) {
+    body {
+      font-size: 17px;
+      line-height: 1.85;
+    }
+
+    .page {
+      padding: 0 18px 52px;
+    }
+
+    section {
+      padding: 42px 0;
+    }
+
+    h1 {
+      font-size: 40px;
+      font-weight: 300;
+      letter-spacing: -0.03em;
+      line-height: 0.98;
+    }
+
+    h2 {
+      font-size: 29px;
+      font-weight: 300;
+      line-height: 1.08;
+      margin-bottom: 18px;
+    }
+
+    h3 {
+      font-size: 22px;
+      line-height: 1.2;
+      margin-bottom: 12px;
+    }
+
+    h4 {
+      font-size: 17px;
+    }
+
+    p, li {
+      font-size: 17px;
+      line-height: 1.82;
+    }
+
+    .lead {
+      font-size: 21px;
+      line-height: 1.56;
+      font-weight: 300;
+    }
+
+    .sub {
+      font-size: 17px;
+      line-height: 1.72;
+    }
+
+    .hero {
+      padding: 44px 0 34px;
+    }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      margin-top: 28px;
+    }
+
+    .hero-stat {
+      padding: 14px 8px;
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      background: #fff;
+      box-shadow: var(--shadow);
+    }
+
+    .hero-stat .num {
+      font-size: 32px;
+      font-weight: 300;
+    }
+
+    .contact-bar {
+      margin-top: 22px;
+      gap: 10px;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .card-grid.c2,
+    .card-grid.c3,
+    .pricing-grid,
+    .stats-row {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+
+    .card,
+    .role,
+    .price-card,
+    .stat-card {
+      padding: 24px 20px;
+    }
+
+    .img-row {
+      gap: 12px;
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .img-row img {
+      max-width: 100% !important;
+      width: 100%;
+      flex: none;
+      min-width: 0;
+    }
+
+    .img-center img {
+      max-width: 100% !important;
+    }
+
+    .cmp-table,
+    .doc-table {
+      width: 100%;
+      display: table;
+      table-layout: fixed;
+      border-collapse: collapse;
+      font-size: 13px;
+      margin-top: 18px;
+    }
+
+    .cmp-table th,
+    .cmp-table td,
+    .doc-table th,
+    .doc-table td {
+      padding: 10px 8px;
+      white-space: normal;
+      word-break: break-word;
+      overflow-wrap: anywhere;
+      vertical-align: top;
+    }
+
+    .cmp-table th,
+    .doc-table th {
+      font-size: 10px;
+      letter-spacing: 0.04em;
+    }
+
+    .cmp-table td:first-child,
+    .doc-table td:first-child {
+      width: auto;
+      white-space: normal;
+    }
+
+    .doc-table td:first-child {
+      font-size: 12px;
+    }
+
+    .layer-item {
+      gap: 14px;
+      padding: 18px 0;
+    }
+
+    .layer-num {
+      width: 36px;
+      height: 36px;
+      font-size: 14px;
+    }
+
+    .problem {
+      margin-top: 36px;
+    }
+
+    .problem-num {
+      font-size: 26px;
+    }
+
+    .problem .status {
+      padding: 18px 20px;
+    }
+
+    .principle {
+      gap: 16px;
+      margin-top: 28px;
+    }
+
+    .principle-letter {
+      width: 40px;
+      height: 40px;
+      font-size: 18px;
+    }
+
+    .timeline {
+      padding-left: 34px;
+    }
+
+    .tl-dot {
+      left: -34px;
+    }
+
+    .tl-item {
+      margin-bottom: 26px;
+    }
+
+    .price-card h4 {
+      font-size: 19px;
+    }
+
+    .price-tag {
+      font-size: 34px;
+    }
+
+    .stat-card .num {
+      font-size: 30px;
+    }
+
+    .faq-item {
+      padding: 22px 0;
+    }
+
+    .faq-q {
+      font-size: 17px;
+    }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+
+<!-- ═══════════ HERO ═══════════ -->
+<div class="hero">
+  <div class="hero-tag en">V1.0 &middot; April 2026</div>
+  <h1 class="en">HackingSEO_OS1</h1>
+  <p class="lead">出海企业的高级 SEO 认知<br><span class="en" style="font-size:17px;color:var(--fg3)">Frontier SEO/GEO Knowledge &middot; Agent-Powered Automation</span></p>
+
+  <p style="margin-top:28px;font-size:15px;color:var(--fg2)">扫下面的飞书问答二维码即可体验<br><span class="en" style="color:var(--fg3)">Twitter: <a href="https://x.com/WeiHackings">@WeiHackings</a></span></p>
+
+  <div class="hero-stats">
+    <div class="hero-stat"><div class="num en">33</div><div class="label">篇成品文档</div></div>
+    <div class="hero-stat"><div class="num en">600K+</div><div class="label">字结构化知识</div></div>
+    <div class="hero-stat"><div class="num en">7</div><div class="label">层知识架构</div></div>
+    <div class="hero-stat"><div class="num en">24/7</div><div class="label">AI 即时问答</div></div>
+  </div>
+
+  <div class="contact-bar">
+    <span>WeChat: <strong>WeHacking_Real</strong></span>
+    <span>Twitter: <a class="en" href="https://x.com/WeiHackings">@WeiHackings</a></span>
+  </div>
+
+  <div class="img-row" style="margin-top:32px">
+    <img src="assets/hackingseo-os1-presales/knowledge-entry.png" alt="知识库体验入口" style="max-width:220px;flex:none">
+    <img src="assets/hackingseo-os1-presales/wechat-qr.png" alt="微信二维码" style="max-width:220px;flex:none">
+  </div>
+</div>
+
+
+<!-- ═══════════ 01 POSITIONING ═══════════ -->
+<section>
+  <div class="section-label en">01 &mdash; Positioning</div>
+  <h2>产品定位</h2>
+  <p class="lead"><strong>这不是一套 SEO 教程，这是一个把前沿 / 边缘 / 深水区 SEO 知识和 AI Agent 自动化设施打包在一起的操作系统。</strong></p>
+
+  <div class="card-grid c3" style="margin-top:32px">
+    <div class="card">
+      <div class="card-tag en">Cross-Border E-Commerce</div>
+      <h4>外贸与跨境电商独立站</h4>
+      <p>Shopify / WooCommerce / 自建站的全栈 SEO 增长</p>
+    </div>
+    <div class="card">
+      <div class="card-tag en">AI &amp; SaaS Global</div>
+      <h4>AI 应用 / SaaS 出海</h4>
+      <p>在 Google AI Overviews、ChatGPT Search、Perplexity 等新渠道抢占品牌可见度</p>
+    </div>
+    <div class="card">
+      <div class="card-tag en">Brand Growth</div>
+      <h4>品牌全球化增长</h4>
+      <p>从 0 到 1 建立海外搜索流量体系与 AI 引用护城河</p>
+    </div>
+  </div>
+
+  <p style="margin-top:24px">它把 60 万字的前沿 / 边缘 / 实用 SEO &amp; GEO 知识做了结构化整合，同时提供 Agent 自动化 SEO 设施搭建能力，接入飞书知识库问答——<strong>你不需要懂 SEO，只需要带着业务问题来，AI 会把专业深度翻译成你能用的判断和行动。</strong></p>
+</section>
+
+
+<!-- ═══════════ 02 PROBLEMS ═══════════ -->
+<section>
+  <div class="section-label en">02 &mdash; Problems We Solve</div>
+  <h2>它解决什么问题</h2>
+  <p class="sub">不是"信息不够多"的问题，而是"不知道该信什么、该做什么、该先做什么"的问题。</p>
+
+  <div class="problem">
+    <div class="problem-header"><span class="problem-num en">01</span><h3>SEO 认知碎片化 &rarr; 无法形成体系</h3></div>
+    <div class="status"><h4 class="en">Current State</h4>
+      <ul><li>看了几十篇 SEO 文章，但不知道怎么串起来</li><li>团队各说各话——技术、内容、外链、AI 可见度各自为战</li><li>做了很多动作，但不知道哪些真正有用</li></ul>
+    </div>
+    <div class="solve"><h4 class="en">How We Fix It</h4>
+      <p>用「内容方法论 + AI 可见度体系 + 外链知识 + 行业指南 + 工具策略集 + 深水区方法论 + 行业情报」七条线，把 SEO 从碎片拼成完整地图。</p>
+    </div>
+  </div>
+
+  <div class="problem">
+    <div class="problem-header"><span class="problem-num en">02</span><h3>AI 搜索时代认知断层 &rarr; 旧打法失效</h3></div>
+    <div class="status"><h4 class="en">Current State</h4>
+      <ul><li>知道 AI Overviews / ChatGPT 搜索在改变流量格局，但不知道怎么应对</li><li>传统 SEO 指标和 AI 可见度指标之间的关系搞不清</li><li>GEO（生成引擎优化）到底该做什么，没有系统框架</li></ul>
+    </div>
+    <div class="solve"><h4 class="en">How We Fix It</h4>
+      <p>8 篇 AI 可见度 / GEO 专题文档，覆盖审计诊断、Source Gap 分析、YouTube mention 权重、AI 爬虫准入、GEO 攻防安全——从"AI 不提你是因为什么"到"怎么让 AI 开始提你"的完整链路。</p>
+    </div>
+  </div>
+
+  <div class="problem">
+    <div class="problem-header"><span class="problem-num en">03</span><h3>策略与执行割裂 &rarr; 知道但做不到</h3></div>
+    <div class="status"><h4 class="en">Current State</h4>
+      <ul><li>看完外链指南，不知道哪些方法适合自己</li><li>知道要做内容，但不知道一篇合格的 SEO 内容长什么样</li><li>想给品牌写策略，但产出质量不稳定</li></ul>
+    </div>
+    <div class="solve"><h4 class="en">How We Fix It</h4>
+      <p>10 万字内容生产方法论（含质检六刀速查表）、100 条策略速查表、品牌四线 SEO 策略生成规范、7 个真实增长案例拆解。</p>
+    </div>
+  </div>
+
+  <div class="problem">
+    <div class="problem-header"><span class="problem-num en">04</span><h3>深水区知识缺失 &rarr; 只会白帽基础</h3></div>
+    <div class="status"><h4 class="en">Current State</h4>
+      <ul><li>行业里真正管用的打法，主流博客不会写</li><li>竞对在用的方法你看不懂</li><li>灰帽手段到底怎么回事、风险多大，没有系统梳理</li></ul>
+    </div>
+    <div class="solve"><h4 class="en">How We Fix It</h4>
+      <p>系统收录灰帽方法论、深水信源池、高竞争垂直行业策略——不消毒、不回避。讲清原理、讲清风险、讲清边界。</p>
+    </div>
+  </div>
+
+  <div class="problem">
+    <div class="problem-header"><span class="problem-num en">05</span><h3>没有 SEO 团队 &rarr; 一个人扛不动</h3></div>
+    <div class="status"><h4 class="en">Current State</h4>
+      <ul><li>公司没有专职 SEO，老板自己看、自己猜</li><li>招不到靠谱的 SEO 人才</li><li>请了外包但不知道怎么判断质量</li></ul>
+    </div>
+    <div class="solve"><h4 class="en">How We Fix It</h4>
+      <p>接入飞书知识库问答后，它就是你的 24/7 SEO 顾问。你用业务语言提问，AI 从 60 万字知识中提取判断和方法。一个人也能拥有一个 SEO 部门的认知水平。</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════ 03 COMPARISON ═══════════ -->
+<section>
+  <div class="section-label en">03 &mdash; Why Different</div>
+  <h2>为什么这是一个"高级认知知识库"</h2>
+  <p class="sub">区别不是"内容多不多"，而是"认知密度高不高"。</p>
+
+  <table class="cmp-table">
+    <thead><tr><th>维度</th><th style="color:var(--fg3)">普通 SEO 课程 / 博客</th><th style="color:var(--fg)">HackingSEO_OS1</th></tr></thead>
+    <tbody>
+      <tr><td>信源</td><td>单一来源，通常带商业目的</td><td><strong>3~8 个独立信源</strong>交叉验证后入库</td></tr>
+      <tr><td>深度</td><td>白帽基础为主，回避争议</td><td>白帽 &rarr; 灰帽 &rarr; 深水区<strong>全光谱</strong></td></tr>
+      <tr><td class="en">AI Search</td><td>偶尔提一嘴</td><td><strong>8 篇 GEO 专题</strong> + 安全评估</td></tr>
+      <tr><td>时效性</td><td>发完就不管了</td><td><strong>周级更新</strong> + 季度重构 + 情报追踪</td></tr>
+      <tr><td>可用性</td><td>读完还是不会做</td><td>速查表 + 质检清单 + <strong>AI 问答</strong></td></tr>
+      <tr><td>门槛</td><td>需要 SEO 基础才能读懂</td><td><strong>零基础</strong>可用，AI 翻译专业深度</td></tr>
+    </tbody>
+  </table>
+</section>
+
+
+<!-- ═══════════ 04 ARCHITECTURE ═══════════ -->
+<section>
+  <div class="section-label en">04 &mdash; Architecture</div>
+  <h2>知识库架构 <span class="en" style="font-size:17px;color:var(--fg3);font-weight:400">7-Layer Knowledge Stack</span></h2>
+
+  <div class="layer-stack">
+    <div class="layer-item"><div class="layer-num en">1</div><div class="layer-body"><h4>内容生产方法论 <span class="en" style="font-weight:400;color:var(--fg3);font-size:14px">Content Methodology</span></h4><p>旗舰 10 万字 &middot; 页面九件套 &middot; 三维价值整合 &middot; 质检六刀</p></div></div>
+    <div class="layer-item"><div class="layer-num en">2</div><div class="layer-body"><h4>AI 可见度 / GEO 体系 <span class="en" style="font-weight:400;color:var(--fg3);font-size:14px">AI Visibility &amp; GEO</span></h4><p>8 篇专题 &middot; 审计诊断 &middot; Source Gap &middot; 攻防安全</p></div></div>
+    <div class="layer-item"><div class="layer-num en">3</div><div class="layer-body"><h4>外链建设知识 <span class="en" style="font-weight:400;color:var(--fg3);font-size:14px">Link Building</span></h4><p>白帽 &rarr; 灰帽全光谱 &middot; 资源手册 &middot; 优质目标清单</p></div></div>
+    <div class="layer-item"><div class="layer-num en">4</div><div class="layer-body"><h4>策略集 / 工具链 <span class="en" style="font-weight:400;color:var(--fg3);font-size:14px">Strategy &amp; Tools</span></h4><p>100 条策略速查 &middot; 工具目录 &middot; AISO/GEO 话术框架</p></div></div>
+    <div class="layer-item"><div class="layer-num en">5</div><div class="layer-body"><h4>垂直行业指南 <span class="en" style="font-weight:400;color:var(--fg3);font-size:14px">Vertical Playbooks</span></h4><p>跨境电商 &middot; 本地 SEO &middot; 亚洲市场 &middot; 技术审计 &middot; 7 个增长案例</p></div></div>
+    <div class="layer-item"><div class="layer-num en">6</div><div class="layer-body"><h4>深水区方法论 <span class="en" style="font-weight:400;color:var(--fg3);font-size:14px">Deep-Water Methods</span></h4><p>灰帽体系 &middot; 高竞争垂直行业策略 &middot; 另有专题仅限付费成员可见</p></div></div>
+    <div class="layer-item"><div class="layer-num en">7</div><div class="layer-body"><h4>行业情报 <span class="en" style="font-weight:400;color:var(--fg3);font-size:14px">Intelligence Feed</span></h4><p>周期更新 &middot; 专题分析 &middot; 算法信号追踪</p></div></div>
+  </div>
+</section>
+
+
+<!-- ═══════════ 05 ROLES ═══════════ -->
+<section>
+  <div class="section-label en">05 &mdash; Who Is It For</div>
+  <h2>适用角色</h2>
+  <p class="sub">不是只给 SEO 专家用的，恰恰相反——越不懂 SEO 的决策者，越需要它。</p>
+
+  <div class="role"><h4>跨境电商独立站操盘手 <span class="en" style="font-weight:400;color:var(--fg3)">DTC Operator</span></h4><p>从建站到外链到内容到 AI 可见度，需要全栈 SEO 知识支撑出海增长。</p><div class="example">「Shopify 独立站刚上线，SEO 从哪开始？」「外链预算有限，怎么分配最高效？」</div></div>
+  <div class="role"><h4>AI 应用 / SaaS 出海团队 <span class="en" style="font-weight:400;color:var(--fg3)">AI & SaaS Go-Global</span></h4><p>需要在 AI Overviews、ChatGPT Search 等新渠道建立品牌可见度。</p><div class="example">「ChatGPT 搜索里推荐竞对不推荐我，怎么破？」</div></div>
+  <div class="role"><h4>外贸企业主 / 品牌负责人 <span class="en" style="font-weight:400;color:var(--fg3)">Founder & Brand Lead</span></h4><p>不一定懂 SEO，但需要做出正确的 SEO 资源配置决策。</p><div class="example">「老板说要做 SEO，预算给多少合适？」</div></div>
+  <div class="role"><h4>增长 / 运营 / 内容团队 <span class="en" style="font-weight:400;color:var(--fg3)">Growth & Content</span></h4><p>需要 AI 可见度诊断、GEO 方法论、工具链选型、内容质检标准。</p><div class="example">「写了 50 篇文章没一篇有排名，问题出在哪？」</div></div>
+  <div class="role"><h4>SEO 从业者 <span class="en" style="font-weight:400;color:var(--fg3)">SEO Professional</span></h4><p>需要结构化的高级认知底座，包括主流博客不会写的深水区知识。</p><div class="example">「Parasite SEO 2026 年还能做吗？」「AI 搜索到底怎么选 source？」</div></div>
+</section>
+
+
+<!-- ═══════════ 06 PRINCIPLES ═══════════ -->
+<section>
+  <div class="section-label en">06 &mdash; Core Principles</div>
+  <h2>核心理念</h2>
+
+  <div class="principle"><div class="principle-letter en">A</div><div class="principle-body"><h4>SEO 必须从技巧驱动走向系统驱动</h4><p>本知识库把 SEO 拆成：<strong>底层逻辑 &rarr; 策略体系 &rarr; 执行路径 &rarr; 质检机制 &rarr; 迭代闭环</strong>。SEO 能力从个人手艺变成组织资产——人可以走，体系留下来。</p></div></div>
+  <div class="principle"><div class="principle-letter en">B</div><div class="principle-body"><h4>AI 搜索不是"SEO 的终结"，而是第二战场</h4><p>把传统 SEO 和 AI 可见度放在同一个框架里，不割裂、不对立：你需要同时做好"被搜索引擎排名"和"被 AI 引用"。</p></div></div>
+  <div class="principle"><div class="principle-letter en">C</div><div class="principle-body"><h4>深水区知识是信息平权，不是鼓励违规</h4><p>如实记录灰帽方法论、深水区打法——讲清原理、讲清风险、讲清边界。你拿到的是完整地图，不是被裁剪过的安全区。</p></div></div>
+</section>
+
+
+<!-- ═══════════ 07 HOW TO USE ═══════════ -->
+<section>
+  <div class="section-label en">07 &mdash; How It Works</div>
+  <h2>使用方式</h2>
+
+  <div class="card-grid c2" style="margin-top:28px">
+    <div class="card">
+      <div class="card-tag en">Recommended &middot; Zero Barrier</div>
+      <h4>飞书 AI 问答</h4>
+      <p>在飞书中直接向 AI 提问。33 篇文档、60 万字内容都是 AI 问答的知识底层。</p>
+      <ul style="font-size:14px;margin-top:12px">
+        <li>「我是做跨境电商的，外链该从哪开始建？」</li>
+        <li>「帮我做一个品牌的 AI 可见度诊断」</li>
+        <li>「竞对在 ChatGPT 搜索里排名比我高，问题出在哪？」</li>
+        <li>「外包团队给的 SEO 方案靠谱吗？帮我评估」</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-tag en">Deep Dive</div>
+      <h4>直接阅读文档</h4>
+      <p>按当前任务直接跳到对应模块：</p>
+      <ul style="font-size:14px;margin-top:12px">
+        <li><strong>SEO Strategy</strong> &rarr; 四线SEO策略生成技能</li>
+        <li><strong>Content</strong> &rarr; 内容生产的SEO焚决</li>
+        <li><strong>AI Visibility</strong> &rarr; AI可见度审计Playbook</li>
+        <li><strong>GEO</strong> &rarr; GEO完整指导手册</li>
+        <li><strong>Link Building</strong> &rarr; 外链建设知识体系</li>
+        <li><strong>Tools</strong> &rarr; SEO工具目录</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 左：飞书问答截图 / 右：文档阅读截图 -->
+  <div class="img-row" style="margin-top:32px">
+    <img src="assets/hackingseo-os1-presales/feishu-ai-ui.png" alt="飞书 AI 问答界面" style="max-width:48%;flex:none">
+    <img src="assets/hackingseo-os1-presales/document-reading.png" alt="文档阅读界面" style="max-width:48%;flex:none">
+  </div>
+</section>
+
+
+<!-- ═══════════ 08 CONTENTS ═══════════ -->
+<section>
+  <div class="section-label en">08 &mdash; Full Document Index</div>
+  <h2>知识库内容一览 <span class="en" style="font-size:17px;color:var(--fg3);font-weight:400">33 Documents &middot; 600K+ Words</span></h2>
+
+  <!-- 知识库全资料目录截图 -->
+  <div class="img-center" style="margin-top:24px;margin-bottom:32px">
+    <img src="assets/hackingseo-os1-presales/knowledge-map-3d.png" alt="知识库全资料目录" style="max-width:600px">
+  </div>
+
+  <h3 style="margin-top:28px"><span class="en" style="color:var(--fg3);font-size:14px;font-weight:400">Layer 1 &mdash;</span> 内容生产方法论</h3>
+  <table class="doc-table">
+    <thead><tr><th>文档</th><th>一句话</th></tr></thead>
+    <tbody><tr><td>内容生产的SEO焚决</td><td><strong>旗舰文档</strong>（10 万字）。页面九件套、信息增益、三维价值整合、站内架构、质检六刀。十章 + 三附录</td></tr></tbody>
+  </table>
+
+  <h3 style="margin-top:28px"><span class="en" style="color:var(--fg3);font-size:14px;font-weight:400">Layer 2 &mdash;</span> AI 可见度 / GEO 体系</h3>
+  <table class="doc-table">
+    <thead><tr><th>文档</th><th>一句话</th></tr></thead>
+    <tbody>
+      <tr><td>GEO完整指导手册</td><td>从传统 SEO 到生成引擎优化的完整过渡框架</td></tr>
+      <tr><td>AI可见度实战指南</td><td>GEO 实战精简版，整合多来源研究</td></tr>
+      <tr><td>AI可见度审计Playbook</td><td>给品牌做 AI 可见度体检的标准流程</td></tr>
+      <tr><td>AI引用Source Gap Playbook</td><td>找出竞对进了哪些 source set 而你没有</td></tr>
+      <tr><td>AI爬虫准入与索引诊断</td><td>AI 不提你，是内容差还是 crawler 进不来？</td></tr>
+      <tr><td>AI YouTube Mentions Playbook</td><td>YouTube 在 AI 可见度中的权重与积累方法</td></tr>
+      <tr><td>AI搜索算法基础</td><td>经典论文汇编，理解 AI 搜索的技术根基</td></tr>
+      <tr><td>AI时代SEO战术卡片</td><td>可直接执行的战术级动作清单</td></tr>
+      <tr><td>GEO攻防安全完整指导</td><td>RAG poisoning / source poisoning 的攻击面与防守控制点</td></tr>
+    </tbody>
+  </table>
+
+  <h3 style="margin-top:28px"><span class="en" style="color:var(--fg3);font-size:14px;font-weight:400">Layer 3 &mdash;</span> 外链建设知识</h3>
+  <table class="doc-table">
+    <thead><tr><th>文档</th><th>一句话</th></tr></thead>
+    <tbody>
+      <tr><td>外链建设知识体系</td><td>从基础到高阶的完整外链方法论</td></tr>
+      <tr><td>创意链接建设</td><td>社区验证过的白帽到灰帽全光谱玩法</td></tr>
+      <tr><td>优质外链目标清单</td><td>12 种外链目标类型与优先级判断</td></tr>
+      <tr><td>外链资源手册v3</td><td>按 niche 分类的信源图谱与供应商评估</td></tr>
+    </tbody>
+  </table>
+
+  <h3 style="margin-top:28px"><span class="en" style="color:var(--fg3);font-size:14px;font-weight:400">Layer 4 &mdash;</span> 策略集 / 工具链</h3>
+  <table class="doc-table">
+    <thead><tr><th>文档</th><th>一句话</th></tr></thead>
+    <tbody>
+      <tr><td>SEO策略100条</td><td>按类别、成本、风险标注的策略速查表</td></tr>
+      <tr><td>SEO工具目录（+ 补充）</td><td>去重并类后的完整工具清单</td></tr>
+      <tr><td>Agency级AISO/GEO话术框架</td><td>AI SEO 商业化表达参考</td></tr>
+      <tr><td>IMGlory SEO工具包</td><td>免费工具包，按外链建设流程整理</td></tr>
+    </tbody>
+  </table>
+
+  <h3 style="margin-top:28px"><span class="en" style="color:var(--fg3);font-size:14px;font-weight:400">Layer 5 &mdash;</span> 垂直行业指南</h3>
+  <table class="doc-table">
+    <thead><tr><th>文档</th><th>一句话</th></tr></thead>
+    <tbody>
+      <tr><td>跨境电商SEO实战</td><td>Shopify / WooCommerce / 独立站落地打法</td></tr>
+      <tr><td>Local SEO Citation建设指南</td><td>GBP 优化、Citation 体系、本地排名因素</td></tr>
+      <tr><td>亚洲市场SEO策略指南</td><td>泰国、印尼、韩国市场本地化策略</td></tr>
+      <tr><td>技术SEO审计指南</td><td>按优先级分层的完整审计框架</td></tr>
+      <tr><td>7个网站SEO增长案例</td><td>真实增长深度拆解（品牌匿名版）</td></tr>
+    </tbody>
+  </table>
+
+  <h3 style="margin-top:28px"><span class="en" style="color:var(--fg3);font-size:14px;font-weight:400">Layer 6 &mdash;</span> 深水区方法论</h3>
+  <table class="doc-table">
+    <thead><tr><th>文档</th><th>一句话</th></tr></thead>
+    <tbody>
+      <tr><td>灰帽SEO方法论体系</td><td>系统化知识图谱，理解边界与风险</td></tr>
+      <tr><td class="doc-restricted" colspan="2" style="font-weight:400">另有深水区专题文档，涉及高竞争垂直行业策略与外部信源池，内容敏感度较高，不在此公开展示。加入知识库后可完整访问。</td></tr>
+    </tbody>
+  </table>
+
+  <h3 style="margin-top:28px"><span class="en" style="color:var(--fg3);font-size:14px;font-weight:400">Layer 7 &mdash;</span> 行业情报</h3>
+  <table class="doc-table">
+    <thead><tr><th>文档</th><th>一句话</th></tr></thead>
+    <tbody>
+      <tr><td>260401情报</td><td>平台门槛抬升、模板化压缩、同源污染趋势</td></tr>
+      <tr><td>260401-Reddit专题</td><td>Reddit 2026 春季为什么变得更值钱也更难做</td></tr>
+      <tr><td>索引加速指南</td><td>Crawled-not-indexed 诊断与加速方法</td></tr>
+    </tbody>
+  </table>
+</section>
+
+
+<!-- ═══════════ 09 UPDATES ═══════════ -->
+<section>
+  <div class="section-label en">09 &mdash; Update Cycle</div>
+  <h2>更新机制</h2>
+  <p class="sub">HackingSEO_OS1 不是静态文档集，而是一套持续进化的前沿知识 + 自动化设施。</p>
+
+  <div class="card-grid c2" style="margin-top:24px">
+    <div class="card"><div class="card-tag en">Weekly</div><h4>持续更新</h4><ul><li>新的 AI 搜索 / GEO 研究发现</li><li>新增工具评估与策略补充</li><li>算法变化与平台政策信号</li><li>深水区方法论的最新动向</li></ul></div>
+    <div class="card"><div class="card-tag en">Bi-weekly ~ Monthly</div><h4>周期情报</h4><ul><li>跨平台 SEO 信号汇总</li><li>专题深度分析</li><li>竞争格局变动</li></ul></div>
+    <div class="card"><div class="card-tag en">Quarterly</div><h4>季度级重构</h4><ul><li>评估新主题簇是否需独立成文</li><li>已有文档合并或重构</li><li>策略因算法变化修订</li></ul></div>
+    <div class="card"><div class="card-tag en">Source-Driven</div><h4>信源驱动扩展</h4><ul><li>深钻深水区信源：BlackHatWorld、BBHF、从业者社区实战讨论</li><li>顶级研究机构持续追踪：Ahrefs、Semrush、iPullRank、Papers We Love</li><li>每篇入库文档经 3~8 个独立信源交叉验证，去营销水分只留硬判断</li><li>学术论文 + arXiv 前沿研究 + 竞品架构拆解</li></ul></div>
+  </div>
+</section>
+
+
+<!-- ═══════════ 10 FAQ ═══════════ -->
+<section>
+  <div class="section-label en">10 &mdash; FAQ</div>
+  <h2>常见问题</h2>
+
+  <div class="faq-item"><div class="faq-q">这个知识库和 SEO 博客文章有什么区别？</div><div class="faq-a">博客文章是单篇、单视角、往往有商业导向的内容。知识库是多来源交叉验证后的结构化知识体系。一篇成品文档通常整合了 3~8 个独立信源的研究与实战经验，去掉了营销水分，只保留可执行的判断和方法。</div></div>
+  <div class="faq-item"><div class="faq-q">和买 SEO 课程相比呢？</div><div class="faq-a">课程是一次性交付，讲完就结束。知识库是持续更新的——算法变了、平台变了、AI 搜索演进了，知识库跟着变。而且知识库接入 AI 问答后，完全不懂 SEO 的人也能直接获取可执行建议。</div></div>
+  <div class="faq-item"><div class="faq-q">和请一个 SEO 顾问相比呢？</div><div class="faq-a">顾问按小时收费，一个月几次沟通。知识库是 24/7 在线的，随时问随时答，而且背后是 60 万字的结构化知识——比单个顾问的知识面更宽。</div></div>
+  <div class="faq-item"><div class="faq-q">知识库适合完全不懂 SEO 的人吗？</div><div class="faq-a">这正是接入飞书问答的核心价值。直接用业务语言提问，AI 会从 60 万字知识中找到对应的判断和方法，翻译成你能理解的建议。</div></div>
+  <div class="faq-item"><div class="faq-q">深水区内容会不会让我踩坑？</div><div class="faq-a">深水区内容的写作原则是：讲清原理、讲清风险、讲清边界。不是鼓励使用，而是让你拥有完整的行业认知。不知道规则的人才最容易踩坑。</div></div>
+  <div class="faq-item"><div class="faq-q">内容会过时吗？</div><div class="faq-a">SEO 底层逻辑（信息增益、E-E-A-T、Source Set 共识）相对稳定。工具推荐、平台策略、算法细节通过周级更新机制保持时效性。</div></div>
+</section>
+
+
+<!-- ═══════════ 11 STATS ═══════════ -->
+<section>
+  <div class="section-label en">11 &mdash; By the Numbers</div>
+  <h2>知识库统计</h2>
+
+  <div class="stats-row">
+    <div class="stat-card"><div class="num en">33</div><div class="label">Documents</div></div>
+    <div class="stat-card"><div class="num en">600K+</div><div class="label">Chinese Characters</div></div>
+    <div class="stat-card"><div class="num en">7</div><div class="label">Knowledge Layers</div></div>
+  </div>
+
+  <table class="doc-table" style="margin-top:24px">
+    <tbody>
+      <tr><td class="en">Sources</td><td>Ahrefs, Semrush, iPullRank, Primary Position, Marketer Milk, Delante, Papers We Love, etc.</td></tr>
+      <tr><td class="en">Coverage</td><td>Content SEO / Technical SEO / Link Building / AI Visibility / GEO / Agent Automation / Cross-Border E-Commerce / SaaS / Asian Markets / Local SEO / Deep-Water Methods / Security</td></tr>
+      <tr><td class="en">Last Updated</td><td>2026-04-07</td></tr>
+      <tr><td class="en">Update Cycle</td><td>Weekly continuous + Quarterly restructure</td></tr>
+    </tbody>
+  </table>
+</section>
+
+
+<!-- ═══════════ 12 ROADMAP ═══════════ -->
+<section>
+  <div class="section-label en">12 &mdash; Product Roadmap</div>
+  <h2>产品愿景</h2>
+  <p class="lead"><strong>让每一家出海企业，都拥有前沿 SEO 认知 + Agent 级自动化设施。</strong></p>
+
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-dot" style="background:var(--accent)"></div>
+      <div class="tl-badge now en">Phase 1 &mdash; Now</div>
+      <h4>提高认知 <span class="en" style="font-weight:400;color:var(--fg3)">Cognitive Upgrade</span></h4>
+      <p>前沿 / 边缘 / 实用知识库 + 飞书 AI 问答。用 33 篇文档、60 万字结构化知识帮你建立完整的 SEO &amp; GEO 认知框架，让判断有依据、决策有体系。</p>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot" style="background:var(--fg3)"></div>
+      <div class="tl-badge en">Phase 2 &mdash; Building</div>
+      <h4>SEO 自动化实践 <span class="en" style="font-weight:400;color:var(--fg3)">Automation Practice</span></h4>
+      <p>教你根据知识库做 SEO 自动化实践。策略自动生成、批量内容生产、外链半自动化等 Agent 驱动的执行设施——从"知道"到"做到"再到"自动做到"。</p>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot" style="background:var(--border)"></div>
+      <div class="tl-badge en">Phase 3 &mdash; Planned</div>
+      <h4>全链路 Agents 治理 <span class="en" style="font-weight:400;color:var(--fg3)">Multi-Agent Governance</span></h4>
+      <p>教你搭建 24/7 运行的全链路 SEO Agents 操作入口。Agent 部门分工协作、监控 &rarr; 诊断 &rarr; 策略 &rarr; 内容 &rarr; 外链 &rarr; 数据回收的闭环编排与质量控制。</p>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot" style="background:var(--border)"></div>
+      <div class="tl-badge en">Phase 4 &mdash; Vision</div>
+      <h4 class="en">HackingSEO_OS2 <span style="font-weight:400;color:var(--fg3)">Autonomous Growth</span></h4>
+      <p>记忆自进化、深度信源检索、自适应策略制定——Agents 从信源检索到策略到内容发布的全方位增长自治。多品牌、多站点、多语种。</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════ 13 PLANS ═══════════ -->
+<section>
+  <div class="section-label en">13 &mdash; Plans</div>
+  <h2>套餐</h2>
+  <p class="sub">三种模式，按需选择。</p>
+
+  <div class="pricing-grid">
+    <div class="price-card">
+      <div class="card-tag en">Essentials</div>
+      <h4>认知入门</h4>
+      <p style="margin-bottom:20px;flex:none">适合有执行能力、缺认知体系的团队或个人。</p>
+      <ul><li>完整知识库访问（33 篇 + 持续更新）</li><li>飞书 AI 问答无限使用</li><li>知识库讨论社群永久加入</li><li>周级更新 + 季度重构</li></ul>
+    </div>
+    <div class="price-card">
+      <div class="card-tag en">Launchpad</div>
+      <h4>冷启动诊断</h4>
+      <p style="margin-bottom:20px;flex:none">刚起步出海、不知道 SEO 从哪开始，先做一次专业诊断。</p>
+      <ul><li>网站诊断 / SEO 策略 / 产品增长咨询 <strong>1 小时</strong></li><li>针对你的品牌给出优先级最高的 3 个 SEO 动作</li><li>完整知识库 + AI 问答 + 社群</li></ul>
+    </div>
+    <div class="price-card">
+      <div class="card-tag en">Growth Partner</div>
+      <h4>增长合伙</h4>
+      <p style="margin-bottom:20px;flex:none">需要持续增长、有长期 SEO 投入意愿的企业。</p>
+      <ul><li>前 3 个月增长顾问一对一陪跑</li><li>定制批量 Google / Bing 高权重引流 Blog</li><li>月度排名复盘 + 策略调优</li><li>完整知识库 + AI 问答 + 社群</li></ul>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════ 14 EARLY BIRD ═══════════ -->
+<section>
+  <div class="section-label en">14 &mdash; Early Bird Pricing</div>
+  <h2>早鸟价</h2>
+  <p class="sub">首月限定（2026.04.01 &mdash; 04.30），过后恢复原价。先加微信 <strong>WeHacking_Real</strong> 咨询。</p>
+
+  <div class="pricing-grid" style="margin-top:32px">
+    <div class="price-card">
+      <div class="card-tag en">Essentials</div>
+      <h4>认知入门</h4>
+      <div class="price-tag-label en">Early Bird</div>
+      <div class="price-tag en">&yen;299</div>
+      <div class="price-original">&yen;499</div>
+      <p>知识库订阅 + 讨论社群<br><strong>永久兑换码</strong></p>
+    </div>
+    <div class="price-card">
+      <div class="card-tag en">Launchpad</div>
+      <h4>冷启动诊断</h4>
+      <div class="price-tag-label en">Early Bird</div>
+      <div class="price-tag en">&yen;699</div>
+      <div class="price-original">&yen;999</div>
+      <p>1h 诊断咨询 + 知识库 + 社群</p>
+    </div>
+    <div class="price-card">
+      <div class="card-tag en">Growth Partner</div>
+      <h4>增长合伙</h4>
+      <div class="price-tag-label en">Early Bird</div>
+      <div class="price-tag en">&yen;19,999</div>
+      <div class="price-original">&yen;24,999</div>
+      <p>3 个月顾问陪跑 + 定制引流 Blog + 全套</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════ 15 CLOSING ═══════════ -->
+<section style="text-align:center;border-bottom:none;padding-bottom:32px">
+  <h2 style="font-size:28px;margin-bottom:16px">最后一句话</h2>
+  <p style="font-size:19px;max-width:600px;margin:0 auto;color:var(--fg2)">
+    这个知识库的目标不是让你变成 SEO 专家。<br><br>
+    它的目标是让你<strong>在不成为专家的前提下，拿到前沿认知 + Agent 级自动化设施</strong>。<br><br>
+    <span class="en" style="font-size:16px;color:var(--fg3)">You don't need three years of SEO training. You just need to bring your business questions.</span>
+  </p>
+  <p style="font-size:19px;font-weight:600;margin-top:24px">你不需要花三年时间学 SEO。你只需要带着业务问题来。</p>
+
+  <p style="font-size:17px;margin-top:28px;color:var(--fg2)">WeChat: <strong>WeHacking_Real</strong></p>
+  <p style="font-size:14px;margin-top:8px;color:var(--fg3)"><span class="en">Twitter: <a href="https://x.com/WeiHackings">@WeiHackings</a></span></p>
+</section>
+
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<div class="footer en">
+  <p style="margin-top:4px">WeChat: WeHacking_Real &middot; Twitter: <a href="https://x.com/WeiHackings">@WeiHackings</a></p>
+</div>
+
+</div>
+</body>
+</html>

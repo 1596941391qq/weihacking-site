@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>leewow.com | SEO 审计与四线策略</title>
+<style>
+  :root{
+    --bg:#f4efe7;
+    --paper:#fcfaf6;
+    --panel:#fffdfa;
+    --line:#ddd2c2;
+    --line-strong:#cdbca4;
+    --ink:#1f2a35;
+    --muted:#65717c;
+    --soft:#8d826f;
+    --accent:#315f68;
+    --accent-soft:#edf4f4;
+    --gold:#9c6a3e;
+    --gold-soft:#f6ede4;
+    --good:#2f6d52;
+    --warn:#b26b2a;
+    --bad:#b64b3d;
+    --shadow:0 20px 48px rgba(31,42,53,.08);
+    --radius:22px;
+    --max:1440px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    background:
+      radial-gradient(circle at top left, rgba(156,106,62,.08), transparent 24%),
+      radial-gradient(circle at top right, rgba(49,95,104,.08), transparent 28%),
+      var(--bg);
+    color:var(--ink);
+    line-height:1.8;
+    font-size:16px;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:var(--accent);text-decoration:none}
+  a:hover{text-decoration:underline}
+  .shell{max-width:var(--max);margin:0 auto;padding:24px}
+  .layout{display:grid;grid-template-columns:300px minmax(0,1fr);gap:24px;align-items:start}
+  .rail{
+    position:sticky;top:18px;
+    background:rgba(255,253,249,.84);
+    border:1px solid rgba(221,210,194,.92);
+    border-radius:28px;
+    padding:26px 24px;
+    box-shadow:var(--shadow);
+    backdrop-filter:blur(18px);
+  }
+  .rail h2{
+    font-family:Georgia,"Times New Roman",serif;
+    font-size:32px;
+    line-height:1.02;
+    letter-spacing:-.04em;
+    font-weight:500;
+    margin-bottom:10px;
+  }
+  .rail p{font-size:13px;color:var(--soft);margin-bottom:18px}
+  .rail nav a{
+    display:block;
+    padding:8px 0;
+    color:var(--muted);
+    border-bottom:1px solid rgba(221,210,194,.72);
+    font-size:14px;
+  }
+  .rail nav a:last-child{border-bottom:none}
+  .page{
+    background:var(--paper);
+    border:1px solid rgba(221,210,194,.95);
+    border-radius:32px;
+    box-shadow:var(--shadow);
+    overflow:hidden;
+  }
+  .hero{
+    padding:48px 52px 40px;
+    border-bottom:1px solid var(--line);
+    background:
+      radial-gradient(circle at top right, rgba(156,106,62,.11), transparent 26%),
+      radial-gradient(circle at top left, rgba(49,95,104,.11), transparent 32%),
+      linear-gradient(180deg, rgba(255,255,255,.95), rgba(252,250,246,.98));
+  }
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;padding:7px 12px;border-radius:999px;
+    border:1px solid rgba(156,106,62,.18);background:rgba(156,106,62,.08);color:var(--gold);
+    font-size:12px;text-transform:uppercase;letter-spacing:.08em;margin-bottom:18px;
+  }
+  h1{font-family:Georgia,"Times New Roman",serif;font-size:58px;line-height:1.02;letter-spacing:-.05em;font-weight:500;max-width:860px}
+  .lead{max-width:920px;margin-top:18px;font-size:20px;line-height:1.65;color:#44505b}
+  .hero-grid{display:grid;grid-template-columns:1.25fr .95fr;gap:18px;margin-top:28px}
+  .hero-card,.hero-note{border:1px solid rgba(221,210,194,.86);border-radius:20px;background:rgba(255,255,255,.82);padding:20px 22px}
+  .mini{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--soft);margin-bottom:10px}
+  .meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+  .pill{padding:7px 12px;border-radius:999px;border:1px solid rgba(221,210,194,.95);background:rgba(255,255,255,.8);font-size:13px;color:var(--muted)}
+  section{padding:36px 52px;border-bottom:1px solid var(--line)}
+  section:last-child{border-bottom:none}
+  .label{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--gold);margin-bottom:10px}
+  h2{font-family:Georgia,"Times New Roman",serif;font-size:36px;line-height:1.08;letter-spacing:-.035em;font-weight:500;margin-bottom:16px}
+  h3{font-size:20px;line-height:1.38;font-weight:600;margin-bottom:10px}
+  p+p{margin-top:14px}
+  .statement{font-size:24px;line-height:1.55;color:#33414d;max-width:980px}
+  .grid-2,.grid-3{display:grid;gap:16px}
+  .grid-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px;box-shadow:0 10px 26px rgba(31,42,53,.04)}
+  .box{padding:24px;border:1px solid var(--line);border-radius:24px;background:linear-gradient(180deg,rgba(255,255,255,.95),rgba(255,252,248,.97))}
+  .issue{display:grid;grid-template-columns:110px 1fr;gap:18px;padding:18px 0;border-bottom:1px solid rgba(221,210,194,.78)}
+  .issue:last-child{border-bottom:none}
+  .sev{font-size:12px;color:var(--soft);text-transform:uppercase;letter-spacing:.08em}
+  .sev strong{display:block;margin-top:4px;font-size:20px;text-transform:none;letter-spacing:-.02em}
+  table{width:100%;border-collapse:collapse;font-size:14px}
+  th,td{text-align:left;vertical-align:top;padding:14px 12px;border-bottom:1px solid rgba(221,210,194,.84)}
+  th{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--soft);font-weight:600}
+  .quote{margin-top:14px;padding:14px 16px;border-radius:16px;background:var(--gold-soft);border:1px solid rgba(156,106,62,.16);color:#5d4a3d;font-size:14px}
+  .audit-meta{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0 20px}
+  .audit-pill{padding:7px 12px;border-radius:999px;background:var(--accent-soft);border:1px solid rgba(49,95,104,.14);color:var(--accent);font-size:13px}
+  .audit-note{margin-top:14px;font-size:14px;color:var(--muted)}
+  .table-wrap{margin-top:18px;border:1px solid var(--line);border-radius:24px;overflow:hidden;background:rgba(255,255,255,.76)}
+  .audit-ledger{font-size:13px;line-height:1.65}
+  .audit-ledger th{position:sticky;top:0;z-index:1;background:#f5f0e8}
+  .audit-ledger td{background:rgba(255,253,249,.95)}
+  .audit-ledger td:nth-child(1){width:72px;color:var(--soft);font-variant-numeric:tabular-nums}
+  .module-sep td{background:#f3eadb;color:var(--gold);font-weight:700;letter-spacing:.03em}
+  .status-good{color:var(--good)}
+  .status-warn{color:var(--warn)}
+  .status-bad{color:var(--bad)}
+  .status-muted{color:var(--muted)}
+  .line-block{padding:26px;border:1px solid var(--line);border-radius:24px;background:linear-gradient(180deg,rgba(255,255,255,.96),rgba(255,252,248,.98))}
+  .line-head{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;margin-bottom:12px}
+  .line-num{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--gold);margin-bottom:5px}
+  .tag{flex-shrink:0;padding:8px 12px;border-radius:999px;font-size:12px;color:var(--accent);background:var(--accent-soft);border:1px solid rgba(49,95,104,.14)}
+  .cols{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:18px}
+  .road{display:grid;grid-template-columns:120px 1fr;gap:20px;padding:18px 0;border-bottom:1px solid rgba(221,210,194,.82)}
+  .road:last-child{border-bottom:none}
+  .phase{font-size:14px;color:var(--gold);font-weight:600}
+  .footer-note{font-size:13px;color:var(--soft);margin-top:18px}
+  @media (max-width:1160px){.layout{grid-template-columns:1fr}.rail{position:static}.hero-grid,.grid-2,.grid-3,.cols{grid-template-columns:1fr}}
+  @media (max-width:780px){.shell{padding:14px}.hero,section{padding:24px 20px}h1{font-size:42px}.lead{font-size:18px}.issue,.road{grid-template-columns:1fr}.line-head{display:block}.tag{display:inline-block;margin-top:10px}}
+</style>
+</head>
+<body>
+<div class="shell">
+  <div class="layout">
+    <aside class="rail">
+      <h2>leewow.com</h2>
+      <p>客户版 SEO 审计与四线策略，围绕首页 SPA 重建、内容体系、产品页深化与站外放大展开。</p>
+      <nav>
+        <a href="#summary">执行摘要</a>
+        <a href="#scores">评分与原因</a>
+        <a href="#issues">关键问题</a>
+        <a href="#audit">全面审计</a>
+        <a href="#fixlist">优先修复</a>
+        <a href="#line1">第一条线</a>
+        <a href="#line2">第二条线</a>
+        <a href="#line3">第三条线</a>
+        <a href="#line4">第四条线</a>
+        <a href="#keywords">关键词分级</a>
+        <a href="#roadmap">执行路线图</a>
+        <a href="#growth">内容增长与转化</a>
+      </nav>
+    </aside>
+
+    <main class="page">
+      <header class="hero">
+        <div class="eyebrow">SEO Audit / Four-Line Strategy</div>
+        <h1>leewow.com SEO 审计与四线策略</h1>
+        <p class="lead">这份审计先拆开 leewow.com 的双架构问题——首页是纯 SPA 空壳，产品页是静态 HTML 但内容极薄——再给出一套从首页重建、内容体系、技术治理到站外建设的完整路线。</p>
+        <div class="hero-grid">
+          <div class="hero-card">
+            <div class="mini">核心判断</div>
+            <p>Leewow 的产品页做得比首页好很多：有静态 HTML、有 Schema、有 H1/H2 结构。但首页是一个纯 JS 空壳（10.5KB，0 个链接，0 张图片），Google 爬到的首页只有 meta 标签和一个 loading 动画。站点有 6 种语言的 URL 入口但全指向同一个 canonical，国际化是假的。Sitemap 只有 4 个 URL。内容体系几乎为零。</p>
+            <div class="meta">
+              <span class="pill">审计日期：2026-04-21（工具实测版）</span>
+              <span class="pill">技术栈：首页 SPA (React/Vue) + 产品页静态 HTML + nginx/1.26.3</span>
+              <span class="pill">站点类型：AI 产品创造平台（DTC）</span>
+              <span class="pill">Sitemap：4 URL（首页 + 产品页 + 隐私 + 条款）</span>
+            </div>
+          </div>
+          <div class="hero-note">
+            <div class="mini">一句话结论</div>
+            <p>综合评分 42/100。最致命的不是产品页做得差，是首页对 Google 来说基本不存在。一个 10.5KB 的 SPA 空壳带着 4 个 URL 的 sitemap，在 Google 眼里这不是一个网站，是一个着陆页。</p>
+            <div class="quote">Leewow 的产品差异点非常强——"AI Shopify for the Physical World"。但这个差异点还没有长成搜索资产。没有对比页、没有教程、没有博客、没有错误码排查。搜索引擎和用户都看不到这个产品的厚度。</div>
+          </div>
+        </div>
+      </header>
+
+      <section id="summary">
+        <div class="label">Executive Summary</div>
+        <h2>执行摘要</h2>
+        <p class="statement">Leewow 处在一个有意思的矛盾里：产品页的技术 SEO 做得相当好——静态 HTML、SoftwareApplication Schema、H1/H2 结构完整。但首页是一个纯 SPA 空壳，Google 爬到的只有 meta 标签和 loading 动画。更关键的是，站点只有 4 个 URL 在 sitemap 里，内容体系完全空白，没有博客、没有对比页、没有教程。国际化有 6 种语言的 URL 入口（/en /zh /ja /es /fr /de），但全部指向同一个 canonical，对 Google 来说是重复内容而不是多语言。</p>
+        <div class="grid-2" style="margin-top:18px">
+          <div class="card">
+            <div class="mini">已经具备的基础</div>
+            <p>HTTP 正确跳 HTTPS，www 正确跳 non-www，产品页有 Schema 和良好的 H1/H2 结构，OG 标签完整，产品页 TTFB 0.35s 极快。Strict-Transport-Security 已启用。</p>
+          </div>
+          <div class="card">
+            <div class="mini">真正拖后腿的地方</div>
+            <p>首页是 SPA 空壳（0 个链接、0 张图片）。Sitemap 只有 4 URL。国际化有 URL 入口但 canonical 全部指向英文根域（重复内容）。没有博客生态、没有竞品对比页、没有教程、没有内容角色分工。站外证据层为零。</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="scores">
+        <div class="label">Scorecard</div>
+        <h2>评分与原因</h2>
+        <div class="box">
+          <table>
+            <tr><th>维度</th><th>分数</th><th>判断</th><th>原因</th></tr>
+            <tr>
+              <td><strong>整体可见性</strong></td>
+              <td class="status-bad">25</td>
+              <td>Sitemap 只有 4 URL，首页对 Google 基本不可见。</td>
+              <td>首页是 SPA 空壳，Google 爬不到任何链接和内容。只有 1 个产品页在 sitemap 里。没有内容体系。</td>
+            </tr>
+            <tr>
+              <td><strong>技术底盘</strong></td>
+              <td class="status-warn">58</td>
+              <td>产品页技术 SEO 做得好，但首页是致命短板。</td>
+              <td>HTTP→HTTPS 正确，www 归一正确，产品页 Schema 完整，TTFB 0.35s。但首页是 SPA 空壳（1.39s TTFB + JS 渲染），国际化 canonical 全部指向同一 URL。</td>
+            </tr>
+            <tr>
+              <td><strong>国际化</strong></td>
+              <td class="status-bad">20</td>
+              <td>有 URL 入口但实质是重复内容。</td>
+              <td>/en /zh /ja /es /fr /de 全部返回 200，但 canonical 全部指向 https://leewow.com/，无 hreflang。Google 会当作同一页面的 6 个重复 URL。</td>
+            </tr>
+            <tr>
+              <td><strong>内容权威</strong></td>
+              <td class="status-bad">18</td>
+              <td>只有 1 个产品页和 2 个法律页面。</td>
+              <td>没有博客、没有对比页、没有教程、没有 FAQ、没有错误码排查。产品页内容有厚度但数量只有 1。内容体系完全空白。</td>
+            </tr>
+            <tr>
+              <td><strong>转化就绪度</strong></td>
+              <td class="status-warn">45</td>
+              <td>产品页有说服力，但整体转化路径太短。</td>
+              <td>产品页有 CTA（"Start Creating"），有清晰的流程说明和对比表。但缺少定价页深度、用户评价、案例展示、信任信号。大量路径（/shop /products /catalog /docs /faq /api）返回 200 但内容未确认。</td>
+            </tr>
+          </table>
+        </div>
+      </section>
+
+      <section id="issues">
+        <div class="label">Priority Findings</div>
+        <h2>关键问题</h2>
+        <div class="box">
+          <div class="issue">
+            <div class="sev status-bad">P0<strong>首页空壳</strong></div>
+            <div>
+              <h3>首页是纯 SPA，Google 爬到的只有 meta 标签和 loading 动画</h3>
+              <p>10.5KB 的 HTML 里，0 个链接、0 张图片。body 里只有 loading grid dots 和一个空的 <code>&lt;div id="root"&gt;</code>。Google 不执行 JavaScript，爬到的首页就是一个带 meta 的空页。这意味着首页无法向任何子页面传递权重，也无法自己排名任何关键词。</p>
+            </div>
+          </div>
+          <div class="issue">
+            <div class="sev status-bad">P0<strong>Sitemap 极度稀疏</strong></div>
+            <div>
+              <h3>整个站点只有 4 个 URL 在 sitemap 里</h3>
+              <p>首页、1 个产品页、隐私政策、服务条款。大量返回 200 的路径（/shop、/products、/catalog、/docs、/faq、/api、/pricing、/contact）都没有进入 sitemap。Google 只能通过自己爬取发现这些页面，效率极低。</p>
+            </div>
+          </div>
+          <div class="issue">
+            <div class="sev status-bad">P0<strong>国际化重复内容</strong></div>
+            <div>
+              <h3>6 种语言 URL 全部指向同一个 canonical，Google 会当作重复内容</h3>
+              <p>/en、/zh、/ja、/es、/fr、/de 都返回 200，但 canonical 全部指向 https://leewow.com/，没有 hreflang。Google 的处理方式是把它们合并成一个页面，多语言入口完全失效。</p>
+            </div>
+          </div>
+          <div class="issue">
+            <div class="sev status-warn">P1<strong>内容空白</strong></div>
+            <div>
+              <h3>没有博客、没有对比页、没有教程，内容体系完全空白</h3>
+              <p>Leewow 的核心竞品（Printful、Printify、Redbubble）都有数百到数千页内容。Leewow 连 1 篇博客文章都没有。竞品品牌词（"Printful alternative"、"cheaper than Printify"）的截流完全空白。</p>
+            </div>
+          </div>
+          <div class="issue">
+            <div class="sev status-warn">P1<strong>首页 TTFB 过高</strong></div>
+            <div>
+              <h3>首页 TTFB 1.39s，而产品页只有 0.35s</h3>
+              <p>首页是 SPA 需要 JS 启动，TTFB 是产品页的 4 倍。如果首页改造成静态 HTML 或 SSR，TTFB 可以降到 0.4s 以内。</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="audit">
+        <div class="label">Audit Report</div>
+        <h2>全面审计</h2>
+        <p>16 个模块、112 个检查点完整展开。</p>
+        <div class="audit-meta">
+          <span class="audit-pill">16 个审计模块</span>
+          <span class="audit-pill">112 个检查点</span>
+          <span class="audit-pill">首页 SPA + 产品页静态 HTML 双架构</span>
+          <span class="audit-pill">nginx/1.26.3</span>
+        </div>
+        <p class="audit-note">状态说明：`良好` = 实测确认基础成立；`待优化` = 有雏形但不够；`风险` = 实测确认影响增长；`待建设` = 对应能力未长出来。</p>
+        <div class="table-wrap">
+          <table class="audit-ledger">
+            <tr><th>编号</th><th>检查点</th><th>核验结果</th></tr>
+
+            <tr class="module-sep"><td colspan="3">01 抓取入口</td></tr>
+            <tr><td>001</td><td>robots.txt 可访问</td><td><strong class="status-good">良好</strong>：User-agent: * Allow: /，Sitemap 声明正确。</td></tr>
+            <tr><td>002</td><td>robots 是否阻断核心页面</td><td><strong class="status-good">良好</strong>：未见核心页面被 Disallow。</td></tr>
+            <tr><td>003</td><td>sitemap 可访问性</td><td><strong class="status-good">良好</strong>：sitemap.xml 可正常解析。</td></tr>
+            <tr><td>004</td><td>sitemap 覆盖范围</td><td><strong class="status-bad">风险</strong>：只有 4 URL（首页、产品页、隐私、条款）。大量 200 页面未进入 sitemap。</td></tr>
+            <tr><td>005</td><td>sitemap lastmod</td><td><strong class="status-bad">风险</strong>：所有 URL 缺少 lastmod 日期，Google 无法判断内容新鲜度。</td></tr>
+            <tr><td>006</td><td>多 sitemap 架构</td><td><strong class="status-muted">待建设</strong>：没有 sitemap index，所有 URL 挤在一个 sitemap 里。如果页面数量增长到 100+，需要拆分。</td></tr>
+            <tr><td>007</td><td>抓取预算保护</td><td><strong class="status-good">良好</strong>：站点极小，抓取预算不是当前瓶颈。</td></tr>
+
+            <tr class="module-sep"><td colspan="3">02 索引治理</td></tr>
+            <tr><td>008</td><td>首页索引状态</td><td><strong class="status-bad">风险</strong>：首页 HTML 是 SPA 空壳，Google 爬到的只有 meta 标签。能否被正确索引取决于 Google 是否执行 JS。对于品牌词"leewow"可以索引，但对于内容词不可见。</td></tr>
+            <tr><td>009</td><td>产品页索引状态</td><td><strong class="status-good">良好</strong>：/product-creation-agent 是静态 HTML，内容完整，canonical 指向自身，Schema 存在。具备良好的索引条件。</td></tr>
+            <tr><td>010</td><td>多语言页面索引</td><td><strong class="status-bad">风险</strong>：/en、/zh、/ja 等都返回 200 但 canonical 全指向 https://leewow.com/。Google 会合并为重复内容。</td></tr>
+            <tr><td>011</td><td>大量路径索引状态</td><td><strong class="status-warn">待优化</strong>：/shop、/products、/catalog、/docs、/faq、/api、/pricing、/contact 等路径返回 200，内容未确认。如果这些是 SPA 页面，和首页有同样的空壳问题。</td></tr>
+            <tr><td>012</td><td>法律页面索引</td><td><strong class="status-warn">待优化</strong>：/privacy-policy 和 /terms-service 在 sitemap 中但不应被重点索引，可考虑 noindex。</td></tr>
+            <tr><td>013</td><td>404 处理</td><td><strong class="status-warn">待优化</strong>：需确认无效路径是否正确返回 404。SPA 架构容易把所有路径都返回 200（前端路由）。</td></tr>
+            <tr><td>014</td><td>博客索引</td><td><strong class="status-muted">待建设</strong>：/blog 路径返回 301（可能是重定向到首页或博客平台）。博客基础设施尚未就绪。</td></tr>
+
+            <tr class="module-sep"><td colspan="3">03 Canonical 与域名统一</td></tr>
+            <tr><td>015</td><td>首页 canonical</td><td><strong class="status-good">良好</strong>：canonical 正确指向 https://leewow.com/。</td></tr>
+            <tr><td>016</td><td>产品页 canonical</td><td><strong class="status-good">良好</strong>：canonical 正确指向 https://leewow.com/product-creation-agent。</td></tr>
+            <tr><td>017</td><td>多语言页面 canonical</td><td><strong class="status-bad">风险</strong>：/en、/zh、/ja 等的 canonical 全部指向 https://leewow.com/（英文根域），没有指向各自的 URL。这是重复内容信号。</td></tr>
+            <tr><td>018</td><td>多语言产品页 canonical</td><td><strong class="status-bad">风险</strong>：/en/product-creation-agent 的 canonical 也指向 https://leewow.com/，不是自身 URL。</td></tr>
+            <tr><td>019</td><td>www 归一化</td><td><strong class="status-good">良好</strong>：www.leewow.com → 301 → leewow.com，正确。</td></tr>
+            <tr><td>020</td><td>HTTP → HTTPS</td><td><strong class="status-good">良好</strong>：http://leewow.com → 301 → https://leewow.com，正确。</td></tr>
+            <tr><td>021</td><td>og:url 与 canonical 一致性</td><td><strong class="status-good">良好</strong>：产品页 og:url 正确指向自身 URL。</td></tr>
+
+            <tr class="module-sep"><td colspan="3">04 状态码与跳转</td></tr>
+            <tr><td>022</td><td>HTTP → HTTPS</td><td><strong class="status-good">良好</strong>：301 单跳，正确。</td></tr>
+            <tr><td>023</td><td>www → non-www</td><td><strong class="status-good">良好</strong>：301 单跳，正确。</td></tr>
+            <tr><td>024</td><td>/blog 跳转</td><td><strong class="status-warn">待优化</strong>：/blog → 301，去向未确认。可能跳转到外部博客平台。</td></tr>
+            <tr><td>025</td><td>多跳链</td><td><strong class="status-good">良好</strong>：已检查的跳转都是单跳。</td></tr>
+            <tr><td>026</td><td>SPA fallback 404</td><td><strong class="status-bad">风险</strong>：大量路径（/shop、/products、/catalog 等）返回 200，可能是 SPA 前端路由把所有路径都渲染为"页面"。Google 会把无效 URL 当成有效页面。</td></tr>
+            <tr><td>027</td><td>5xx 稳定性</td><td><strong class="status-good">良好</strong>：实测所有页面返回 200，无 5xx。nginx 稳定。</td></tr>
+            <tr><td>028</td><td>HSTS</td><td><strong class="status-good">良好</strong>：Strict-Transport-Security: max-age=63072000 已启用。</td></tr>
+
+            <tr class="module-sep"><td colspan="3">05 SERP 片段</td></tr>
+            <tr><td>029</td><td>首页 Title</td><td><strong class="status-warn">待优化</strong>："Leewow: The World's First Product Creation Agent - Idea to Physical Product in 30 Seconds"。品牌定位清晰但过长（90+ 字符），Google 可能截断。</td></tr>
+            <tr><td>030</td><td>首页 Description</td><td><strong class="status-good">良好</strong>：描述清晰，包含核心差异点（"AI handles design, manufacturing, and global delivery"）。</td></tr>
+            <tr><td>031</td><td>产品页 Title</td><td><strong class="status-bad">风险</strong>：产品页 Title 和首页完全相同。缺少产品页独特的关键词定位。</td></tr>
+            <tr><td>032</td><td>产品页 Description</td><td><strong class="status-bad">风险</strong>：产品页 Description 缺失（meta description 标签不存在）。</td></tr>
+            <tr><td>033</td><td>品牌词片段一致性</td><td><strong class="status-good">良好</strong>：Title 和 OG 标签中的品牌名一致。</td></tr>
+            <tr><td>034</td><td>功能词片段</td><td><strong class="status-warn">待优化</strong>：应该有更多面向功能词的独立页面（"AI product design"、"custom merchandise AI"）。</td></tr>
+            <tr><td>035</td><td>FAQ 富结果信号</td><td><strong class="status-muted">待建设</strong>：没有 FAQ 页面。</td></tr>
+
+            <tr class="module-sep"><td colspan="3">06 标题与语义结构</td></tr>
+            <tr><td>036</td><td>首页 H1</td><td><strong class="status-bad">风险</strong>：首页 HTML 是 SPA 空壳，没有 H1。JS 渲染后的 H1 可能存在，但 Google 不一定看得到。</td></tr>
+            <tr><td>037</td><td>产品页 H1</td><td><strong class="status-good">良好</strong>："The World's First Product Creation Agent"，清晰有力。</td></tr>
+            <tr><td>038</td><td>产品页 H2 结构</td><td><strong class="status-good">良好</strong>：6 个 H2 覆盖了核心问题（What Is / From Idea to Doorstep / Not Print-on-Demand / Built at Intersection / AI Shopify / The Future）。结构完整。</td></tr>
+            <tr><td>039</td><td>H2 是否承接搜索问题</td><td><strong class="status-warn">待优化</strong>：产品页的 H2 偏品牌叙事（"The Future of Product Creation Is Here"），不够像回答用户搜索问题。</td></tr>
+            <tr><td>040</td><td>首段复述主命题</td><td><strong class="status-good">良好</strong>：产品页首段直接给出价值判断。</td></tr>
+            <tr><td>041</td><td>语义层级清晰度</td><td><strong class="status-good">良好</strong>：产品页的 H1/H2 层级清晰。</td></tr>
+            <tr><td>042</td><td>页面主命题漂移</td><td><strong class="status-good">良好</strong>：产品页聚焦于"Product Creation Agent"概念，没有漂移。</td></tr>
+
+            <tr class="module-sep"><td colspan="3">07 页面角色分工</td></tr>
+            <tr><td>043</td><td>首页角色</td><td><strong class="status-bad">风险</strong>：首页是 SPA 空壳，无法承担品牌入口和权重分发的职责。</td></tr>
+            <tr><td>044</td><td>产品页角色</td><td><strong class="status-warn">待优化</strong>：唯一的 1 个产品页做得不错，但只有 1 个。需要更多产品功能页、场景页。</td></tr>
+            <tr><td>045</td><td>对比页角色</td><td><strong class="status-muted">待建设</strong>：没有竞品对比页。Printful / Printify / Redbubble 的品牌词截流为零。</td></tr>
+            <tr><td>046</td><td>博客角色</td><td><strong class="status-muted">待建设</strong>：博客不存在。</td></tr>
+            <tr><td>047</td><td>教程页角色</td><td><strong class="status-muted">待建设</strong>：没有 AI 产品设计教程、品类指南。</td></tr>
+            <tr><td>048</td><td>定价页角色</td><td><strong class="status-warn">待优化</strong>：/pricing 返回 200，但内容未确认。定价页应承担最硬的收口职责。</td></tr>
+            <tr><td>049</td><td>FAQ / Docs 角色</td><td><strong class="status-muted">待建设</strong>：/docs 和 /faq 返回 200，但内容未确认。</td></tr>
+
+            <tr class="module-sep"><td colspan="3">08 内容厚度与覆盖</td></tr>
+            <tr><td>050</td><td>核心页数量</td><td><strong class="status-bad">风险</strong>：只有 1 个产品页 + 2 个法律页。竞品 Printful 有数千页。</td></tr>
+            <tr><td>051</td><td>产品页内容厚度</td><td><strong class="status-good">良好</strong>：/product-creation-agent 内容丰富，包含流程说明、对比表、差异化说明。是全站内容最厚实的页面。</td></tr>
+            <tr><td>052</td><td>行业问题覆盖</td><td><strong class="status-muted">待建设</strong>："AI product design vs traditional"、"how to start a merchandise brand"、"print-on-demand alternatives" 等查询没有对应页面。</td></tr>
+            <tr><td>053</td><td>比较主题覆盖</td><td><strong class="status-muted">待建设</strong>：竞品对比完全空白。</td></tr>
+            <tr><td>054</td><td>品类指南覆盖</td><td><strong class="status-muted">待建设</strong>：Leewow 涉及 15+ 品类（卫衣、T恤、围巾、抱枕等），每个品类都应有独立页面。</td></tr>
+            <tr><td>055</td><td>FAQ 覆盖</td><td><strong class="status-muted">待建设</strong>：没有系统化的 FAQ。</td></tr>
+            <tr><td>056</td><td>案例与用户故事</td><td><strong class="status-muted">待建设</strong>：没有用户案例、使用教程、成品展示。</td></tr>
+
+            <tr class="module-sep"><td colspan="3">09 信息架构</td></tr>
+            <tr><td>057</td><td>首页到一级主题路径</td><td><strong class="status-bad">风险</strong>：首页 SPA 无法提供任何导航路径。Google 无法通过首页发现子页面。</td></tr>
+            <tr><td>058</td><td>产品目录结构</td><td><strong class="status-muted">待建设</strong>：没有按品类（服装/家居/数码）的产品目录结构。</td></tr>
+            <tr><td>059</td><td>集群页挂载关系</td><td><strong class="status-muted">待建设</strong>：没有 hub-and-spoke 结构。</td></tr>
+            <tr><td>060</td><td>对比页位置</td><td><strong class="status-muted">待建设</strong>：没有 /compare/ 目录。</td></tr>
+            <tr><td>061</td><td>多语言架构</td><td><strong class="status-bad">风险</strong>：有 /en /zh /ja 等 URL 前缀但没有独立的 canonical 和内容，Google 无法区分语言版本。</td></tr>
+            <tr><td>062</td><td>导航与 Footer</td><td><strong class="status-bad">风险</strong>：首页 HTML 中没有导航和 Footer（SPA 渲染）。爬虫无法通过导航发现页面。</td></tr>
+            <tr><td>063</td><td>URL 层级设计</td><td><strong class="status-good">良好</strong>：产品页 URL（/product-creation-agent）简洁清晰。但需要更多层级的 URL 设计来支撑内容体系。</td></tr>
+
+            <tr class="module-sep"><td colspan="3">10 内链分发</td></tr>
+            <tr><td>064</td><td>首页出链策略</td><td><strong class="status-bad">风险</strong>：首页 HTML 中 0 个链接。无法向任何子页面传递权重。</td></tr>
+            <tr><td>065</td><td>产品页出链</td><td><strong class="status-warn">待优化</strong>：产品页有内联 CSS 的静态内容，出链情况需确认。如果也没有链接，就是孤立的。</td></tr>
+            <tr><td>066</td><td>面包屑导航</td><td><strong class="status-bad">风险</strong>：没有面包屑。</td></tr>
+            <tr><td>067</td><td>对比页到产品页</td><td><strong class="status-muted">待建设</strong>：对比页不存在。</td></tr>
+            <tr><td>068</td><td>博客到产品页</td><td><strong class="status-muted">待建设</strong>：博客不存在。</td></tr>
+            <tr><td>069</td><td>锚文本语义</td><td><strong class="status-muted">待建设</strong>：没有足够的内链来评估锚文本质量。</td></tr>
+            <tr><td>070</td><td>孤立页风险</td><td><strong class="status-bad">风险</strong>：产品页可能只能通过 sitemap 和直接 URL 访问，没有站内链接指向它。</td></tr>
+
+            <tr class="module-sep"><td colspan="3">11 Schema 覆盖</td></tr>
+            <tr><td>071</td><td>产品页 Schema</td><td><strong class="status-good">良好</strong>：/product-creation-agent 有完整的 SoftwareApplication Schema，包含 name、description、applicationCategory、operatingSystem、url、offers。</td></tr>
+            <tr><td>072</td><td>首页 Schema</td><td><strong class="status-bad">风险</strong>：首页 HTML 中没有 Schema。需要 Organization + WebSite Schema。</td></tr>
+            <tr><td>073</td><td>FAQPage Schema</td><td><strong class="status-muted">待建设</strong>：没有 FAQ 页面和 Schema。</td></tr>
+            <tr><td>074</td><td>HowTo Schema</td><td><strong class="status-muted">待建设</strong>：产品使用教程不存在。</td></tr>
+            <tr><td>075</td><td>BreadcrumbList Schema</td><td><strong class="status-bad">风险</strong>：没有面包屑 Schema。</td></tr>
+            <tr><td>076</td><td>Product Schema</td><td><strong class="status-muted">待建设</strong>：Leewow 的具体产品（卫衣、T恤等）应该有 Product Schema。</td></tr>
+            <tr><td>077</td><td>VideoObject Schema</td><td><strong class="status-muted">待建设</strong>：如果有产品演示视频应加 VideoObject Schema。</td></tr>
+
+            <tr class="module-sep"><td colspan="3">12 媒体与图像 SEO</td></tr>
+            <tr><td>078</td><td>首页图片</td><td><strong class="status-bad">风险</strong>：首页 HTML 中 0 张图片。</td></tr>
+            <tr><td>079</td><td>产品页图片</td><td><strong class="status-warn">待优化</strong>：需确认产品页是否有图片，以及 ALT 标签是否包含描述性文本。</td></tr>
+            <tr><td>080</td><td>图片格式</td><td><strong class="status-warn">待优化</strong>：需确认图片是否使用 WebP/AVIF 格式。</td></tr>
+            <tr><td>081</td><td>图片 sitemap</td><td><strong class="status-bad">风险</strong>：没有 image sitemap。</td></tr>
+            <tr><td>082</td><td>懒加载策略</td><td><strong class="status-warn">待优化</strong>：需确认。</td></tr>
+            <tr><td>083</td><td>媒体周边说明文字</td><td><strong class="status-warn">待优化</strong>：需确认产品页的图片是否有充分的描述性文字。</td></tr>
+            <tr><td>084</td><td>OG 图片</td><td><strong class="status-good">良好</strong>：有 og:image 设置，但指向的是同一个图片（product-creation-agent.jpg）。</td></tr>
+
+            <tr class="module-sep"><td colspan="3">13 性能与 CWV</td></tr>
+            <tr><td>085</td><td>首页 TTFB</td><td><strong class="status-bad">风险</strong>：1.39s，超过 Google 800ms 建议值。SPA 启动开销。</td></tr>
+            <tr><td>086</td><td>产品页 TTFB</td><td><strong class="status-good">良好</strong>：0.35s，优秀。静态 HTML 的优势。</td></tr>
+            <tr><td>087</td><td>隐私页 TTFB</td><td><strong class="status-warn">待优化</strong>：0.95s，可接受但有优化空间。</td></tr>
+            <tr><td>088</td><td>LCP 风险</td><td><strong class="status-bad">风险</strong>：首页 TTFB 1.39s 直接拉高 LCP，首屏内容渲染可能超过 2.5s。</td></tr>
+            <tr><td>089</td><td>INP 风险</td><td><strong class="status-warn">待优化</strong>：SPA 首页有大量交互元素，需关注交互响应。</td></tr>
+            <tr><td>090</td><td>脚本体积</td><td><strong class="status-warn">待优化</strong>：首页加载 5 个 script 标签。SPA 的 JS bundle 大小需确认。</td></tr>
+            <tr><td>091</td><td>移动端体验</td><td><strong class="status-warn">待优化</strong>：viewport meta 禁止缩放（user-scalable=no），影响可访问性。</td></tr>
+
+            <tr class="module-sep"><td colspan="3">14 转化与信任</td></tr>
+            <tr><td>092</td><td>产品页 CTA 强度</td><td><strong class="status-good">良好</strong>：有明确的 CTA 和流程说明。</td></tr>
+            <tr><td>093</td><td>定价页 CTA</td><td><strong class="status-warn">待优化</strong>：/pricing 返回 200，但深度和收口力度需确认。</td></tr>
+            <tr><td>094</td><td>试用门槛</td><td><strong class="status-warn">待优化</strong>：Schema 中 price=0 表示免费，但试用限制需更透明。</td></tr>
+            <tr><td>095</td><td>用户证言</td><td><strong class="status-muted">待建设</strong>：没有用户评价或案例。</td></tr>
+            <tr><td>096</td><td>第三方信任信号</td><td><strong class="status-muted">待建设</strong>：没有合作伙伴 Logo、媒体报道、行业认可。</td></tr>
+            <tr><td>097</td><td>成品展示</td><td><strong class="status-muted">待建设</strong>：Leewow 的成品图和实物展示是核心转化资产，但站内展示不足。</td></tr>
+            <tr><td>098</td><td>风险与边界</td><td><strong class="status-warn">待优化</strong>：没有解释 Leewow 不适合什么场景、生产周期、配送范围等用户最关心的问题。</td></tr>
+
+            <tr class="module-sep"><td colspan="3">15 AI Search Ready</td></tr>
+            <tr><td>099</td><td>TL;DR 摘要块</td><td><strong class="status-warn">待优化</strong>：产品页有描述性首段，但缺少 AI 可直接提取的简短答案块。</td></tr>
+            <tr><td>100</td><td>定义块</td><td><strong class="status-good">良好</strong>："What Is a Product Creation Agent?" 是一个优秀的定义块 H2。</td></tr>
+            <tr><td>101</td><td>对比表</td><td><strong class="status-warn">待优化</strong>：产品页有 "Not Print-on-Demand" 对比说明，但没有竞品参数对比表。</td></tr>
+            <tr><td>102</td><td>步骤块</td><td><strong class="status-warn">待优化</strong>："From Idea to Doorstep in 30 Seconds" 有流程说明但缺 HowTo Schema。</td></tr>
+            <tr><td>103</td><td>FAQ 答案块</td><td><strong class="status-muted">待建设</strong>：没有 FAQ。</td></tr>
+            <tr><td>104</td><td>限制说明块</td><td><strong class="status-warn">待优化</strong>：缺少生产周期、配送范围、品类限制等说明。</td></tr>
+            <tr><td>105</td><td>首页对 AI 爬虫可见性</td><td><strong class="status-bad">风险</strong>：首页是 SPA 空壳，AI 爬虫可能也无法获取内容。</td></tr>
+
+            <tr class="module-sep"><td colspan="3">16 站外证据层</td></tr>
+            <tr><td>106</td><td>品牌提及</td><td><strong class="status-muted">待建设</strong>：需建立提及监测和回收机制。</td></tr>
+            <tr><td>107</td><td>竞品反链截流</td><td><strong class="status-muted">待建设</strong>：Printful/Printify/Redbubble 的品牌词截流完全空白。</td></tr>
+            <tr><td>108</td><td>Broken Link Building</td><td><strong class="status-muted">待建设</strong>：已关闭的 POD 平台域名是外链机会。</td></tr>
+            <tr><td>109</td><td>目录收录</td><td><strong class="status-muted">待建设</strong>：Product Hunt、AI 工具目录、POD 平台目录的收录未启动。</td></tr>
+            <tr><td>110</td><td>社交证据</td><td><strong class="status-muted">待建设</strong>：实物成品在 Instagram/Pinterest 的展示是天然的外链和品牌资产。</td></tr>
+            <tr><td>111</td><td>社区渗透</td><td><strong class="status-muted">待建设</strong>：r/printondemand、r/Etsy、独立开发者社区的渗透未启动。</td></tr>
+            <tr><td>112</td><td>可链接资产</td><td><strong class="status-bad">风险</strong>：没有足够多别人愿意引用的硬材料（基准测试、成本对比、品类报告）。</td></tr>
+          </table>
+        </div>
+      </section>
+
+      <section id="fixlist">
+        <div class="label">Fix Order</div>
+        <h2>优先修复</h2>
+        <div class="box">
+          <table>
+            <tr><th>优先级</th><th>动作</th><th>为什么先做</th><th>对应条线</th></tr>
+            <tr><td><strong>P0</strong></td><td>首页从 SPA 改造为 SSR/SSG，确保 Google 爬到完整的 HTML 内容</td><td>首页是权重分发中心。SPA 空壳 = 无法传递权重 = 所有子页面都是孤岛。</td><td>第三条线</td></tr>
+            <tr><td><strong>P0</strong></td><td>Sitemap 从 4 URL 扩展到完整覆盖</td><td>只有 4 URL = Google 几乎不爬这个站。</td><td>第三条线</td></tr>
+            <tr><td><strong>P0</strong></td><td>修复多语言 canonical（每个语言版本指向自身 URL）+ 部署 hreflang</td><td>当前 6 个语言 URL 全指向同一 canonical = 重复内容。</td><td>第三条线</td></tr>
+            <tr><td><strong>P1</strong></td><td>产品页 Title 和 Description 去重（不能和首页完全相同）</td><td>产品页和首页 Title 一模一样，错失关键词定位机会。</td><td>第三条线</td></tr>
+            <tr><td><strong>P1</strong></td><td>首页加 Organization + WebSite Schema</td><td>品牌实体和站内搜索框无法被 Google 识别。</td><td>第三条线</td></tr>
+            <tr><td><strong>P1</strong></td><td>上线竞品对比页（Printful / Printify / Redbubble / Gelato）</td><td>最靠近决策流量。这些品牌词搜索量巨大，截流见效最快。</td><td>第一条线</td></tr>
+            <tr><td><strong>P1</strong></td><td>建设品类页（15+ 品类：卫衣/T恤/围巾/抱枕/毛毯等）</td><td>每个品类 = 一个长尾词入口。Leewow 有 15+ 品类但站内没有品类页。</td><td>第二条线</td></tr>
+            <tr><td><strong>P2</strong></td><td>博客生态启动</td><td>内容营销入口。教程、案例、趋势分析。</td><td>第二条线</td></tr>
+            <tr><td><strong>P2</strong></td><td>修复 SPA fallback（非有效路径应返回 404）</td><td>当前所有路径都返回 200，Google 会索引大量无效 URL。</td><td>第三条线</td></tr>
+            <tr><td><strong>P2</strong></td><td>启动站外资产线（目录收录、社区渗透、实物展示）</td><td>把前三条线放大。</td><td>第四条线</td></tr>
+          </table>
+        </div>
+      </section>
+
+      <section id="line1">
+        <div class="label">Line 1</div>
+        <h2>第一条线：寄生站导流与竞品截流</h2>
+        <div class="line-block">
+          <div class="line-head">
+            <div>
+              <div class="line-num">Line 1</div>
+              <h3>在用户搜索竞品和品类词的时候截住他们</h3>
+            </div>
+            <div class="tag">替代词 / 对比词 / 品类词 / 礼物词</div>
+          </div>
+          <p>Leewow 的核心竞品（Printful、Printify、Redbubble、Gelato）已经在搜索结果里经营了多年。正面硬刚它们的品牌词排名很难，但截流是可行的。用户搜"Printful alternative"的时候，脑子里想的不是品牌忠诚，而是"有没有更好的方案"。Leewow 的差异化足够强——不是 print-on-demand，是 AI Product Creation Agent。这个差异点一旦被说清楚，截流效果会很直接。</p>
+          <p>同时，Leewow 涉及的 15+ 品类（卫衣、T恤、围巾、抱枕、毛毯、鼠标垫等），每一个品类都有长尾搜索词。"custom hoodie AI design"、"AI printed t-shirt"、"personalized blanket gift"——这些查询的竞争度远低于竞品品牌词，而且更接近购买意图。</p>
+          <div class="cols">
+            <div class="card">
+              <div class="mini">竞品截流优先级</div>
+              <p>Printful vs Leewow、Printify vs Leewow、Redbubble vs Leewow、Gelato vs Leewow。每个对比页要有参数表、价格对比、适合人群、边界说明。</p>
+            </div>
+            <div class="card">
+              <div class="mini">品类词优先级</div>
+              <p>custom hoodie、AI t-shirt design、personalized blanket、custom phone case、AI product design for creators。每个品类一个独立页面，展示成品图 + 设计流程 + 适用场景。</p>
+            </div>
+            <div class="card">
+              <div class="mini">寄生站打法</div>
+              <p>Medium/Dev.to 发教程、YouTube 发产品演示视频、Pinterest 发成品图。Leewow 的实物成品是天然的视觉内容，Pinterest 和 Instagram 的传播力远高于文字。</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="line2">
+        <div class="label">Line 2</div>
+        <h2>第二条线：主站内容体系与品类页矩阵</h2>
+        <div class="line-block">
+          <div class="line-head">
+            <div>
+              <div class="line-num">Line 2</div>
+              <h3>从 1 个产品页扩展到完整的品类和内容体系</h3>
+            </div>
+            <div class="tag">品类页 / 对比页 / 教程 / 博客 / FAQ</div>
+          </div>
+          <p>Leewow 当前只有 1 个产品页。第二条线负责把站点从"一个着陆页"拉到"一个有厚度的 AI 产品创造平台"。每个品类需要独立的展示页、每个竞品需要对比页、每个使用场景需要教程。</p>
+          <div class="grid-2" style="margin-top:18px">
+            <div class="card">
+              <div class="mini">品类页矩阵</div>
+              <p>15+ 品类页：卫衣、T恤、围巾、抱枕、毛毯、鼠标垫、水杯、马克杯、颈枕、挂画、手机壳、书包、眼罩、电脑包、抽纸盒。每个页面展示成品图、AI 设计入口、适用场景、送礼建议。</p>
+            </div>
+            <div class="card">
+              <div class="mini">内容角色补全</div>
+              <p>竞品对比页（5-10 篇）、AI 设计教程（10-20 篇）、礼物指南（按场景/节日）、博客（行业趋势、案例分析）、FAQ（生产周期、配送范围、品类限制）。</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="line3">
+        <div class="label">Line 3</div>
+        <h2>第三条线：技术底盘修复与首页重建</h2>
+        <div class="line-block">
+          <div class="line-head">
+            <div>
+              <div class="line-num">Line 3</div>
+              <h3>先把首页从空壳变成真正的网站入口</h3>
+            </div>
+            <div class="tag">首页 SSR / Sitemap / 国际化 / Schema / TTFB</div>
+          </div>
+          <p>Leewow 的技术底盘呈现有趣的分裂：产品页做得好（静态 HTML + Schema + 0.35s TTFB），但首页是 SPA 空壳（10.5KB + JS 渲染 + 1.39s TTFB）。这种分裂说明产品页是手工制作的高质量页面，而首页是后来的 SPA 应用外壳。</p>
+          <p>第三条线的核心任务是把首页从 SPA 改造为 SSR/SSG，让 Google 爬到完整的 HTML 内容。同时修复国际化的 canonical 问题和 sitemap 的覆盖问题。</p>
+          <div class="cols">
+            <div class="card">
+              <div class="mini">首页重建方案</div>
+              <p>选项一：保持 SPA 但加预渲染（prerender.io）。选项二：首页改为 SSG 静态页面（像产品页一样）。选项三：全站迁移到 SSR 框架（Nuxt/Next）。推荐选项二，因为产品页已经证明了静态 HTML 的效果。</p>
+            </div>
+            <div class="card">
+              <div class="mini">国际化修复</div>
+              <p>每个语言版本的 canonical 指向自身 URL。加 hreflang 标签。每个语言版本有独特的 Title 和 Description（不是简单翻译）。</p>
+            </div>
+            <div class="card">
+              <div class="mini">Sitemap 重建</div>
+              <p>从 4 URL 扩展到完整覆盖：首页 + 产品页 + 品类页 + 对比页 + 教程 + 博客 + FAQ。使用 sitemap index 拆分。加 lastmod 日期。</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="line4">
+        <div class="label">Line 4</div>
+        <h2>第四条线：站外 SEO、视觉资产与社区渗透</h2>
+        <div class="line-block">
+          <div class="line-head">
+            <div>
+              <div class="line-num">Line 4</div>
+              <h3>Leewow 的实物成品是天然的外链资产</h3>
+            </div>
+            <div class="tag">Pinterest / Instagram / Reddit / Directories / Case Studies</div>
+          </div>
+          <p>Leewow 有一个其他 AI SaaS 不具备的独特优势：它生产的是实物。每一个 AI 设计变成的卫衣、抱枕、手机壳，都可以拍照、拍视频、发到社交媒体。这些实物成品图片是天然的外链磁铁——比任何"10 best AI tools"列表文章都有说服力。</p>
+          <div class="grid-2" style="margin-top:18px">
+            <div class="card">
+              <div class="mini">视觉资产策略</div>
+              <p>每个品类的成品图发 Pinterest（链接回品类页）。AI 设计过程录屏发 YouTube。实物开箱视频发 TikTok/Instagram。每月 20-30 个成品展示，形成持续的内容输出。</p>
+            </div>
+            <div class="card">
+              <div class="mini">社区与目录</div>
+              <p>Product Hunt 发布、AI 工具目录收录、POD 平台对比站提交。Reddit r/printondemand 和 r/Etsy 的社区渗透。已关闭 POD 平台的域名收购（和策略文档中的"收购死掉的 SaaS 域名"逻辑一致）。</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="keywords">
+        <div class="label">Keyword Map</div>
+        <h2>关键词分级</h2>
+        <div class="box">
+          <table>
+            <tr><th>级别</th><th>关键词方向</th><th>承担页面</th></tr>
+            <tr><td><strong>S</strong></td><td>printful alternative / printify alternative / ai product design / custom merchandise ai / product creation agent</td><td>对比页、首页、产品页共同承担</td></tr>
+            <tr><td><strong>A</strong></td><td>redbubble alternative / gelato vs printful / ai t-shirt design / custom hoodie ai / personalized blanket gift</td><td>对比页、品类页</td></tr>
+            <tr><td><strong>B</strong></td><td>how to start a merchandise brand / print on demand vs ai product creation / best custom gift ideas 2026 / ai design tools for products</td><td>博客、教程页</td></tr>
+            <tr><td><strong>C</strong></td><td>custom phone case ai / ai printed mug / personalized pillow design / ai laptop bag design</td><td>品类页</td></tr>
+            <tr><td><strong>D</strong></td><td>leewow review / leewow pricing / how to use leewow / ai product creation tutorial</td><td>FAQ、教程、长尾页</td></tr>
+          </table>
+        </div>
+      </section>
+
+      <section id="roadmap">
+        <div class="label">Roadmap</div>
+        <h2>执行路线图</h2>
+        <div class="road">
+          <div class="phase">第 1-2 周</div>
+          <div><h3>技术止血</h3><p>首页 SSR/SSG 改造、Sitemap 从 4 URL 扩展到完整覆盖、多语言 canonical 修复 + hreflang 部署、产品页 Title/Description 去重。首页加 Organization + WebSite Schema。</p></div>
+        </div>
+        <div class="road">
+          <div class="phase">第 3-4 周</div>
+          <div><h3>内容启动</h3><p>上线第一批竞品对比页（Printful / Printify / Redbubble / Gelato）。上线第一批品类页（5 个高优先品类：卫衣、T恤、围巾、抱枕、毛毯）。启动 Pinterest 成品图发布。</p></div>
+        </div>
+        <div class="road">
+          <div class="phase">第 2 个月</div>
+          <div><h3>品类页规模化</h3><p>完成 15+ 品类页。上线 AI 设计教程（10 篇）。博客生态启动（每周 2-3 篇）。实物成品视频制作开始。</p></div>
+        </div>
+        <div class="road">
+          <div class="phase">第 3 个月</div>
+          <div><h3>站外加速</h3><p>Product Hunt 发布。AI 工具目录和 POD 平台目录收录。Reddit 社区渗透启动。YouTube 产品演示频道启动。礼物指南页面上线。</p></div>
+        </div>
+        <div class="road">
+          <div class="phase">第 4-6 个月</div>
+          <div><h3>从着陆页变成品类入口</h3><p>对比页、品类页、教程页进入滚动更新。第一份 AI 产品设计成本对比报告发布。站外持续把视觉内容和链接打向品类页。品牌开始在 POD 和 AI 设计的交叉赛道形成存在感。</p></div>
+        </div>
+      </section>
+
+      <section id="growth">
+        <div class="label">Growth & Conversion</div>
+        <h2>内容增长与转化</h2>
+        <div class="grid-2">
+          <div class="card">
+            <div class="mini">流量预期</div>
+            <p>品类词截流 3 个月 500-2,000/月，6 个月 3,000-8,000/月。竞品品牌词截流 3 个月 200-1,000/月。Pinterest/Instagram 视觉导流 3 个月 500-2,000/月。前提是首页在第 1-2 周完成 SSR 改造。</p>
+          </div>
+          <div class="card">
+            <div class="mini">转化路径</div>
+            <p>品类搜索 → 品类页（成品图 + AI 设计入口）→ 产品设计器 → 下单。竞品搜索 → 对比页 → "试试 Leewow" CTA → 免费设计。社交媒体 → 成品图 → 品牌搜索 → 首页。关键转化节点是品类页的设计入口 CTA。</p>
+          </div>
+        </div>
+        <p class="footer-note">这份客户稿保留了完整的审计、修复顺序、四线策略、关键词分级、路线图和增长建议。</p>
+      </section>
+    </main>
+  </div>
+</div>
+</body>
+</html>

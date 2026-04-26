@@ -64,11 +64,24 @@
 
   <!-- ==================== HERO ==================== -->
   <div class="hero">
-    <div class="hero-photo" id="heroAvatar"><img src="images/avatar.jpg" alt="weihacking" loading="lazy"></div>
-    <div class="hero-tag" data-zh="SEO / GEO 策略师 · hacking 周刊作者 · Soulcraft Limited" data-en="SEO / GEO Strategist · hacking Newsletter · Soulcraft Limited">SEO / GEO 策略师 · hacking 周刊作者 · Soulcraft Limited</div>
-    <h1 data-zh="wei<em>hacking</em>" data-en="wei<em>hacking</em>">wei<em>hacking</em></h1>
-    <div class="hero-sub" data-zh="六年实战，200+ 客户。在搜索引擎和 AI 的交叉地带找缝隙。不卖概念，只交付数字。" data-en="Six years in the trenches. 200+ clients. Finding the gaps between search and AI. No buzzwords — just numbers.">六年实战，200+ 客户。在搜索引擎和 AI 的交叉地带找缝隙。不卖概念，只交付数字。</div>
-    <div class="hero-links">
+    <!-- Geometric background -->
+    <div class="hero-geo" aria-hidden="true">
+      <svg viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice">
+        <g class="geo-float" opacity=".12"><polygon points="120,80 140,40 160,80" fill="var(--accent)"/></g>
+        <g class="geo-float" opacity=".08"><circle cx="900" cy="200" r="6" fill="var(--ink)"/></g>
+        <g class="geo-float" opacity=".10"><rect x="600" y="500" width="12" height="12" fill="var(--accent)" transform="rotate(15 606 506)"/></g>
+        <g class="geo-float" opacity=".06"><circle cx="300" cy="600" r="4" fill="var(--ink)"/></g>
+        <g class="geo-float" opacity=".09"><polygon points="1000,650 1010,620 1020,650" fill="var(--accent)"/></g>
+      </svg>
+    </div>
+    <div class="hero-photo-wrap" style="z-index:1">
+      <div class="hero-photo" id="heroAvatar"><img src="images/avatar.jpg" alt="weihacking" loading="lazy"></div>
+      <svg class="hero-orbit" viewBox="0 0 160 160"><circle cx="80" cy="80" r="78"/></svg>
+    </div>
+    <div class="hero-tag" data-zh="SEO / GEO 策略师 · hacking 周刊作者 · Soulcraft Limited" data-en="SEO / GEO Strategist · hacking Newsletter · Soulcraft Limited" style="z-index:1">SEO / GEO 策略师 · hacking 周刊作者 · Soulcraft Limited</div>
+    <h1 data-zh="wei<em>hacking</em>" data-en="wei<em>hacking</em>" style="z-index:1">wei<em>hacking</em></h1>
+    <div class="hero-sub" data-zh="六年实战，200+ 客户。在搜索引擎和 AI 的交叉地带找缝隙。不卖概念，只交付数字。" data-en="Six years in the trenches. 200+ clients. Finding the gaps between search and AI. No buzzwords — just numbers." style="z-index:1">六年实战，200+ 客户。在搜索引擎和 AI 的交叉地带找缝隙。不卖概念，只交付数字。</div>
+    <div class="hero-links" style="z-index:1">
       <a href="#products" class="cta" data-zh="结果向交付 →" data-en="Services →">结果向交付 →</a>
       <a href="#knowledge-base" class="cta ghost" data-zh="HackingSEO OS1" data-en="HackingSEO OS1">HackingSEO OS1</a>
       <a href="https://x.com/weihacking" target="_blank" rel="noreferrer" class="cta ghost">X / Twitter</a>
@@ -80,12 +93,19 @@
   <div class="updates-band">
     <div class="updates-inner">
       <span class="updates-label" data-zh="最新" data-en="Updates">最新</span>
+      <div style="overflow:hidden;flex:1">
       <div class="updates-feed">
         <span class="update-item"><span class="ud">04-26</span><span data-zh="焚决架构重构完成：决策链五层 + 45 段 Passage-Ready + 全站内容深化" data-en="Doctrine architecture restructure: 5 decision layers + 45 Passage-Ready paragraphs + site-wide content deepening">焚决架构重构完成：决策链五层 + 45 段 Passage-Ready + 全站内容深化</span></span>
-		        <span class="update-item"><span class="ud">04-25</span><span data-zh="4 页 SEO 扩展上线：案例研究 + 策略指南" data-en="4 SEO expansion pages live">4 页 SEO 扩展上线：案例研究 + 策略指南</span></span>
-	        <span class="update-item"><span class="ud">04-22</span><span data-zh="个人品牌站上线，8 页杂志式架构" data-en="Personal brand site launched — 8-page magazine architecture">个人品牌站上线，8 页杂志式架构</span></span>
+        <span class="update-item"><span class="ud">04-25</span><span data-zh="4 页 SEO 扩展上线：案例研究 + 策略指南" data-en="4 SEO expansion pages live">4 页 SEO 扩展上线：案例研究 + 策略指南</span></span>
+        <span class="update-item"><span class="ud">04-22</span><span data-zh="个人品牌站上线，8 页杂志式架构" data-en="Personal brand site launched — 8-page magazine architecture">个人品牌站上线，8 页杂志式架构</span></span>
         <span class="update-item"><span class="ud">04-20</span><span data-zh="hacking 周刊第三期发布" data-en="hacking newsletter Issue #03 published">hacking 周刊第三期发布</span></span>
         <span class="update-item"><span class="ud">04-12</span><span data-zh="HackingSEO OS1 知识库突破 60 万字" data-en="HackingSEO OS1 knowledge base exceeds 600K words">HackingSEO OS1 知识库突破 60 万字</span></span>
+        <span class="update-item"><span class="ud">04-26</span><span>焚决架构重构完成</span></span>
+        <span class="update-item"><span class="ud">04-25</span><span>4 页 SEO 扩展上线</span></span>
+        <span class="update-item"><span class="ud">04-22</span><span>个人品牌站上线</span></span>
+        <span class="update-item"><span class="ud">04-20</span><span>hacking 周刊第三期</span></span>
+        <span class="update-item"><span class="ud">04-12</span><span>OS1 知识库突破 60 万字</span></span>
+      </div>
       </div>
     </div>
   </div>
@@ -155,6 +175,7 @@
   </div>
 
   <!-- ==================== ABOUT ==================== -->
+  <svg class="sec-divider wrap" viewBox="0 0 800 24" preserveAspectRatio="none" aria-hidden="true"><line x1="0" y1="12" x2="800" y2="12"/></svg>
   <section id="about">
     <div class="wrap">
       <h2 class="sec-label" data-zh="关于" data-en="About">关于</h2>
@@ -171,6 +192,7 @@
   </section>
 
   <!-- ==================== THINKING ==================== -->
+  <svg class="sec-divider wrap" viewBox="0 0 800 24" preserveAspectRatio="none" aria-hidden="true"><line x1="0" y1="12" x2="800" y2="12"/></svg>
   <section id="thinking">
     <div class="wrap">
       <h2 class="sec-label" data-zh="推文哲思" data-en="Thinking">推文哲思</h2>
@@ -192,6 +214,7 @@
   </section>
 
   <!-- ==================== KNOWLEDGE BASE / NEWSLETTER ==================== -->
+  <svg class="sec-divider wrap" viewBox="0 0 800 24" preserveAspectRatio="none" aria-hidden="true"><line x1="0" y1="12" x2="800" y2="12"/></svg>
   <section class="kb-section" id="knowledge-base">
     <div class="wrap">
       <h2 class="sec-label" data-zh="知识产品" data-en="Knowledge Products">知识产品</h2>
@@ -228,6 +251,7 @@
   </section>
 
   <!-- ==================== PRODUCTS ==================== -->
+  <svg class="sec-divider wrap" viewBox="0 0 800 24" preserveAspectRatio="none" aria-hidden="true"><line x1="0" y1="12" x2="800" y2="12"/></svg>
   <section class="prod-section" id="products">
     <div class="wrap">
       <h2 class="sec-label" data-zh="结果向交付" data-en="Results-Driven Delivery">结果向交付</h2>
@@ -252,6 +276,7 @@
   </section>
 
   <!-- ==================== TOOLS ==================== -->
+  <svg class="sec-divider wrap" viewBox="0 0 800 24" preserveAspectRatio="none" aria-hidden="true"><line x1="0" y1="12" x2="800" y2="12"/></svg>
   <section id="tools">
     <div class="wrap">
       <h2 class="sec-label" data-zh="开源工具" data-en="Open Source Tools">开源工具</h2>
@@ -277,6 +302,7 @@
   </section>
 
   <!-- ==================== KNOWLEDGE HIGHLIGHTS ==================== -->
+  <svg class="sec-divider wrap" viewBox="0 0 800 24" preserveAspectRatio="none" aria-hidden="true"><line x1="0" y1="12" x2="800" y2="12"/></svg>
   <section id="knowledge">
     <div class="wrap">
       <h2 class="sec-label" data-zh="知识精选" data-en="Knowledge Highlights">知识精选</h2>

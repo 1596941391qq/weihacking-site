@@ -146,7 +146,7 @@
     .updates-band{background:var(--ink);color:var(--bg);padding:14px 0;font-family:var(--mono);font-size:11px;letter-spacing:.04em;overflow:hidden;position:relative}
     .updates-inner{max-width:900px;margin:0 auto;padding:0 28px;display:flex;align-items:center;gap:20px}
     .updates-label{white-space:nowrap;opacity:.5;text-transform:uppercase;letter-spacing:.12em;font-size:10px}
-    .updates-feed{display:flex;gap:24px;overflow-x:auto;scrollbar-width:none}
+    .updates-feed{display:flex;gap:24px;overflow-x:auto;scrollbar-width:none;width:max-content}
     .updates-feed::-webkit-scrollbar{display:none}
     .update-item{white-space:nowrap;opacity:.7;transition:opacity .2s}
     .update-item:hover{opacity:1}
@@ -502,6 +502,51 @@
 
     /* CARD HOVER LIFT (enhanced) */
     .toc-item:hover,.rn-item:hover,.kb-card:hover,.aph-card:hover,.finding-card:hover,.svc-card:hover,.contact-card:hover,.tool-dir-card:hover,.feat-tool:hover,.prod-cell:hover{transform:translateY(-3px)}
+
+    /* ===== CREATIVE ANIMATION LAYER ===== */
+
+    /* Hero geometric background */
+    .hero-geo{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0}
+    .hero-geo svg{position:absolute;width:100%;height:100%}
+
+    /* Avatar orbital ring */
+    .hero-photo-wrap{position:relative;display:flex;align-items:center;justify-content:center;margin:0 auto 32px}
+    .hero-orbit{position:absolute;width:160px;height:160px;animation:orbitSpin 20s linear infinite}
+    .hero-orbit circle{fill:none;stroke:var(--accent);stroke-width:.5;stroke-dasharray:4 6;opacity:.4}
+    @keyframes orbitSpin{to{transform:rotate(360deg)}}
+
+    /* Floating geometric shapes */
+    .geo-float{animation:geoFloat 8s ease-in-out infinite}
+    .geo-float:nth-child(2){animation-delay:-2s;animation-duration:10s}
+    .geo-float:nth-child(3){animation-delay:-4s;animation-duration:12s}
+    .geo-float:nth-child(4){animation-delay:-6s;animation-duration:9s}
+    .geo-float:nth-child(5){animation-delay:-3s;animation-duration:11s}
+    @keyframes geoFloat{
+      0%,100%{transform:translateY(0) rotate(0deg)}
+      33%{transform:translateY(-18px) rotate(6deg)}
+      66%{transform:translateY(8px) rotate(-4deg)}
+    }
+
+    /* Section line-draw dividers */
+    .sec-divider{display:block;width:100%;height:24px;margin:0 auto;opacity:.15;transition:opacity .4s}
+    .sec-divider.visible{opacity:.35}
+    .sec-divider line{stroke:var(--ink);stroke-width:.5;stroke-dasharray:800;stroke-dashoffset:800;transition:stroke-dashoffset 1.2s ease}
+    .sec-divider.visible line{stroke-dashoffset:0}
+    [data-theme="dark"] .sec-divider line{stroke:var(--ink)}
+
+    /* Updates ticker smooth scroll */
+    .updates-feed{display:flex;gap:48px;animation:tickerScroll 30s linear infinite}
+    @keyframes tickerScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+    .updates-feed:hover{animation-play-state:paused}
+
+    /* Hero entrance cascade */
+    .hero .hero-tag,.hero .hero-photo-wrap,.hero h1,.hero .hero-sub,.hero .hero-links{opacity:0;transform:translateY(24px);animation:heroIn .7s ease forwards}
+    .hero .hero-photo-wrap{animation-delay:.15s}
+    .hero .hero-tag{animation-delay:.35s}
+    .hero h1{animation-delay:.5s}
+    .hero .hero-sub{animation-delay:.7s}
+    .hero .hero-links{animation-delay:.9s}
+    @keyframes heroIn{to{opacity:1;transform:translateY(0)}}
 
     /* RESPONSIVE */
     @media(max-width:768px){

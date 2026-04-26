@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>302.ai | SEO 审计与四线策略</title>
+<style>
+  :root{
+    --bg:#f4efe7;
+    --paper:#fcfaf6;
+    --panel:#fffdfa;
+    --line:#ddd2c2;
+    --line-strong:#cdbca4;
+    --ink:#1f2a35;
+    --muted:#65717c;
+    --soft:#8d826f;
+    --accent:#315f68;
+    --accent-soft:#edf4f4;
+    --gold:#9c6a3e;
+    --gold-soft:#f6ede4;
+    --good:#2f6d52;
+    --warn:#b26b2a;
+    --bad:#b64b3d;
+    --shadow:0 20px 48px rgba(31,42,53,.08);
+    --radius:22px;
+    --max:1440px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    background:
+      radial-gradient(circle at top left, rgba(156,106,62,.08), transparent 24%),
+      radial-gradient(circle at top right, rgba(49,95,104,.08), transparent 28%),
+      var(--bg);
+    color:var(--ink);
+    line-height:1.8;
+    font-size:16px;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:var(--accent);text-decoration:none}
+  a:hover{text-decoration:underline}
+  .shell{max-width:var(--max);margin:0 auto;padding:24px}
+  .layout{display:grid;grid-template-columns:300px minmax(0,1fr);gap:24px;align-items:start}
+  .rail{
+    position:sticky;top:18px;
+    background:rgba(255,253,249,.84);
+    border:1px solid rgba(221,210,194,.92);
+    border-radius:28px;
+    padding:26px 24px;
+    box-shadow:var(--shadow);
+    backdrop-filter:blur(18px);
+  }
+  .rail h2{
+    font-family:Georgia,"Times New Roman",serif;
+    font-size:32px;
+    line-height:1.02;
+    letter-spacing:-.04em;
+    font-weight:500;
+    margin-bottom:10px;
+  }
+  .rail p{font-size:13px;color:var(--soft);margin-bottom:18px}
+  .rail nav a{
+    display:block;
+    padding:8px 0;
+    color:var(--muted);
+    border-bottom:1px solid rgba(221,210,194,.72);
+    font-size:14px;
+  }
+  .rail nav a:last-child{border-bottom:none}
+  .page{
+    background:var(--paper);
+    border:1px solid rgba(221,210,194,.95);
+    border-radius:32px;
+    box-shadow:var(--shadow);
+    overflow:hidden;
+  }
+  .hero{
+    padding:48px 52px 40px;
+    border-bottom:1px solid var(--line);
+    background:
+      radial-gradient(circle at top right, rgba(156,106,62,.11), transparent 26%),
+      radial-gradient(circle at top left, rgba(49,95,104,.11), transparent 32%),
+      linear-gradient(180deg, rgba(255,255,255,.95), rgba(252,250,246,.98));
+  }
+  .eyebrow{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:7px 12px;
+    border-radius:999px;
+    border:1px solid rgba(156,106,62,.18);
+    background:rgba(156,106,62,.08);
+    color:var(--gold);
+    font-size:12px;
+    text-transform:uppercase;
+    letter-spacing:.08em;
+    margin-bottom:18px;
+  }
+  h1{
+    font-family:Georgia,"Times New Roman",serif;
+    font-size:58px;
+    line-height:1.02;
+    letter-spacing:-.05em;
+    font-weight:500;
+    max-width:860px;
+  }
+  .lead{
+    max-width:920px;
+    margin-top:18px;
+    font-size:20px;
+    line-height:1.65;
+    color:#44505b;
+  }
+  .hero-grid{display:grid;grid-template-columns:1.25fr .95fr;gap:18px;margin-top:28px}
+  .hero-card,.hero-note{
+    border:1px solid rgba(221,210,194,.86);
+    border-radius:20px;
+    background:rgba(255,255,255,.82);
+    padding:20px 22px;
+  }
+  .mini{
+    font-size:12px;
+    text-transform:uppercase;
+    letter-spacing:.08em;
+    color:var(--soft);
+    margin-bottom:10px;
+  }
+  .meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+  .pill{
+    padding:7px 12px;
+    border-radius:999px;
+    border:1px solid rgba(221,210,194,.95);
+    background:rgba(255,255,255,.8);
+    font-size:13px;
+    color:var(--muted);
+  }
+  section{padding:36px 52px;border-bottom:1px solid var(--line)}
+  section:last-child{border-bottom:none}
+  .label{
+    font-size:12px;
+    text-transform:uppercase;
+    letter-spacing:.08em;
+    color:var(--gold);
+    margin-bottom:10px;
+  }
+  h2{
+    font-family:Georgia,"Times New Roman",serif;
+    font-size:36px;
+    line-height:1.08;
+    letter-spacing:-.035em;
+    font-weight:500;
+    margin-bottom:16px;
+  }
+  h3{font-size:20px;line-height:1.38;font-weight:600;margin-bottom:10px}
+  p + p{margin-top:14px}
+  .statement{font-size:24px;line-height:1.55;color:#33414d;max-width:980px}
+  .grid-2,.grid-3{display:grid;gap:16px}
+  .grid-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .card{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:22px;
+    box-shadow:0 10px 26px rgba(31,42,53,.04);
+  }
+  .box{
+    padding:24px;
+    border:1px solid var(--line);
+    border-radius:24px;
+    background:linear-gradient(180deg, rgba(255,255,255,.95), rgba(255,252,248,.97));
+  }
+  .issue{
+    display:grid;
+    grid-template-columns:110px 1fr;
+    gap:18px;
+    padding:18px 0;
+    border-bottom:1px solid rgba(221,210,194,.78);
+  }
+  .issue:last-child{border-bottom:none}
+  .sev{
+    font-size:12px;
+    color:var(--soft);
+    text-transform:uppercase;
+    letter-spacing:.08em;
+  }
+  .sev strong{
+    display:block;
+    margin-top:4px;
+    font-size:20px;
+    text-transform:none;
+    letter-spacing:-.02em;
+  }
+  table{width:100%;border-collapse:collapse;font-size:14px}
+  th,td{
+    text-align:left;
+    vertical-align:top;
+    padding:14px 12px;
+    border-bottom:1px solid rgba(221,210,194,.84);
+  }
+  th{
+    font-size:12px;
+    text-transform:uppercase;
+    letter-spacing:.06em;
+    color:var(--soft);
+    font-weight:600;
+  }
+  .quote{
+    margin-top:14px;
+    padding:14px 16px;
+    border-radius:16px;
+    background:var(--gold-soft);
+    border:1px solid rgba(156,106,62,.16);
+    color:#5d4a3d;
+    font-size:14px;
+  }
+  .audit-meta{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0 20px}
+  .audit-pill{
+    padding:7px 12px;
+    border-radius:999px;
+    background:var(--accent-soft);
+    border:1px solid rgba(49,95,104,.14);
+    color:var(--accent);
+    font-size:13px;
+  }
+  .audit-note{margin-top:14px;font-size:14px;color:var(--muted)}
+  .table-wrap{
+    margin-top:18px;
+    border:1px solid var(--line);
+    border-radius:24px;
+    overflow:hidden;
+    background:rgba(255,255,255,.76);
+  }
+  .audit-ledger{font-size:13px;line-height:1.65}
+  .audit-ledger th{position:sticky;top:0;z-index:1;background:#f5f0e8}
+  .audit-ledger td{background:rgba(255,253,249,.95)}
+  .audit-ledger td:nth-child(1){
+    width:72px;
+    color:var(--soft);
+    font-variant-numeric:tabular-nums;
+  }
+  .module-sep td{
+    background:#f3eadb;
+    color:var(--gold);
+    font-weight:700;
+    letter-spacing:.03em;
+  }
+  .status-good{color:var(--good)}
+  .status-warn{color:var(--warn)}
+  .status-bad{color:var(--bad)}
+  .status-muted{color:var(--muted)}
+  .line-block{
+    padding:26px;
+    border:1px solid var(--line);
+    border-radius:24px;
+    background:linear-gradient(180deg, rgba(255,255,255,.96), rgba(255,252,248,.98));
+  }
+  .line-head{
+    display:flex;
+    justify-content:space-between;
+    gap:16px;
+    align-items:flex-start;
+    margin-bottom:12px;
+  }
+  .line-num{
+    font-size:12px;
+    text-transform:uppercase;
+    letter-spacing:.08em;
+    color:var(--gold);
+    margin-bottom:5px;
+  }
+  .tag{
+    flex-shrink:0;
+    padding:8px 12px;
+    border-radius:999px;
+    font-size:12px;
+    color:var(--accent);
+    background:var(--accent-soft);
+    border:1px solid rgba(49,95,104,.14);
+  }
+  .cols{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:18px}
+  .road{
+    display:grid;
+    grid-template-columns:120px 1fr;
+    gap:20px;
+    padding:18px 0;
+    border-bottom:1px solid rgba(221,210,194,.82);
+  }
+  .road:last-child{border-bottom:none}
+  .phase{font-size:14px;color:var(--gold);font-weight:600}
+  .footer-note{font-size:13px;color:var(--soft);margin-top:18px}
+  @media (max-width:1160px){
+    .layout{grid-template-columns:1fr}
+    .rail{position:static}
+    .hero-grid,.grid-2,.grid-3,.cols{grid-template-columns:1fr}
+  }
+  @media (max-width:780px){
+    .shell{padding:14px}
+    .hero,section{padding:24px 20px}
+    h1{font-size:42px}
+    .lead{font-size:18px}
+    .issue,.road{grid-template-columns:1fr}
+    .line-head{display:block}
+    .tag{display:inline-block;margin-top:10px}
+  }
+</style>
+</head>
+<body>
+<div class="shell">
+  <div class="layout">
+    <aside class="rail">
+      <h2>302.ai</h2>
+      <p>客户版 SEO 审计与四线策略，围绕国际化修复、内容体系、技术底盘与站外放大展开。</p>
+      <nav>
+        <a href="#summary">执行摘要</a>
+        <a href="#scores">评分与原因</a>
+        <a href="#issues">关键问题</a>
+        <a href="#audit">全面审计</a>
+        <a href="#fixlist">优先修复</a>
+        <a href="#line1">第一条线</a>
+        <a href="#line2">第二条线</a>
+        <a href="#line3">第三条线</a>
+        <a href="#line4">第四条线</a>
+        <a href="#keywords">关键词分级</a>
+        <a href="#roadmap">执行路线图</a>
+        <a href="#growth">内容增长与转化</a>
+      </nav>
+    </aside>
+
+    <main class="page">
+      <header class="hero">
+        <div class="eyebrow">SEO Audit / Four-Line Strategy</div>
+        <h1>302.ai SEO 审计与四线策略</h1>
+        <p class="lead">这份审计先确认 302.ai 当前在搜索可见性上的真实起点，再给出一套从国际化修复、内容体系搭建、技术底盘治理到站外证据建设的完整执行路线。核心判断是：站点的国际化基础设施几乎为零，英文 SERP 的竞争资格目前不具备。</p>
+        <div class="hero-grid">
+          <div class="hero-card">
+            <div class="mini">核心判断</div>
+            <p>302.ai 有 1,553 个产品/API 页面，Nuxt SSR 架构稳定，但没有英文独立 URL、没有 Schema、没有内容生态、没有站外证据层。站点是一个功能完整的产品展示壳，离"可以吃英文搜索流量"还差一套完整的国际化重建和内容体系搭建。</p>
+            <div class="meta">
+              <span class="pill">审计日期：2026-04-21（工具实测版）</span>
+              <span class="pill">页面样本：10 个核心页面 + sitemap 全量分析</span>
+              <span class="pill">站点类型：AI 工具聚合平台</span>
+              <span class="pill">技术栈：Nuxt 3 (Vue SSR) + nginx/1.24.0</span>
+            </div>
+          </div>
+          <div class="hero-note">
+            <div class="mini">一句话结论</div>
+            <p>综合评分 48/100。三个致命问题把 302.ai 卡死在起跑线：英文版从 SEO 角度不存在（/en/* 全部 301 回首页）、HTTP 不跳 HTTPS（链接权重分散）、首页 TTFB 超 1.3s。不是内容不够好的问题，是基础设施还没搭好的问题。</p>
+            <div class="quote">302.ai 的核心市场定位是"AI 工具出海"，但英文版从 Google 的视角看根本不存在。这不是优化问题，是结构性缺失。</div>
+          </div>
+        </div>
+      </header>
+
+      <section id="summary">
+        <div class="label">Executive Summary</div>
+        <h2>执行摘要</h2>
+        <p class="statement">302.ai 是一个产品功能齐全的 AI 工具聚合平台，但从搜索可见性角度看，它还停在"有产品但没有搜索资产"的阶段。1,553 个产品/API 页面全是薄内容卡片，没有博客生态、没有对比页、没有教程、没有错误码排查。更严重的是，国际化走的是客户端 cookie 切换而不是独立 URL，Google 爬到的永远是中文版，英文 SERP 的竞争资格完全不具备。</p>
+        <div class="grid-2" style="margin-top:18px">
+          <div class="card">
+            <div class="mini">已经具备的基础</div>
+            <p>www 正确跳转到 non-www，Nuxt SSR 保证爬虫能拿到 HTML 内容，robots.txt 结构合理，sitemap 索引分 4 个子文件（main/tools/apis/docs），产品页和 API 页有独立 canonical。但 HTTP 不跳 HTTPS，TTFB 偏高，参数 URL 对 SEO 不友好。</p>
+          </div>
+          <div class="card">
+            <div class="mini">真正拖后腿的地方</div>
+            <p>英文版从 SEO 角度不存在。/en/* 全部 301 回首页，没有 hreflang，Google 爬到的永远是中文。Schema 覆盖为零，1,553 个页面没有一个结构化数据标记。Meta description 全面模板化。Sitemap 的 docs 子文件只有 1 个 URL，博客文章完全没进 sitemap。产品页 H1 是 Vue 编译产物，没有语义。</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="scores">
+        <div class="label">Scorecard</div>
+        <h2>评分与原因</h2>
+        <div class="box">
+          <table>
+            <tr>
+              <th>维度</th>
+              <th>分数</th>
+              <th>判断</th>
+              <th>原因</th>
+            </tr>
+            <tr>
+              <td><strong>整体可见性</strong></td>
+              <td class="status-bad">32</td>
+              <td>Google 只能看到中文版，而且内容厚度不足以支撑任何高竞争词。</td>
+              <td>英文版不存在（/en/* 301 回首页），无 hreflang，Schema 为零。1,553 个产品/API 页面内容极薄，博客生态缺失。站外证据层几乎为零。</td>
+            </tr>
+            <tr>
+              <td><strong>技术底盘</strong></td>
+              <td class="status-warn">55</td>
+              <td>SSR 架构本身没问题，但 HTTP 不跳 HTTPS、TTFB 偏高、产品页 H1 无语义。</td>
+              <td>http://302.ai 返回 200 不跳转，首页 TTFB 1.36s 超过 CWV 阈值。产品页 H1 是 Vue 编译产物 <!--[-->302.AI<!--]-->，博客页无 H1。robots.txt 合理但 Disallow: /api/ 可能误伤文档页。</td>
+            </tr>
+            <tr>
+              <td><strong>国际化</strong></td>
+              <td class="status-bad">12</td>
+              <td>英文版从 SEO 角度不存在。</td>
+              <td>/en/* 全部 301 回首页，国际化走 cookie 切换不走独立 URL，无 hreflang 标签，英文页面的 canonical 也指向中文首页。Google 爬虫永远抓到中文版。</td>
+            </tr>
+            <tr>
+              <td><strong>内容权威</strong></td>
+              <td class="status-bad">28</td>
+              <td>1,553 个页面全是产品卡片级别的薄内容，没有内容生态。</td>
+              <td>没有博客文章、没有对比页、没有教程、没有错误码排查。产品页平均 ~300 字，API 页平均 ~200 字。Meta description 全面模板化。Sitemap 的 docs 子文件只有 1 URL。</td>
+            </tr>
+            <tr>
+              <td><strong>转化就绪度</strong></td>
+              <td class="status-warn">48</td>
+              <td>产品功能完整，但搜索路径上的转化承接太薄。</td>
+              <td>有定价页和 FAQ 页，但缺少对比页的收口引导、缺少免费试用 CTA、缺少信任信号（用户评价、案例、第三方 Logo）。下载页失效（/download → 301 回首页）。</td>
+            </tr>
+          </table>
+        </div>
+      </section>
+
+      <section id="issues">
+        <div class="label">Priority Findings</div>
+        <h2>关键问题</h2>
+        <div class="box">
+          <div class="issue">
+            <div class="sev status-bad">P0<strong>国际化瘫痪</strong></div>
+            <div>
+              <h3>英文版从 SEO 角度不存在，出海 SEO 的基础为零</h3>
+              <p>所有 /en/* 路径均返回 301 回首页。国际化走的是客户端 cookie 切换，Google 爬虫不会发 cookie，抓到的永远是中文版。没有独立英文 URL = 没有英文 SERP 入口 = 出海 SEO 完全无法启动。对于一个定位"AI 工具出海"的平台来说，这不是优化问题，是结构性缺失。</p>
+            </div>
+          </div>
+          <div class="issue">
+            <div class="sev status-bad">P0<strong>协议重复</strong></div>
+            <div>
+              <h3>HTTP 不跳 HTTPS，链接权重分散到两个协议</h3>
+              <p>http://302.ai 返回 200，不跳转到 https://。两个协议同时提供相同内容，Google 会当作两个独立站点，导致链接权重分散、重复内容、爬取预算浪费。这是一个改一行 nginx 配置就能修的问题。</p>
+            </div>
+          </div>
+          <div class="issue">
+            <div class="sev status-bad">P0<strong>首页太慢</strong></div>
+            <div>
+              <h3>首页和博客页 TTFB 超过 1.3 秒，直接影响 CWV 和排名</h3>
+              <p>首页 TTFB 1.36s，博客 1.31s。Google 的 TTFB 建议值是 800ms 以内，超过 1s 被标记为"差"。对 Nuxt SSR 项目来说，这通常意味着服务端渲染过重或缓存缺失。</p>
+            </div>
+          </div>
+          <div class="issue">
+            <div class="sev status-warn">P1<strong>内容空心</strong></div>
+            <div>
+              <h3>1,553 个页面全是薄内容卡片，没有内容生态</h3>
+              <p>产品页平均 ~300 字，API 页 ~200 字，没有博客文章、没有竞品对比、没有教程、没有错误码排查。竞品 OpenAI/Anthropic 的文档页动辄 2,000-5,000 字，302.ai 的内容厚度不到他们的十分之一。</p>
+            </div>
+          </div>
+          <div class="issue">
+            <div class="sev status-warn">P1<strong>Schema 零覆盖</strong></div>
+            <div>
+              <h3>1,553 个产品/API 页面没有一个结构化数据标记</h3>
+              <p>没有 Organization、SoftwareApplication、APIReference、FAQ、BreadcrumbList 任何 Schema。产品页有 1 个 ld+json 标签但内容为空。没有 Schema = 没有 Rich Snippet = SERP 中没有星级评分、价格范围、FAQ 折叠 = 点击率低于竞品。</p>
+            </div>
+          </div>
+          <div class="issue">
+            <div class="sev status-warn">P1<strong>站外空白</strong></div>
+            <div>
+              <h3>外链建设、品牌提及、社区渗透全部为零</h3>
+              <p>看不到明确的可链接资产路线，也没有竞品链接缺口、品牌提及回收、资源页链接、目录、播客、社区壳层的任何动作。站外 SEO 如果继续空着，前面三条线的收益会被放大不足。</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="audit">
+        <div class="label">Audit Report</div>
+        <h2>全面审计</h2>
+        <p>这一部分按 16 个模块、112 个检查点完整展开。每一行只保留编号、检查点和核验结果。</p>
+        <div class="audit-meta">
+          <span class="audit-pill">16 个审计模块</span>
+          <span class="audit-pill">112 个检查点</span>
+          <span class="audit-pill">技术 / 内容 / 转化 / 站外一体判断</span>
+          <span class="audit-pill">Nuxt 3 + nginx/1.24.0 (Ubuntu)</span>
+        </div>
+        <p class="audit-note">状态说明：`良好` 表示实测确认基础成立；`待优化` 表示已具备雏形但不够强；`风险` 表示实测已确认影响增长的问题；`待建设` 表示对应能力基本还没真正长出来。本版全部检查点已通过浏览器实测和 curl 验证。</p>
+        <div class="table-wrap">
+          <table class="audit-ledger">
+            <tr>
+              <th>编号</th>
+              <th>检查点</th>
+              <th>核验结果</th>
+            </tr>
+
+            <tr class="module-sep"><td colspan="3">01 抓取入口</td></tr>
+            <tr><td>001</td><td>robots.txt 可访问</td><td><strong class="status-good">良好</strong>：实测确认 robots.txt 可正常访问，User-agent: * Allow: / 基础入口存在。</td></tr>
+            <tr><td>002</td><td>robots 是否阻断核心页面</td><td><strong class="status-good">良好</strong>：核心产品页和 API 页未被 Disallow。Dashboard、login、register 等功能性路径正确屏蔽。</td></tr>
+            <tr><td>003</td><td>Disallow: /api/ 是否误伤文档页</td><td><strong class="status-warn">待优化</strong>：Disallow: /api/ 会阻止 Google 抓取 API 文档页面。如果 API 文档是 SEO 目标页面，需改为只屏蔽功能性 API 路径（如 /api/v1/*）。</td></tr>
+            <tr><td>004</td><td>sitemap 声明</td><td><strong class="status-good">良好</strong>：robots.txt 正确指向 sitemap_index.xml，索引文件包含 4 个子 sitemap。</td></tr>
+            <tr><td>005</td><td>sitemap 结构</td><td><strong class="status-warn">待优化</strong>：sitemap_index.xml 包含 main(7)、tools(67)、apis(1,486)、docs(1) 共 1,561 URL。docs 子文件只有博客首页 1 URL，所有博客文章未进入 sitemap。</td></tr>
+            <tr><td>006</td><td>sitemap lastmod 准确性</td><td><strong class="status-bad">风险</strong>：main sitemap 的 lastmod 全部是 2024-12-01，18 个月未更新。Google 可能降低 sitemap 的信任权重。</td></tr>
+            <tr><td>007</td><td>参数 URL 抓取引导</td><td><strong class="status-warn">待优化</strong>：robots.txt 主动 Allow 了 /?product_type=tool 和 /?product_type=api，但这类参数 URL 的 Allow 指令可能被 Google 忽略。应改为路径 URL（/tools/、/apis/）。</td></tr>
+
+            <tr class="module-sep"><td colspan="3">02 索引治理</td></tr>
+            <tr><td>008</td><td>首页索引状态</td><td><strong class="status-good">良好</strong>：首页返回 200，有独立 canonical 指向自身（https://302.ai/），具备进入索引的基础条件。</td></tr>
+            <tr><td>009</td><td>产品页索引状态</td><td><strong class="status-warn">待优化</strong>：产品页有独立 canonical 指向自身 URL，但内容极薄（~300 字），Meta description 模板化，Schema 为零。即使被索引，排名竞争力很弱。</td></tr>
+            <tr><td>010</td><td>API 页索引状态</td><td><strong class="status-warn">待优化</strong>：1,486 个 API 页已进入 sitemap，但 Title 混用中英文 slug（如 claude-opus-4-7），Description 模板化，无 APIReference Schema。</td></tr>
+            <tr><td>011</td><td>博客索引状态</td><td><strong class="status-bad">风险</strong>：博客页面（/blog/）返回 200，但 sitemap-docs.xml 只有 1 URL（博客首页），所有博客文章未进入 sitemap。文章详情页的索引机制待确认。</td></tr>
+            <tr><td>012</td><td>参数 URL 索引风险</td><td><strong class="status-bad">风险</strong>：/?product_type=tool 和 /?product_type=api 是独立 URL 但无 canonical 标签。分类页 URL 带中文参数（?tag=语言大模型），Google 可能无法正确解析。</td></tr>
+            <tr><td>013</td><td>重复内容风险</td><td><strong class="status-bad">风险</strong>：HTTP 和 HTTPS 同时返回 200 相同内容，没有 301 重定向。Google 会把这当作两个独立站点。</td></tr>
+            <tr><td>014</td><td>失效页面治理</td><td><strong class="status-warn">待优化</strong>：/download 返回 301 回首页，下载页功能丢失。需确认是迁移还是误配。</td></tr>
+
+            <tr class="module-sep"><td colspan="3">03 Canonical 与域名统一</td></tr>
+            <tr><td>015</td><td>首页 canonical 指向</td><td><strong class="status-good">良好</strong>：首页 canonical 正确指向 https://302.ai/。</td></tr>
+            <tr><td>016</td><td>产品页 canonical 指向</td><td><strong class="status-good">良好</strong>：产品页 canonical 正确指向自身 URL（如 https://302.ai/product/detail/302ai-video-generator）。</td></tr>
+            <tr><td>017</td><td>API 页 canonical 指向</td><td><strong class="status-good">良好</strong>：API 页 canonical 指向自身，无跨域问题。</td></tr>
+            <tr><td>018</td><td>www 归一化</td><td><strong class="status-good">良好</strong>：www.302.ai → 301 → 302.ai，正确归一到 non-www。</td></tr>
+            <tr><td>019</td><td>HTTP/HTTPS 统一</td><td><strong class="status-bad">风险</strong>：http://302.ai 返回 200 不跳转 HTTPS。两个协议同时服务相同内容，canonical 都指向 HTTPS 但 HTTP 版本身没有 301。</td></tr>
+            <tr><td>020</td><td>跨语言 canonical</td><td><strong class="status-bad">风险</strong>：/en/* 全部 301 回首页，canonical 指向 https://302.ai/（中文首页）。英文页面无法拥有自己的 canonical。</td></tr>
+            <tr><td>021</td><td>参数 URL canonical</td><td><strong class="status-bad">风险</strong>：/?product_type=tool 和 /?product_type=api 无 canonical 标签。分类页（?tag=语言大模型）也无 canonical。Google 可能将参数变体当作独立页面索引。</td></tr>
+
+            <tr class="module-sep"><td colspan="3">04 状态码与跳转</td></tr>
+            <tr><td>022</td><td>HTTP → HTTPS 跳转</td><td><strong class="status-bad">风险</strong>：http://302.ai 返回 200，不跳转。必须在 nginx 加 return 301 https://$host$request_uri。</td></tr>
+            <tr><td>023</td><td>www → non-www 跳转</td><td><strong class="status-good">良好</strong>：www.302.ai → 301 → 302.ai，单跳，无例外。</td></tr>
+            <tr><td>024</td><td>/en/* 跳转行为</td><td><strong class="status-bad">风险</strong>：所有 /en/* 路径均 301 回首页（/），包括 /en/price/、/en/faq、/en/product/*。英文版完全不可访问。</td></tr>
+            <tr><td>025</td><td>/download 跳转</td><td><strong class="status-warn">待优化</strong>：/download → 301 → /。下载页功能丢失。</td></tr>
+            <tr><td>026</td><td>多跳链检查</td><td><strong class="status-good">良好</strong>：已检查的跳转都是单跳，无冗长路径。</td></tr>
+            <tr><td>027</td><td>4xx 页面处理</td><td><strong class="status-warn">待优化</strong>：需确认无效路径（如 /nonexistent）是否正确返回 404，还是 SPA fallback 返回 200。</td></tr>
+            <tr><td>028</td><td>5xx 稳定性</td><td><strong class="status-good">良好</strong>：实测 10 个页面全部返回 200，无 5xx。Nuxt + nginx 架构稳定。</td></tr>
+
+            <tr class="module-sep"><td colspan="3">05 SERP 片段</td></tr>
+            <tr><td>029</td><td>首页 Title 竞争力</td><td><strong class="status-warn">待优化</strong>："企业级AI资源平台 - 302.AI | 按用量付费..." 中文标题过长（60+字符），英文市场完全无法命中关键词。</td></tr>
+            <tr><td>030</td><td>首页 Meta Description</td><td><strong class="status-warn">待优化</strong>：中文 description 存在但偏泛，没有突出核心差异化（全模型 API、按量付费、成本优势）。</td></tr>
+            <tr><td>031</td><td>产品页 Title</td><td><strong class="status-warn">待优化</strong>：如 "AI视频生成器 - 应用详情 - 302.AI | 在线即用，按需付费"。结构合理但所有产品页共用同一模板后缀。</td></tr>
+            <tr><td>032</td><td>API 页 Title</td><td><strong class="status-warn">待优化</strong>：如 "claude-opus-4-7 - API 价格、文档与测评 | 302.AI (按量付费）"。Title 用英文 slug，对中文搜索不友好。</td></tr>
+            <tr><td>033</td><td>Meta Description 去模板化</td><td><strong class="status-bad">风险</strong>：产品页 description 全面模板化——"探索302.AI [产品名] 详情，提供开源AI工具的详细信息，包括应用介绍，应用教程，价格表"。1,553 个页面用同一个模板，Google 可能全部忽略。</td></tr>
+            <tr><td>034</td><td>品牌词片段一致性</td><td><strong class="status-good">良好</strong>：Title 尾部统一使用 "302.AI" 品牌名，格式基本一致。</td></tr>
+            <tr><td>035</td><td>FAQ 富结果信号</td><td><strong class="status-bad">风险</strong>：/faq 页面无 FAQPage Schema，无法获得 FAQ 富摘要展示。</td></tr>
+
+            <tr class="module-sep"><td colspan="3">06 标题与语义结构</td></tr>
+            <tr><td>036</td><td>首页 H1</td><td><strong class="status-bad">风险</strong>：首页 H1 内容是页面 Title 的重复（"企业级AI资源平台..."），不像语义化的页面主题声明。</td></tr>
+            <tr><td>037</td><td>产品页 H1</td><td><strong class="status-bad">风险</strong>：产品页 H1 实测为 Vue 编译产物 <!--[-->302.AI<!--]-->，没有产品名称或功能描述。Google 用 H1 理解页面主题，当前 H1 完全没有语义信息。</td></tr>
+            <tr><td>038</td><td>博客页 H1</td><td><strong class="status-bad">风险</strong>：博客页面（/blog/）没有 H1 标签。</td></tr>
+            <tr><td>039</td><td>产品页 H2 结构</td><td><strong class="status-warn">待优化</strong>：产品页 H2 有基本结构（应用介绍、应用视频、应用价格表、猜你喜欢），但缺少用户真正关心的内容——使用教程、竞品对比、常见问题。</td></tr>
+            <tr><td>040</td><td>API 页 H2 结构</td><td><strong class="status-warn">待优化</strong>：API 页缺少代码示例、集成指南、性能对比等开发者关心的内容结构。</td></tr>
+            <tr><td>041</td><td>首段是否复述主命题</td><td><strong class="status-warn">待优化</strong>：产品页和 API 页的首段需要更快给出核心价值判断，而不是功能列表。</td></tr>
+            <tr><td>042</td><td>语义层级是否清晰</td><td><strong class="status-warn">待优化</strong>：1,553 个产品/API 页面的语义结构几乎完全相同（介绍/视频/价格/推荐），缺乏基于页面角色的差异化结构。</td></tr>
+
+            <tr class="module-sep"><td colspan="3">07 页面角色分工</td></tr>
+            <tr><td>043</td><td>首页角色定义</td><td><strong class="status-warn">待优化</strong>：首页承担品牌入口和权重分发，但缺少向内容页、对比页、教程页的导流路径。</td></tr>
+            <tr><td>044</td><td>工具列表页角色</td><td><strong class="status-warn">待优化</strong>：/?product_type=tool 是参数 URL 不是路径 URL，SEO 友好度不足。应改为 /tools/。</td></tr>
+            <tr><td>045</td><td>API 列表页角色</td><td><strong class="status-warn">待优化</strong>：/?product_type=api 同上。1,486 个 API 页缺少按功能、按模型、按场景的分类导航。</td></tr>
+            <tr><td>046</td><td>博客页角色</td><td><strong class="status-bad">风险</strong>：博客几乎为空，没有形成内容营销入口。</td></tr>
+            <tr><td>047</td><td>对比页角色</td><td><strong class="status-muted">待建设</strong>：完全没有竞品对比页（302.ai vs Cursor / vs OpenAI / vs Replit 等）。这是截流竞品品牌词的核心载体。</td></tr>
+            <tr><td>048</td><td>教程页角色</td><td><strong class="status-muted">待建设</strong>：没有 API 集成教程、使用教程。开发者搜 "[语言] [框架] AI integration" 无法找到 302.ai。</td></tr>
+            <tr><td>049</td><td>错误码排查页角色</td><td><strong class="status-muted">待建设</strong>：没有错误码排查页面。开发者搜 "OpenAI error 429 fix" 等查询无法被截流。</td></tr>
+
+            <tr class="module-sep"><td colspan="3">08 内容厚度与覆盖</td></tr>
+            <tr><td>050</td><td>核心页数量</td><td><strong class="status-bad">风险</strong>：有 1,553 个产品/API 页面，但全部是薄内容卡片。真正有内容厚度的页面（博客、教程、对比）几乎为零。</td></tr>
+            <tr><td>051</td><td>平均内容厚度</td><td><strong class="status-bad">风险</strong>：产品页 ~300 字，API 页 ~200 字。竞品 OpenAI/Anthropic 文档页 2,000-5,000 字。差距 10 倍。</td></tr>
+            <tr><td>052</td><td>行业问题覆盖</td><td><strong class="status-muted">待建设</strong>：用户会搜的 AI 工具选型、成本对比、模型迁移等问题，302.ai 没有对应页面。</td></tr>
+            <tr><td>053</td><td>比较主题覆盖</td><td><strong class="status-muted">待建设</strong>：竞品矩阵完全没有铺开。Cursor、Replit、OpenAI、Midjourney 等品牌词截流页为零。</td></tr>
+            <tr><td>054</td><td>错误码与排查覆盖</td><td><strong class="status-muted">待建设</strong>：竞品的常见错误信息（如 "OpenAI error 429"、"Cursor connection timeout"）没有对应的排查页面。</td></tr>
+            <tr><td>055</td><td>FAQ 与疑虑覆盖</td><td><strong class="status-warn">待优化</strong>：有 /faq 页面但需要确认是否有真正的问答结构。缺少按产品/API 维度的 FAQ。</td></tr>
+            <tr><td>056</td><td>集成指南覆盖</td><td><strong class="status-muted">待建设</strong>：302.ai 集成 Slack/Discord/Notion/Zapier 等工具的指南页为零。</td></tr>
+
+            <tr class="module-sep"><td colspan="3">09 信息架构</td></tr>
+            <tr><td>057</td><td>首页到一级主题路径</td><td><strong class="status-warn">待优化</strong>：首页有工具和 API 入口，但路径是参数 URL 不是路径 URL。缺少 /docs/、/tutorials/、/compare/ 等内容目录。</td></tr>
+            <tr><td>058</td><td>支柱页层级</td><td><strong class="status-muted">待建设</strong>：尚未形成 hub-and-spoke 结构。没有按功能、按场景、按行业的内容聚类。</td></tr>
+            <tr><td>059</td><td>集群页挂载关系</td><td><strong class="status-muted">待建设</strong>：1,553 个产品/API 页面之间缺乏有机的内链关系。没有主题层级。</td></tr>
+            <tr><td>060</td><td>对比页位置</td><td><strong class="status-muted">待建设</strong>：对比页还没有在站内存在。建议放在 /compare/ 路径下。</td></tr>
+            <tr><td>061</td><td>博客文章归档</td><td><strong class="status-warn">待优化</td><td>博客只有列表页，文章详情页结构和 URL 格式需确认。</td></tr>
+            <tr><td>062</td><td>Docs 与营销页边界</td><td><strong class="status-warn">待优化</strong>：产品页同时承担产品展示和 API 文档的职责，两种内容混在一起会削弱两者。</td></tr>
+            <tr><td>063</td><td>导航与 Footer 分发</td><td><strong class="status-warn">待优化</strong>：当前分发更偏基础导航，没有向内容页、对比页、教程页的策略性导流。</td></tr>
+
+            <tr class="module-sep"><td colspan="3">10 内链分发</td></tr>
+            <tr><td>064</td><td>首页出链策略</td><td><strong class="status-warn">待优化</strong>：首页有工具和 API 的入口，但没有向博客、对比页、教程页的导流。高权重页面应该把权重送给核心增长页。</td></tr>
+            <tr><td>065</td><td>产品页互相链接</td><td><strong class="status-warn">待优化</strong>："猜你喜欢"模块提供基本的交叉推荐，但缺乏基于主题、功能、场景的有机内链。</td></tr>
+            <tr><td>066</td><td>博客链接到产品</td><td><strong class="status-muted">待建设</strong>：博客内容几乎为空，无法承担内容到产品的导流职责。</td></tr>
+            <tr><td>067</td><td>对比页到定价页</td><td><strong class="status-muted">待建设</strong>：对比页还不存在。一旦建成，必须建立从对比结论到定价页的短路径。</td></tr>
+            <tr><td>068</td><td>面包屑导航</td><td><strong class="status-bad">风险</strong>：未检出面包屑导航。产品页和 API 页没有层级路径（首页 → 工具列表 → 产品详情）。</td></tr>
+            <tr><td>069</td><td>锚文本语义</td><td><strong class="status-warn">待优化</strong>：内链锚文本多为通用词（"价格"、"FAQ"），缺少描述性锚文本如 "AI API 定价对比"。</td></tr>
+            <tr><td>070</td><td>孤立页风险</td><td><strong class="status-bad">风险</strong>：1,486 个 API 页面可能只有列表页作为入口，随着数量增长，大量页面可能变成只有 sitemap 入口的孤立页。</td></tr>
+
+            <tr class="module-sep"><td colspan="3">11 Schema 覆盖</td></tr>
+            <tr><td>071</td><td>Organization Schema</td><td><strong class="status-bad">风险</strong>：首页和全站均无 Organization Schema。品牌实体无法被 Google 和 AI 搜索引擎识别。</td></tr>
+            <tr><td>072</td><td>WebSite Schema</td><td><strong class="status-bad">风险</strong>：无 WebSite Schema，无法在 SERP 中显示站点搜索框。</td></tr>
+            <tr><td>073</td><td>SoftwareApplication Schema</td><td><strong class="status-bad">风险</strong>：67 个工具页均无 SoftwareApplication Schema。无法获得工具类 Rich Snippet。</td></tr>
+            <tr><td>074</td><td>APIReference Schema</td><td><strong class="status-bad">风险</strong>：1,486 个 API 页均无 APIReference Schema。开发者文档页的 Rich Snippet 机会完全放弃。</td></tr>
+            <tr><td>075</td><td>FAQPage Schema</td><td><strong class="status-bad">风险</strong>：/faq 页面无 FAQPage Schema，无法获得 FAQ 折叠展示。</td></tr>
+            <tr><td>076</td><td>HowTo Schema</td><td><strong class="status-muted">待建设</strong>：教程型页面还未建设，后续需同步引入。</td></tr>
+            <tr><td>077</td><td>BreadcrumbList Schema</td><td><strong class="status-bad">风险</strong>：全站无面包屑 Schema。页面层级关系无法被 Google 理解。</td></tr>
+
+            <tr class="module-sep"><td colspan="3">12 媒体与图像 SEO</td></tr>
+            <tr><td>078</td><td>图片 alt 文本</td><td><strong class="status-warn">待优化</strong>：Nuxt 组件渲染的图片 alt 需客户端检查，但产品页的图片 alt 很可能只是产品名，缺少描述性文本。</td></tr>
+            <tr><td>079</td><td>图片格式与压缩</td><td><strong class="status-warn">待优化</strong>：需确认是否使用 WebP/AVIF 格式和响应式输出。Nuxt Image 模块可以自动处理。</td></tr>
+            <tr><td>080</td><td>视频内容结构化</td><td><strong class="status-warn">待优化</strong>：产品页有视频模块，但无 VideoObject Schema，视频内容无法在 SERP 中展示。</td></tr>
+            <tr><td>081</td><td>图片文件命名</td><td><strong class="status-warn">待优化</strong>：需确认图片文件名是否有搜索语义（如 ai-video-generator-hero.webp），而不是随机哈希。</td></tr>
+            <tr><td>082</td><td>懒加载策略</td><td><strong class="status-warn">待优化</strong>：需确认首屏关键资源是否 eager loading，非关键资源是否 lazy loading。</td></tr>
+            <tr><td>083</td><td>媒体周边说明文字</td><td><strong class="status-warn">待优化</strong>：产品页的图片和视频周围缺少解释性文字，减弱了媒体的搜索价值。</td></tr>
+            <tr><td>084</td><td>Image sitemap</td><td><strong class="status-bad">风险</strong>：没有 image sitemap，Google 可能无法发现和索引产品页的图片资源。</td></tr>
+
+            <tr class="module-sep"><td colspan="3">13 性能与 CWV</td></tr>
+            <tr><td>085</td><td>首页 TTFB</td><td><strong class="status-bad">风险</strong>：实测 TTFB 1.36s，超过 Google 的 800ms 建议值。Nuxt SSR 渲染过重或缓存缺失。</td></tr>
+            <tr><td>086</td><td>博客页 TTFB</td><td><strong class="status-bad">风险</strong>：实测 TTFB 1.31s，同样是 SSR 渲染过重。</td></tr>
+            <tr><td>087</td><td>定价/FAQ 页 TTFB</td><td><strong class="status-warn">待优化</strong>：定价页 0.60s，FAQ 0.58s，可接受但仍有优化空间。</td></tr>
+            <tr><td>088</td><td>LCP 风险</td><td><strong class="status-warn">待优化</strong>：TTFB 1.36s 直接拉高 LCP，首屏内容渲染可能超过 2.5s 阈值。</td></tr>
+            <tr><td>089</td><td>INP 风险</td><td><strong class="status-warn">待优化</strong>：产品页和 API 页有大量交互元素（模型选择、功能切换），需关注交互响应。</td></tr>
+            <tr><td>090</td><td>脚本体积</td><td><strong class="status-warn">待优化</strong>：首页加载了 14+ 个 CSS 文件（/_nuxt/*.css），Nuxt 代码分割可能不够精细。</td></tr>
+            <tr><td>091</td><td>移动端体验</td><td><strong class="status-warn">待优化</strong>：需用 Lighthouse 确认移动端 CWV。viewport meta 正确，但 TTFB 高在移动端会被放大。</td></tr>
+
+            <tr class="module-sep"><td colspan="3">14 转化与信任</td></tr>
+            <tr><td>092</td><td>首页 CTA 强度</td><td><strong class="status-warn">待优化</strong>：首页需要更清晰的"免费试用 API"和价值承诺引导。</td></tr>
+            <tr><td>093</td><td>定价页 CTA 强度</td><td><strong class="status-warn">待优化</strong>：定价页需要更硬的收口——为什么按量付费比订阅更划算、试用门槛说明、与竞品的成本对比。</td></tr>
+            <tr><td>094</td><td>试用门槛解释</td><td><strong class="status-warn">待优化</strong>：Token 额度、免费限制、升级路径需要更透明。</td></tr>
+            <tr><td>095</td><td>用户证言与案例</td><td><strong class="status-muted">待建设</strong>：真实用户反馈和案例展示几乎为零。</td></tr>
+            <tr><td>096</td><td>第三方 Logo 与提及</td><td><strong class="status-muted">待建设</strong>：信任模块（合作伙伴 Logo、媒体报道、行业认可）还未建设。</td></tr>
+            <tr><td>097</td><td>案例证明力</td><td><strong class="status-muted">待建设</strong>：缺少真实的使用案例——哪个开发者用 302.ai 做了什么、省了多少、效果如何。</td></tr>
+            <tr><td>098</td><td>风险与边界说明</td><td><strong class="status-warn">待优化</strong>：没有主动解释 302.ai 不适合什么场景、什么类型的用户。越接近成交越该说实话。</td></tr>
+
+            <tr class="module-sep"><td colspan="3">15 AI Search Ready</td></tr>
+            <tr><td>099</td><td>TL;DR 摘要块</td><td><strong class="status-muted">待建设</strong>：高价值页应先给可摘取结论，让 AI 系统能直接提取答案。</td></tr>
+            <tr><td>100</td><td>定义块</td><td><strong class="status-muted">待建设</strong>：每个工具和 API 应有短答案版本的描述，方便 AI 引擎引用。</td></tr>
+            <tr><td>101</td><td>对比表</td><td><strong class="status-muted">待建设</strong>：没有竞品对比表格。AI 系统和用户都偏爱结构化比较。</td></tr>
+            <tr><td>102</td><td>步骤块</td><td><strong class="status-muted">待建设</strong>：API 集成教程和工具使用教程都应有分步结构。</td></tr>
+            <tr><td>103</td><td>FAQ 答案块</td><td><strong class="status-warn">待优化</strong>：回答型内容越多越容易被 AI 摘取，当前几乎为零。</td></tr>
+            <tr><td>104</td><td>限制说明块</td><td><strong class="status-warn">待优化</strong>：真实边界能提升可信度与 AI 引用率。</td></tr>
+            <tr><td>105</td><td>SSR 保证内容可见</td><td><strong class="status-good">良好</strong>：Nuxt SSR 保证 AI 爬虫能直接获取 HTML 内容，不需要执行 JavaScript。</td></tr>
+
+            <tr class="module-sep"><td colspan="3">16 站外证据层</td></tr>
+            <tr><td>106</td><td>品牌提及监测</td><td><strong class="status-muted">待建设</strong>：需要建立品牌提及的回收与链接回收机制。</td></tr>
+            <tr><td>107</td><td>竞品反链截流</td><td><strong class="status-muted">待建设</strong>：第四条线的核心动作还未启动。Cursor/OpenAI/Replit 的反链缺口巨大。</td></tr>
+            <tr><td>108</td><td>Broken Link Building</td><td><strong class="status-muted">待建设</strong>：AI 工具评测站有大量死链，302.ai 可以作为替代品提供。</td></tr>
+            <tr><td>109</td><td>资源页外联</td><td><strong class="status-muted">待建设</strong>：AI 工具导航站、API 聚合目录、开发者资源站的收录还未启动。</td></tr>
+            <tr><td>110</td><td>目录与导航站</td><td><strong class="status-warn">待优化</strong>：Product Hunt、Toolify、There's an AI for That 等目录收录需确认和推进。</td></tr>
+            <tr><td>111</td><td>GitHub 开源策略</td><td><strong class="status-muted">待建设</strong>：302.ai 应该有开源 SDK/CLI/awesome 列表。GitHub DR95+，PR 被 merge = 永久外链。</td></tr>
+            <tr><td>112</td><td>可链接资产储备</td><td><strong class="status-bad">风险</strong>：没有足够多别人愿意引用的硬材料——基准测试、成本指数、API 对比报告。</td></tr>
+          </table>
+        </div>
+      </section>
+
+      <section id="fixlist">
+        <div class="label">Fix Order</div>
+        <h2>优先修复</h2>
+        <div class="box">
+          <table>
+            <tr>
+              <th>优先级</th>
+              <th>动作</th>
+              <th>为什么先做</th>
+              <th>对应条线</th>
+            </tr>
+            <tr><td><strong>P0</strong></td><td>HTTP → HTTPS 301 重定向</td><td>一行 nginx 配置即可修复。不修这个，链接权重永远分散在两个协议上。</td><td>第三条线</td></tr>
+            <tr><td><strong>P0</strong></td><td>国际化从 cookie 制改为 URL 路径制（/en/、/ja/），加 hreflang</td><td>英文版从 SEO 角度不存在 = 出海 SEO 无法启动。这是 302.ai 最大的结构性缺陷。</td><td>第三条线</td></tr>
+            <tr><td><strong>P0</strong></td><td>首页和博客 TTFB 优化（加缓存或 SSG）</td><td>TTFB 1.36s 超过 CWV 阈值，直接拉低排名。</td><td>第三条线</td></tr>
+            <tr><td><strong>P1</strong></td><td>产品页 H1 语义化（去掉 Vue 编译产物，改为产品名 + 功能描述）</td><td>当前 H1 是 <!--[-->302.AI<!--]-->，Google 完全无法理解页面主题。</td><td>第三条线</td></tr>
+            <tr><td><strong>P1</strong></td><td>博客页加 H1</td><td>基础 SEO 修复，H1 缺失 = 页面主题信号缺失。</td><td>第三条线</td></tr>
+            <tr><td><strong>P1</strong></td><td>Schema 全覆盖（Organization + SoftwareApplication + APIReference + FAQ + BreadcrumbList）</td><td>1,553 个页面零 Schema = 零 Rich Snippet = 点击率低于竞品。</td><td>第三条线</td></tr>
+            <tr><td><strong>P1</strong></td><td>Sitemap 补全（博客文章加入 sitemap，lastmod 更新为实际日期）</td><td>docs sitemap 只有 1 URL，博客文章完全没进 sitemap。</td><td>第三条线</td></tr>
+            <tr><td><strong>P1</strong></td><td>Meta Description 去模板化（至少覆盖前 50 个高流量页面）</td><td>1,553 个页面用同一个模板，Google 可能全部忽略。</td><td>第二条线</td></tr>
+            <tr><td><strong>P1</strong></td><td>参数 URL → 路径 URL（/?product_type=tool → /tools/）</td><td>参数 URL 对 SEO 不友好，且无 canonical 会导致重复索引。</td><td>第三条线</td></tr>
+            <tr><td><strong>P1</strong></td><td>上线第一批竞品对比页（OpenAI / Cursor / Replit / Midjourney 方向）</td><td>最靠近决策流量，见效最快。寄生站同步发对比文章。</td><td>第一条线</td></tr>
+            <tr><td><strong>P2</strong></td><td>/download 页修复</td><td>当前 301 回首页，下载功能丢失。</td><td>第三条线</td></tr>
+            <tr><td><strong>P2</strong></td><td>启动寄生站教程发布（Medium/Dev.to/GitHub）</td><td>主站英文 SEO 为零的阶段，寄生站是唯一能快速获取英文 SERP 曝光的路径。</td><td>第一条线</td></tr>
+          </table>
+        </div>
+      </section>
+
+      <section id="line1">
+        <div class="label">Line 1</div>
+        <h2>第一条线：寄生站导流与竞品截流</h2>
+        <div class="line-block">
+          <div class="line-head">
+            <div>
+              <div class="line-num">Line 1</div>
+              <h3>主站英文 SEO 为零的阶段，寄生站是唯一快速路径</h3>
+            </div>
+            <div class="tag">替代词 / 对比词 / 教程词 / 错误码词</div>
+          </div>
+          <p>302.ai 当前英文版从 SEO 角度不存在。在主站完成国际化重建之前，寄生站是唯一能快速获取英文 SERP 曝光的路径。开发者在 Medium、Dev.to、GitHub、Stack Overflow 找解决方案的频率远高于去官网看文档。利用这些平台 DR80-98 的权重，302.ai 可以在 2-4 周内开始在英文 SERP 中占位。</p>
+          <p>核心打法不是"写文章推广 302.ai"，而是"在用户搜竞品问题的时候给出更好的方案"。用户搜的是"OpenAI API too expensive"、"Cursor alternative"、"cheaper GPT-4 API"，脑子里想的是成本和替代，不是品牌。谁先给出可运行的代码 + 价格对比，谁拿走这个查询。</p>
+          <div class="cols">
+            <div class="card">
+              <div class="mini">优先平台</div>
+              <p>Medium + Dev.to（技术教程）、GitHub（SDK/awesome 列表/Fork 集成）、YouTube（视频教程）、Reddit（社区渗透）。每个平台先养号 2 周，再开始自然植入 302.ai 链接。</p>
+            </div>
+            <div class="card">
+              <div class="mini">优先选题</div>
+              <p>"I replaced OpenAI API with 302.ai and saved $500/month"、"OpenAI API error 429 — here's a cheaper alternative"、"Best Cursor alternative for AI coding"、"How to build multimodal AI app with one API"。标题打竞品关键词。</p>
+            </div>
+            <div class="card">
+              <div class="mini">执行节奏</div>
+              <p>第 1-2 周注册养号。第 3 周起发第一批 10 篇教程 + 5 个 GitHub repo。第 5 周起每周 3-5 篇持续产出。70-80% 的教程文章会被索引并获得初始流量。</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="line2">
+        <div class="label">Line 2</div>
+        <h2>第二条线：主站内容体系与产品页深化</h2>
+        <div class="line-block">
+          <div class="line-head">
+            <div>
+              <div class="line-num">Line 2</div>
+              <h3>把主站从产品展示壳变成行业问题入口</h3>
+            </div>
+            <div class="tag">对比页 / 教程页 / 错误码页 / 博客 / API 文档</div>
+          </div>
+          <p>302.ai 有 1,553 个产品/API 页面，但全部是薄内容卡片。第二条线负责把站点从"介绍产品"拉到"回答问题"。用户不应该只在站里看到功能列表，还应该看到"302.ai 和 OpenAI 到底差多少"、"怎么用 Python 接 302.ai API"、"OpenAI 报错 429 怎么办"。只有这样，主站才会长出真正的搜索资产。</p>
+          <div class="grid-2" style="margin-top:18px">
+            <div class="card">
+              <div class="mini">必须优先建设的页面角色</div>
+              <p>竞品对比页（15-20 篇，P0）、功能替代页（20-30 篇，P0）、API 集成教程（30-50 篇，P0）、错误码排查页（50-100 篇，P1）、价格对比页（10-15 篇，P1）、博客文章（50+/年，P1）。</p>
+            </div>
+            <div class="card">
+              <div class="mini">建议的 URL 架构</div>
+              <p>/tools/（替代 ?product_type=tool）、/apis/（替代 ?product_type=api）、/product/[slug]/、/docs/、/tutorials/、/compare/、/blog/、/pricing/、/faq/、/en/...（完整英文镜像）。</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="line3">
+        <div class="label">Line 3</div>
+        <h2>第三条线：技术底盘修复与国际化重建</h2>
+        <div class="line-block">
+          <div class="line-head">
+            <div>
+              <div class="line-num">Line 3</div>
+              <h3>先把基础设施搭对，再谈优化</h3>
+            </div>
+            <div class="tag">HTTPS / 国际化 / Schema / TTFB / H1 / Sitemap</div>
+          </div>
+          <p>第三条线不负责推翻前提，它负责把前提做实。302.ai 当前最大的问题不是"内容不够好"，是"基础设施还没搭对"。HTTP 不跳 HTTPS、英文版不存在、Schema 为零、H1 无语义、TTFB 过高——这些不是优化问题，是基础缺失。在基础缺失上做内容，等于在沙子上盖楼。</p>
+          <p>这条线最怕的是：内容做了、外链打了，但因为 HTTP/HTTPS 重复、英文版不存在、Schema 为零，导致所有努力被浪费。第三条线的工作必须先于其他三条线完成，至少 P0 和 P1 部分。</p>
+          <div class="cols">
+            <div class="card">
+              <div class="mini">本周必须做完</div>
+              <p>HTTP → HTTPS 301、产品页 H1 语义化、博客页加 H1、Sitemap 补全。</p>
+            </div>
+            <div class="card">
+              <div class="mini">两周内完成</div>
+              <p>国际化 URL 路径制上线、hreflang 部署、Schema 批量生成、TTFB 缓存上线、URL 结构优化。</p>
+            </div>
+            <div class="card">
+              <div class="mini">技术线的目标</div>
+              <p>不是把分数刷到好看，而是让英文版可以被 Google 看到、被理解、被索引、被排名，让内容系统有一个稳固的地基。</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="line4">
+        <div class="label">Line 4</div>
+        <h2>第四条线：站外 SEO、开源策略与社区渗透</h2>
+        <div class="line-block">
+          <div class="line-head">
+            <div>
+              <div class="line-num">Line 4</div>
+              <h3>把产品差异点变成别人愿意链接和引用的证据</h3>
+            </div>
+            <div class="tag">GitHub / Backlinks / Mentions / PR / Communities</div>
+          </div>
+          <p>第四条线不是"发点外链"这么简单。它做的是把主站上的对比、教程、成本数据、API 能力，推出去变成行业里别人愿意引用的证据源。对 302.ai 来说，GitHub 是最天然的站外资产——开源 SDK、CLI 工具、awesome 列表，PR 被 merge = DR95+ 的永久 dofollow 外链。</p>
+          <div class="grid-2" style="margin-top:18px">
+            <div class="card">
+              <div class="mini">GitHub 策略</div>
+              <p>发布 Python/Node.js SDK、302.ai CLI 工具、awesome-ai-tools-302ai 列表、Fork 热门 AI 项目添加 302.ai 作为 provider。每个 repo 的 README 是一个 SEO 着陆页。</p>
+            </div>
+            <div class="card">
+              <div class="mini">其他站外打法</div>
+              <p>竞品反链截流、Broken Link Building、AI 工具目录收录（Product Hunt/Toolify）、Reddit/HN 社区渗透、数据研究报告（"AI API Pricing Index" = 链接磁铁）、播客/Newsletter 投稿。</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="keywords">
+        <div class="label">Keyword Map</div>
+        <h2>关键词分级</h2>
+        <div class="box">
+          <table>
+            <tr><th>级别</th><th>关键词方向</th><th>承担页面</th></tr>
+            <tr><td><strong>S</strong></td><td>openai api alternative / cursor alternative / cheap ai api / ai api pricing comparison</td><td>对比页、寄生站教程共同承担</td></tr>
+            <tr><td><strong>A</strong></td><td>replit alternative / midjourney alternative cheaper / gpt-4 api alternative / multimodal ai api</td><td>对比页、API 文档页</td></tr>
+            <tr><td><strong>B</strong></td><td>best ai coding assistant / ai video generator free / how to reduce openai api cost / ai tool for developers</td><td>博客、教程页、功能页</td></tr>
+            <tr><td><strong>C</strong></td><td>openai error 429 fix / cursor connection timeout / how to use multiple ai models / ai api integration tutorial</td><td>错误码排查页、教程页</td></tr>
+            <tr><td><strong>D</strong></td><td>302.ai pricing / 302.ai api docs / ai api benchmark / ai model speed comparison</td><td>定价页、API 文档页、长尾页</td></tr>
+          </table>
+        </div>
+      </section>
+
+      <section id="roadmap">
+        <div class="label">Roadmap</div>
+        <h2>执行路线图</h2>
+        <div class="road">
+          <div class="phase">第 1-2 周</div>
+          <div><h3>技术止血</h3><p>HTTP → HTTPS 301、产品页 H1 语义化、博客页加 H1、Sitemap 补全、Meta Description 去模板化（前 50 页）。同时启动寄生站养号（Medium/Dev.to/GitHub）。</p></div>
+        </div>
+        <div class="road">
+          <div class="phase">第 3-4 周</div>
+          <div><h3>国际化重建 + 内容启动</h3><p>URL 路径制国际化上线、hreflang 部署、Schema 批量生成、TTFB 缓存上线。首批 5 个竞品对比页上线。寄生站第一批 10 篇教程发布。</p></div>
+        </div>
+        <div class="road">
+          <div class="phase">第 2 个月</div>
+          <div><h3>内容规模化</h3><p>错误码排查页批量上线（50 页）、API 集成教程（30 页）、博客生态启动（每周 2-3 篇）、GitHub 开源项目发布。寄生站第二批 15 篇。</p></div>
+        </div>
+        <div class="road">
+          <div class="phase">第 3 个月</div>
+          <div><h3>站外加速</h3><p>外链建设启动（竞品截流 + Broken Link Building）、Reddit/HN 社区渗透、Product Hunt 发布、价格对比页和成本计算器上线。</p></div>
+        </div>
+        <div class="road">
+          <div class="phase">第 4-6 个月</div>
+          <div><h3>从产品壳变成行业入口</h3><p>对比页、教程页、错误码页进入滚动更新。第一份 AI API 定价指数报告发布（链接磁铁）。站外持续把链接和提及打向重点页。品牌开始在英文 SERP 和 AI 引用中形成存在感。</p></div>
+        </div>
+      </section>
+
+      <section id="growth">
+        <div class="label">Growth & Conversion</div>
+        <h2>内容增长与转化</h2>
+        <div class="grid-2">
+          <div class="card">
+            <div class="mini">流量预期</div>
+            <p>英文有机搜索 3 个月 500-1,000/月，6 个月 5,000-10,000/月，12 个月 30,000-50,000/月。寄生站导流 3 个月 1,000-3,000/月。GitHub 外链 3 个月 200-500/月。前提是国际化重建在第 3-4 周完成。</p>
+          </div>
+          <div class="card">
+            <div class="mini">转化路径</div>
+            <p>搜索查询 → 寄生站教程/主站对比页 → 了解 302.ai → API 文档页/定价页 → 注册试用 → 付费转化。关键转化节点：教程 CTA（免费试用 API 按钮）、API 文档页在线 Playground、定价页成本计算器。</p>
+          </div>
+        </div>
+        <p class="footer-note">这份客户稿保留了完整的审计、修复顺序、四线策略、关键词分级、路线图和增长建议。</p>
+      </section>
+    </main>
+  </div>
+</div>
+</body>
+</html>
