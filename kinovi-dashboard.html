@@ -21,32 +21,6 @@
       --radius: 0.5rem;
     }
 
-    .serp-section { margin-bottom: 32px; }
-    .serp-section .serp-title { font-size: 1.25rem; font-weight: 700; margin-bottom: 8px; color: rgb(var(--fg)); }
-    .serp-date { font-size: 0.75rem; color: rgb(var(--muted-fg)); margin-bottom: 12px; }
-    .serp-table-wrap { background: rgb(var(--card)); border: 1px solid rgb(var(--border)); border-radius: var(--radius); padding: 20px; box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.08); overflow-x: auto; }
-    .serp-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
-    .serp-table th { text-align: left; padding: 8px 12px; border-bottom: 2px solid rgb(var(--border)); color: rgb(var(--muted-fg)); font-weight: 600; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; }
-    .serp-table td { padding: 8px 12px; border-bottom: 1px solid rgb(var(--border)); color: rgb(var(--card-fg)); }
-    .serp-table tr:last-child td { border-bottom: none; }
-    .serp-table .kw-cell { max-width: 280px; word-break: break-word; font-weight: 500; }
-    .serp-dim { color: rgb(var(--muted-fg)); }
-    .serp-hit { color: rgb(34 197 94); font-weight: 700; }
-    .serp-views { color: rgb(var(--primary)); font-size: 0.8rem; font-weight: 500; }
-    .serp-note { margin-top: 12px; font-size: 0.75rem; color: rgb(var(--muted-fg)); line-height: 1.6; }
-    .serp-thumb { max-height: 40px; margin-left: 6px; vertical-align: middle; border-radius: 3px; border: 1px solid rgb(var(--border)); cursor: pointer; transition: transform 0.15s; }
-    .serp-thumb:hover { transform: scale(1.05); }
-    .serp-lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 9999; cursor: pointer; align-items: center; justify-content: center; }
-    .serp-lightbox.open { display: flex; }
-    .serp-lightbox img { max-width: 95vw; max-height: 95vh; border-radius: 6px; box-shadow: 0 4px 24px rgba(0,0,0,0.5); }
-    .serp-expand { cursor: pointer; user-select: none; }
-    .serp-expand::before { content: "\\25B6"; display: inline-block; width: 14px; font-size: 0.65rem; transition: transform 0.2s; }
-    .serp-expand.open::before { transform: rotate(90deg); }
-    .serp-sub-row td { padding: 6px 12px 6px 36px; font-size: 0.8rem; background: rgb(var(--muted) / 0.3); }
-    .serp-sub-row { display: none; }
-    .serp-sub-row.visible { display: table-row; }
-    .serp-badge { font-size: 0.65rem; background: rgb(34 197 94 / 0.12); color: rgb(34 197 94); padding: 2px 6px; border-radius: 3px; font-weight: 600; margin-left: 6px; }
-
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       background: rgb(var(--bg));
@@ -155,106 +129,176 @@
     @media (max-width: 768px) {
       .stats-grid { grid-template-columns: repeat(2, 1fr); }
     }
+
+    /* SERP Monitor */
+    .serp-section { margin-bottom: 32px; }
+    .serp-section .table-title { font-size: 1rem; font-weight: 600; margin-bottom: 4px; }
+    .serp-section .chart-desc { font-size: 0.8rem; color: rgb(var(--muted-fg)); margin-bottom: 12px; }
+    .serp-hit { color: rgb(34 197 94); font-weight: 700; }
+    .serp-miss { color: rgb(var(--muted-fg)); }
+    .serp-thumb { max-height: 40px; margin-left: 6px; vertical-align: middle; border-radius: 3px; border: 1px solid rgb(var(--border)); cursor: pointer; transition: transform 0.15s; }
+    .serp-thumb:hover { transform: scale(1.1); }
+    .serp-lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 9999; cursor: pointer; align-items: center; justify-content: center; }
+    .serp-lightbox.open { display: flex; }
+    .serp-lightbox img { max-width: 90vw; max-height: 90vh; border-radius: 6px; box-shadow: 0 0 40px rgba(0,0,0,0.5); }
+    .serp-expand { cursor: pointer; user-select: none; }
+    .serp-expand::before { content: "\25B6"; display: inline-block; width: 14px; font-size: 0.65rem; transition: transform 0.2s; margin-right: 4px; }
+    .serp-expand.open::before { transform: rotate(90deg); }
+    .serp-sub-row { display: none; }
+    .serp-sub-row.visible { display: table-row; }
+    .serp-badge { font-size: 0.65rem; background: rgb(34 197 94 / 0.12); color: rgb(34 197 94); padding: 2px 6px; border-radius: 3px; font-weight: 600; margin-left: 6px; }
+    .serp-badge-new { background: rgb(59 130 246 / 0.12); color: rgb(59 130 246); }
   </style>
 </head>
 <body>
   <div class="container">
-
-  <div class="serp-section">
-    <h2 class="serp-title">SERP Presence Monitor</h2>
-    <div class="serp-date">Updated: 2026-04-26 | Engines: Google + Bing + AI Mode | Sub-keywords: 48 (Bing)</div>
-    <div class="serp-table-wrap">
-      <table class="serp-table">
-        <thead>
-          <tr><th>Keyword</th><th>Google</th><th>Bing</th><th>AI Mode</th><th>Views</th></tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="kw-cell serp-expand" onclick="toggleSubs(this)">cheap video generation api<span class="serp-badge">2 hits</span></td>
-            <td class="serp-hit">AI Overview (04-26) <img class="serp-thumb" onclick="openLightbox(this)" src="serp-evidence/google-cheap-video-generation-api-ai-overview-20260426.png" alt="evidence"></td>
-            <td class="serp-hit">#3 (04-25) <img class="serp-thumb" onclick="openLightbox(this)" src="serp-evidence/bing-cheap-video-generation-api-20260424145301..png" alt="evidence"></td>
-            <td class="serp-dim">-</td>
-            <td class="serp-views">52</td>
-          </tr>
-          <tr class="serp-sub-row">
-            <td class="kw-cell" style="font-size:0.8rem;color:rgb(var(--muted-fg))">└ cheap video generation api (main)</td>
-            <td class="serp-hit">AI Overview <img class="serp-thumb" onclick="openLightbox(this)" src="serp-evidence/google-cheap-video-generation-api-ai-overview-20260426.png" alt="evidence"></td>
-            <td class="serp-hit">#3 <img class="serp-thumb" onclick="openLightbox(this)" src="serp-evidence/bing-cheap-video-generation-api-20260424145301..png" alt="evidence"></td>
-            <td class="serp-dim">-</td>
-            <td>-</td>
-          </tr>
-          <tr>
-            <td class="kw-cell">ai video with consistent characters</td>
-            <td class="serp-dim">-</td><td class="serp-dim">-</td><td class="serp-dim">-</td>
-            <td class="serp-views">89</td>
-          </tr>
-          <tr>
-            <td class="kw-cell">ai video generator with audio</td>
-            <td class="serp-dim">-</td><td class="serp-dim">-</td><td class="serp-dim">-</td>
-            <td class="serp-views">79</td>
-          </tr>
-          <tr>
-            <td class="kw-cell">ai character video generator</td>
-            <td class="serp-dim">-</td><td class="serp-dim">-</td><td class="serp-dim">-</td>
-            <td class="serp-views">50</td>
-          </tr>
-          <tr>
-            <td class="kw-cell">replicate alternative video api</td>
-            <td class="serp-dim">-</td><td class="serp-dim">-</td><td class="serp-dim">-</td>
-            <td class="serp-views">50</td>
-          </tr>
-          <tr>
-            <td class="kw-cell">ai ugc video generator</td>
-            <td class="serp-dim">-</td><td class="serp-dim">-</td><td class="serp-dim">-</td>
-            <td class="serp-views">40</td>
-          </tr>
-          <tr>
-            <td class="kw-cell">ai ad creative video generator</td>
-            <td class="serp-dim">-</td><td class="serp-dim">-</td><td class="serp-dim">-</td>
-            <td class="serp-views">39</td>
-          </tr>
-          <tr>
-            <td class="kw-cell">ai product video generator</td>
-            <td class="serp-dim">-</td><td class="serp-dim">-</td><td class="serp-dim">-</td>
-            <td class="serp-views">28</td>
-          </tr>
-          <tr>
-            <td class="kw-cell">sora alternative free</td>
-            <td class="serp-dim">-</td><td class="serp-dim">-</td><td class="serp-dim">-</td>
-            <td class="serp-views">16</td>
-          </tr>
-          <tr>
-            <td class="kw-cell">fal.ai alternative for video generation</td>
-            <td class="serp-dim">-</td><td class="serp-dim">-</td><td class="serp-dim">-</td>
-            <td class="serp-views">11</td>
-          </tr>
-        </tbody>
-      </table>
-      <p class="serp-note">Google uses semantic ranking; pages may appear for related queries beyond exact keyword matches.<br>Bing #3 = 04-25 evidence preserved. AI Overview = 04-26 detected. Click thumbnails to enlarge. Sub-keywords hidden unless ranked.</p>
+    <!-- SERP Monitor Section -->
+    <div class="serp-section">
+      <div class="data-table" style="margin-bottom:32px;">
+        <div class="table-header">
+          <div>
+            <div class="table-title">SERP 排名监控 (04-28)</div>
+            <div class="chart-desc">Google / Bing / AI Mode 三引擎 | 10 主词 + 48 子词 | 增量更新</div>
+          </div>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th style="width:40px">#</th>
+              <th>Keyword</th>
+              <th style="width:100px">Google</th>
+              <th style="width:100px">Bing</th>
+              <th style="width:100px">AI Mode</th>
+              <th style="width:60px">Views</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Hit keywords first -->
+            <tr>
+              <td class="rank-num">1</td>
+              <td>
+                <span class="serp-expand" onclick="toggleSub('sub-cheap')">cheap video generation api</span>
+                <span class="serp-badge">2 hits</span>
+              </td>
+              <td><span class="serp-hit">AI Overview</span> <img class="serp-thumb" src="serp-evidence/google-kinovi-highlighted-cheap-video-gen-api-1777378491592.png" onclick="openLightbox(this)" alt="AI Overview - kinovi highlighted"> <img class="serp-thumb" src="serp-evidence/google-kinovi-list-cheap-video-gen-api-1777378493034.png" onclick="openLightbox(this)" alt="AI Overview - kinovi in list"></td>
+              <td><span class="serp-hit">#3</span> <img class="serp-thumb" src="serp-evidence/bing-cheap-video-generation-api-20260424145301..png" onclick="openLightbox(this)" alt="bing #3 04-25"></td>
+              <td class="serp-miss">-</td>
+              <td class="views-cell">52</td>
+            </tr>
+            <tr class="serp-sub-row" id="sub-cheap-1">
+              <td></td>
+              <td style="padding-left:32px;font-size:0.8rem;color:rgb(var(--muted-fg))">├ cheap video generation api integration</td>
+              <td class="serp-miss">-</td>
+              <td><span class="serp-hit">kinovi</span> <img class="serp-thumb" src="serp-evidence/bing-kinovi-cheap-video-generation-api-integration-1200-1777379463920.png" onclick="openLightbox(this)" alt="integration evidence"></td>
+              <td class="serp-miss">-</td>
+              <td>-</td>
+            </tr>
+            <tr class="serp-sub-row" id="sub-cheap-2">
+              <td></td>
+              <td style="padding-left:32px;font-size:0.8rem;color:rgb(var(--muted-fg))">├ cheap video generation alternatives</td>
+              <td class="serp-miss">-</td>
+              <td><span class="serp-hit">kinovi</span> <img class="serp-thumb" src="serp-evidence/bing-kinovi-cheap-video-generation-alternatives-1200-1777379472433.png" onclick="openLightbox(this)" alt="alternatives evidence"> <span class="serp-badge serp-badge-new">NEW</span></td>
+              <td class="serp-miss">-</td>
+              <td>-</td>
+            </tr>
+            <tr class="serp-sub-row" id="sub-cheap-3">
+              <td></td>
+              <td style="padding-left:32px;font-size:0.8rem;color:rgb(var(--muted-fg))">├ cheap video generation sdk</td>
+              <td class="serp-miss">-</td>
+              <td><span class="serp-hit">kinovi</span> <img class="serp-thumb" src="serp-evidence/bing-kinovi-cheap-video-generation-sdk-1200-1777379479257.png" onclick="openLightbox(this)" alt="sdk evidence"></td>
+              <td class="serp-miss">-</td>
+              <td>-</td>
+            </tr>
+            <tr class="serp-sub-row" id="sub-cheap-4">
+              <td></td>
+              <td style="padding-left:32px;font-size:0.8rem;color:rgb(var(--muted-fg))">└ cheap video generation api tutorial</td>
+              <td class="serp-miss">-</td>
+              <td><span class="serp-hit">kinovi</span> <img class="serp-thumb" src="serp-evidence/bing-kinovi-cheap-video-generation-api-tutorial-1200-1777379485993.png" onclick="openLightbox(this)" alt="tutorial evidence"></td>
+              <td class="serp-miss">-</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td class="rank-num">2</td>
+              <td>replicate alternative video api</td>
+              <td class="serp-miss">-</td>
+              <td class="serp-miss">-</td>
+              <td class="serp-miss">-</td>
+              <td class="views-cell">50</td>
+            </tr>
+            <!-- Non-hit keywords -->
+            <tr>
+              <td class="rank-num">3</td>
+              <td>ai video with consistent characters</td>
+              <td class="serp-miss">-</td>
+              <td class="serp-miss">-</td>
+              <td class="serp-miss">-</td>
+              <td class="views-cell">89</td>
+            </tr>
+            <tr>
+              <td class="rank-num">4</td>
+              <td>ai video generator with audio</td>
+              <td class="serp-miss">-</td>
+              <td class="serp-miss">-</td>
+              <td class="serp-miss">-</td>
+              <td class="views-cell">79</td>
+            </tr>
+            <tr>
+              <td class="rank-num">5</td>
+              <td>ai character video generator</td>
+              <td class="serp-miss">-</td>
+              <td class="serp-miss">-</td>
+              <td class="serp-miss">-</td>
+              <td class="views-cell">50</td>
+            </tr>
+            <tr>
+              <td class="rank-num">6</td>
+              <td>ai ugc video generator</td>
+              <td class="serp-miss">-</td>
+              <td class="serp-miss">-</td>
+              <td class="serp-miss">-</td>
+              <td class="views-cell">40</td>
+            </tr>
+            <tr>
+              <td class="rank-num">7</td>
+              <td>ai ad creative video generator</td>
+              <td class="serp-miss">-</td>
+              <td class="serp-miss">-</td>
+              <td class="serp-miss">-</td>
+              <td class="views-cell">39</td>
+            </tr>
+            <tr>
+              <td class="rank-num">8</td>
+              <td>ai product video generator</td>
+              <td class="serp-miss">-</td>
+              <td class="serp-miss">-</td>
+              <td class="serp-miss">-</td>
+              <td class="views-cell">28</td>
+            </tr>
+            <tr>
+              <td class="rank-num">9</td>
+              <td>sora alternative free</td>
+              <td class="serp-miss">-</td>
+              <td class="serp-miss">-</td>
+              <td class="serp-miss">-</td>
+              <td class="views-cell">16</td>
+            </tr>
+            <tr>
+              <td class="rank-num">10</td>
+              <td>fal.ai alternative for video generation</td>
+              <td class="serp-miss">-</td>
+              <td class="serp-miss">-</td>
+              <td class="serp-miss">-</td>
+              <td class="views-cell">11</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
-  </div>
 
-  <div class="serp-lightbox" id="serpLightbox" onclick="closeLightbox()">
-    <img id="serpLightboxImg" src="" alt="evidence">
-  </div>
-
-  <script>
-  function openLightbox(el) {
-    event.stopPropagation();
-    document.getElementById('serpLightboxImg').src = el.src;
-    document.getElementById('serpLightbox').classList.add('open');
-  }
-  function closeLightbox() {
-    document.getElementById('serpLightbox').classList.remove('open');
-  }
-  function toggleSubs(el) {
-    el.classList.toggle('open');
-    var row = el.closest('tr');
-    while ((row = row.nextElementSibling) && row.classList.contains('serp-sub-row')) {
-      row.classList.toggle('visible');
-    }
-  }
-  </script>
+    <!-- Lightbox -->
+    <div class="serp-lightbox" id="serpLightbox" onclick="closeLightbox()">
+      <img id="serpLightboxImg" src="" alt="evidence">
+    </div>
 
     <div class="header">
       <div class="page-title">KINOVI 文章数据洞察</div>
@@ -348,7 +392,7 @@
     // 格式: { keyword, created_at, views, url }
     // created_at: ISO 日期字符串
     // url: UniFuncs 分享链接
-    const rawData = [{"keyword":"ai ad creative video generator","title":"","created_at":"2026-04-23T01:55:03.984Z","views":56,"url":"https://unifuncs.com/s/Cy6S6Gd5"},{"keyword":"ai character video generator","title":"","created_at":"2026-04-23T01:54:40.905Z","views":62,"url":"https://unifuncs.com/s/SHQ9HO1F"},{"keyword":"ai product video generator","title":"","created_at":"2026-04-23T01:55:03.739Z","views":34,"url":"https://unifuncs.com/s/8HyJ80iC"},{"keyword":"ai ugc video generator","title":"","created_at":"2026-04-23T01:54:47.808Z","views":42,"url":"https://unifuncs.com/s/CZMIrfeO"},{"keyword":"ai video generator with audio","title":"","created_at":"2026-04-23T01:54:46.348Z","views":134,"url":"https://unifuncs.com/s/dNehbtLl"},{"keyword":"ai video with consistent characters","title":"","created_at":"2026-04-23T01:54:46.166Z","views":131,"url":"https://unifuncs.com/s/14y2wjq6"},{"keyword":"cheap video generation api","title":"","created_at":"2026-04-23T01:55:11.956Z","views":97,"url":"https://unifuncs.com/s/vnhhe8Sj"},{"keyword":"fal.ai alternative for video generation","title":"","created_at":"2026-04-23T01:55:11.260Z","views":13,"url":"https://unifuncs.com/s/Ep9C2zpx"},{"keyword":"replicate alternative video api","title":"","created_at":"2026-04-23T01:55:06.699Z","views":94,"url":"https://unifuncs.com/s/TDikzkNU"},{"keyword":"sora alternative free","title":"","created_at":"2026-04-23T01:54:38.062Z","views":19,"url":"https://unifuncs.com/s/IjcrkHjX"}];
+    const rawData = [{"keyword":"ai ad creative video generator","title":"","created_at":"2026-04-23T01:55:03.984Z","views":70,"url":"https://unifuncs.com/s/Cy6S6Gd5"},{"keyword":"ai character video generator","title":"","created_at":"2026-04-23T01:54:40.905Z","views":77,"url":"https://unifuncs.com/s/SHQ9HO1F"},{"keyword":"ai product video generator","title":"","created_at":"2026-04-23T01:55:03.739Z","views":42,"url":"https://unifuncs.com/s/8HyJ80iC"},{"keyword":"ai ugc video generator","title":"","created_at":"2026-04-23T01:54:47.808Z","views":47,"url":"https://unifuncs.com/s/CZMIrfeO"},{"keyword":"ai video generator with audio","title":"","created_at":"2026-04-23T01:54:46.348Z","views":159,"url":"https://unifuncs.com/s/dNehbtLl"},{"keyword":"ai video with consistent characters","title":"","created_at":"2026-04-23T01:54:46.166Z","views":168,"url":"https://unifuncs.com/s/14y2wjq6"},{"keyword":"cheap video generation api","title":"","created_at":"2026-04-23T01:55:11.956Z","views":136,"url":"https://unifuncs.com/s/vnhhe8Sj"},{"keyword":"fal.ai alternative for video generation","title":"","created_at":"2026-04-23T01:55:11.260Z","views":18,"url":"https://unifuncs.com/s/Ep9C2zpx"},{"keyword":"replicate alternative video api","title":"","created_at":"2026-04-23T01:55:06.699Z","views":199,"url":"https://unifuncs.com/s/TDikzkNU"},{"keyword":"sora alternative free","title":"","created_at":"2026-04-23T01:54:38.062Z","views":31,"url":"https://unifuncs.com/s/IjcrkHjX"}];
 
     // ============ 模板逻辑（无需修改）============
     const today = new Date();
@@ -538,6 +582,25 @@
     renderScatterChart();
     renderHeatmapChart();
     renderTable();
+  </script>
+  <script>
+    function openLightbox(el) {
+      var lb = document.getElementById('serpLightbox');
+      var img = document.getElementById('serpLightboxImg');
+      img.src = el.src;
+      lb.classList.add('open');
+    }
+    function closeLightbox() {
+      document.getElementById('serpLightbox').classList.remove('open');
+    }
+    document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeLightbox(); });
+    function toggleSub(prefix) {
+      var expandEl = document.querySelector('.serp-expand');
+      expandEl.classList.toggle('open');
+      var key = prefix.replace('sub-','');
+      var rows = document.querySelectorAll('[id^="sub-' + key + '-"]');
+      rows.forEach(function(r) { r.classList.toggle('visible'); });
+    }
   </script>
 </body>
 </html>
