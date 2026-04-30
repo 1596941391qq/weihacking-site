@@ -36,21 +36,21 @@
     .nb:hover{background:rgba(255,255,255,.15)}
 
     /* HERO — Magazine Cover Layout */
-    .hero{min-height:100vh;display:grid;grid-template-columns:3fr 2fr;align-items:center;gap:24px;padding:120px 48px 80px;position:relative;overflow:hidden;
+    .hero{min-height:100vh;display:grid;grid-template-columns:5fr 2fr;align-items:center;gap:24px;padding:120px 48px 80px;position:relative;overflow:hidden;
       background:radial-gradient(ellipse at 30% 50%, rgba(192,57,43,.06) 0%, transparent 50%),var(--bg)}
     [data-theme="dark"] .hero{background:radial-gradient(ellipse at 30% 50%, rgba(74,222,128,.05) 0%, transparent 50%),var(--bg)}
     .hero-text{position:relative;z-index:2}
-    .hero-greeting{font-family:var(--hand);font-size:clamp(20px,3vw,32px);color:var(--accent);margin-bottom:8px}
-    .hero-photo-area{position:relative;display:flex;align-items:center;justify-content:center;z-index:1}
-    .hero-photo{width:340px;height:420px;border-radius:8px;background:var(--bg-alt);border:3px solid var(--ink);overflow:hidden;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:11px;color:var(--muted);transform:rotate(-2deg);box-shadow:14px 14px 0 var(--bg-alt),14px 14px 0 3px var(--rule-s);position:relative;z-index:2}
+    .hero-photo-area{position:relative;display:flex;align-items:center;justify-content:center;z-index:1;opacity:.55;filter:blur(.4px);transition:all .4s}
+    .hero-photo-area:hover{opacity:.85;filter:none}
+    .hero-photo{width:200px;height:250px;border-radius:8px;background:var(--bg-alt);border:2px solid var(--rule-s);overflow:hidden;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:11px;color:var(--muted);transform:rotate(-2deg);box-shadow:8px 8px 0 var(--bg-alt);position:relative;z-index:2}
     .hero-photo img{width:100%;height:100%;object-fit:cover}
-    .hero-blob{position:absolute;width:460px;height:460px;z-index:1;opacity:.2;animation:blobFloat 10s ease-in-out infinite}
+    .hero-blob{position:absolute;width:300px;height:300px;z-index:1;opacity:.15;animation:blobFloat 10s ease-in-out infinite}
     .hero-blob path{fill:var(--accent)}
     @keyframes blobFloat{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(10px,-15px) scale(1.03)}}
-    .hero-tag{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:16px}
-    .hero h1{font-family:var(--serif);font-size:clamp(48px,7vw,100px);font-weight:900;line-height:.9;letter-spacing:-.03em;margin-bottom:20px}
+    .hero-tag{font-family:var(--mono);font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-s);margin-bottom:16px}
+    .hero h1{font-family:var(--serif);font-size:clamp(56px,9vw,130px);font-weight:900;line-height:.85;letter-spacing:-.04em;margin-bottom:20px}
     .hero h1 em{font-style:italic;color:var(--accent)}
-    .hero-sub{font-size:clamp(15px,1.8vw,19px);color:var(--ink-s);max-width:520px;line-height:1.7;margin-bottom:32px}
+    .hero-sub{font-size:clamp(15px,1.8vw,19px);color:var(--ink);max-width:520px;line-height:1.7;margin-bottom:32px}
     .hero-links{display:flex;gap:12px;flex-wrap:wrap}
     .hero-social{display:flex;gap:10px;margin-top:16px}
     .hero-social a{width:36px;height:36px;border:1px solid var(--rule-s);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--muted);transition:all .2s}
@@ -530,9 +530,8 @@
     .updates-feed:hover{animation-play-state:paused}
 
     /* Hero entrance cascade — magazine layout */
-    .hero .hero-greeting,.hero .hero-tag,.hero h1,.hero .hero-sub,.hero .hero-links,.hero .hero-photo-area{opacity:0;transform:translateY(20px);animation:heroIn .7s ease forwards}
-    .hero .hero-greeting{animation-delay:.1s}
-    .hero .hero-tag{animation-delay:.2s}
+    .hero .hero-tag,.hero h1,.hero .hero-sub,.hero .hero-links,.hero .hero-photo-area{opacity:0;transform:translateY(20px);animation:heroIn .7s ease forwards}
+    .hero .hero-tag{animation-delay:.1s}
     .hero h1{animation-delay:.35s}
     .hero .hero-sub{animation-delay:.5s}
     .hero .hero-links{animation-delay:.65s}
@@ -543,8 +542,8 @@
     @media(max-width:768px){
       .hero{grid-template-columns:1fr;justify-items:center;text-align:center;padding:100px 24px 60px;gap:32px}
       .hero-text{order:2}.hero-photo-area{order:1}
-      .hero-photo{width:200px;height:240px;transform:rotate(-1deg)}
-      .hero-blob{width:260px;height:260px}
+      .hero-photo{width:160px;height:200px;transform:rotate(-1deg)}
+      .hero-blob{width:200px;height:200px}
       .hero-links{gap:10px;justify-content:center}
       .gos-banner{grid-template-columns:1fr;gap:16px}
       .kb-grid,.think-grid,.prod-grid,.tools-grid,.toc-grid,.rn-grid,.skills-grid,.aph-grid,.contra-grid,.mf-items,.findings-grid,.stats-grid,.case-spot,.tier-split,.issue-gallery,.feat-tools,.project-grid,.svc-grid,.results-grid,.contact-grid,.portfolio-grid,.serp-gallery{grid-template-columns:1fr}
