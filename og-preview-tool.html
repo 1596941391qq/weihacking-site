@@ -43,7 +43,7 @@
       <p class="hero-sub" data-zh="查看页面在 Facebook、Twitter/X、LinkedIn 分享时的展示效果。" data-en="See how your page appears when shared on Facebook, Twitter/X, and LinkedIn.">查看页面在 Facebook、Twitter/X、LinkedIn 分享时的展示效果。</p>
     </div>
   </div>
-  <section class="wrap" style="padding:48px 28px">
+  <section class="wrap tool-section">
     <div class="tool-ui">
       <div class="tool-row">
         <div class="tool-input-group">
@@ -70,7 +70,7 @@
 
       <div class="tool-preview" id="fbPreview">
         <h4>Facebook / LinkedIn Preview</h4>
-        <div class="og-preview" style="max-width:520px">
+        <div class="og-preview og-fb">
           <div class="og-img" id="fbImg">1200 × 630</div>
           <div class="og-body">
             <div class="og-site" id="fbSite">example.com</div>
@@ -82,10 +82,10 @@
 
       <div class="tool-preview" id="twPreview" style="margin-top:24px">
         <h4>Twitter / X Card Preview</h4>
-        <div style="display:flex;gap:16px;flex-wrap:wrap">
+        <div class="og-flex-row" style="display:flex;gap:16px;flex-wrap:wrap">
           <div>
             <div style="font-family:var(--mono);font-size:10px;color:var(--muted);margin-bottom:6px;letter-spacing:.06em">SUMMARY_LARGE_IMAGE</div>
-            <div class="og-preview" style="max-width:400px">
+            <div class="og-preview og-lg">
               <div class="og-img" style="height:200px" id="twImg">Image Preview</div>
               <div class="og-body">
                 <div class="og-title" id="twTitle">Your Page Title</div>
@@ -96,8 +96,8 @@
           </div>
           <div>
             <div style="font-family:var(--mono);font-size:10px;color:var(--muted);margin-bottom:6px;letter-spacing:.06em">SUMMARY</div>
-            <div style="border:1px solid var(--rule);border-radius:8px;overflow:hidden;max-width:300px;display:flex;background:var(--card)">
-              <div style="width:120px;height:120px;background:var(--bg-alt);display:flex;align-items:center;justify-content:center;color:var(--muted);font-family:var(--mono);font-size:10px;flex-shrink:0" id="twSmImg">Img</div>
+            <div class="og-sm-card" style="border:1px solid var(--rule);border-radius:8px;overflow:hidden;max-width:300px;display:flex;background:var(--card)">
+              <div class="og-sm-thumb" style="width:120px;height:120px;background:var(--bg-alt);display:flex;align-items:center;justify-content:center;color:var(--muted);font-family:var(--mono);font-size:10px;flex-shrink:0" id="twSmImg">Img</div>
               <div style="padding:10px 12px;display:flex;flex-direction:column;justify-content:center">
                 <div style="font-size:14px;font-weight:700;color:var(--ink);line-height:1.3;margin-bottom:2px" id="twSmTitle">Title</div>
                 <div style="font-size:12px;color:var(--muted);line-height:1.4;margin-bottom:2px" id="twSmDesc">Description</div>
