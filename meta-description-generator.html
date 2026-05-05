@@ -38,11 +38,13 @@
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
   "name": "Meta Description Generator",
-  "applicationCategory": "DeveloperApplication",
+  "applicationCategory": "BusinessApplication",
   "operatingSystem": "Web",
   "description": "Free meta description generator with real-time character counting, quality scoring, and SERP preview.",
   "url": "https://1596941391qq.github.io/meta-description-generator.html",
-  "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}
+  "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+  "author": {"@type": "Person", "name": "weihacking", "url": "https://1596941391qq.github.io"},
+  "publisher": {"@type": "Organization", "name": "Soulcraft Limited", "logo": {"@type": "ImageObject", "url": "https://1596941391qq.github.io/images/avatar.jpg"}}
 }
 </script>
 </head>
@@ -144,7 +146,7 @@
     </div>
   </footer>
 
-  <script src="script.js"></script>
+  <script src="script.js" defer></script>
   <script>
   function updatePreview(){
     var t=document.getElementById('pageTitle').value;
