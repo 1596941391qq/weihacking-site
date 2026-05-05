@@ -1,0 +1,396 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light" data-lang="zh">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>hacking 周刊 #05 — Adobe 收购 Semrush / AI Mode 破亿月活</title>
+  <meta name="description" content="hacking 周刊第五期：March Core Update 社区实测、GA4 MP 行为注入 2.0、外链共识矩阵、E-E-A-T 一手经验缺口、自由职业定价陷阱。2026-04-28 ~ 05-05。">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⌘</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Source+Code+Pro:wght@400;600&family=Noto+Serif+SC:wght@400;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .nl-article{max-width:740px;margin:0 auto;padding:0 28px 48px}
+    .nl-article h2{font-family:var(--serif);font-size:28px;font-weight:900;line-height:1.2;margin:48px 0 20px;color:var(--ink);border-top:2px solid var(--rule);padding-top:32px}
+    .nl-article h3{font-family:var(--serif);font-size:20px;font-weight:700;line-height:1.3;margin:28px 0 12px;color:var(--ink)}
+    .nl-article p{font-size:16px;line-height:1.8;color:var(--ink-s);margin-bottom:16px}
+    .nl-article blockquote{border-left:3px solid var(--accent);padding:12px 20px;margin:20px 0;font-style:italic;color:var(--ink-s);background:var(--bg-alt)}
+    .nl-article strong{color:var(--ink);font-weight:700}
+    .nl-article em{font-style:normal;color:var(--accent);font-weight:700}
+    .nl-article ul,.nl-article ol{margin:12px 0 16px 24px;color:var(--ink-s)}
+    .nl-article li{font-size:15px;line-height:1.7;margin-bottom:6px}
+    .nl-table{width:100%;border-collapse:collapse;margin:20px 0;font-size:14px}
+    .nl-table th{background:var(--bg-alt);padding:10px 14px;text-align:left;font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);border-bottom:2px solid var(--rule)}
+    .nl-table td{padding:10px 14px;border-bottom:1px solid var(--rule);color:var(--ink-s);line-height:1.5}
+    .nl-tool-list{list-style:none;padding:0;margin:12px 0 24px}
+    .nl-tool-list li{font-size:14px;color:var(--ink-s);padding:6px 0;border-bottom:1px solid var(--rule)}
+    .nl-tool-list strong{color:var(--ink)}
+    .nl-term-list{list-style:none;padding:0;margin:12px 0 24px}
+    .nl-term-list li{font-size:14px;padding:8px 0;border-bottom:1px solid var(--rule)}
+    .nl-term-list strong{color:var(--accent);font-family:var(--mono);font-size:12px}
+    .nav-issue{display:flex;justify-content:space-between;align-items:center;margin-top:16px;padding:24px 0;border-top:1px solid var(--rule)}
+    .nav-issue a{font-family:var(--mono);font-size:12px;color:var(--accent)}
+    .nl-editor-note{font-size:15px;line-height:1.8;color:var(--ink-s);margin-bottom:24px;padding:20px 24px;background:var(--bg-alt);border-left:3px solid var(--accent)}
+    .nl-editor-note strong{color:var(--ink)}
+    .nl-summary{font-size:15px;line-height:1.8;color:var(--ink-s);margin:20px 0 24px;padding:16px 20px;background:var(--bg-alt);border-radius:2px;font-family:var(--body)}
+    .nl-quotes blockquote{border-left:3px solid var(--accent);padding:12px 20px;margin:16px 0;font-style:italic;color:var(--ink-s);background:var(--bg-alt)}
+    .nl-quotes blockquote strong{color:var(--ink);font-style:normal}
+    .nl-preview{font-size:14px;line-height:1.7;color:var(--ink-s);margin-top:48px;padding:20px 24px;border-top:2px solid var(--rule);font-style:italic}
+  </style>
+</head>
+<body>
+  <nav><a href="../index.html">weihacking_</a><div class="nav-r"><a href="../knowledge.html" class="nb" style="margin-right:8px">←</a><button class="nb" id="themeToggle" onclick="toggleTheme()">☽</button></div></nav>
+  <div class="sub-hero" style="padding-bottom:32px"><div class="wrap"><p class="sec-label">hacking 周刊</p><h1>#05 · Adobe 收购 Semrush / AI Mode 破亿月活</h1><p class="hero-sub">2026-04-28 ~ 05-05</p></div></div>
+  <section class="wrap" style="padding:0 28px 32px">
+    <div class="nl-article">
+
+      <div class="nl-editor-note">
+        <strong>编者按：</strong> 这期我们做了一件简单但费时间的事：把 BHW 论坛上 Google March 2026 Core Update 的社区投票帖完整读完了——38 条回复，47 人投票，逐条记录谁涨了谁跌了、跌了多少、为什么跌、怎么恢复的。读完后发现一件有意思的事：影响最大的因素不是 DA/DR，不是内容质量，甚至不是外链数量——而是"外链是否还在持续建设"。一个连 DR 都没搞上去但一直在稳定建外链的新站，比一个 DR 60 但半年没动过外链的老站活得好。这个发现改变了我们对"链接权威性"的理解方式。
+      </div>
+
+      <!-- Chapter 1: March 2026 Core Update -->
+      <h2>March 2026 Core Update 社区实测：47 人的真实数据</h2>
+
+      <p>BHW 站长 Diamond Damien 在 4 月 28 日发起了一个社区投票帖，让成员汇报 March Core Update + March Spam Update 的实际影响。47 人投票，38 条详细回复。这是目前能找到的规模最大的 SEO 社区自报数据集。</p>
+
+      <h3>投票结果</h3>
+
+      <table class="nl-table">
+        <thead><tr><th>选项</th><th>票数</th></tr></thead>
+        <tbody>
+          <tr><td>非常正面</td><td>7</td></tr>
+          <tr><td>正面</td><td>9</td></tr>
+          <tr><td>中立</td><td>18</td></tr>
+          <tr><td>负面</td><td>10</td></tr>
+          <tr><td>非常负面</td><td>3</td></tr>
+        </tbody>
+      </table>
+
+      <p>净情绪：微偏负面。中立最多，但负面（13）略超正面（16）——不是屠杀，但也不轻松。</p>
+
+      <h3>受害者的共同特征</h3>
+
+      <p><strong>Rank Vortex</strong> — 2 个站受影响，1 个流量跌了约 50%。游戏垂直。</p>
+
+      <p><strong>nancybennet</strong> — 全站流量跌 25-30%，到四月下旬仍在恢复中。</p>
+
+      <p><strong>PetraAnn</strong> — 游戏和主题公园内容站受损。外链本身是"干净的"，但还是被命中。怀疑是外链的主题相关性被收紧了审查。</p>
+
+      <p><strong>ihatog</strong> — 健康/健身垂直，单站跌 20-30%。注意到锚文本过度优化的惩罚模式。</p>
+
+      <p><strong>jasminepan</strong> — 电商站产品页下降，博客内容保持稳定。认为 Google 在奖励"真实内容"，惩罚薄联盟页面。</p>
+
+      <p><strong>vlado</strong> — 多个 aged domain 受损。半年以上没建新外链的站被打击最重。恢复始于重新建设上下文外链。</p>
+
+      <p><strong>Guestwriting</strong> — 赌博垂直，页面级别的降权（不是整站打击）。怀疑 AI 内容外链被去索引。</p>
+
+      <h3>获益者的共同特征</h3>
+
+      <p><strong>TheMarquis</strong> — 流量微增。称这是"平静的一次"。持续内容发布节奏的站受益。</p>
+
+      <p><strong>iazeemsays</strong> — 个人站 +10%。归因于稳定的外链建设速度 + 避免锚文本过度优化。</p>
+
+      <p><strong>harpage</strong> — 排名提升。2 月份做了 link disavow 清理。Google 在这次更新中惩罚了有毒外链档案、奖励了清理行为。</p>
+
+      <p><strong>alonelywriter</strong> — 从 1 月更新的 -50% 跌幅中完全恢复。认为 3 月更新逆转了 1 月的部分过度矫正。</p>
+
+      <p><strong>Topiano</strong> — 微增。新站（不到 12 个月），受益于持续新内容 + 更新后的新外链获取。</p>
+
+      <h3>PBNMariia 的洞察（全场最有价值的一条评论）</h3>
+
+      <p>PBNMariia 报告了部分恢复，但揭示了关键发现：<strong>DR 不重要。更新后外链建设的速度才是最大因素。</strong></p>
+
+      <p>她在更新后为受损站建了 15-30 条上下文外链 → 排名恢复并超过之前位置。更新前停止建外链的站受损；更新过程中继续建外链的站稳定。</p>
+
+      <p>她的结论：Google 在奖励持续的外链速度（link velocity），而不是静态的权威性指标。</p>
+
+      <h3>Funiki 的发现（全场最有价值的第二条评论）</h3>
+
+      <p>Funiki 报告了先跌后恢复。恢复过程中发现了一个关键现象：<strong>发布在外部出版物上的 AI 生成内容（客座文章、PBN）开始从 Google 索引中消失。</strong></p>
+
+      <p>这不是去索引你的站——是去索引你花钱放在别人站上的那篇文章。Google 在检测和去价值化链接层面的 AI 内容，不只是内容层面。</p>
+
+      <div class="nl-summary">极致压缩：47 人投票，13 负面 vs 16 正面。关键发现：DR 不重要，link velocity 才是。PBNMariia 的数据证明更新后继续建外链的站恢复最快。Funiki 发现 AI 生成的外链文章正在被 Google 去索引。锚文本过度优化和产品薄页被打击。持续发布 + 新鲜外链 = 获益。</div>
+
+      <blockquote><strong>一句话点评：</strong> PBNMariia 一句话改写了我对链接权威性的理解：Google 不看你的"历史资产"，它看你的"当前活跃度"。一个 DR 30 但每个月在建外链的站，比一个 DR 60 但半年没动的站更安全。静态的权威性是负债，不是资产。</blockquote>
+
+      <h3>本章工具</h3>
+      <ul class="nl-tool-list">
+        <li><strong>Google Search Console</strong> (search.google.com/search-console) — 监控更新前后的展示/点击变化。免费。</li>
+        <li><strong>Ahrefs DR Tracker</strong> (ahrefs.com) — 追踪 DR 变化。但本章的核心教训是：DR 不是决定性因素。</li>
+      </ul>
+
+      <h3>本章术语</h3>
+      <ul class="nl-term-list">
+        <li><strong>Link Velocity（外链速度）</strong> — 获取新外链的频率和持续性。PBNMariia 的数据证明这比累积 DR 更重要。</li>
+        <li><strong>Topical Authority Cycle</strong> — 论坛成员 caesaregypt 提出的观察：每年 3-4 月 Google 倾向于奖励主题深度，之后切回链接权威性。这解释了为什么有些低 DR 站在春季获益。</li>
+      </ul>
+
+      <!-- Chapter 2: CTR Bot -->
+      <h2>CTR Bot 终结者：GA4 Measurement Protocol 服务器端注入</h2>
+
+      <p>上一期我们拆了 GA4 Measurement Protocol 的基本用法。这周，BHW 用户 <strong>bhseoworld</strong> 发了一个更激进的版本：完全绕过浏览器层，从服务器端直接向 GA4 注入行为信号。</p>
+
+      <h3>OP 的核心架构</h3>
+
+      <p>bhseoworld 的论点：90% 的 SEO 从业者在 CTR 机器人上浪费预算。Puppeteer 脚本、住宅代理、微工——这些都在和 Google 的 Firefly 子系统与 SpamBrain 搏斗，注定被标记。WebGL 指纹、TCP 窗口大小、合成会话模式，这些都是检测信号。</p>
+
+      <p>他的方案分三步：</p>
+
+      <p><strong>第一步：收集真实的 Client ID。</strong> 在一个有真实流量的白帽站上放 JS，捕获 <code>_ga</code> cookie（真实 Google 验证过的 client_id）+ IP 地址，存入 Redis。不能用随机 UUID——Google 会标记为幽灵流量。</p>
+
+      <p><strong>第二步：服务器端注入。</strong> 通过与 client_id 地理位置匹配的代理，向 GA4 Measurement Protocol 端点发 Python POST 请求。发送 <code>page_view</code>（含 <code>engagement_time_msec: 45000</code>）、滚动事件、session_id。</p>
+
+      <p><strong>第三步：回访乘数。</strong> 48 小时后用同一 client_id + 同一地理位置代理触发第二次请求，发送 <code>form_start</code> 或 <code>click</code> 事件。这将导致 <code>repeatVisitProbability</code> 分数飙升。</p>
+
+      <h3>评论区的三个技术扩展（全部来自 OP 自问自答）</h3>
+
+      <p>bhseoworld 的帖子只有 8 条回复，其中 6 条是他自己在回答私信问题。这在 BHW 意味着两种可能：要么是精心设计的引流漏斗（每条回复都以推广"私人协议" PDF 结束），要么是他确实在把高价值信息以问答形式呈现。</p>
+
+      <p><strong>技术扩展一：跨域收集。</strong> 创建白帽站（梗图、新闻），花 $50 买弹窗流量，嵌入 JS 监听器捕获 <code>_ga</code> cookie + IP。现在你拥有 10,000 个真实的 Google 用户画像，可以"强制"他们访问你的盈利站。</p>
+
+      <p><strong>技术扩展二：高斯随机心跳。</strong> 不能直接发一个 10 分钟的 <code>engagement_time_msec</code>——Google 的异常检测会标记没有中间事件的长会话。必须：先发 <code>page_view</code>，等 15 秒，滚动 25%，等 45 秒，滚动 50%。延迟的熵必须模拟人类阅读速度。</p>
+
+      <p><strong>技术扩展三：CrUX 数据缺口。</strong> API 注入不产生 Chrome UX Report 数据。混合编排：用 Puppeteer + 4G 移动代理做初始搜索点击（注册 CrUX beacon），提取 <code>session_id</code>，然后把这个 session_id 交给 Python API worker 在接下来 14 天发回访。昂贵的浏览器用来开门，免费的 API 用来养忠诚度分数。</p>
+
+      <h3>LondoN eXtream 的测试计划</h3>
+
+      <p>LondoN eXtream 计划在他 2 年历史、日访数百万的站上测试。每天推 10-20,000 用户，停留时间随机化在 30-60 秒。只针对美国/英国流量。</p>
+
+      <p>bhseoworld 的回应是一个<strong>关键的警告</strong>：在推送 2 万次访问前，验证三件事：引荐来源熵（100% Google.com 流量是足迹）、设备/ISP 指纹（数据中心范围的 4G 代理会被 GA4 忽略）、事件链（没有 <code>session_start</code> 的 <code>page_view</code> 可能被 ML 模型丢弃）。</p>
+
+      <h3>OPSEC 规则</h3>
+
+      <ol>
+        <li>切勿过度操作——拥有完美停留时间的新站将触发 <code>behavior_pattern_anomaly</code>。</li>
+        <li>混合引荐来源（Google、Reddit、Twitter、直接流量）。</li>
+        <li>地理位置匹配是强制性的（英国 client_id 通过印度 IP = 无效信号）。</li>
+        <li>JA4+ TLS 握手签名：标准的 Python <code>requests</code> 或 <code>axios</code> 会暴露裸露的 TLS 握手。必须用自定义 TLS 客户端伪造 Chrome-on-Android 扩展数据。</li>
+      </ol>
+
+      <div class="nl-summary">极致压缩：bhseoworld 的 GA4 MP 注入 2.0——跨域收集真实 client_id → 服务器端注入行为信号 → 48h 回访乘数。关键技术细节：高斯随机心跳、CrUX 混合编排、JA4+ TLS 指纹伪装。帖子 75% 是 OP 自问自答，每个回答以推广"私人协议"结束。</div>
+
+      <blockquote><strong>一句话点评：</strong> 读完整个帖子，我最大的感受不是"这个方法多厉害"，而是"如果一个人需要在 8 条回复里 6 条自己回答自己的私信问题，那评论区就没有真正的社区验证"。但技术本身是扎实的——CrUX 数据缺口的发现、JA4+ TLS 指纹的问题、高斯随机化的必要性——这些是独立的工程事实，不依赖社区背书。</blockquote>
+
+      <h3>本章工具</h3>
+      <ul class="nl-tool-list">
+        <li><strong>GA4 Measurement Protocol</strong> (developers.google.com/analytics) — Google 官方事件上报 API。OP 方案的核心通道。免费。</li>
+        <li><strong>Redis</strong> (redis.io) — client_id + session_id 存储。OP 方案的数据层。开源。</li>
+        <li><strong>IPQualityScore</strong> (ipqualityscore.com) — 代理 ASN 验证。bhseoworld 建议在推送前检查代理质量。</li>
+      </ul>
+
+      <h3>本章术语</h3>
+      <ul class="nl-term-list">
+        <li><strong>JA4+ TLS Fingerprint</strong> — TLS 握手阶段的设备/客户端指纹。标准 Python HTTP 库的 TLS 握手与真实 Chrome 不同，Google 可据此识别脚本。</li>
+        <li><strong>CrUX Beacon</strong> — Chrome UX Report 数据采集点。GA4 MP 注入不触发 CrUX，这是一个检测缺口，bhseoworld 用混合方案（浏览器开门 + API 养号）来补齐。</li>
+        <li><strong>高斯随机心跳</strong> — 模拟人类阅读节奏的事件序列：非等间隔、非线性的滚动和停留事件。与"15 秒滚动一次"的线性模式形成对比。</li>
+      </ul>
+
+      <!-- Chapter 3: Link Building Consensus -->
+      <h2>外链已死？2026 年链接建设共识矩阵</h2>
+
+      <p>本周 BHW 有两个帖子从不同角度问了同一个问题："为什么建了外链还是不排名？" 一个是新手问的（53 条回复，3 页），一个是社区讨论型（20 条回复）。两个帖子叠在一起，构成了一份 2026 年链接建设的共识矩阵。</p>
+
+      <h3>帖子一：新手的 50 条外链为什么没用</h3>
+
+      <p><strong>Uniqueidea</strong> 发帖说：为网站建了 50+ 条外链（profile links、web 2.0、social bookmark），关键词卡在第 5 页之后。问做错了什么。</p>
+
+      <p>社区回复压倒性一致（25/32 条回复指向同一结论）：<strong>profile links、web 2.0、social bookmark 在 2026 年已被 Google 完全忽略或大幅贬值。</strong></p>
+
+      <p><strong>xxtinkerbelxx</strong>（最高赞回复）：这些外链在 15 年前还不错，现在毫无作用。外链是拼图的最后几块，先做好其他所有事情。</p>
+
+      <p><strong>FishWalker</strong>：需要高质量的上下文外链（真实网站、相关垂直），不是数量。50 条听起来不错，但如果都是低质量的，Google 直接忽略。</p>
+
+      <p><strong>Ghost Root</strong>（1 赞）：外链不是即时因果关系的魔法公式。Google 需要时间发现新外链、重新评估权威性、判断是否真正有价值——可能要几周甚至几个月。来自有真实流量网站首页的链接 ≠ 埋在无人访问博客页面上的链接。</p>
+
+      <p><strong>Sam119</strong>（附 GSC 截图）：成人垂直站，零外链，5 个月后日均 300+ 流量。前 3-4 个月完全平坦（10-30 点击/天，100 展示/天），第 5 个月才开始指数级增长。<strong>域名年龄和耐心比外链更重要。</strong></p>
+
+      <p><strong>PrasadPol</strong>：通过先修复页面优化，几周内把 5 个客户页面从第 4-5 页推到前 5。推荐 freeserp.com 做竞对差距分析。</p>
+
+      <h3>帖子二：链接建设常见错误的共识矩阵</h3>
+
+      <p>20 条回复中，以下是按提及频率排列的错误清单：</p>
+
+      <table class="nl-table">
+        <thead><tr><th>错误</th><th>提及次数</th><th>核心回复者</th></tr></thead>
+        <tbody>
+          <tr><td>低质量/垃圾外链</td><td>15/19</td><td>几乎所有人</td></tr>
+          <tr><td>锚文本过度优化（缺乏多样性）</td><td>12/19</td><td>DanielMedrea0、Lospic、xxtinkerbelxx 等</td></tr>
+          <tr><td>外链建设过快/不自然</td><td>10/19</td><td>DanielMedrea0、Ads-Shops、xxtinkerbelxx</td></tr>
+          <tr><td>重数量轻相关性</td><td>8/19</td><td>Lospic、Jommo、xxtinkerbelxx</td></tr>
+          <tr><td>所有链接只指向首页</td><td>3/19</td><td>Harry120、Jommo</td></tr>
+        </tbody>
+      </table>
+
+      <p><strong>xxtinkerbelxx</strong> 的回复（这条独立于帖子一，但内容互补）：自动化爆发式的交付模式会触发 AI 驱动的垃圾过滤器。忽视锚文本多样性 + 过度使用高权威但不相关的客座文章 → 可能导致人工处罚或排名暴跌。</p>
+
+      <p><strong>Jommo</strong> 提出了一个被忽视的点：在没有检查对方网站是否有真实流量的情况下就建外链。</p>
+
+      <p><strong>Harry120</strong>：不要把所有链接都指向主页，分散到相关内页效果更好。</p>
+
+      <h3>两个帖子交叉验证后的共识</h3>
+
+      <ol>
+        <li><strong>Profile / Web 2.0 / Bookmark = 死信号。</strong> 53 帖和 20 帖的社区一致认为这三类外链在 2026 年无效。</li>
+        <li><strong>5 条高质量编辑链接 > 500 条低层级链接。</strong> MeshorSEO 的原话。</li>
+        <li><strong>外链是最后几块拼图，不是第一块。</strong> 先做好内容 + 页面 SEO + 搜索意图匹配。</li>
+        <li><strong>域名年龄 + 耐心是独立变量。</strong> Sam119 的零外链站 5 个月才爆发。</li>
+        <li><strong>"有真实流量的网站"是外链质量的核心判据。</strong> 不是 DA/DR。</li>
+      </ol>
+
+      <div class="nl-summary">极致压缩：两个帖子、73 条回复的交叉验证结论：profile/web2.0/bookmark 外链在 2026 年已死。5 条编辑链接 > 500 条低层级链接。外链是拼图的最后几块。域名年龄和耐心是独立变量。外链质量的判据不是 DA/DR，是"对方站有没有真实流量"。</div>
+
+      <blockquote><strong>一句话点评：</strong> Sam119 的零外链成人站 5 个月日均 300+ 流量的案例，比所有外链策略理论加在一起都更有说服力。它直接挑战了一个行业基本假设：你真的需要外链才能排名吗？答案可能是：对于足够垂直、内容足够深度的站，不需要。</blockquote>
+
+      <h3>本章工具</h3>
+      <ul class="nl-tool-list">
+        <li><strong>freeserp.com</strong> — PrasadPol 推荐。抓取实时排名位置 + 竞品站全文，显示差距并生成 AI 修复计划。免费，无需注册。</li>
+        <li><strong>Google Search Console</strong> (search.google.com/search-console) — Sam119 用 GSC 截图证明了 5 个月的耐心等待是有效的。免费。</li>
+      </ul>
+
+      <h3>本章术语</h3>
+      <ul class="nl-term-list">
+        <li><strong>编辑链接（Editorial Link）</strong> — 由网站编辑自然放置的链接，而非交换、购买或自动生成的。2026 年社区共识中的最高价值外链类型。</li>
+        <li><strong>Topical Authority（主题权威性）</strong> — Alpha1404 和 xxtinkerbelxx 提到的概念：围绕一个垂直创建内容集群，建立真正的领域权威性。比单纯建外链更重要。</li>
+        <li><strong>Silo Method（筒仓方法）</strong> — PankajJangir 提到的关键词组织方法：不直接竞争大词，而是定位一个只有你在竞争的细分关键词。</li>
+      </ul>
+
+      <!-- Chapter 4: E-E-A-T -->
+      <h2>E-E-A-T 第一杀手：缺少一手经验</h2>
+
+      <p>BHW 用户 <strong>MadOnGrind</strong> 发了一个简洁的帖子，不做教学，只做诊断：你的内容当前最大的可信度问题是什么？</p>
+
+      <p>他列了四个选项：</p>
+      <ul>
+        <li>A) 内容没有引用足够的可信来源</li>
+        <li>B) 作者简介太泛，没有真正传递专业性</li>
+        <li>C) 一切读起来都很权威，但没有任何一手经验感</li>
+        <li>D) 在发 YMYL 内容，但真的不知道自己的 E-E-A-T 够不够强</li>
+      </ul>
+
+      <h3>评论区的回答</h3>
+
+      <p>回复不多（6 条），但方向高度集中：<strong>选项 C 是公认的第一杀手。</strong></p>
+
+      <p>回复者 A：从实操角度讲，大多数人的痛点在于让内容真正感觉是"一手体验"而不是"写得不错"。修复方法不是更多润色，而是收紧每篇内容的"真相来源"。</p>
+
+      <p>回复者 B："如果内容缺少一手体验，那多半就是它的问题。人们要的是真实故事，不只是从 Google 搜来的信息。"</p>
+
+      <p>回复者 C：选 C。听起来"正确"，但感觉不真实。没有个人角度，没有体验，只有信息。这通常就是内容变得容易被遗忘的原因。</p>
+
+      <p>回复者 D：选 D——因为 YMYL 话题范围太广了。</p>
+
+      <h3>MadOnGrind 的补刀（全场最有价值的一条回复）</h3>
+
+      <p>MadOnGrind 随后给出了"一手经验内容"的具体定义。它包括四类元素：</p>
+
+      <ol>
+        <li><strong>具体结果</strong> → "我们建了 12 条外链，3 周内排名开始变化"</li>
+        <li><strong>约束条件</strong> → "这只对 SaaS 有效，对本地站无效"</li>
+        <li><strong>失败案例</strong> → "单独做客座文章没有效果，直到我们加了内部链接"</li>
+        <li><strong>权衡取舍</strong> → "高 DR 外链的实际转化不如垂直领域的链接"</li>
+      </ol>
+
+      <p>然后他补了一句关键的话：<strong>"这些是 AI 或通用写手通常不会包含的东西。"</strong></p>
+
+      <p>这句话本质上定义了 E-E-A-T 和 AI 内容之间的边界：AI 可以生成"权威的"文字，但无法生成"经历过的"内容。约束条件、失败案例、权衡取舍——这些只有做过的人才知道。</p>
+
+      <div class="nl-summary">极致压缩：E-E-A-T 第一杀手是一手经验缺失（选项 C）。修复方法不是润色文字，是在内容中注入四类元素：具体结果、约束条件、失败案例、权衡取舍。MadOnGrind 的总结句：这些是 AI 做不了的事。</div>
+
+      <blockquote><strong>一句话点评：</strong> "约束条件、失败案例、权衡取舍"——这三类内容 99% 的 AI 生成文章不会包含，不是因为 AI 不能写，而是因为没有经历过的人不会想到要写这些。E-E-A-T 的 E（Experience）不是一个写作技巧，是一个生存状态。</blockquote>
+
+      <h3>本章工具</h3>
+      <ul class="nl-tool-list">
+        <li><strong>无特定工具</strong> — 本章的核心结论是内容创作方法论，不是工具问题。</li>
+      </ul>
+
+      <h3>本章术语</h3>
+      <ul class="nl-term-list">
+        <li><strong>YMYL（Your Money or Your Life）</strong> — Google 对健康、财务、安全等影响用户重大决策的内容分类，E-E-A-T 审查更严格。</li>
+        <li><strong>First-Hand Experience（一手经验）</strong> — 不是"研究过"，而是"做过"。2026 年 E-E-A-T 审查中权重最高的信号。</li>
+      </ul>
+
+      <!-- Chapter 5: Pricing -->
+      <h2>$15k 定价错误：自由职业者的 100% 共识课</h2>
+
+      <p>BHW 用户 <strong>Faisal Mirza</strong> 发帖分享了一个损失：因为按小时收费而不是按项目收费，去年少赚了 $15,000。客户不断要求"小调整"，每次实际耗时 20+ 小时，但因为"只需 15 分钟"所以没有开账单。全年累积。</p>
+
+      <p>帖子只有 11 条回复，但罕见的 100% 一致：<strong>每个回复者都同意项目定价优于按小时定价。没有任何一个人为按小时收费辩护。</strong></p>
+
+      <h3>评论区逐条</h3>
+
+      <p><strong>katie_brooks</strong>：很容易陷入"只需 15 分钟"的陷阱。即使不额外收费，也必须严格定义项目结束点。</p>
+
+      <p><strong>V</strong>（Jr. Executive VIP，7,579 帖，2012 年注册）：承认过去常常主动满足额外请求以保持客户满意，但并不总是考虑自身成本。</p>
+
+      <p><strong>Steptoe</strong>（Jr. Executive VIP，5,281 帖）：时间长了你会有直觉判断客户值不值得留。如果他们总是在"讨价还价"或要求免费定制，要么让他们走，要么大幅提价。引用 80/20 法则。</p>
+
+      <p><strong>jelenaitmui9</strong>：唯一提出质疑的人——"转向项目定价并开始收取范围蔓延费用时，客户有没有反弹？"</p>
+
+      <p><strong>Project Limitless</strong>（Jr. Executive VIP）：<strong>最强硬的立场——"按小时收费是为非技能工作准备的，比如从事重复性任务的 VA。对于技能型工作，应该始终按项目计费。"</strong></p>
+
+      <p><strong>Votage Designs</strong>：倾向"基于价值的项目定价"+ 正式的"变更单"流程，确保范围蔓延的每一分钟都有记录并收费。</p>
+
+      <h3>唯一的分歧点</h3>
+
+      <p>100% 同意项目定价 > 按小时定价。唯一的分歧在项目定价的内部：大多数人主张"明确范围 + 额外工作额外收费"，而 Votage Designs 专门提倡"基于价值的定价"（根据客户感知价值定价，而非你的时间/成本）。</p>
+
+      <div class="nl-summary">极致压缩：$15k 损失来自按小时收费 + 未开票的范围蔓延。转向项目定价后收入 +40%。11 条回复 100% 同意项目 > 按小时。分歧只在定价方式内部：范围明确的项目定价 vs 基于价值的定价。</div>
+
+      <blockquote><strong>一句话点评：</strong> Project Limitless 一句话切中要害："按小时收费是为非技能工作准备的。"当你按小时卖时间，你卖的是商品。当你按项目卖结果，你卖的是能力。从小时到项目的转变，本质上是把自己从劳动力变成专家。</blockquote>
+
+      <h3>本章工具</h3>
+      <ul class="nl-tool-list">
+        <li><strong>无特定工具</strong> — 商业方法论讨论，不涉及工具。</li>
+      </ul>
+
+      <h3>本章术语</h3>
+      <ul class="nl-term-list">
+        <li><strong>Scope Creep（范围蔓延）</strong> — 客户在项目过程中不断追加"小调整"，超出原始合同范围。未管理的 scope creep 是自由职业者最大的收入杀手。</li>
+        <li><strong>Value-Based Pricing（基于价值的定价）</strong> — 根据客户的感知价值定价，而非你的时间成本或市场平均价。Votage Designs 推荐的方式。</li>
+      </ul>
+
+      <!-- Tool Picks -->
+      <h2>本期工具精选</h2>
+
+      <table class="nl-table">
+        <thead><tr><th>工具</th><th>类别</th><th>一句话</th></tr></thead>
+        <tbody>
+          <tr><td><strong>GA4 Measurement Protocol</strong></td><td>行为注入</td><td>Google 官方事件上报 API。bhseoworld 的服务器端注入通道。免费。</td></tr>
+          <tr><td><strong>Redis</strong></td><td>数据层</td><td>client_id + session_id 存储。OP 方案的会话管理基础设施。开源。</td></tr>
+          <tr><td><strong>freeserp.com</strong></td><td>SERP 分析</td><td>抓取实时排名 + 竞品全文差距。PrasadPol 推荐的免费工具。</td></tr>
+          <tr><td><strong>IPQualityScore</strong></td><td>代理验证</td><td>代理 ASN 和欺诈分数检查。bhseoworld 建议推送前验证。</td></tr>
+          <tr><td><strong>Google Search Console</strong></td><td>数据监控</td><td>Core Update 前后流量变化追踪。Sam119 的耐心验证工具。免费。</td></tr>
+        </tbody>
+      </table>
+
+      <!-- Quotes -->
+      <h2>本期言论</h2>
+
+      <div class="nl-quotes">
+        <blockquote>"DR 不重要。更新后外链建设的速度才是最大因素。" <strong>PBNMariia</strong> 在 Core Update 投票帖中的发现。Google 奖励的是持续活跃的 link velocity，不是静态的历史权威性。</blockquote>
+
+        <blockquote>"5 条高质量的编辑链接将始终优于 500 条低层级链接。" <strong>MeshorSEO</strong> 对链接建设的简洁概括。数量游戏的规则在 2026 年已经彻底改写。</blockquote>
+
+        <blockquote>"约束条件、失败案例、权衡取舍——这些是 AI 或通用写手通常不会包含的东西。" <strong>MadOnGrind</strong> 对 E-E-A-T 一手经验的具体定义。这不是写作技巧，是生存状态。</blockquote>
+
+        <blockquote>"按小时收费是为非技能工作准备的。对于技能型工作，应该始终按项目计费。" <strong>Project Limitless</strong> 关于定价的最强硬立场。从小时到项目的转变 = 从劳动力到专家。</blockquote>
+
+        <blockquote>"发布在外部出版物上的 AI 生成文章开始从 Google 索引中消失。" <strong>Funiki</strong> 在 Core Update 帖子中的发现。Google 在链接层面检测 AI 内容，不只是内容层面。你的 AI 外链可能已经在静默失效。</blockquote>
+      </div>
+
+      <!-- Preview -->
+      <p class="nl-preview">下期预告：Funiki 发现的"AI 外链去索引"现象值得持续跟踪。如果 Google 真的在链接层面检测和惩罚 AI 生成的外链文章，那整个 PBN 和客座文章行业的商业模式都需要重新审视。下期我们会继续深挖这个趋势，同时关注 PBNMariia 的 link velocity 假说是否在更广泛的数据集中得到验证。</p>
+
+    </div>
+    <div class="nav-issue">
+      <a href="issue-04.html">← 上一篇: #04</a>
+      <span style="color:var(--muted);font-family:var(--mono);font-size:12px">#05</span>
+      <a href="issue-special-ecommerce-interception.html">下一篇: 电商截流特刊 →</a>
+    </div>
+  </section>
+  <footer><div>© 2026 weihacking · Soulcraft Limited</div><div class="f-links"><a href="https://x.com/weihacking" target="_blank" rel="noreferrer">X ↗</a><a href="https://github.com/1596941391qq" target="_blank" rel="noreferrer">GitHub ↗</a></div></footer>
+  <script src="../script.js"></script>
+</body>
+</html>
