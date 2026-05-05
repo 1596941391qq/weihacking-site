@@ -44,7 +44,7 @@
     .hero-photo-area:hover{opacity:1;filter:none;transform:scale(1.02)}
     .hero-photo{width:200px;height:250px;border-radius:8px;background:var(--bg-alt);border:2px solid var(--rule-s);overflow:hidden;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:11px;color:var(--muted);transform:rotate(-2deg);box-shadow:8px 8px 0 var(--bg-alt);position:relative;z-index:2}
     .hero-photo img{width:100%;height:100%;object-fit:cover}
-    .hero-blob{position:absolute;width:300px;height:300px;z-index:1;opacity:.15;animation:blobFloat 10s ease-in-out infinite}
+    .hero-blob{position:absolute;width:200px;height:200px;z-index:1;opacity:.08;animation:blobFloat 10s ease-in-out infinite}
     .hero-blob path{fill:var(--accent)}
     @keyframes blobFloat{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(10px,-15px) scale(1.03)}}
     .hero-tag{font-family:var(--mono);font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-s);margin-bottom:16px}
