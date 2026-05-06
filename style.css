@@ -157,6 +157,8 @@
     .sub-hero h1{font-family:var(--serif);font-size:clamp(28px,5vw,48px);font-weight:900;line-height:1.1;letter-spacing:-.02em;margin-bottom:8px}
     .sub-hero .hero-tag{margin-bottom:12px}
     .sub-hero .hero-sub{margin-bottom:0}
+    .sub-hero::after{content:'';display:block;width:60px;height:2px;background:var(--accent);margin:20px auto 0;animation:accentIn .8s ease forwards;opacity:0;transform:scaleX(0)}
+    @keyframes accentIn{to{opacity:1;transform:scaleX(1)}}
 
     /* UPDATES BAND */
     .updates-band{background:var(--ink);color:var(--bg);padding:14px 0;font-family:var(--mono);font-size:11px;letter-spacing:.04em;overflow:hidden;position:relative}
