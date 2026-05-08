@@ -86,37 +86,37 @@
       <div id="fieldsArticle">
         <div class="tool-row">
           <div class="tool-input-group">
-            <label>Headline</label>
+            <label for="aHeadline">Headline</label>
             <input type="text" class="tool-input" id="aHeadline" placeholder="Article headline" oninput="generate()">
           </div>
           <div class="tool-input-group">
-            <label>Author</label>
+            <label for="aAuthor">Author</label>
             <input type="text" class="tool-input" id="aAuthor" placeholder="Author name" oninput="generate()">
           </div>
         </div>
         <div class="tool-row">
           <div class="tool-input-group">
-            <label>Date Published</label>
+            <label for="aPubDate">Date Published</label>
             <input type="date" class="tool-input" id="aPubDate" oninput="generate()">
           </div>
           <div class="tool-input-group">
-            <label>Date Modified</label>
+            <label for="aModDate">Date Modified</label>
             <input type="date" class="tool-input" id="aModDate" oninput="generate()">
           </div>
         </div>
         <div class="tool-input-group">
-          <label>URL</label>
+          <label for="aUrl">URL</label>
           <input type="url" class="tool-input" id="aUrl" placeholder="https://example.com/article" oninput="generate()">
         </div>
         <div class="tool-input-group">
-          <label>Image URL</label>
+          <label for="aImage">Image URL</label>
           <input type="url" class="tool-input" id="aImage" placeholder="https://example.com/image.jpg" oninput="generate()">
         </div>
       </div>
 
       <div id="fieldsFAQ" style="display:none">
         <div class="tool-input-group">
-          <label>FAQ 问答对（每行一问一答，用 | 分隔）</label>
+          <label for="faqItems">FAQ 问答对（每行一问一答，用 | 分隔）</label>
           <textarea class="tool-input" id="faqItems" rows="5" placeholder="What is SEO? | SEO is the practice of optimizing...&#10;How long does SEO take? | Typically 3-6 months..." oninput="generate()"></textarea>
         </div>
       </div>
@@ -124,21 +124,21 @@
       <div id="fieldsProduct" style="display:none">
         <div class="tool-row">
           <div class="tool-input-group">
-            <label>Product Name</label>
+            <label for="pName">Product Name</label>
             <input type="text" class="tool-input" id="pName" placeholder="Product name" oninput="generate()">
           </div>
           <div class="tool-input-group">
-            <label>Price</label>
+            <label for="pPrice">Price</label>
             <input type="text" class="tool-input" id="pPrice" placeholder="29.99" oninput="generate()">
           </div>
         </div>
         <div class="tool-row">
           <div class="tool-input-group">
-            <label>Currency</label>
+            <label for="pCurrency">Currency</label>
             <input type="text" class="tool-input" id="pCurrency" placeholder="USD" value="USD" oninput="generate()">
           </div>
           <div class="tool-input-group">
-            <label>Availability</label>
+            <label for="pAvail">Availability</label>
             <select class="tool-input" id="pAvail" onchange="generate()">
               <option value="InStock">In Stock</option>
               <option value="OutOfStock">Out of Stock</option>
@@ -147,7 +147,7 @@
           </div>
         </div>
         <div class="tool-input-group">
-          <label>Description</label>
+          <label for="pDesc">Description</label>
           <textarea class="tool-input" id="pDesc" rows="2" placeholder="Product description..." oninput="generate()"></textarea>
         </div>
       </div>
@@ -155,20 +155,20 @@
       <div id="fieldsLocal" style="display:none">
         <div class="tool-row">
           <div class="tool-input-group">
-            <label>Business Name</label>
+            <label for="lbName">Business Name</label>
             <input type="text" class="tool-input" id="lbName" placeholder="Business name" oninput="generate()">
           </div>
           <div class="tool-input-group">
-            <label>Phone</label>
+            <label for="lbPhone">Phone</label>
             <input type="text" class="tool-input" id="lbPhone" placeholder="+1-234-567-8900" oninput="generate()">
           </div>
         </div>
         <div class="tool-input-group">
-          <label>Address</label>
+          <label for="lbAddr">Address</label>
           <input type="text" class="tool-input" id="lbAddr" placeholder="123 Main St, City, State" oninput="generate()">
         </div>
         <div class="tool-input-group">
-          <label>Website URL</label>
+          <label for="lbUrl">Website URL</label>
           <input type="url" class="tool-input" id="lbUrl" placeholder="https://example.com" oninput="generate()">
         </div>
       </div>
@@ -176,23 +176,23 @@
       <div id="fieldsPerson" style="display:none">
         <div class="tool-row">
           <div class="tool-input-group">
-            <label>Name</label>
+            <label for="perName">Name</label>
             <input type="text" class="tool-input" id="perName" placeholder="Full name" oninput="generate()">
           </div>
           <div class="tool-input-group">
-            <label>Job Title</label>
+            <label for="perJob">Job Title</label>
             <input type="text" class="tool-input" id="perJob" placeholder="SEO Consultant" oninput="generate()">
           </div>
         </div>
         <div class="tool-input-group">
-          <label>Website URL</label>
+          <label for="perUrl">Website URL</label>
           <input type="url" class="tool-input" id="perUrl" placeholder="https://example.com" oninput="generate()">
         </div>
       </div>
 
       <div id="fieldsBreadcrumb" style="display:none">
         <div class="tool-input-group">
-          <label>Breadcrumb 路径（每行一条，从根到当前页）</label>
+          <label for="bcItems">Breadcrumb 路径（每行一条，从根到当前页）</label>
           <textarea class="tool-input" id="bcItems" rows="4" placeholder="Home | https://example.com&#10;Blog | https://example.com/blog&#10;Article Title | https://example.com/blog/article" oninput="generate()"></textarea>
         </div>
       </div>

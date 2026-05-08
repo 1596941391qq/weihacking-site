@@ -72,15 +72,15 @@
   <section class="wrap tool-section">
     <div class="tool-ui">
       <div class="tool-input-group">
-        <label data-zh="Sitemap URL" data-en="Sitemap URL">Sitemap URL</label>
+        <label for="sitemapUrl" data-zh="Sitemap URL" data-en="Sitemap URL">Sitemap URL</label>
         <input type="url" class="tool-input" id="sitemapUrl" placeholder="https://example.com/sitemap.xml" oninput="generate()">
       </div>
       <div class="tool-input-group">
-        <label data-zh="禁止路径（每行一条）" data-en="Disallow Paths (one per line)">禁止路径（每行一条）</label>
+        <label for="disallowPaths" data-zh="禁止路径（每行一条）" data-en="Disallow Paths (one per line)">禁止路径（每行一条）</label>
         <textarea class="tool-input" id="disallowPaths" rows="4" placeholder="/admin/&#10;/private/&#10;/tmp/" oninput="generate()"></textarea>
       </div>
       <div class="tool-input-group">
-        <label data-zh="允许路径（每行一条）" data-en="Allow Paths (one per line)">允许路径（每行一条）</label>
+        <label for="allowPaths" data-zh="允许路径（每行一条）" data-en="Allow Paths (one per line)">允许路径（每行一条）</label>
         <textarea class="tool-input" id="allowPaths" rows="2" placeholder="/admin/public/" oninput="generate()"></textarea>
       </div>
       <div class="tool-input-group">

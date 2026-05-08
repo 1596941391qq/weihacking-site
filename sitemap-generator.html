@@ -50,12 +50,12 @@
   <section class="wrap tool-section">
     <div class="tool-ui">
       <div class="tool-input-group">
-        <label data-zh="URL 列表（每行一个 URL）" data-en="URL List (one per line)">URL 列表（每行一个 URL）</label>
+        <label for="urlList" data-zh="URL 列表（每行一个 URL）" data-en="URL List (one per line)">URL 列表（每行一个 URL）</label>
         <textarea class="tool-input" id="urlList" rows="8" placeholder="https://example.com/&#10;https://example.com/about&#10;https://example.com/products&#10;https://example.com/blog" oninput="generate()"></textarea>
       </div>
       <div class="tool-row">
         <div class="tool-input-group">
-          <label data-zh="默认优先级" data-en="Default Priority">默认优先级</label>
+          <label for="priority" data-zh="默认优先级" data-en="Default Priority">默认优先级</label>
           <select class="tool-input" id="priority" onchange="generate()">
             <option value="0.8">0.8 (High)</option>
             <option value="0.5" selected>0.5 (Medium)</option>
@@ -63,7 +63,7 @@
           </select>
         </div>
         <div class="tool-input-group">
-          <label data-zh="更新频率" data-en="Change Frequency">更新频率</label>
+          <label for="freq" data-zh="更新频率" data-en="Change Frequency">更新频率</label>
           <select class="tool-input" id="freq" onchange="generate()">
             <option value="weekly" selected>Weekly</option>
             <option value="daily">Daily</option>
