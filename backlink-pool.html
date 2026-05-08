@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>外链导航 — 5900+ 免费外链提交站点</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect rx='20' width='100' height='100' fill='%233b5998'/><text x='50' y='68' font-size='55' text-anchor='middle' fill='white' font-family='system-ui' font-weight='bold'>链</text></svg>">
+<meta name="description" content="收录 5900+ 个可免费获取外链的站点，按类型、层级、难度分类。涵盖目录、Profile、书签、论坛、Citation 等，助力 SEO 外链建设。">
+<link rel="stylesheet" href="css/backlink.css">
+
+<link rel="canonical" href="https://weihacking.com/backlink-pool.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="外链导航 — 5900+ 免费外链提交站点">
+<meta property="og:description" content="收录 5900+ 个可免费获取外链的站点，按类型、层级、难度分类。涵盖目录、Profile、书签、论坛、Citation 等，助力 SEO 外链建设。">
+<meta property="og:image" content="https://weihacking.com/images/og-backlink-pool.png">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="logo">外链<span>导航</span></div>
+    <div class="search">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="search" aria-label="搜索站点" placeholder="搜索站点名称、域名或描述…">
+    </div>
+    <div class="topbar-stats">共 <b id="hTotal">-</b> 个站点 · Tier 1 <b id="hT1">-</b> · Dofollow <b id="hDF">-</b></div>
+  </div>
+</div>
+
+<div class="nav-wrap">
+  <div class="nav" id="navBar">
+    <button class="nav-chip on" data-cat="">全部</button>
+    <button class="nav-chip" data-cat="directory">目录提交</button>
+    <button class="nav-chip" data-cat="profile">Profile</button>
+    <button class="nav-chip" data-cat="bookmark">书签</button>
+    <button class="nav-chip" data-cat="forum">论坛</button>
+    <button class="nav-chip" data-cat="citation">Citation</button>
+    <button class="nav-chip" data-cat="submission">投稿</button>
+    <button class="nav-chip" data-cat="social">社交</button>
+    <button class="nav-chip" data-cat="edu">.edu</button>
+    <button class="nav-chip" data-cat="gov">.gov</button>
+  </div>
+</div>
+
+<div class="filter-bar">
+  <select class="fsel" id="fTier" aria-label="层级筛选"><option value="">所有层级</option><option value="1">Tier 1 高权威</option><option value="2">Tier 2 中等</option><option value="3">Tier 3 批量</option></select>
+  <select class="fsel" id="fDR" aria-label="DR 筛选"><option value="">所有DR</option><option value="90">DR 90+</option><option value="70">DR 70+</option><option value="50">DR 50+</option><option value="30">DR 30+</option></select>
+  <select class="fsel" id="fDF" aria-label="Dofollow 筛选"><option value="">Dofollow</option><option value="true">是</option><option value="likely_true">可能是</option><option value="false">否</option></select>
+  <select class="fsel" id="fLang" aria-label="语言筛选"><option value="">语言</option></select>
+  <select class="fsel" id="fCost" aria-label="费用筛选"><option value="">费用</option><option value="free">免费</option><option value="freemium">免费增值</option><option value="paid">付费</option></select>
+  <div class="fsort">
+    <button class="on" onclick="doSort('dr',this)">权重 ↓</button>
+    <button onclick="doSort('diff',this)">最易 ↑</button>
+    <button onclick="doSort('name',this)">A-Z</button>
+  </div>
+  <button class="export-btn" onclick="exportCSV()">导出 CSV</button>
+</div>
+
+<div class="main">
+  <div class="result-info" id="count">加载中…</div>
+  <div class="grid" id="grid"><div class="sk-card"><div class="sk-line sk-w60 sk-mt8"></div><div class="sk-line sk-w40 sk-mt6"></div><div class="sk-line sk-w80 sk-mt6" style="height:6px"></div></div><div class="sk-card"><div class="sk-line sk-w60 sk-mt8"></div><div class="sk-line sk-w40 sk-mt6"></div><div class="sk-line sk-w80 sk-mt6" style="height:6px"></div></div><div class="sk-card"><div class="sk-line sk-w60 sk-mt8"></div><div class="sk-line sk-w40 sk-mt6"></div><div class="sk-line sk-w80 sk-mt6" style="height:6px"></div></div><div class="sk-card"><div class="sk-line sk-w60 sk-mt8"></div><div class="sk-line sk-w40 sk-mt6"></div><div class="sk-line sk-w80 sk-mt6" style="height:6px"></div></div><div class="sk-card"><div class="sk-line sk-w60 sk-mt8"></div><div class="sk-line sk-w40 sk-mt6"></div><div class="sk-line sk-w80 sk-mt6" style="height:6px"></div></div><div class="sk-card"><div class="sk-line sk-w60 sk-mt8"></div><div class="sk-line sk-w40 sk-mt6"></div><div class="sk-line sk-w80 sk-mt6" style="height:6px"></div></div><div class="sk-card"><div class="sk-line sk-w60 sk-mt8"></div><div class="sk-line sk-w40 sk-mt6"></div><div class="sk-line sk-w80 sk-mt6" style="height:6px"></div></div><div class="sk-card"><div class="sk-line sk-w60 sk-mt8"></div><div class="sk-line sk-w40 sk-mt6"></div><div class="sk-line sk-w80 sk-mt6" style="height:6px"></div></div><div class="sk-card"><div class="sk-line sk-w60 sk-mt8"></div><div class="sk-line sk-w40 sk-mt6"></div><div class="sk-line sk-w80 sk-mt6" style="height:6px"></div></div><div class="sk-card"><div class="sk-line sk-w60 sk-mt8"></div><div class="sk-line sk-w40 sk-mt6"></div><div class="sk-line sk-w80 sk-mt6" style="height:6px"></div></div><div class="sk-card"><div class="sk-line sk-w60 sk-mt8"></div><div class="sk-line sk-w40 sk-mt6"></div><div class="sk-line sk-w80 sk-mt6" style="height:6px"></div></div><div class="sk-card"><div class="sk-line sk-w60 sk-mt8"></div><div class="sk-line sk-w40 sk-mt6"></div><div class="sk-line sk-w80 sk-mt6" style="height:6px"></div></div></div>
+  <div class="pager" id="pager"></div>
+</div>
+
+<div class="foot">外链导航 — 收录 <span id="ftTotal">-</span> 个可提交站点 · 数据更新于 <span id="ftDate">-</span><br>链接金字塔：Tier 1（高权威实体页）→ Tier 2（Web 2.0/论坛/目录）→ Tier 3（书签/Profile 批量资产）</div>
+
+<script>
+let ALL=[],filtered=[],page=0,PP=48,sortBy='dr';
+
+async function init(){
+  try{
+    let r;
+    try{r=await fetch('data/backlink-data.json')}catch(e){}
+    if(!r||!r.ok)r=await fetch('../data/backlink-data.json');
+    if(!r.ok)throw r.status;
+    const j=await r.json();
+    const raw=j.records||j;
+    ALL=raw.filter(x=>!x.notes||!x.notes.startsWith('DEAD'));
+    const m=j.meta||{};
+    document.getElementById('hTotal').textContent=ALL.length.toLocaleString();
+    document.getElementById('ftTotal').textContent=ALL.length;
+    document.getElementById('ftDate').textContent=m.generated||'-';
+    document.getElementById('hT1').textContent=ALL.filter(x=>x.tier==='1').length.toLocaleString();
+    document.getElementById('hDF').textContent=(ALL.filter(x=>x.dofollow==='true').length+ALL.filter(x=>x.dofollow==='likely_true').length).toLocaleString();
+    fillSel('fLang',[...new Set(ALL.map(x=>x.language).filter(Boolean))].sort());
+    // nav click
+    document.querySelectorAll('.nav-chip').forEach(btn=>{
+      btn.addEventListener('click',()=>{
+        document.querySelectorAll('.nav-chip').forEach(b=>b.classList.remove('on'));
+        btn.classList.add('on');
+        apply();
+      });
+    });
+    apply();
+  }catch(e){
+    document.getElementById('grid').innerHTML='<p style="padding:40px;text-align:center;color:#666">加载失败，请先运行构建脚本</p>';
+  }
+}
+
+function fillSel(id,arr){
+  const el=document.getElementById(id);
+  arr.forEach(v=>{const o=document.createElement('option');o.value=v;o.textContent=v;el.appendChild(o)});
+}
+
+function apply(){
+  const q=document.getElementById('search').value.toLowerCase();
+  const nav=document.querySelector('.nav-chip.on')?.dataset.cat||'';
+  const fti=document.getElementById('fTier').value;
+  const fdr=document.getElementById('fDR').value;
+  const fdf=document.getElementById('fDF').value;
+  const fl=document.getElementById('fLang').value;
+  const fc=document.getElementById('fCost').value;
+  filtered=ALL.filter(r=>{
+    if(nav&&r.type!==nav)return false;
+    if(fti&&r.tier!==fti)return false;
+    if(fdf&&r.dofollow!==fdf)return false;
+    if(fl&&r.language!==fl)return false;
+    if(fc&&r.free_or_paid!==fc)return false;
+    if(fdr){const mn=parseInt(fdr);if(fdr==='0'){if(r.dr!=null&&r.dr>=30)return false}else{if(r.dr==null||r.dr<mn)return false}}
+    if(q){const h=((r.name||'')+' '+(r.domain||'')+' '+(r.url||'')+' '+(r.desc||'')).toLowerCase();if(!h.includes(q))return false}
+    return true;
+  });
+  dosort();page=0;
+  document.getElementById('count').textContent=`找到 ${filtered.length} 个站点`;
+  render();
+}
+
+function dosort(){
+  const d={dr:-1,diff:1,name:1}[sortBy]||1;
+  filtered.sort((a,b)=>{
+    let va,vb;
+    if(sortBy==='dr'){va=a.dr||0;vb=b.dr||0}
+    else if(sortBy==='diff'){va=a.difficulty||0;vb=b.difficulty||0}
+    else{va=(a.name||'').toLowerCase();vb=(b.name||'').toLowerCase()}
+    return va<vb?-1*d:va>vb?1*d:0;
+  });
+}
+
+function doSort(s,btn){
+  sortBy=s;
+  document.querySelectorAll('.fsort button').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  dosort();page=0;render();
+}
+
+function render(){
+  const g=document.getElementById('grid');
+  const s=page*PP;
+  const sl=filtered.slice(s,s+PP);
+  if(filtered.length===0){
+    g.innerHTML='<div style="grid-column:1/-1;text-align:center;padding:60px 20px"><div style="font-size:2rem;margin-bottom:12px">🔍</div><div style="font-size:.95rem;font-weight:600;color:var(--text2);margin-bottom:6px">没有找到匹配的站点</div><div style="font-size:.78rem;color:var(--text3)">试试换个关键词，或减少筛选条件</div></div>';
+    document.getElementById('pager').innerHTML='';
+    return;
+  }
+  g.innerHTML=sl.map(r=>{
+    const dc=r.dr>=80?'dr-h':r.dr>=50?'dr-m':r.dr?'dr-l':'dr-n';
+    const tc=r.tier==='1'?'ct-t1':r.tier==='2'?'ct-t2':'ct-t3';
+    const dfc=r.dofollow==='true'?'ct-df-y':r.dofollow==='false'?'ct-df-n':r.dofollow==='likely_true'||r.dofollow==='likely_false'?'ct-df-m':'ct-df-u';
+    const dfLabel=r.dofollow==='true'?'Dofollow':r.dofollow==='false'?'Nofollow':r.dofollow==='likely_true'?'可能DF':r.dofollow==='likely_false'?'可能NF':'未知';
+    const diff=r.difficulty||0;
+    const bc=diff<=3?'easy':diff<=6?'mid':'hard';
+    const lang=r.language&&r.language!=='en'?'<span class="ct ct-sec ct-lang">'+esc(r.language)+'</span>':'';
+    const cost=r.free_or_paid&&r.free_or_paid!=='free'?'<span class="ct ct-sec ct-'+r.free_or_paid+'">'+(r.free_or_paid==='freemium'?'免费增值':'付费')+'</span>':'<span class="ct ct-sec ct-free">免费</span>';
+    const ease=diff?`<div class="c-ease"><span class="el">易用度 ${10-diff}/10</span><div class="eb"><div class="ef ${bc}" style="width:${(10-diff)*10}%"></div></div></div>`:'';
+    const icon=(r.name||'?')[0].toUpperCase();
+    return `<div class="card">
+      <div class="c-head">
+        <div class="c-icon">${icon}</div>
+        <div class="c-info">
+          <div class="c-name"><a href="${esc(r.url)}" target="_blank" rel="noopener">${esc(r.name||r.domain)}</a></div>
+          <div class="c-url">${esc(r.url)}</div>
+        </div>
+      </div>
+      <div class="c-tags">
+        <span class="ct ct-type">${esc(r.type)}</span>
+        <span class="ct ${tc}">T${esc(r.tier)}</span>
+        <span class="ct ${dfc}">${dfLabel}</span>
+        ${r.dr?`<span class="ct ${dc}">DR ${r.dr}</span>`:''}
+        ${lang}${cost}
+      </div>
+      ${r.desc?'<div class="c-desc">'+esc(r.desc)+'</div>':''}
+      ${ease}
+    </div>`;
+  }).join('');
+  const total=filtered.length,pages=Math.ceil(total/PP);
+  const pg=document.getElementById('pager');
+  if(pages<=1){pg.innerHTML='';return}
+  pg.innerHTML=`<button ${page===0?'disabled':''} onclick="goPage(${page-1})">上一页</button>
+    <span class="pi">${s+1}–${Math.min(s+PP,total)} / ${total}</span>
+    <button ${page>=pages-1?'disabled':''} onclick="goPage(${page+1})">下一页</button>`;
+}
+
+function goPage(p){page=p;render();window.scrollTo({top:document.querySelector('.main').offsetTop-60,behavior:'smooth'})}
+
+function esc(s){return s?String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'):''}
+
+function exportCSV(){
+  const h=['名称','网址','类型','层级','DR','Dofollow','难度','语言','费用','描述'];
+  const rows=filtered.map(r=>h.map((_,i)=>{
+    const m=[r.name,r.url,r.type,r.tier,r.dr,r.dofollow,r.difficulty,r.language,r.free_or_paid,r.desc];
+    return '"'+String(m[i]||'').replace(/"/g,'""')+'"';
+  }).join(','));
+  const csv='\uFEFF'+h.join(',')+'\n'+rows.join('\n');
+  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));
+  a.download='外链导航-'+new Date().toISOString().slice(0,10)+'.csv';a.click();
+}
+
+document.getElementById('search').addEventListener('input',apply);
+['fTier','fDR','fDF','fLang','fCost'].forEach(id=>document.getElementById(id).addEventListener('change',apply));
+
+init();
+</script>
+</body>
+</html>
