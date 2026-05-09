@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Invoice Generator - SoulCraft Limited</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Arial,Helvetica,sans-serif;background:#f0f2f5;color:#000;font-size:11pt}
+.app{display:flex;min-height:100vh}
+
+/* === Sidebar === */
+.sb{width:340px;background:#fff;border-right:1px solid #ddd;padding:20px;overflow-y:auto;flex-shrink:0}
+.sb h1{font-size:16px;margin-bottom:16px;font-weight:700}
+.sec{margin-bottom:14px}
+.sec label{display:block;font-size:11px;font-weight:600;color:#666;margin-bottom:3px}
+.sec input,.sec select,.sec textarea{width:100%;padding:6px 8px;border:1px solid #ccc;border-radius:3px;font-size:13px;font-family:inherit}
+.sec input:focus,.sec select:focus{outline:none;border-color:#4169E1}
+.r2{display:flex;gap:8px}.r2>*{flex:1}
+.btn{padding:6px 14px;border:none;border-radius:3px;cursor:pointer;font-size:12px;font-weight:600}
+.bp{background:#000;color:#fff}.bp:hover{background:#333}
+.bs{background:#f5f5f5;color:#333;border:1px solid #ccc}.bs:hover{background:#eee}
+.bf{width:100%;padding:10px;font-size:14px}
+.ti{display:flex;align-items:center;gap:6px;padding:4px 6px;background:#f8f8f8;border:1px solid #ddd;border-radius:3px;margin-bottom:3px;font-size:12px}
+.ti span{flex:1}.ti .tp{font-weight:600}
+.ti button{background:none;border:none;color:#999;cursor:pointer;font-size:14px}.ti button:hover{color:#c00}
+
+/* === Preview === */
+.pa{flex:1;padding:32px;display:flex;justify-content:center;align-items:flex-start;overflow-y:auto}
+
+/* === Invoice - pixel match to original PDF === */
+.inv{background:#fff;width:794px;min-height:1123px;padding:56px 80px 56px 80px;box-shadow:0 2px 16px rgba(0,0,0,.06);position:relative;font-family:Arial,Helvetica,sans-serif;color:#000;line-height:1.4}
+
+/* Top: Invoice title + logo placeholder */
+.inv-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:20px}
+.inv-title{font-size:22pt;font-weight:700;color:#000}
+
+/* Meta rows: label left, value right */
+.inv-meta{margin-bottom:24px}
+.inv-mrow{display:flex;font-size:10pt;line-height:1.9;color:#000}
+.inv-mrow .ml{color:#000;flex-shrink:0}
+.inv-mrow .mv{color:#000;flex:1;text-align:left}
+
+/* Two columns: company info left, Bill to right */
+.inv-cols{display:flex;margin-bottom:28px;gap:0}
+.inv-col-l{flex:1;padding-right:20px}
+.inv-col-r{flex:1;padding-left:20px}
+.inv-col-l .cn{font-size:14pt;font-weight:700;margin-bottom:4px}
+.inv-col-l .ca{font-size:10pt;line-height:1.6}
+.inv-col-r .bl{font-size:8pt;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#666;margin-bottom:6px}
+.inv-col-r .bn{font-size:12pt;font-weight:600;margin-bottom:2px}
+.inv-col-r .be{font-size:10pt;margin-bottom:2px}
+.inv-col-r .ba{font-size:10pt;line-height:1.6;white-space:pre-line}
+
+/* Amount due */
+.inv-amt{margin-bottom:28px}
+.inv-amt-big{font-size:14pt;font-weight:700;line-height:1.4}
+
+/* Table - match original: header has border+gray bg, data rows only horizontal rules */
+.inv-tbl{width:100%;border-collapse:collapse;margin-bottom:0}
+.inv-tbl th{font-size:10pt;font-weight:700;background:#f8f8f8;border-bottom:1px solid #ddd;border-top:1px solid #ddd;padding:8px 10px;text-align:left}
+.inv-tbl th:first-child{border-left:1px solid #ddd;padding-left:10px}
+.inv-tbl th:last-child{border-right:1px solid #ddd;padding-right:10px}
+.inv-tbl th:nth-child(2){text-align:center;width:60px}
+.inv-tbl th:nth-child(3){text-align:right;width:120px}
+.inv-tbl th:nth-child(4){text-align:right;width:120px}
+.inv-tbl td{font-size:10pt;border:none;border-bottom:1px solid #e8e8e8;padding:10px 10px;position:relative}
+.inv-tbl tr:last-child td{border-bottom:1px solid #ddd}
+.inv-tbl td:nth-child(2){text-align:center}
+.inv-tbl td:nth-child(3),.inv-tbl td:nth-child(4){text-align:right}
+.rmb{background:none;border:none;color:#ddd;cursor:pointer;font-size:13px;line-height:1;position:absolute;right:-18px;top:50%;transform:translateY(-50%);display:none}
+.inv-tbl tr:hover .rmb{display:inline-block}
+.rmb:hover{color:#c00}
+
+/* Totals */
+.inv-tot{width:250px;margin-left:auto;margin-top:12px}
+.inv-tr{display:flex;justify-content:space-between;padding:6px 0;font-size:10pt;border-bottom:1px solid #e8e8e8}
+.inv-tr.b{font-weight:700;border-bottom-color:#ddd}
+.inv-tr.n{border-bottom:none;font-weight:700;padding-top:8px}
+
+/* Footer */
+.inv-ft{position:absolute;bottom:40px;right:80px;font-size:9pt;color:#666}
+
+@media print{
+.sb{display:none!important}
+.pa{padding:0}
+.inv{box-shadow:none;width:100%;min-height:auto}
+.rmb{display:none!important}
+}
+</style>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect rx='20' width='100' height='100' fill='%233b5998'/><text x='50' y='68' font-size='55' text-anchor='middle' fill='white' font-family='system-ui' font-weight='bold'>W</text></svg>">
+</head>
+<body>
+<main>
+<div class="app">
+
+<!-- Sidebar -->
+<div class="sb">
+  <h1>Invoice Generator</h1>
+  <div class="sec">
+    <label for="invoiceNumber">Invoice Number</label>
+    <div class="r2">
+      <input type="text" id="invoiceNumber" readonly style="background:#f8f8f8">
+      <button class="btn bs" onclick="regenNum()">&#x21bb;</button>
+    </div>
+  </div>
+  <div class="sec">
+    <div class="r2">
+      <div><label for="issueDate">Date of Issue</label><input type="date" id="issueDate"></div>
+      <div><label for="dueDate">Due Date</label><input type="date" id="dueDate"></div>
+    </div>
+  </div>
+  <div class="sec"><label for="clientName">Client Name</label><input type="text" id="clientName" placeholder="e.g. Cubo World Inc"></div>
+  <div class="sec"><label for="clientEmail">Client Email</label><input type="email" id="clientEmail" placeholder="e.g. kelly@flot.ai"></div>
+  <div class="sec"><label for="clientAddress">Client Address</label><textarea id="clientAddress" rows="3" placeholder="Full address"></textarea></div>
+  <div class="sec">
+    <label for="currency">Currency</label>
+    <select id="currency">
+      <option value="USD">USD ($)</option>
+      <option value="EUR">EUR (€)</option>
+      <option value="GBP">GBP (£)</option>
+      <option value="HKD">HKD (HK$)</option>
+      <option value="CNY">CNY (¥)</option>
+    </select>
+  </div>
+  <div class="sec">
+    <label>Saved Services / Products</label>
+    <div id="tplList"></div>
+    <div class="r2" style="margin-top:6px">
+      <input type="text" id="newTplName" placeholder="Service name" style="flex:2">
+      <input type="number" id="newTplPrice" placeholder="Price" step="0.01" style="flex:1">
+      <button class="btn bp" onclick="saveTpl()">+</button>
+    </div>
+  </div>
+  <div class="sec">
+    <label for="tplSelect">Add Line Item</label>
+    <div style="margin-bottom:4px"><select id="tplSelect" style="width:100%"><option value="">-- pick saved or type --</option></select></div>
+    <input type="text" id="itemDesc" placeholder="Description" style="margin-bottom:4px">
+    <div class="r2" style="margin-bottom:6px">
+      <input type="number" id="itemQty" placeholder="Qty" min="1" value="1">
+      <input type="number" id="itemPrice" placeholder="Unit price" step="0.01">
+    </div>
+    <button class="btn bp bf" onclick="addItem()">Add Item</button>
+  </div>
+  <div class="sec" style="margin-top:20px">
+    <button class="btn bp bf" onclick="dlPDF()" style="margin-bottom:6px">Download PDF</button>
+    <button class="btn bs bf" onclick="window.print()">Print</button>
+  </div>
+</div>
+
+<!-- Invoice Preview -->
+<div class="pa">
+<div class="inv" id="invContent">
+
+  <!-- Top: Invoice title -->
+  <div class="inv-top">
+    <div class="inv-title">Invoice</div>
+  </div>
+
+  <!-- Meta rows -->
+  <div class="inv-meta">
+    <div class="inv-mrow"><span class="ml">Invoice number</span><span class="mv" id="dNum"></span></div>
+    <div class="inv-mrow"><span class="ml">Date of issue</span><span class="mv" id="dIssue"></span></div>
+    <div class="inv-mrow"><span class="ml">Date due</span><span class="mv" id="dDue"></span></div>
+  </div>
+
+  <!-- Two columns: company (left) | Bill to (right) -->
+  <div class="inv-cols">
+    <div class="inv-col-l">
+      <div class="cn">SOULCRAFT LIMITED</div>
+      <div class="ca">
+        九龍 San Po Kong<br>
+        No. 99 King Fuk Street<br>
+        Rm D07, 8/F, Kai Tak Fty Building<br>
+        Hong Kong
+      </div>
+    </div>
+    <div class="inv-col-r">
+      <div class="bl">Bill to</div>
+      <div class="bn" id="dCName">-</div>
+      <div class="be" id="dCEmail">-</div>
+      <div class="ba" id="dCAddr">-</div>
+    </div>
+  </div>
+
+  <!-- Amount due -->
+  <div class="inv-amt">
+    <div class="inv-amt-big" id="dAmtBig">$0.00 USD due -</div>
+  </div>
+
+  <!-- Table -->
+  <table class="inv-tbl">
+    <thead><tr>
+      <th scope="col">Description</th><th scope="col">Qty</th><th scope="col">Unit price</th><th scope="col">Amount</th>
+    </tr></thead>
+    <tbody id="tBody"></tbody>
+  </table>
+
+  <!-- Totals -->
+  <div class="inv-tot">
+    <div class="inv-tr"><span>Subtotal</span><span id="dSub">$0.00</span></div>
+    <div class="inv-tr b"><span>Total</span><span id="dTotal">$0.00</span></div>
+    <div class="inv-tr n"><span>Amount due</span><span id="dAmtDue">$0.00 USD</span></div>
+  </div>
+
+  <div class="inv-ft">Page 1 of 1</div>
+</div>
+</div>
+</div>
+
+<script>
+var items=[],tpls=JSON.parse(localStorage.getItem('invoiceTemplates')||'[]');
+var CS={USD:'$',EUR:'€',GBP:'£',HKD:'HK$',CNY:'¥'};
+
+function genNum(){var c='ABCDEFGHJKLMNPQRSTUVWXYZ23456789',s='';for(var i=0;i<8;i++)s+=c[Math.floor(Math.random()*c.length)];return s+' '+String(Math.floor(Math.random()*9999)+1).padStart(4,'0')}
+function regenNum(){document.getElementById('invoiceNumber').value=genNum();upd()}
+function fmtD(s){if(!s)return'-';var d=new Date(s+'T00:00:00');return d.toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'})}
+function defDue(){var d=new Date();d.setDate(d.getDate()+30);return d.toISOString().split('T')[0]}
+
+function renderTpls(){
+  var l=document.getElementById('tplList'),s=document.getElementById('tplSelect');
+  l.innerHTML='';s.innerHTML='<option value="">-- pick saved or type --</option>';
+  tpls.forEach(function(t,i){
+    l.innerHTML+='<div class="ti"><span>'+t.name+'</span><span class="tp">$'+parseFloat(t.price).toFixed(2)+'</span><button onclick="delTpl('+i+')">&times;</button></div>';
+    s.innerHTML+='<option value="'+i+'">'+t.name+' - $'+parseFloat(t.price).toFixed(2)+'</option>';
+  });
+}
+function saveTpl(){var n=document.getElementById('newTplName').value.trim(),p=parseFloat(document.getElementById('newTplPrice').value);if(!n||isNaN(p))return;tpls.push({name:n,price:p});localStorage.setItem('invoiceTemplates',JSON.stringify(tpls));document.getElementById('newTplName').value='';document.getElementById('newTplPrice').value='';renderTpls()}
+function delTpl(i){tpls.splice(i,1);localStorage.setItem('invoiceTemplates',JSON.stringify(tpls));renderTpls()}
+
+document.getElementById('tplSelect').addEventListener('change',function(){if(this.value==='')return;var t=tpls[parseInt(this.value)];document.getElementById('itemDesc').value=t.name;document.getElementById('itemPrice').value=t.price});
+
+function addItem(){var d=document.getElementById('itemDesc').value.trim(),q=parseInt(document.getElementById('itemQty').value)||1,p=parseFloat(document.getElementById('itemPrice').value)||0;if(!d)return;items.push({d:d,q:q,p:p});document.getElementById('itemDesc').value='';document.getElementById('itemQty').value='1';document.getElementById('itemPrice').value='';document.getElementById('tplSelect').value='';renderItems();upd()}
+function rmItem(i){items.splice(i,1);renderItems();upd()}
+function renderItems(){var tb=document.getElementById('tBody'),c=document.getElementById('currency').value,s=CS[c];tb.innerHTML=items.map(function(it,i){return'<tr><td>'+it.d+'<button class="rmb" onclick="rmItem('+i+')">&times;</button></td><td>'+it.q+'</td><td>'+s+it.p.toFixed(2)+'</td><td>'+s+(it.q*it.p).toFixed(2)+'</td></tr>'}).join('')}
+
+function upd(){
+  var c=document.getElementById('currency').value,s=CS[c];
+  document.getElementById('dNum').textContent=document.getElementById('invoiceNumber').value;
+  document.getElementById('dIssue').textContent=fmtD(document.getElementById('issueDate').value);
+  document.getElementById('dDue').textContent=fmtD(document.getElementById('dueDate').value);
+  document.getElementById('dCName').textContent=document.getElementById('clientName').value||'-';
+  document.getElementById('dCEmail').textContent=document.getElementById('clientEmail').value||'-';
+  document.getElementById('dCAddr').textContent=document.getElementById('clientAddress').value||'';
+  var t=items.reduce(function(a,it){return a+it.q*it.p},0);
+  var dueTxt=fmtD(document.getElementById('dueDate').value);
+  document.getElementById('dSub').textContent=s+t.toFixed(2);
+  document.getElementById('dTotal').textContent=s+t.toFixed(2);
+  document.getElementById('dAmtDue').textContent=s+t.toFixed(2)+' '+c;
+  document.getElementById('dAmtBig').textContent=s+t.toFixed(2)+' '+c+' due '+dueTxt;
+}
+
+function dlPDF(){
+  var el=document.getElementById('invContent'),n=document.getElementById('invoiceNumber').value.replace(/\s+/g,'-');
+  html2pdf().set({margin:0,filename:'Invoice-'+n+'.pdf',image:{type:'jpeg',quality:.98},html2canvas:{scale:2,useCORS:true},jsPDF:{unit:'mm',format:'a4',orientation:'portrait'}}).from(el).save();
+}
+
+['invoiceNumber','issueDate','dueDate','clientName','clientEmail','clientAddress','currency'].forEach(function(id){
+  document.getElementById(id).addEventListener('input',function(){if(id==='currency')renderItems();upd()});
+});
+
+(function(){document.getElementById('invoiceNumber').value=genNum();document.getElementById('issueDate').value=new Date().toISOString().split('T')[0];document.getElementById('dueDate').value=defDue();renderTpls();upd()})();
+</script>
+</main>
+</body>
+</html>
