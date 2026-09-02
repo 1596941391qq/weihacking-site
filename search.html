@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Deep Search Lab — weihacking</title>
+  <meta name="description" content="把网页搜索、OSINT、非标论坛、开放社区和社媒证据放进同一条可追溯搜索链。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="search.css">
+</head>
+<body>
+  <nav class="topbar" aria-label="主导航">
+    <a class="brand" href="index.html">weihacking_</a>
+    <div class="nav-meta"><span class="live-dot"></span> SEARCH INFRA / DEMO <button id="themeToggle" type="button">DARK</button></div>
+  </nav>
+
+  <main>
+    <header class="masthead">
+      <p class="eyebrow">DEEP SEARCH LAB · PUBLIC DEMO</p>
+      <h1>搜到网页只是开始。<br><em>把地下水位也照出来。</em></h1>
+      <p class="lede">网页索引负责广度，非标论坛负责经验，OSINT 负责补证。每条结论保留来源、时间、采集方式和置信度。</p>
+    </header>
+
+    <section class="search-shell" aria-label="搜索工作台">
+      <form id="searchForm" class="query-panel">
+        <label for="query">你要调查什么？</label>
+        <div class="query-row">
+          <input id="query" name="query" value="AI 搜索产品如何获得早期用户" autocomplete="off">
+          <button type="submit">开始深搜 →</button>
+        </div>
+        <div class="mode-row" role="group" aria-label="调查模式">
+          <button class="mode active" type="button" data-mode="balanced">均衡</button>
+          <button class="mode" type="button" data-mode="forums">论坛优先</button>
+          <button class="mode" type="button" data-mode="osint">OSINT 补证</button>
+          <button class="mode" type="button" data-mode="fast">快速扫描</button>
+        </div>
+        <p class="query-note">公开 Demo 不执行侵入式扫描。OSINT 仅使用公开信息；需要授权的动作会停在审批点。</p>
+      </form>
+
+      <div class="source-strip" id="sourceStrip" aria-label="搜索来源"></div>
+
+      <div class="workspace">
+        <aside class="route-panel">
+          <div class="panel-kicker">ROUTE TRACE</div>
+          <h2>本次搜索怎么跑</h2>
+          <ol id="routeTrace" class="route-trace"></ol>
+          <div class="route-rule"></div>
+          <dl class="route-stats">
+            <div><dt>路由能力</dt><dd>87 平台 / 387 项</dd></div>
+            <div><dt>论坛池</dt><dd>8+ 深水社区</dd></div>
+            <div><dt>转换链</dt><dd>4 级降级</dd></div>
+          </dl>
+        </aside>
+
+        <section class="results-panel">
+          <div class="results-head">
+            <div><span id="resultMode">DEMO EVIDENCE</span><h2 id="resultTitle">证据流</h2></div>
+            <div class="results-count"><strong id="resultCount">0</strong> SIGNALS</div>
+          </div>
+          <div id="progress" class="progress" hidden><span></span><p>正在分派来源与拼接证据链…</p></div>
+          <div id="results" class="results" aria-live="polite"></div>
+        </section>
+
+        <aside class="intel-panel">
+          <div class="panel-kicker">DEEP SOURCES</div>
+          <h2>不在普通搜索框里的东西</h2>
+          <div class="intel-block">
+            <div class="intel-head"><span>非标论坛</span><b>SESSION ROUTE</b></div>
+            <ul>
+              <li><i class="ok"></i><span>BlackHatWorld</span><small>CDP / 登录态</small></li>
+              <li><i class="ok"></i><span>BestBlackHatForum</span><small>评论树</small></li>
+              <li><i class="ok"></i><span>BuilderSociety</span><small>主题深采</small></li>
+              <li><i class="wait"></i><span>OneHack</span><small>按需唤醒</small></li>
+            </ul>
+          </div>
+          <div class="intel-block">
+            <div class="intel-head"><span>OSINT 补证</span><b>PUBLIC ONLY</b></div>
+            <div class="osint-grid">
+              <span>DNS</span><span>WHOIS</span><span>SUBDOMAIN</span><span>USERNAME</span><span>EMAIL</span><span>ARCHIVE</span>
+            </div>
+          </div>
+          <div class="intel-block compact">
+            <div class="intel-head"><span>网页转证据</span><b>AUTO FALLBACK</b></div>
+            <p>Serper → Firecrawl → Jina → CDP</p>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="architecture">
+      <p class="eyebrow">THE ACTUAL STACK</p>
+      <h2>这不是一个搜索 API 的皮肤。</h2>
+      <div class="stack-grid">
+        <article><b>01</b><h3>发现</h3><p>Serper、Exa、HN、GitHub、Polymarket、StockTwits 与平台内搜索负责建立候选集。</p></article>
+        <article><b>02</b><h3>深采</h3><p>Apify 处理结构化平台；登录论坛通过持久化浏览器会话读取主题、分页和评论树。</p></article>
+        <article><b>03</b><h3>补证</h3><p>OSINT 把域名、主体、历史快照和公开身份线索拼到同一实体上，而不是堆链接。</p></article>
+        <article><b>04</b><h3>归一</h3><p>转换为 Markdown 与统一证据对象，保留抓取时间、后端、原始链接和置信度。</p></article>
+      </div>
+    </section>
+  </main>
+
+  <footer><span>© 2026 weihacking · Soulcraft Limited</span><a href="tools.html">全部工具 →</a></footer>
+  <script src="search.js" defer></script>
+</body>
+</html>
