@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Deep Search Lab 项目介绍 — weihacking</title>
+  <meta name="description" content="Deep Search Lab 把网页搜索、专业社区、非标论坛、社媒与公开 OSINT 证据放进一条可追溯的研究链。">
+  <link rel="canonical" href="https://weihacking.com/search-project.html">
+  <meta property="og:title" content="Deep Search Lab — 搜索基础设施项目介绍">
+  <meta property="og:description" content="不是多套搜索 API 的拼盘，而是一条从发现、深采、补证到可追溯答案的研究链。">
+  <meta property="og:url" content="https://weihacking.com/search-project.html">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="search.css">
+  <link rel="stylesheet" href="search-project.css">
+</head>
+<body>
+  <nav class="topbar" aria-label="主导航">
+    <a class="brand" href="index.html">weihacking_</a>
+    <div class="nav-meta"><a href="search.html">OPEN DEMO</a><span>PROJECT / 01</span><button id="themeToggle" type="button">DARK</button></div>
+  </nav>
+
+  <main class="project-page">
+    <header class="masthead project-hero">
+      <p class="eyebrow">DEEP SEARCH LAB · PROJECT BRIEF</p>
+      <h1>搜索给你链接。<br><em>研究需要证据链。</em></h1>
+      <p class="lede">Deep Search Lab 是一套面向研究者、增长团队和独立开发者的搜索基础设施。它把公开网页、专业社区、非标论坛、社媒信号和 OSINT 补证放进同一条可追溯链路，回答的不只是“网上有什么”，还有“这件事为什么可信”。</p>
+      <div class="hero-actions"><a class="primary-action" href="search.html">打开搜索 Demo →</a><a href="#architecture">查看系统结构 ↓</a></div>
+    </header>
+
+    <section class="project-band">
+      <div><b>01</b><span>发现候选来源</span></div>
+      <div><b>02</b><span>读取原始内容</span></div>
+      <div><b>03</b><span>交叉补证</span></div>
+      <div><b>04</b><span>保留来源与时间</span></div>
+    </section>
+
+    <section class="project-section thesis">
+      <p class="eyebrow">WHY THIS EXISTS</p>
+      <h2>普通搜索擅长回答流行问题。<br>真正困难的问题，证据往往散落在边缘。</h2>
+      <div class="two-col-copy">
+        <p>一条产品失败经验可能只存在于论坛评论的第 14 页；一个开源项目的真实痛点藏在 GitHub Issue；一次市场判断需要同时核对新闻、历史页面、主体信息和社区反应。只搜网页标题，得到的是摘要，不是判断依据。</p>
+        <p>这个项目把“找到页面”和“拿到能验证的原始内容”拆开处理。每个结果尽量保留来源、抓取时间、使用的后端和置信度。无法获取、命中风控或需要登录时，也明确告诉你，而不是拿空结果冒充世界上没有答案。</p>
+      </div>
+    </section>
+
+    <section id="architecture" class="project-section architecture-map">
+      <p class="eyebrow">HOW IT WORKS</p>
+      <h2>四层系统，不靠单一搜索引擎押宝。</h2>
+      <div class="layer-list">
+        <article><span>DISCOVER</span><h3>发现层</h3><p>Serper、Exa、Brave 计划通道、Hacker News、GitHub、Polymarket 与平台内搜索建立候选集。目标是广，不假装每个来源都同样可靠。</p><small>WEB / NEWS / CODE / MARKET / COMMUNITY</small></article>
+        <article><span>COLLECT</span><h3>采集层</h3><p>Apify 处理结构化平台；Firecrawl、Jina Reader 和 Obscura 读取公开页面；Chrome CDP 留给登录、验证码、强交互和人工接管。</p><small>API / ACTOR / HEADLESS / SESSION</small></article>
+        <article><span>VERIFY</span><h3>补证层</h3><p>DNS、WHOIS、历史快照、公开账号和跨源时间线用于核对主体与事件。OSINT 仅限公开信息，不执行侵入式扫描。</p><small>ENTITY / HISTORY / IDENTITY / TIMELINE</small></article>
+        <article><span>NORMALIZE</span><h3>证据层</h3><p>页面转为 Markdown 和统一证据对象，记录原始 URL、时间、采集方式与失败原因，供搜索 Demo、Agent 和后续研究编排复用。</p><small>MARKDOWN / TRACE / CONFIDENCE / CITATION</small></article>
+      </div>
+    </section>
+
+    <section class="project-section sources-section">
+      <p class="eyebrow">SOURCE MAP</p>
+      <h2>我们搜索的不是一个互联网，而是五种不同的证据环境。</h2>
+      <div class="source-cards">
+        <article><b>开放网页</b><p>新闻、博客、文档和产品页面。适合建立全局背景与最新事实。</p><span>Serper · Exa · Firecrawl</span></article>
+        <article><b>开放社区</b><p>HN、GitHub Issues/Discussions、Reddit。适合技术判断、需求和失败现场。</p><span>API · Feed · Actor</span></article>
+        <article><b>非标论坛</b><p>BHW、BBHF、BuilderSociety、OneHack 等。适合经验、灰度细节和圈内术语。</p><span>Obscura · Chrome CDP</span></article>
+        <article><b>社媒与平台</b><p>X、小红书及垂直平台。适合观察传播、用户语言和实时反应。</p><span>Serper · Apify · Session</span></article>
+        <article><b>公开记录</b><p>域名、证书、归档和公开身份线索。适合验证主体、关系和时间线。</p><span>OSINT · Public only</span></article>
+      </div>
+    </section>
+
+    <section class="project-section proof-section">
+      <p class="eyebrow">WHAT IS REAL TODAY</p>
+      <h2>能力状态公开，失败也算结果。</h2>
+      <div class="proof-grid">
+        <article><strong>87 / 387</strong><p>统一网关公开目录中的平台数与标准化能力数。它不等于内网推荐 Actor 数。</p></article>
+        <article><strong>5-stage</strong><p>网页转证据降级链：Serper → Firecrawl → Jina → Obscura → Chrome。</p></article>
+        <article><strong>BHW ✓</strong><p>Obscura 已真实产出论坛首页 Markdown；BBHF 的 Cloudflare 与 OneHack 的兼容问题仍明确保留。</p></article>
+        <article><strong>TRACE</strong><p>结果保留来源、时间与采集方式；后续将补齐查询级成本和完整引用覆盖率。</p></article>
+      </div>
+      <div class="truth-box"><b>当前边界</b><p>这仍是公开 Demo，不是已经完成的万能调查产品。论坛登录态、完整增量索引、长任务研究编排和公开 SLA 尚在建设；涉及授权的动作不会自动越过审批点。</p></div>
+    </section>
+
+    <section class="project-section audience-section">
+      <p class="eyebrow">WHO IT IS FOR</p>
+      <h2>给需要形成判断的人，不给只想多看十条链接的人。</h2>
+      <div class="audience-grid">
+        <article><h3>研究者与分析师</h3><p>快速搭建证据地图，找出来源冲突、未知项和需要继续追查的位置。</p></article>
+        <article><h3>增长与 SEO 团队</h3><p>从真实用户语言、论坛失败经验和竞品足迹中发现需求，不把搜索量当全部市场。</p></article>
+        <article><h3>独立开发者</h3><p>验证痛点、技术路线和早期用户语境，减少“大家应该会需要”的自我感动。</p></article>
+        <article><h3>Agent 工程师</h3><p>通过统一能力目录和路由器获得可降级、可追踪的搜索与采集后端。</p></article>
+      </div>
+    </section>
+
+    <section class="project-section roadmap-public">
+      <p class="eyebrow">PUBLIC ROADMAP</p>
+      <h2>下一步不是再堆十个 Logo。</h2>
+      <ol>
+        <li><b>把 Demo 变成真搜索产品</b><span>真实 API 状态、异步任务、来源筛选和证据导出。</span></li>
+        <li><b>建立论坛增量索引</b><span>公开页由 Obscura 定时采集；登录态与高风控站由 Chrome 补位。</span></li>
+        <li><b>接入研究编排层</b><span>让 Local Deep Research 负责拆题、多轮追查和引用报告，底层仍统一走 OMGgrow Router。</span></li>
+        <li><b>建立公开跑分</b><span>比较召回、引用正确率、延迟、成本和失败率，而不是比较“支持多少引擎”。</span></li>
+      </ol>
+    </section>
+
+    <section class="project-cta">
+      <p class="eyebrow">TRY THE SYSTEM</p>
+      <h2>从一个你不相信搜索摘要能回答的问题开始。</h2>
+      <a class="primary-action" href="search.html">进入 Deep Search Lab →</a>
+    </section>
+  </main>
+
+  <footer><span>© 2026 weihacking · Soulcraft Limited</span><div><a href="search.html">搜索 Demo</a><a href="tools.html">全部工具</a></div></footer>
+  <script>
+    const toggle=document.getElementById('themeToggle');
+    const saved=localStorage.getItem('deep-search-theme');
+    if(saved) document.documentElement.dataset.theme=saved;
+    toggle.addEventListener('click',()=>{const next=document.documentElement.dataset.theme==='dark'?'light':'dark';document.documentElement.dataset.theme=next;localStorage.setItem('deep-search-theme',next);toggle.textContent=next==='dark'?'LIGHT':'DARK'});
+  </script>
+</body>
+</html>
